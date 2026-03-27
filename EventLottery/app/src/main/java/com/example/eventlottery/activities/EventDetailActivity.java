@@ -389,6 +389,7 @@ public class EventDetailActivity extends AppCompatActivity {
     }
 
     private void loadComments() {
+        if (currentEvent == null) return;
         commentRepo.getCommentsForEvent(currentEvent.getId())
                 .addOnSuccessListener(qs -> {
                     List<Comment> comments = new ArrayList<>();
@@ -396,7 +397,12 @@ public class EventDetailActivity extends AppCompatActivity {
                         Comment c = doc.toObject(Comment.class);
                         if (c != null) { c.setId(doc.getId()); comments.add(c); }
                     }
+                    // Sort by time ascending (oldest first)
+                    comments.sort((a, b) -> Long.compare(a.getCreatedAt(), b.getCreatedAt()));
                     commentAdapter.setComments(comments);
+                })
+                .addOnFailureListener(e -> {
+                    if (!isFinishing()) Toast.makeText(this, "Error loading comments", Toast.LENGTH_SHORT).show();
                 });
     }
 

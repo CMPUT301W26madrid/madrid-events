@@ -20,9 +20,7 @@ public class CommentRepository {
     }
 
     public Task<QuerySnapshot> getCommentsForEvent(String eventId) {
-        return commentRef.whereEqualTo("eventId", eventId)
-                .orderBy("createdAt", Query.Direction.ASCENDING)
-                .get();
+        return commentRef.whereEqualTo("eventId", eventId).get();
     }
 
     public Task<Void> deleteComment(String commentId) {

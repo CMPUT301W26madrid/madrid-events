@@ -4,12 +4,12 @@
         "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\menu\\bottom_nav_admin.xml"
     },
     {
-        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\mipmap-anydpi-v26\\ic_launcher.xml"
-    },
-    {
         "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\layout_fragment_organizer_dashboard.xml.flat",
         "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\fragment_organizer_dashboard.xml"
+    },
+    {
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
         "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\mipmap-mdpi_ic_launcher.xml.flat",
@@ -18,10 +18,6 @@
     {
         "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\layout_item_notification.xml.flat",
         "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\item_notification.xml"
-    },
-    {
-        "merged": "com.example.eventlottery.app-debug-46:/menu_bottom_nav_entrant.xml.flat",
-        "source": "com.example.eventlottery.app-main-48:/menu/bottom_nav_entrant.xml"
     },
     {
         "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\drawable_bg_unread_dot.xml.flat",
@@ -56,12 +52,12 @@
         "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\drawable\\bg_badge_green.xml"
     },
     {
-        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\layout_activity_event_detail.xml.flat",
-        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\activity_event_detail.xml"
-    },
-    {
         "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\menu_bottom_nav_entrant.xml.flat",
         "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\menu\\bottom_nav_entrant.xml"
+    },
+    {
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\layout_activity_event_detail.xml.flat",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\activity_event_detail.xml"
     },
     {
         "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\drawable_bg_avatar_primary.xml.flat",
@@ -74,10 +70,6 @@
     {
         "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\drawable_bg_calendar_selected.xml.flat",
         "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\drawable\\bg_calendar_selected.xml"
-    },
-    {
-        "merged": "com.example.eventlottery.app-debug-46:/drawable_ic_home.xml.flat",
-        "source": "com.example.eventlottery.app-main-48:/drawable/ic_home.xml"
     },
     {
         "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\layout_fragment_notifications.xml.flat",
@@ -144,6 +136,10 @@
         "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\item_registration.xml"
     },
     {
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\drawable_ic_home.xml.flat",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\drawable\\ic_home.xml"
+    },
+    {
         "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\mipmap-mdpi_ic_launcher_round.xml.flat",
         "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\mipmap-mdpi\\ic_launcher_round.xml"
     },
@@ -170,6 +166,10 @@
     {
         "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\drawable_bg_avatar_white.xml.flat",
         "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\drawable\\bg_avatar_white.xml"
+    },
+    {
+        "merged": "com.example.eventlottery.app-debug-46:/layout_activity_admin_main.xml.flat",
+        "source": "com.example.eventlottery.app-main-48:/layout/activity_admin_main.xml"
     },
     {
         "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\drawable_bg_avatar_white_small.xml.flat",
@@ -260,6 +260,10 @@
         "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\mipmap-xhdpi\\ic_launcher.xml"
     },
     {
+        "merged": "com.example.eventlottery.app-debug-46:/layout_activity_organizer_main.xml.flat",
+        "source": "com.example.eventlottery.app-main-48:/layout/activity_organizer_main.xml"
+    },
+    {
         "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\layout_fragment_my_events.xml.flat",
         "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\fragment_my_events.xml"
     },
@@ -270,6 +274,10 @@
     {
         "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\mipmap-xxxhdpi_ic_launcher_round.xml.flat",
         "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\mipmap-xxxhdpi\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.eventlottery.app-debug-46:/layout_activity_entrant_main.xml.flat",
+        "source": "com.example.eventlottery.app-main-48:/layout/activity_entrant_main.xml"
     },
     {
         "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\drawable_ic_delete.xml.flat",
