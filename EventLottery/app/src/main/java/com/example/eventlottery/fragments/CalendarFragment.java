@@ -1,6 +1,7 @@
 package com.example.eventlottery.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -139,9 +140,9 @@ public class CalendarFragment extends Fragment {
         cell.setGravity(Gravity.CENTER);
 
         GridLayout.LayoutParams lp = new GridLayout.LayoutParams();
-        int size = dp(40);
-        lp.width  = size;
-        lp.height = size;
+        lp.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
+        lp.width = 0;
+        lp.height = dp(44);
         cell.setLayoutParams(lp);
 
         if (label == null) return cell;
@@ -153,13 +154,11 @@ public class CalendarFragment extends Fragment {
 
         if (isToday) {
             tv.setBackgroundResource(R.drawable.bg_calendar_today);
-            tv.setTextColor(0xFFFFFFFF);
+            tv.setTextColor(Color.WHITE);
             tv.setTypeface(null, Typeface.BOLD);
-            tv.setPadding(dp(4), dp(4), dp(4), dp(4));
         } else if (isSelected) {
             tv.setBackgroundResource(R.drawable.bg_calendar_selected);
             tv.setTextColor(0xFF1A7A5E);
-            tv.setPadding(dp(4), dp(4), dp(4), dp(4));
         } else {
             tv.setTextColor(0xFF374151);
         }
