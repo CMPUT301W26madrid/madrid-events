@@ -126,6 +126,7 @@ attr allowStacking
 attr alpha
 attr alphabeticModifiers
 attr altSrc
+attr ambientEnabled
 attr animateCircleAngleTo
 attr animateMenuItems
 attr animateNavigationIcon
@@ -232,6 +233,13 @@ attr buttonStyle
 attr buttonStyleSmall
 attr buttonTint
 attr buttonTintMode
+attr cameraBearing
+attr cameraMaxZoomPreference
+attr cameraMinZoomPreference
+attr cameraTargetLat
+attr cameraTargetLng
+attr cameraTilt
+attr cameraZoom
 attr cardBackgroundColor
 attr cardCornerRadius
 attr cardElevation
@@ -702,6 +710,10 @@ attr labelVisibilityMode
 attr largeFontVerticalOffsetAdjustment
 attr lastBaselineToBottomHeight
 attr lastItemDecorated
+attr latLngBoundsNorthEastLatitude
+attr latLngBoundsNorthEastLongitude
+attr latLngBoundsSouthWestLatitude
+attr latLngBoundsSouthWestLongitude
 attr layout
 attr layoutDescription
 attr layoutDuringTransition
@@ -797,10 +809,13 @@ attr listPreferredItemPaddingEnd
 attr listPreferredItemPaddingLeft
 attr listPreferredItemPaddingRight
 attr listPreferredItemPaddingStart
+attr liteMode
 attr logo
 attr logoAdjustViewBounds
 attr logoDescription
 attr logoScaleType
+attr mapId
+attr mapType
 attr marginHorizontal
 attr marginLeftSystemWindowInsets
 attr marginRightSystemWindowInsets
@@ -1300,10 +1315,19 @@ attr triggerId
 attr triggerReceiver
 attr triggerSlack
 attr ttcIndex
+attr uiCompass
+attr uiMapToolbar
+attr uiRotateGestures
+attr uiScrollGestures
+attr uiScrollGesturesDuringRotateOrZoom
+attr uiTiltGestures
+attr uiZoomControls
+attr uiZoomGestures
 attr upDuration
 attr useCompatPadding
 attr useDrawerArrowDrawable
 attr useMaterialThemeColors
+attr useViewLifecycle
 attr values
 attr verticalOffset
 attr verticalOffsetWithText
@@ -1334,6 +1358,7 @@ attr windowNoTitle
 attr yearSelectedStyle
 attr yearStyle
 attr yearTodayStyle
+attr zOrderOnTop
 attr zxing_framing_rect_height
 attr zxing_framing_rect_width
 attr zxing_possible_result_points
@@ -3330,6 +3355,7 @@ id bounceStart
 id btn_accept
 id btn_cancel
 id btn_close_qr
+id btn_co_organizers
 id btn_create
 id btn_create_event
 id btn_create_profile
@@ -3344,6 +3370,7 @@ id btn_run_lottery
 id btn_save
 id btn_send_notification
 id btn_sign_out
+id btn_view_map
 id buttonPanel
 id cache_measures
 id callMeasure
@@ -3501,6 +3528,7 @@ id home
 id homeAsUp
 id honorRequest
 id horizontal_only
+id hybrid
 id icon
 id icon_group
 id icon_only
@@ -3548,6 +3576,7 @@ id ll_filters
 id ll_role_badges
 id ll_roles
 id m3_side_sheet
+id map
 id marquee
 id masked
 id match_constraint
@@ -3695,6 +3724,7 @@ id rv_my_events
 id rv_notifications
 id rv_profiles
 id rv_registrations
+id satellite
 id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
@@ -3777,6 +3807,7 @@ id tag_transition_group
 id tag_unhandled_key_event_manager
 id tag_unhandled_key_listeners
 id tag_window_insets_animation_callback
+id terrain
 id text
 id text2
 id textEnd
@@ -4036,6 +4067,7 @@ layout activity_create_event
 layout activity_entrant_main
 layout activity_event_detail
 layout activity_login
+layout activity_map_view
 layout activity_organizer_event_management
 layout activity_organizer_main
 layout activity_profile
@@ -4058,6 +4090,7 @@ layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout dialog_create_profile
 layout dialog_qr_code
+layout fragment_admin_dashboard
 layout fragment_calendar
 layout fragment_discover_events
 layout fragment_my_events
@@ -5704,6 +5737,7 @@ styleable LinearLayoutCompat_Layout android_layout_gravity android_layout_width 
 styleable LinearProgressIndicator indeterminateAnimationType indicatorDirectionLinear trackStopIndicatorSize
 styleable ListPopupWindow android_dropDownHorizontalOffset android_dropDownVerticalOffset
 styleable LoadingImageView circleCrop imageAspectRatio imageAspectRatioAdjust
+styleable MapAttrs backgroundColor ambientEnabled cameraBearing cameraMaxZoomPreference cameraMinZoomPreference cameraTargetLat cameraTargetLng cameraTilt cameraZoom latLngBoundsNorthEastLatitude latLngBoundsNorthEastLongitude latLngBoundsSouthWestLatitude latLngBoundsSouthWestLongitude liteMode mapId mapType uiCompass uiMapToolbar uiRotateGestures uiScrollGestures uiScrollGesturesDuringRotateOrZoom uiTiltGestures uiZoomControls uiZoomGestures useViewLifecycle zOrderOnTop
 styleable MaterialAlertDialog backgroundInsetBottom backgroundInsetEnd backgroundInsetStart backgroundInsetTop backgroundTint
 styleable MaterialAlertDialogTheme materialAlertDialogBodyTextStyle materialAlertDialogButtonSpacerVisibility materialAlertDialogTheme materialAlertDialogTitleIconStyle materialAlertDialogTitlePanelStyle materialAlertDialogTitleTextStyle
 styleable MaterialAutoCompleteTextView android_inputType android_popupElevation dropDownBackgroundTint simpleItemLayout simpleItemSelectedColor simpleItemSelectedRippleColor simpleItems

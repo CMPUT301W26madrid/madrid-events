@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,17 +37,21 @@ public final class ActivityEntrantMainBinding implements ViewBinding {
   public final ImageView ivBell;
 
   @NonNull
+  public final Spinner spinnerRole;
+
+  @NonNull
   public final TextView tvNotifBadge;
 
   private ActivityEntrantMainBinding(@NonNull CoordinatorLayout rootView,
       @NonNull AppBarLayout appBar, @NonNull BottomNavigationView bottomNav,
       @NonNull FrameLayout fragmentContainer, @NonNull ImageView ivBell,
-      @NonNull TextView tvNotifBadge) {
+      @NonNull Spinner spinnerRole, @NonNull TextView tvNotifBadge) {
     this.rootView = rootView;
     this.appBar = appBar;
     this.bottomNav = bottomNav;
     this.fragmentContainer = fragmentContainer;
     this.ivBell = ivBell;
+    this.spinnerRole = spinnerRole;
     this.tvNotifBadge = tvNotifBadge;
   }
 
@@ -101,6 +106,12 @@ public final class ActivityEntrantMainBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.spinner_role;
+      Spinner spinnerRole = ViewBindings.findChildViewById(rootView, id);
+      if (spinnerRole == null) {
+        break missingId;
+      }
+
       id = R.id.tv_notif_badge;
       TextView tvNotifBadge = ViewBindings.findChildViewById(rootView, id);
       if (tvNotifBadge == null) {
@@ -108,7 +119,7 @@ public final class ActivityEntrantMainBinding implements ViewBinding {
       }
 
       return new ActivityEntrantMainBinding((CoordinatorLayout) rootView, appBar, bottomNav,
-          fragmentContainer, ivBell, tvNotifBadge);
+          fragmentContainer, ivBell, spinnerRole, tvNotifBadge);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

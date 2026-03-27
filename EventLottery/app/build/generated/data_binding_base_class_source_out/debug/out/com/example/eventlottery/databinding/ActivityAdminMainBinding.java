@@ -4,72 +4,54 @@ package com.example.eventlottery.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.eventlottery.R;
-import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
 
 public final class ActivityAdminMainBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final CoordinatorLayout rootView;
 
   @NonNull
-  public final EditText etSearch;
+  public final BottomNavigationView bottomNav;
 
   @NonNull
-  public final LinearLayout llEmpty;
+  public final FrameLayout fragmentContainer;
 
   @NonNull
-  public final ProgressBar progress;
-
-  @NonNull
-  public final RecyclerView rvAdmin;
+  public final ImageView ivBell;
 
   @NonNull
   public final Spinner spinnerRole;
 
   @NonNull
-  public final TabLayout tabLayout;
+  public final TextView tvNotifBadge;
 
-  @NonNull
-  public final TextView tvStatEvents;
-
-  @NonNull
-  public final TextView tvStatImages;
-
-  @NonNull
-  public final TextView tvStatUsers;
-
-  private ActivityAdminMainBinding(@NonNull LinearLayout rootView, @NonNull EditText etSearch,
-      @NonNull LinearLayout llEmpty, @NonNull ProgressBar progress, @NonNull RecyclerView rvAdmin,
-      @NonNull Spinner spinnerRole, @NonNull TabLayout tabLayout, @NonNull TextView tvStatEvents,
-      @NonNull TextView tvStatImages, @NonNull TextView tvStatUsers) {
+  private ActivityAdminMainBinding(@NonNull CoordinatorLayout rootView,
+      @NonNull BottomNavigationView bottomNav, @NonNull FrameLayout fragmentContainer,
+      @NonNull ImageView ivBell, @NonNull Spinner spinnerRole, @NonNull TextView tvNotifBadge) {
     this.rootView = rootView;
-    this.etSearch = etSearch;
-    this.llEmpty = llEmpty;
-    this.progress = progress;
-    this.rvAdmin = rvAdmin;
+    this.bottomNav = bottomNav;
+    this.fragmentContainer = fragmentContainer;
+    this.ivBell = ivBell;
     this.spinnerRole = spinnerRole;
-    this.tabLayout = tabLayout;
-    this.tvStatEvents = tvStatEvents;
-    this.tvStatImages = tvStatImages;
-    this.tvStatUsers = tvStatUsers;
+    this.tvNotifBadge = tvNotifBadge;
   }
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public CoordinatorLayout getRoot() {
     return rootView;
   }
 
@@ -94,27 +76,21 @@ public final class ActivityAdminMainBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.et_search;
-      EditText etSearch = ViewBindings.findChildViewById(rootView, id);
-      if (etSearch == null) {
+      id = R.id.bottom_nav;
+      BottomNavigationView bottomNav = ViewBindings.findChildViewById(rootView, id);
+      if (bottomNav == null) {
         break missingId;
       }
 
-      id = R.id.ll_empty;
-      LinearLayout llEmpty = ViewBindings.findChildViewById(rootView, id);
-      if (llEmpty == null) {
+      id = R.id.fragment_container;
+      FrameLayout fragmentContainer = ViewBindings.findChildViewById(rootView, id);
+      if (fragmentContainer == null) {
         break missingId;
       }
 
-      id = R.id.progress;
-      ProgressBar progress = ViewBindings.findChildViewById(rootView, id);
-      if (progress == null) {
-        break missingId;
-      }
-
-      id = R.id.rv_admin;
-      RecyclerView rvAdmin = ViewBindings.findChildViewById(rootView, id);
-      if (rvAdmin == null) {
+      id = R.id.iv_bell;
+      ImageView ivBell = ViewBindings.findChildViewById(rootView, id);
+      if (ivBell == null) {
         break missingId;
       }
 
@@ -124,32 +100,14 @@ public final class ActivityAdminMainBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.tab_layout;
-      TabLayout tabLayout = ViewBindings.findChildViewById(rootView, id);
-      if (tabLayout == null) {
+      id = R.id.tv_notif_badge;
+      TextView tvNotifBadge = ViewBindings.findChildViewById(rootView, id);
+      if (tvNotifBadge == null) {
         break missingId;
       }
 
-      id = R.id.tv_stat_events;
-      TextView tvStatEvents = ViewBindings.findChildViewById(rootView, id);
-      if (tvStatEvents == null) {
-        break missingId;
-      }
-
-      id = R.id.tv_stat_images;
-      TextView tvStatImages = ViewBindings.findChildViewById(rootView, id);
-      if (tvStatImages == null) {
-        break missingId;
-      }
-
-      id = R.id.tv_stat_users;
-      TextView tvStatUsers = ViewBindings.findChildViewById(rootView, id);
-      if (tvStatUsers == null) {
-        break missingId;
-      }
-
-      return new ActivityAdminMainBinding((LinearLayout) rootView, etSearch, llEmpty, progress,
-          rvAdmin, spinnerRole, tabLayout, tvStatEvents, tvStatImages, tvStatUsers);
+      return new ActivityAdminMainBinding((CoordinatorLayout) rootView, bottomNav,
+          fragmentContainer, ivBell, spinnerRole, tvNotifBadge);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

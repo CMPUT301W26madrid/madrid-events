@@ -29,6 +29,9 @@ public final class ActivityOrganizerEventManagementBinding implements ViewBindin
   private final CoordinatorLayout rootView;
 
   @NonNull
+  public final MaterialButton btnCoOrganizers;
+
+  @NonNull
   public final MaterialButton btnDrawReplacement;
 
   @NonNull
@@ -39,6 +42,9 @@ public final class ActivityOrganizerEventManagementBinding implements ViewBindin
 
   @NonNull
   public final MaterialButton btnSendNotification;
+
+  @NonNull
+  public final MaterialButton btnViewMap;
 
   @NonNull
   public final ChipGroup cgAudience;
@@ -89,8 +95,9 @@ public final class ActivityOrganizerEventManagementBinding implements ViewBindin
   public final TextView tvStatWaiting;
 
   private ActivityOrganizerEventManagementBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull MaterialButton btnDrawReplacement, @NonNull MaterialButton btnExportCsv,
-      @NonNull MaterialButton btnRunLottery, @NonNull MaterialButton btnSendNotification,
+      @NonNull MaterialButton btnCoOrganizers, @NonNull MaterialButton btnDrawReplacement,
+      @NonNull MaterialButton btnExportCsv, @NonNull MaterialButton btnRunLottery,
+      @NonNull MaterialButton btnSendNotification, @NonNull MaterialButton btnViewMap,
       @NonNull ChipGroup cgAudience, @NonNull Chip chipAllEntrants,
       @NonNull Chip chipCancelledEntrants, @NonNull Chip chipSelectedEntrants,
       @NonNull TextInputEditText etNotificationMsg, @NonNull ImageView ivQrToolbar,
@@ -100,10 +107,12 @@ public final class ActivityOrganizerEventManagementBinding implements ViewBindin
       @NonNull TextView tvStatAccepted, @NonNull TextView tvStatDeclined,
       @NonNull TextView tvStatSelected, @NonNull TextView tvStatWaiting) {
     this.rootView = rootView;
+    this.btnCoOrganizers = btnCoOrganizers;
     this.btnDrawReplacement = btnDrawReplacement;
     this.btnExportCsv = btnExportCsv;
     this.btnRunLottery = btnRunLottery;
     this.btnSendNotification = btnSendNotification;
+    this.btnViewMap = btnViewMap;
     this.cgAudience = cgAudience;
     this.chipAllEntrants = chipAllEntrants;
     this.chipCancelledEntrants = chipCancelledEntrants;
@@ -149,6 +158,12 @@ public final class ActivityOrganizerEventManagementBinding implements ViewBindin
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.btn_co_organizers;
+      MaterialButton btnCoOrganizers = ViewBindings.findChildViewById(rootView, id);
+      if (btnCoOrganizers == null) {
+        break missingId;
+      }
+
       id = R.id.btn_draw_replacement;
       MaterialButton btnDrawReplacement = ViewBindings.findChildViewById(rootView, id);
       if (btnDrawReplacement == null) {
@@ -170,6 +185,12 @@ public final class ActivityOrganizerEventManagementBinding implements ViewBindin
       id = R.id.btn_send_notification;
       MaterialButton btnSendNotification = ViewBindings.findChildViewById(rootView, id);
       if (btnSendNotification == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_view_map;
+      MaterialButton btnViewMap = ViewBindings.findChildViewById(rootView, id);
+      if (btnViewMap == null) {
         break missingId;
       }
 
@@ -270,10 +291,11 @@ public final class ActivityOrganizerEventManagementBinding implements ViewBindin
       }
 
       return new ActivityOrganizerEventManagementBinding((CoordinatorLayout) rootView,
-          btnDrawReplacement, btnExportCsv, btnRunLottery, btnSendNotification, cgAudience,
-          chipAllEntrants, chipCancelledEntrants, chipSelectedEntrants, etNotificationMsg,
-          ivQrToolbar, rvRegistrations, tabLayout, tilNotificationMsg, toolbar, tvEmptyTab,
-          tvEventStatusBadge, tvStatAccepted, tvStatDeclined, tvStatSelected, tvStatWaiting);
+          btnCoOrganizers, btnDrawReplacement, btnExportCsv, btnRunLottery, btnSendNotification,
+          btnViewMap, cgAudience, chipAllEntrants, chipCancelledEntrants, chipSelectedEntrants,
+          etNotificationMsg, ivQrToolbar, rvRegistrations, tabLayout, tilNotificationMsg, toolbar,
+          tvEmptyTab, tvEventStatusBadge, tvStatAccepted, tvStatDeclined, tvStatSelected,
+          tvStatWaiting);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

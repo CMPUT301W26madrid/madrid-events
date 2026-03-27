@@ -159,7 +159,12 @@ public class LoginActivity extends AppCompatActivity {
             List<String> roles = new ArrayList<>();
             if (cbEntrant.isChecked())   roles.add("entrant");
             if (cbOrganizer.isChecked()) roles.add("organizer");
-            if (cbAdmin.isChecked())     roles.add("admin");
+            if (cbAdmin.isChecked()) {
+                roles.add("admin");
+                // US 03.09.01: Admin is also organizer and entrant by default
+                if (!roles.contains("organizer")) roles.add("organizer");
+                if (!roles.contains("entrant"))   roles.add("entrant");
+            }
             if (roles.isEmpty()) {
                 Toast.makeText(this, R.string.error_role_required, Toast.LENGTH_SHORT).show();
                 return;
@@ -170,7 +175,6 @@ public class LoginActivity extends AppCompatActivity {
 
             User newUser = new User(name, email, phone, roles, session.getDeviceId());
 
-            // Fix #2: use addUser() which returns Task<DocumentReference> → gives us the real ID
             userRepo.addUser(newUser).addOnSuccessListener(docRef -> {
                 String newId = docRef.getId();
                 newUser.setId(newId);

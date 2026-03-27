@@ -1,125 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/background">
 
-    <!-- Header -->
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="@color/primary"
-        android:paddingHorizontal="16dp"
-        android:paddingTop="16dp"
-        android:paddingBottom="12dp">
-
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="horizontal" android:gravity="center_vertical">
-            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/admin_panel"
-                android:textColor="@color/white"
-                android:textSize="22sp" android:textStyle="bold"/>
-            <Spinner android:id="@+id/spinner_role"
-                android:layout_width="wrap_content" android:layout_height="40dp"
-                android:background="@drawable/bg_spinner_white"
-                android:paddingHorizontal="8dp"/>
-        </LinearLayout>
-
-        <!-- Stats bar -->
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="horizontal" android:layout_marginTop="14dp">
-
-            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
-                android:layout_weight="1" android:orientation="vertical" android:gravity="center">
-                <TextView android:id="@+id/tv_stat_users"
-                    android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="0" android:textColor="@color/white"
-                    android:textSize="26sp" android:textStyle="bold"/>
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="Users" android:textColor="#CCffffff" android:textSize="12sp"/>
-            </LinearLayout>
-
-            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
-                android:layout_weight="1" android:orientation="vertical" android:gravity="center">
-                <TextView android:id="@+id/tv_stat_events"
-                    android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="0" android:textColor="@color/white"
-                    android:textSize="26sp" android:textStyle="bold"/>
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="Events" android:textColor="#CCffffff" android:textSize="12sp"/>
-            </LinearLayout>
-
-            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
-                android:layout_weight="1" android:orientation="vertical" android:gravity="center">
-                <TextView android:id="@+id/tv_stat_images"
-                    android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="0" android:textColor="@color/white"
-                    android:textSize="26sp" android:textStyle="bold"/>
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="Images" android:textColor="#CCffffff" android:textSize="12sp"/>
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- Search bar -->
-        <LinearLayout android:layout_width="match_parent" android:layout_height="44dp"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/bg_search_field_white"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingHorizontal="12dp">
-            <ImageView android:layout_width="20dp" android:layout_height="20dp"
-                android:src="@drawable/ic_search" android:alpha="0.6"/>
-            <EditText android:id="@+id/et_search"
-                android:layout_width="0dp" android:layout_height="match_parent"
-                android:layout_weight="1" android:background="@null"
-                android:hint="@string/search_users_events"
-                android:textColor="@color/text_primary"
-                android:textColorHint="@color/text_secondary"
-                android:textSize="14sp" android:paddingHorizontal="8dp"
-                android:inputType="text" android:imeOptions="actionSearch" android:singleLine="true"/>
-        </LinearLayout>
-    </LinearLayout>
-
-    <!-- Tabs -->
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
-        style="@style/TabStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:elevation="2dp"/>
-
-    <!-- Content -->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_admin"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="8dp"
-            android:clipToPadding="false"/>
+        app:elevation="0dp">
 
         <LinearLayout
-            android:id="@+id/ll_empty"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="gone">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="Nothing here yet"
-                android:textColor="@color/text_secondary" android:textSize="15sp"/>
-        </LinearLayout>
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="16dp">
 
-        <ProgressBar android:id="@+id/progress"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_gravity="center" android:visibility="gone"/>
-    </FrameLayout>
-</LinearLayout>
+            <TextView
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_avatar_white_small"
+                android:gravity="center"
+                android:text="AD"
+                android:textColor="@color/primary"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+            <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1"/>
+
+            <!-- Role switcher -->
+            <Spinner
+                android:id="@+id/spinner_role"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_spinner"
+                android:paddingHorizontal="8dp"/>
+
+            <RelativeLayout
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="4dp">
+
+                <ImageView
+                    android:id="@+id/iv_bell"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_notifications"
+                    app:tint="@color/white"
+                    android:background="?attr/selectableItemBackgroundBorderless"/>
+
+                <TextView
+                    android:id="@+id/tv_notif_badge"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/bg_badge_red"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_marginBottom="64dp"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        app:menu="@menu/bottom_nav_admin"
+        app:itemIconTint="@color/nav_selector"
+        app:itemTextColor="@color/nav_selector"
+        app:labelVisibilityMode="labeled"
+        app:itemIconSize="22dp"
+        app:elevation="8dp"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

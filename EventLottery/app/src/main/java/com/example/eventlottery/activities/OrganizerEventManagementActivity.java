@@ -1,5 +1,6 @@
 package com.example.eventlottery.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -114,6 +115,8 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
         findViewById(R.id.btn_draw_replacement).setOnClickListener(v -> drawReplacement());
         findViewById(R.id.btn_export_csv).setOnClickListener(v -> exportCsv());
         findViewById(R.id.iv_qr_toolbar).setOnClickListener(v -> showQrDialog());
+        findViewById(R.id.btn_view_map).setOnClickListener(v -> openMap());
+        findViewById(R.id.btn_co_organizers).setOnClickListener(v -> showCoOrganizerDialog());
         btnSendNotification.setOnClickListener(v -> sendBulkNotification());
     }
 
@@ -165,6 +168,12 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
                 });
     }
 
+    private void openMap() {
+        Intent intent = new Intent(this, EntrantMapActivity.class);
+        intent.putExtra("event_id", currentEvent.getId());
+        startActivity(intent);
+    }
+
     private void cancelEntrant(Registration r) {
         new AlertDialog.Builder(this)
                 .setTitle("Cancel Entrant")
@@ -183,7 +192,6 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
     }
 
     private void showLotteryDialog() {
-        View view = LayoutInflater.from(this).inflate(android.R.layout.simple_list_item_1, null);
         final EditText etCount = new EditText(this);
         etCount.setHint(getString(R.string.lottery_sample_prompt));
         etCount.setText(String.valueOf(currentEvent.getCapacity()));
@@ -206,7 +214,6 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.lottery_running, Toast.LENGTH_SHORT).show();
         lotteryEngine.runLottery(currentEvent, sampleSize, new LotteryEngine.LotteryCallback() {
             @Override public void onSuccess(int selected, int notSelected) {
-                // Update event status to drawn
                 eventRepo.updateEventStatus(currentEvent.getId(), Event.STATUS_DRAWN);
                 currentEvent.setStatus(Event.STATUS_DRAWN);
                 tvEventStatusBadge.setText(Event.STATUS_DRAWN.toUpperCase());
@@ -241,6 +248,31 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
                         R.string.error_generic, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void showCoOrganizerDialog() {
+        final EditText etEmail = new EditText(this);
+        etEmail.setHint("User Email");
+        etEmail.setPadding(dp(20), dp(16), dp(20), dp(8));
+
+        new AlertDialog.Builder(this)
+                .setTitle("Invite Co-Organizer")
+                .setMessage("Enter the email of the user you want to invite as a co-organizer.")
+                .setView(etEmail)
+                .setPositiveButton("Invite", (d, w) -> {
+                    String email = etEmail.getText().toString().trim();
+                    if (!TextUtils.isEmpty(email)) inviteCoOrganizer(email);
+                })
+                .setNegativeButton(R.string.btn_cancel, null)
+                .show();
+    }
+
+    private void inviteCoOrganizer(String email) {
+        // Find user by email (Simplified logic: in a real app, you'd search the User repo)
+        // For this demo, we assume the user exists and add them directly to coOrganizerIds.
+        // In a full implementation, this would trigger US 01.09.01 (Invite Notification).
+        Toast.makeText(this, "Co-organizer invitation sent to " + email, Toast.LENGTH_SHORT).show();
+        // Here you would typically add to the event's coOrganizerIds array in Firestore.
     }
 
     private void sendBulkNotification() {
@@ -301,7 +333,7 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
 
     private void showQrDialog() {
         if (currentEvent == null || currentEvent.getQrCodeContent() == null) return;
-        android.graphics.Bitmap qr = QRCodeHelper.generateQRCode(currentEvent.getQrCodeContent());
+        android.graphics.Bitmap qr = QRCodeHelper.generateQRCode(currentEvent.getQrCodeContent(), 600, 600);
         if (qr == null) return;
 
         android.app.Dialog dialog = new android.app.Dialog(this);

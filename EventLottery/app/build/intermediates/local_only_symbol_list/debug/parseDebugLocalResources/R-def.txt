@@ -77,6 +77,7 @@ id bottom_nav
 id btn_accept
 id btn_cancel
 id btn_close_qr
+id btn_co_organizers
 id btn_create
 id btn_create_event
 id btn_create_profile
@@ -91,6 +92,7 @@ id btn_run_lottery
 id btn_save
 id btn_send_notification
 id btn_sign_out
+id btn_view_map
 id card_selected
 id cb_admin
 id cb_entrant
@@ -142,6 +144,7 @@ id ll_empty
 id ll_filters
 id ll_role_badges
 id ll_roles
+id map
 id nav_admin
 id nav_alerts
 id nav_browse
@@ -241,12 +244,14 @@ layout activity_create_event
 layout activity_entrant_main
 layout activity_event_detail
 layout activity_login
+layout activity_map_view
 layout activity_organizer_event_management
 layout activity_organizer_main
 layout activity_profile
 layout activity_qr_scan
 layout dialog_create_profile
 layout dialog_qr_code
+layout fragment_admin_dashboard
 layout fragment_calendar
 layout fragment_discover_events
 layout fragment_my_events

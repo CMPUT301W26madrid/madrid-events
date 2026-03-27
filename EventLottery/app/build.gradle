@@ -42,34 +42,31 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
-    // Firebase BoM — keeps all Firebase versions in sync
+    // Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:33.1.0')
     implementation 'com.google.firebase:firebase-firestore'
     implementation 'com.google.firebase:firebase-messaging'
-    // firebase-auth, firebase-storage, firebase-functions removed — not used in this app
 
-    // Google Play Services — Location (FusedLocationProviderClient)
-    // REQUIRED by EventDetailActivity geolocation feature (was missing — compile error)
+    // Google Play Services
     implementation 'com.google.android.gms:play-services-location:21.3.0'
+    implementation 'com.google.android.gms:play-services-maps:18.2.0'
 
-    // ZXing QR Code generation (Zebra Crossing)
+    // ZXing QR Code generation
     implementation 'com.google.zxing:core:3.5.3'
     implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
 
-    // ML Kit barcode scanning (QR scan via camera)
+    // ML Kit barcode scanning
     implementation 'com.google.mlkit:barcode-scanning:17.3.0'
 
-    // Glide image loading (event poster images)
+    // Glide image loading
     implementation 'com.github.bumptech.glide:glide:4.16.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
 
-    // CameraX (live QR scanning viewfinder)
+    // CameraX
     implementation 'androidx.camera:camera-camera2:1.3.4'
     implementation 'androidx.camera:camera-lifecycle:1.3.4'
     implementation 'androidx.camera:camera-view:1.3.4'
 
-    // Guava ListenableFuture — used by CameraX ProcessCameraProvider.getInstance()
-    // CameraX brings this transitively but explicit declaration avoids version conflicts
     implementation 'com.google.guava:guava:33.2.1-android'
 
     // Testing
