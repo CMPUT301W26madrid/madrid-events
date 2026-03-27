@@ -8,50 +8,57 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.eventlottery.R;
+import com.google.android.material.button.MaterialButton;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
 
 public final class ItemNotificationBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final CardView rootView;
 
   @NonNull
-  public final TextView tvActionRequired;
+  public final MaterialButton btnAccept;
 
   @NonNull
-  public final TextView tvIcon;
+  public final MaterialButton btnDecline;
 
   @NonNull
-  public final TextView tvMessage;
+  public final LinearLayout llActions;
 
   @NonNull
-  public final TextView tvTime;
+  public final TextView tvNotifMessage;
 
   @NonNull
-  public final TextView tvTitle;
+  public final TextView tvNotifTime;
 
   @NonNull
-  public final View vUnread;
+  public final TextView tvNotifTitle;
 
-  private ItemNotificationBinding(@NonNull LinearLayout rootView,
-      @NonNull TextView tvActionRequired, @NonNull TextView tvIcon, @NonNull TextView tvMessage,
-      @NonNull TextView tvTime, @NonNull TextView tvTitle, @NonNull View vUnread) {
+  @NonNull
+  public final View vUnreadDot;
+
+  private ItemNotificationBinding(@NonNull CardView rootView, @NonNull MaterialButton btnAccept,
+      @NonNull MaterialButton btnDecline, @NonNull LinearLayout llActions,
+      @NonNull TextView tvNotifMessage, @NonNull TextView tvNotifTime,
+      @NonNull TextView tvNotifTitle, @NonNull View vUnreadDot) {
     this.rootView = rootView;
-    this.tvActionRequired = tvActionRequired;
-    this.tvIcon = tvIcon;
-    this.tvMessage = tvMessage;
-    this.tvTime = tvTime;
-    this.tvTitle = tvTitle;
-    this.vUnread = vUnread;
+    this.btnAccept = btnAccept;
+    this.btnDecline = btnDecline;
+    this.llActions = llActions;
+    this.tvNotifMessage = tvNotifMessage;
+    this.tvNotifTime = tvNotifTime;
+    this.tvNotifTitle = tvNotifTitle;
+    this.vUnreadDot = vUnreadDot;
   }
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public CardView getRoot() {
     return rootView;
   }
 
@@ -76,44 +83,50 @@ public final class ItemNotificationBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.tv_action_required;
-      TextView tvActionRequired = ViewBindings.findChildViewById(rootView, id);
-      if (tvActionRequired == null) {
+      id = R.id.btn_accept;
+      MaterialButton btnAccept = ViewBindings.findChildViewById(rootView, id);
+      if (btnAccept == null) {
         break missingId;
       }
 
-      id = R.id.tv_icon;
-      TextView tvIcon = ViewBindings.findChildViewById(rootView, id);
-      if (tvIcon == null) {
+      id = R.id.btn_decline;
+      MaterialButton btnDecline = ViewBindings.findChildViewById(rootView, id);
+      if (btnDecline == null) {
         break missingId;
       }
 
-      id = R.id.tv_message;
-      TextView tvMessage = ViewBindings.findChildViewById(rootView, id);
-      if (tvMessage == null) {
+      id = R.id.ll_actions;
+      LinearLayout llActions = ViewBindings.findChildViewById(rootView, id);
+      if (llActions == null) {
         break missingId;
       }
 
-      id = R.id.tv_time;
-      TextView tvTime = ViewBindings.findChildViewById(rootView, id);
-      if (tvTime == null) {
+      id = R.id.tv_notif_message;
+      TextView tvNotifMessage = ViewBindings.findChildViewById(rootView, id);
+      if (tvNotifMessage == null) {
         break missingId;
       }
 
-      id = R.id.tv_title;
-      TextView tvTitle = ViewBindings.findChildViewById(rootView, id);
-      if (tvTitle == null) {
+      id = R.id.tv_notif_time;
+      TextView tvNotifTime = ViewBindings.findChildViewById(rootView, id);
+      if (tvNotifTime == null) {
         break missingId;
       }
 
-      id = R.id.v_unread;
-      View vUnread = ViewBindings.findChildViewById(rootView, id);
-      if (vUnread == null) {
+      id = R.id.tv_notif_title;
+      TextView tvNotifTitle = ViewBindings.findChildViewById(rootView, id);
+      if (tvNotifTitle == null) {
         break missingId;
       }
 
-      return new ItemNotificationBinding((LinearLayout) rootView, tvActionRequired, tvIcon,
-          tvMessage, tvTime, tvTitle, vUnread);
+      id = R.id.v_unread_dot;
+      View vUnreadDot = ViewBindings.findChildViewById(rootView, id);
+      if (vUnreadDot == null) {
+        break missingId;
+      }
+
+      return new ItemNotificationBinding((CardView) rootView, btnAccept, btnDecline, llActions,
+          tvNotifMessage, tvNotifTime, tvNotifTitle, vUnreadDot);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

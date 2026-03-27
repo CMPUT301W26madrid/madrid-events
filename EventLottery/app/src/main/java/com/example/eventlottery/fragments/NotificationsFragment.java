@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -16,16 +17,18 @@ import com.example.eventlottery.R;
 import com.example.eventlottery.activities.EventDetailActivity;
 import com.example.eventlottery.adapters.NotificationAdapter;
 import com.example.eventlottery.models.AppNotification;
+import com.example.eventlottery.repositories.EventRepository;
 import com.example.eventlottery.repositories.NotificationRepository;
 import com.example.eventlottery.utils.SessionManager;
 import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotificationsFragment extends Fragment {
+public class NotificationsFragment extends Fragment implements NotificationAdapter.OnNotificationActionListener {
 
     private SessionManager session;
     private NotificationRepository notifRepo;
+    private EventRepository eventRepo;
     private NotificationAdapter adapter;
     private View llEmpty;
     private ProgressBar progress;
@@ -42,21 +45,15 @@ public class NotificationsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         session   = new SessionManager(requireContext());
         notifRepo = new NotificationRepository();
+        eventRepo = new EventRepository();
 
         RecyclerView rv = view.findViewById(R.id.rv_notifications);
         llEmpty  = view.findViewById(R.id.ll_empty);
         progress = view.findViewById(R.id.progress);
         TextView tvMarkRead = view.findViewById(R.id.tv_mark_read);
 
-        adapter = new NotificationAdapter(notif -> {
-            // Mark as read then open event
-            notifRepo.markAsRead(notif.getId());
-            if (notif.getEventId() != null && !notif.getEventId().isEmpty()) {
-                Intent i = new Intent(getContext(), EventDetailActivity.class);
-                i.putExtra("event_id", notif.getEventId());
-                startActivity(i);
-            }
-        });
+        adapter = new NotificationAdapter();
+        adapter.setActionListener(this);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         rv.setAdapter(adapter);
 
@@ -77,6 +74,9 @@ public class NotificationsFragment extends Fragment {
                 AppNotification n = doc.toObject(AppNotification.class);
                 if (n != null) { n.setId(doc.getId()); list.add(n); }
             }
+            // Sort by createdAt descending
+            list.sort((a, b) -> Long.compare(b.getCreatedAt(), a.getCreatedAt()));
+            
             progress.setVisibility(View.GONE);
             adapter.setNotifications(list);
             llEmpty.setVisibility(adapter.isEmpty() ? View.VISIBLE : View.GONE);
@@ -88,10 +88,41 @@ public class NotificationsFragment extends Fragment {
     private void markAllRead() {
         String userId = session.getUserId();
         if (userId == null) return;
-        // Use the fixed markAllReadForUser() that never returns null
         notifRepo.markAllReadForUser(userId)
                 .addOnSuccessListener(v -> loadNotifications())
                 .addOnFailureListener(e -> loadNotifications());
+    }
+
+    @Override
+    public void onAccept(AppNotification notification) {
+        if (AppNotification.TYPE_CO_ORGANIZER.equals(notification.getType())) {
+            String userId = session.getUserId();
+            eventRepo.addCoOrganizer(notification.getEventId(), userId)
+                    .addOnSuccessListener(v -> {
+                        Toast.makeText(getContext(), "You are now a co-organizer!", Toast.LENGTH_SHORT).show();
+                        notifRepo.deleteNotification(notification.getId()).addOnSuccessListener(v2 -> loadNotifications());
+                    });
+        } else if (notification.getEventId() != null) {
+            // For lottery wins, redirect to event detail to accept
+            Intent i = new Intent(getContext(), EventDetailActivity.class);
+            i.putExtra("event_id", notification.getEventId());
+            startActivity(i);
+            notifRepo.markAsRead(notification.getId());
+        }
+    }
+
+    @Override
+    public void onDecline(AppNotification notification) {
+        // Just delete the notification for now
+        notifRepo.deleteNotification(notification.getId()).addOnSuccessListener(v -> {
+            Toast.makeText(getContext(), "Invitation declined", Toast.LENGTH_SHORT).show();
+            loadNotifications();
+        });
+    }
+
+    @Override
+    public void onDelete(AppNotification notification) {
+        notifRepo.deleteNotification(notification.getId()).addOnSuccessListener(v -> loadNotifications());
     }
 
     @Override public void onResume() { super.onResume(); loadNotifications(); }

@@ -37,6 +37,10 @@ public class UserRepository {
         return usersRef.whereEqualTo("deviceId", deviceId).get();
     }
 
+    public Task<QuerySnapshot> getUserByEmail(String email) {
+        return usersRef.whereEqualTo("email", email).limit(1).get();
+    }
+
     public Task<QuerySnapshot> getAllUsers() {
         return usersRef.orderBy("name", Query.Direction.ASCENDING).get();
     }

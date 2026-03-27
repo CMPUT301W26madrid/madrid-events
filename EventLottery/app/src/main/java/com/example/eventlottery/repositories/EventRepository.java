@@ -107,4 +107,8 @@ public class EventRepository {
                 .endAt(lower + "\uf8ff")
                 .get();
     }
+
+    public Task<Void> addCoOrganizer(String eventId, String userId) {
+        return eventsRef.document(eventId).update("coOrganizerIds", FieldValue.arrayUnion(userId));
+    }
 }

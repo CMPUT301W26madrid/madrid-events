@@ -3160,6 +3160,7 @@ drawable ic_clock_black_24dp
 drawable ic_close
 drawable ic_dashboard
 drawable ic_delete
+drawable ic_home
 drawable ic_keyboard_black_24dp
 drawable ic_location
 drawable ic_m3_chip_check
@@ -3570,6 +3571,7 @@ id linear
 id listMode
 id list_item
 id ll_action_bar
+id ll_actions
 id ll_days_left
 id ll_empty
 id ll_filters
@@ -3861,7 +3863,6 @@ id transition_scene_layoutid_cache
 id transition_transform
 id triangle
 id tv_accepted_count
-id tv_action_required
 id tv_avatar
 id tv_capacity
 id tv_date
@@ -3875,16 +3876,17 @@ id tv_entrant_count
 id tv_event_date
 id tv_event_status_badge
 id tv_event_title
-id tv_icon
 id tv_joined_date
 id tv_location
 id tv_mark_read
-id tv_message
 id tv_month_year
 id tv_name
 id tv_no_events_day
 id tv_no_profiles
 id tv_notif_badge
+id tv_notif_message
+id tv_notif_time
+id tv_notif_title
 id tv_organizer
 id tv_poster_name
 id tv_price
@@ -3914,7 +3916,7 @@ id uniform
 id unlabeled
 id up
 id useLogo
-id v_unread
+id v_unread_dot
 id vertical_only
 id view_offset_helper
 id view_transition
@@ -5737,7 +5739,7 @@ styleable LinearLayoutCompat_Layout android_layout_gravity android_layout_width 
 styleable LinearProgressIndicator indeterminateAnimationType indicatorDirectionLinear trackStopIndicatorSize
 styleable ListPopupWindow android_dropDownHorizontalOffset android_dropDownVerticalOffset
 styleable LoadingImageView circleCrop imageAspectRatio imageAspectRatioAdjust
-styleable MapAttrs backgroundColor ambientEnabled cameraBearing cameraMaxZoomPreference cameraMinZoomPreference cameraTargetLat cameraTargetLng cameraTilt cameraZoom latLngBoundsNorthEastLatitude latLngBoundsNorthEastLongitude latLngBoundsSouthWestLatitude latLngBoundsSouthWestLongitude liteMode mapId mapType uiCompass uiMapToolbar uiRotateGestures uiScrollGestures uiScrollGesturesDuringRotateOrZoom uiTiltGestures uiZoomControls uiZoomGestures useViewLifecycle zOrderOnTop
+styleable MapAttrs ambientEnabled backgroundColor cameraBearing cameraMaxZoomPreference cameraMinZoomPreference cameraTargetLat cameraTargetLng cameraTilt cameraZoom latLngBoundsNorthEastLatitude latLngBoundsNorthEastLongitude latLngBoundsSouthWestLatitude latLngBoundsSouthWestLongitude liteMode mapId mapType uiCompass uiMapToolbar uiRotateGestures uiScrollGestures uiScrollGesturesDuringRotateOrZoom uiTiltGestures uiZoomControls uiZoomGestures useViewLifecycle zOrderOnTop
 styleable MaterialAlertDialog backgroundInsetBottom backgroundInsetEnd backgroundInsetStart backgroundInsetTop backgroundTint
 styleable MaterialAlertDialogTheme materialAlertDialogBodyTextStyle materialAlertDialogButtonSpacerVisibility materialAlertDialogTheme materialAlertDialogTitleIconStyle materialAlertDialogTitlePanelStyle materialAlertDialogTitleTextStyle
 styleable MaterialAutoCompleteTextView android_inputType android_popupElevation dropDownBackgroundTint simpleItemLayout simpleItemSelectedColor simpleItemSelectedRippleColor simpleItems

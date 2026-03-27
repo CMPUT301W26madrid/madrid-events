@@ -15,10 +15,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.eventlottery.R;
 import com.example.eventlottery.adapters.RegistrationAdapter;
+import com.example.eventlottery.models.AppNotification;
 import com.example.eventlottery.models.Event;
 import com.example.eventlottery.models.Registration;
+import com.example.eventlottery.models.User;
 import com.example.eventlottery.repositories.EventRepository;
+import com.example.eventlottery.repositories.NotificationRepository;
 import com.example.eventlottery.repositories.RegistrationRepository;
+import com.example.eventlottery.repositories.UserRepository;
 import com.example.eventlottery.utils.CsvExportHelper;
 import com.example.eventlottery.utils.LotteryEngine;
 import com.example.eventlottery.utils.QRCodeHelper;
@@ -36,6 +40,8 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
     private SessionManager session;
     private EventRepository eventRepo;
     private RegistrationRepository regRepo;
+    private UserRepository userRepo;
+    private NotificationRepository notifRepo;
     private LotteryEngine lotteryEngine;
 
     private Event currentEvent;
@@ -59,6 +65,8 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
         session      = new SessionManager(this);
         eventRepo    = new EventRepository();
         regRepo      = new RegistrationRepository();
+        userRepo     = new UserRepository();
+        notifRepo    = new NotificationRepository();
         lotteryEngine = new LotteryEngine();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -268,11 +276,39 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
     }
 
     private void inviteCoOrganizer(String email) {
-        // Find user by email (Simplified logic: in a real app, you'd search the User repo)
-        // For this demo, we assume the user exists and add them directly to coOrganizerIds.
-        // In a full implementation, this would trigger US 01.09.01 (Invite Notification).
-        Toast.makeText(this, "Co-organizer invitation sent to " + email, Toast.LENGTH_SHORT).show();
-        // Here you would typically add to the event's coOrganizerIds array in Firestore.
+        userRepo.getUserByEmail(email).addOnSuccessListener(qs -> {
+            if (qs.isEmpty()) {
+                Toast.makeText(this, "User not found with this email", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            DocumentSnapshot doc = qs.getDocuments().get(0);
+            User targetUser = doc.toObject(User.class);
+            if (targetUser == null) return;
+            targetUser.setId(doc.getId());
+
+            String currentUserId = session.getUserId();
+            userRepo.getUserById(currentUserId).addOnSuccessListener(myDoc -> {
+                User me = myDoc.toObject(User.class);
+                String myName = (me != null) ? me.getName() : "An organizer";
+
+                AppNotification notif = new AppNotification(
+                        targetUser.getId(),
+                        currentEvent.getId(),
+                        currentEvent.getTitle(),
+                        AppNotification.TYPE_CO_ORGANIZER,
+                        "Co-Organizer Invitation",
+                        myName + " has invited you to be a co-organizer for the event \"" + currentEvent.getTitle() + "\".",
+                        true
+                );
+                notif.setSenderName(myName);
+
+                notifRepo.createNotification(notif).addOnSuccessListener(v -> {
+                    Toast.makeText(this, "Invitation sent to " + targetUser.getName(), Toast.LENGTH_SHORT).show();
+                });
+            });
+        }).addOnFailureListener(e -> {
+            Toast.makeText(this, "Error finding user", Toast.LENGTH_SHORT).show();
+        });
     }
 
     private void sendBulkNotification() {
@@ -295,11 +331,9 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
         }
         btnSendNotification.setEnabled(false);
 
-        new com.example.eventlottery.repositories.UserRepository()
-                .getUserById(currentUserId)
+        userRepo.getUserById(currentUserId)
                 .addOnSuccessListener(doc -> {
-                    com.example.eventlottery.models.User user =
-                            doc.toObject(com.example.eventlottery.models.User.class);
+                    User user = doc.toObject(User.class);
                     String orgName = user != null ? user.getName() : "Organizer";
                     lotteryEngine.sendBulkNotification(currentEvent, audience, msg, orgName,
                             new LotteryEngine.LotteryCallback() {

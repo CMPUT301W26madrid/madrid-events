@@ -67,6 +67,7 @@ drawable ic_camera
 drawable ic_close
 drawable ic_dashboard
 drawable ic_delete
+drawable ic_home
 drawable ic_location
 drawable ic_notifications
 drawable ic_person
@@ -139,6 +140,7 @@ id iv_qr
 id iv_qr_btn
 id iv_qr_toolbar
 id ll_action_bar
+id ll_actions
 id ll_days_left
 id ll_empty
 id ll_filters
@@ -190,7 +192,6 @@ id til_tags
 id til_title
 id toolbar
 id tv_accepted_count
-id tv_action_required
 id tv_avatar
 id tv_capacity
 id tv_date
@@ -204,16 +205,17 @@ id tv_entrant_count
 id tv_event_date
 id tv_event_status_badge
 id tv_event_title
-id tv_icon
 id tv_joined_date
 id tv_location
 id tv_mark_read
-id tv_message
 id tv_month_year
 id tv_name
 id tv_no_events_day
 id tv_no_profiles
 id tv_notif_badge
+id tv_notif_message
+id tv_notif_time
+id tv_notif_title
 id tv_organizer
 id tv_poster_name
 id tv_price
@@ -238,7 +240,7 @@ id tv_text
 id tv_time
 id tv_title
 id tv_waiting_count
-id v_unread
+id v_unread_dot
 layout activity_admin_main
 layout activity_create_event
 layout activity_entrant_main

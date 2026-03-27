@@ -4,6 +4,7 @@ package com.example.eventlottery.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -27,6 +28,9 @@ public final class ActivityCreateEventBinding implements ViewBinding {
   public final MaterialButton btnCreateEvent;
 
   @NonNull
+  public final MaterialButton btnUploadPoster;
+
+  @NonNull
   public final TextInputEditText etCapacity;
 
   @NonNull
@@ -43,9 +47,6 @@ public final class ActivityCreateEventBinding implements ViewBinding {
 
   @NonNull
   public final TextInputEditText etMaxWl;
-
-  @NonNull
-  public final TextInputEditText etPoster;
 
   @NonNull
   public final TextInputEditText etPrice;
@@ -87,9 +88,6 @@ public final class ActivityCreateEventBinding implements ViewBinding {
   public final TextInputLayout tilMaxWl;
 
   @NonNull
-  public final TextInputLayout tilPoster;
-
-  @NonNull
   public final TextInputLayout tilPrice;
 
   @NonNull
@@ -107,30 +105,33 @@ public final class ActivityCreateEventBinding implements ViewBinding {
   @NonNull
   public final Toolbar toolbar;
 
+  @NonNull
+  public final TextView tvPosterName;
+
   private ActivityCreateEventBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull MaterialButton btnCreateEvent, @NonNull TextInputEditText etCapacity,
-      @NonNull TextInputEditText etDescription, @NonNull TextInputEditText etEventEnd,
-      @NonNull TextInputEditText etEventStart, @NonNull TextInputEditText etLocation,
-      @NonNull TextInputEditText etMaxWl, @NonNull TextInputEditText etPoster,
+      @NonNull MaterialButton btnCreateEvent, @NonNull MaterialButton btnUploadPoster,
+      @NonNull TextInputEditText etCapacity, @NonNull TextInputEditText etDescription,
+      @NonNull TextInputEditText etEventEnd, @NonNull TextInputEditText etEventStart,
+      @NonNull TextInputEditText etLocation, @NonNull TextInputEditText etMaxWl,
       @NonNull TextInputEditText etPrice, @NonNull TextInputEditText etRegClose,
       @NonNull TextInputEditText etRegOpen, @NonNull TextInputEditText etTags,
       @NonNull TextInputEditText etTitle, @NonNull SwitchMaterial swGeolocation,
       @NonNull SwitchMaterial swPrivate, @NonNull TextInputLayout tilCapacity,
       @NonNull TextInputLayout tilDescription, @NonNull TextInputLayout tilEventEnd,
       @NonNull TextInputLayout tilEventStart, @NonNull TextInputLayout tilLocation,
-      @NonNull TextInputLayout tilMaxWl, @NonNull TextInputLayout tilPoster,
-      @NonNull TextInputLayout tilPrice, @NonNull TextInputLayout tilRegClose,
-      @NonNull TextInputLayout tilRegOpen, @NonNull TextInputLayout tilTags,
-      @NonNull TextInputLayout tilTitle, @NonNull Toolbar toolbar) {
+      @NonNull TextInputLayout tilMaxWl, @NonNull TextInputLayout tilPrice,
+      @NonNull TextInputLayout tilRegClose, @NonNull TextInputLayout tilRegOpen,
+      @NonNull TextInputLayout tilTags, @NonNull TextInputLayout tilTitle, @NonNull Toolbar toolbar,
+      @NonNull TextView tvPosterName) {
     this.rootView = rootView;
     this.btnCreateEvent = btnCreateEvent;
+    this.btnUploadPoster = btnUploadPoster;
     this.etCapacity = etCapacity;
     this.etDescription = etDescription;
     this.etEventEnd = etEventEnd;
     this.etEventStart = etEventStart;
     this.etLocation = etLocation;
     this.etMaxWl = etMaxWl;
-    this.etPoster = etPoster;
     this.etPrice = etPrice;
     this.etRegClose = etRegClose;
     this.etRegOpen = etRegOpen;
@@ -144,13 +145,13 @@ public final class ActivityCreateEventBinding implements ViewBinding {
     this.tilEventStart = tilEventStart;
     this.tilLocation = tilLocation;
     this.tilMaxWl = tilMaxWl;
-    this.tilPoster = tilPoster;
     this.tilPrice = tilPrice;
     this.tilRegClose = tilRegClose;
     this.tilRegOpen = tilRegOpen;
     this.tilTags = tilTags;
     this.tilTitle = tilTitle;
     this.toolbar = toolbar;
+    this.tvPosterName = tvPosterName;
   }
 
   @Override
@@ -183,6 +184,12 @@ public final class ActivityCreateEventBinding implements ViewBinding {
       id = R.id.btn_create_event;
       MaterialButton btnCreateEvent = ViewBindings.findChildViewById(rootView, id);
       if (btnCreateEvent == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_upload_poster;
+      MaterialButton btnUploadPoster = ViewBindings.findChildViewById(rootView, id);
+      if (btnUploadPoster == null) {
         break missingId;
       }
 
@@ -219,12 +226,6 @@ public final class ActivityCreateEventBinding implements ViewBinding {
       id = R.id.et_max_wl;
       TextInputEditText etMaxWl = ViewBindings.findChildViewById(rootView, id);
       if (etMaxWl == null) {
-        break missingId;
-      }
-
-      id = R.id.et_poster;
-      TextInputEditText etPoster = ViewBindings.findChildViewById(rootView, id);
-      if (etPoster == null) {
         break missingId;
       }
 
@@ -306,12 +307,6 @@ public final class ActivityCreateEventBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.til_poster;
-      TextInputLayout tilPoster = ViewBindings.findChildViewById(rootView, id);
-      if (tilPoster == null) {
-        break missingId;
-      }
-
       id = R.id.til_price;
       TextInputLayout tilPrice = ViewBindings.findChildViewById(rootView, id);
       if (tilPrice == null) {
@@ -348,11 +343,17 @@ public final class ActivityCreateEventBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tv_poster_name;
+      TextView tvPosterName = ViewBindings.findChildViewById(rootView, id);
+      if (tvPosterName == null) {
+        break missingId;
+      }
+
       return new ActivityCreateEventBinding((CoordinatorLayout) rootView, btnCreateEvent,
-          etCapacity, etDescription, etEventEnd, etEventStart, etLocation, etMaxWl, etPoster,
+          btnUploadPoster, etCapacity, etDescription, etEventEnd, etEventStart, etLocation, etMaxWl,
           etPrice, etRegClose, etRegOpen, etTags, etTitle, swGeolocation, swPrivate, tilCapacity,
-          tilDescription, tilEventEnd, tilEventStart, tilLocation, tilMaxWl, tilPoster, tilPrice,
-          tilRegClose, tilRegOpen, tilTags, tilTitle, toolbar);
+          tilDescription, tilEventEnd, tilEventStart, tilLocation, tilMaxWl, tilPrice, tilRegClose,
+          tilRegOpen, tilTags, tilTitle, toolbar, tvPosterName);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

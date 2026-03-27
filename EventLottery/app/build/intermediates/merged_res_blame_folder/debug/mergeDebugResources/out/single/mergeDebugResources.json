@@ -20,6 +20,10 @@
         "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\item_notification.xml"
     },
     {
+        "merged": "com.example.eventlottery.app-debug-46:/menu_bottom_nav_entrant.xml.flat",
+        "source": "com.example.eventlottery.app-main-48:/menu/bottom_nav_entrant.xml"
+    },
+    {
         "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\drawable_bg_unread_dot.xml.flat",
         "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\drawable\\bg_unread_dot.xml"
     },
@@ -70,6 +74,10 @@
     {
         "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\drawable_bg_calendar_selected.xml.flat",
         "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\drawable\\bg_calendar_selected.xml"
+    },
+    {
+        "merged": "com.example.eventlottery.app-debug-46:/drawable_ic_home.xml.flat",
+        "source": "com.example.eventlottery.app-main-48:/drawable/ic_home.xml"
     },
     {
         "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\layout_fragment_notifications.xml.flat",
@@ -190,10 +198,6 @@
     {
         "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\layout_activity_organizer_event_management.xml.flat",
         "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\activity_organizer_event_management.xml"
-    },
-    {
-        "merged": "com.example.eventlottery.app-debug-46:/layout_activity_create_event.xml.flat",
-        "source": "com.example.eventlottery.app-main-48:/layout/activity_create_event.xml"
     },
     {
         "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-debug-46:\\drawable_bg_info_cell.xml.flat",
