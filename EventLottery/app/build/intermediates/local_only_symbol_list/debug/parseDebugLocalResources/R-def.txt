@@ -60,6 +60,7 @@ drawable bg_spinner
 drawable bg_spinner_white
 drawable bg_unread_dot
 drawable ic_add
+drawable ic_app_logo
 drawable ic_arrow_back
 drawable ic_arrow_forward
 drawable ic_calendar
