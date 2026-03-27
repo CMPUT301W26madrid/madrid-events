@@ -3369,6 +3369,7 @@ int id btn_run_lottery 0x7f080073
 int id btn_save 0x7f080074
 int id btn_send_notification 0x7f080075
 int id btn_sign_out 0x7f080076
+int id btn_upload_poster 0x7f0802b9
 int id btn_view_map 0x7f0802b4
 int id buttonPanel 0x7f080077
 int id cache_measures 0x7f080078
@@ -3478,7 +3479,6 @@ int id et_max_wl 0x7f0800df
 int id et_name 0x7f0800e0
 int id et_notification_msg 0x7f0800e1
 int id et_phone 0x7f0800e2
-int id et_poster 0x7f0800e3
 int id et_price 0x7f0800e4
 int id et_reg_close 0x7f0800e5
 int id et_reg_open 0x7f0800e6
@@ -3834,7 +3834,6 @@ int id til_max_wl 0x7f08023f
 int id til_name 0x7f080240
 int id til_notification_msg 0x7f080241
 int id til_phone 0x7f080242
-int id til_poster 0x7f080243
 int id til_price 0x7f080244
 int id til_reg_close 0x7f080245
 int id til_reg_open 0x7f080246
@@ -3886,6 +3885,7 @@ int id tv_no_events_day 0x7f080273
 int id tv_no_profiles 0x7f080274
 int id tv_notif_badge 0x7f080275
 int id tv_organizer 0x7f080276
+int id tv_poster_name 0x7f0802ba
 int id tv_price 0x7f080277
 int id tv_qr_title 0x7f080278
 int id tv_reg_period 0x7f080279

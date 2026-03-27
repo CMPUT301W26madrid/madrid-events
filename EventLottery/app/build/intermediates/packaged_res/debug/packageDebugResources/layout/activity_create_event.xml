@@ -216,7 +216,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Options -->
+            <!-- Event Poster -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -230,18 +230,36 @@
                     android:padding="16dp">
 
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="@string/options" android:textColor="@color/text_primary"
+                        android:text="Event Poster" android:textColor="@color/text_primary"
                         android:textSize="15sp" android:textStyle="bold" android:layout_marginBottom="14dp"/>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_poster" style="@style/InputField"
-                        android:layout_width="match_parent" android:layout_height="wrap_content"
-                        android:hint="@string/hint_poster_url" android:layout_marginBottom="16dp">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_poster"
-                            android:layout_width="match_parent" android:layout_height="wrap_content"
-                            android:inputType="textUri"/>
-                    </com.google.android.material.textfield.TextInputLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="16dp">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_upload_poster"
+                            style="@style/ButtonOutline"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Upload Image"
+                            app:icon="@drawable/ic_camera"/>
+
+                        <TextView
+                            android:id="@+id/tv_poster_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
+                            android:text="No file selected"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
+                    </LinearLayout>
 
                     <!-- Private toggle -->
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"

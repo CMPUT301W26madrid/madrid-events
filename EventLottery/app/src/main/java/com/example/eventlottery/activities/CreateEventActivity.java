@@ -2,9 +2,15 @@ package com.example.eventlottery.activities;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.example.eventlottery.R;
@@ -31,15 +37,27 @@ public class CreateEventActivity extends AppCompatActivity {
     private TextInputLayout tilTitle, tilDescription, tilLocation, tilCapacity;
     private TextInputEditText etTitle, etDescription, etLocation, etTags;
     private TextInputEditText etEventStart, etEventEnd, etRegOpen, etRegClose;
-    private TextInputEditText etCapacity, etMaxWl, etPrice, etPoster;
+    private TextInputEditText etCapacity, etMaxWl, etPrice;
+    private TextView tvPosterName;
+    private MaterialButton btnUploadPoster;
     private SwitchMaterial swPrivate, swGeolocation;
     private MaterialButton btnCreate;
+
+    private String selectedPosterUri = null;
 
     private final Calendar calEventStart = Calendar.getInstance();
     private final Calendar calEventEnd   = Calendar.getInstance();
     private final Calendar calRegOpen    = Calendar.getInstance();
     private final Calendar calRegClose   = Calendar.getInstance();
     private final SimpleDateFormat sdf = new SimpleDateFormat("MMM d, yyyy h:mm a", Locale.getDefault());
+
+    private final ActivityResultLauncher<String> galleryLauncher =
+            registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
+                if (uri != null) {
+                    selectedPosterUri = uri.toString();
+                    tvPosterName.setText("Image selected");
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +76,7 @@ public class CreateEventActivity extends AppCompatActivity {
         bindViews();
         setupDatePickers();
 
+        btnUploadPoster.setOnClickListener(v -> galleryLauncher.launch("image/*"));
         btnCreate.setOnClickListener(v -> validateAndCreate());
     }
 
@@ -78,7 +97,10 @@ public class CreateEventActivity extends AppCompatActivity {
         etCapacity    = findViewById(R.id.et_capacity);
         etMaxWl       = findViewById(R.id.et_max_wl);
         etPrice       = findViewById(R.id.et_price);
-        etPoster      = findViewById(R.id.et_poster);
+        
+        btnUploadPoster = findViewById(R.id.btn_upload_poster);
+        tvPosterName    = findViewById(R.id.tv_poster_name);
+        
         swPrivate     = findViewById(R.id.sw_private);
         swGeolocation = findViewById(R.id.sw_geolocation);
         btnCreate     = findViewById(R.id.btn_create_event);
@@ -133,7 +155,6 @@ public class CreateEventActivity extends AppCompatActivity {
         int capacity   = safeInt(cap, 10);
         int maxWl      = safeInt(getText(etMaxWl), 0);
         double price   = safeDouble(getText(etPrice), 0);
-        String poster  = getText(etPoster);
         boolean priv   = swPrivate.isChecked();
         boolean geo    = swGeolocation.isChecked();
 
@@ -157,7 +178,7 @@ public class CreateEventActivity extends AppCompatActivity {
                     calEventStart.getTimeInMillis(), calEventEnd.getTimeInMillis(),
                     calRegOpen.getTimeInMillis(), calRegClose.getTimeInMillis(),
                     capacity, maxWl, price,
-                    poster.isEmpty() ? null : poster,
+                    selectedPosterUri,
                     priv, geo);
 
             // Handle tags

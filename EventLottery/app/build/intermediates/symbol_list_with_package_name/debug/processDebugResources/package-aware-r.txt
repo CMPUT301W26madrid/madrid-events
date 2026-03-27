@@ -3370,6 +3370,7 @@ id btn_run_lottery
 id btn_save
 id btn_send_notification
 id btn_sign_out
+id btn_upload_poster
 id btn_view_map
 id buttonPanel
 id cache_measures
@@ -3479,7 +3480,6 @@ id et_max_wl
 id et_name
 id et_notification_msg
 id et_phone
-id et_poster
 id et_price
 id et_reg_close
 id et_reg_open
@@ -3835,7 +3835,6 @@ id til_max_wl
 id til_name
 id til_notification_msg
 id til_phone
-id til_poster
 id til_price
 id til_reg_close
 id til_reg_open
@@ -3887,6 +3886,7 @@ id tv_no_events_day
 id tv_no_profiles
 id tv_notif_badge
 id tv_organizer
+id tv_poster_name
 id tv_price
 id tv_qr_title
 id tv_reg_period

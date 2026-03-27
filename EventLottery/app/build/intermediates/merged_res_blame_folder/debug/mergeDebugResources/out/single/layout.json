@@ -1,110 +1,114 @@
 [
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/fragment_admin_dashboard.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/fragment_admin_dashboard.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\item_comment.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\item_comment.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_admin_main.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/activity_admin_main.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\fragment_notifications.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\fragment_notifications.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/dialog_create_profile.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/dialog_create_profile.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\activity_organizer_main.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\activity_organizer_main.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_organizer_event_management.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/activity_organizer_event_management.xml"
-    },
-    {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/item_admin_event.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/item_admin_event.xml"
-    },
-    {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/fragment_discover_events.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/fragment_discover_events.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\fragment_calendar.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\fragment_calendar.xml"
     },
     {
         "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_create_event.xml",
         "source": "com.example.eventlottery.app-main-48:/layout/activity_create_event.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/item_notification.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/item_notification.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\activity_map_view.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\activity_map_view.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_organizer_main.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/activity_organizer_main.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\item_registration.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\item_registration.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_entrant_main.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/activity_entrant_main.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\fragment_organizer_dashboard.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\fragment_organizer_dashboard.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/item_my_event.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/item_my_event.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\item_admin_event.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\item_admin_event.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/item_registration.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/item_registration.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\fragment_my_events.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\fragment_my_events.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_event_detail.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/activity_event_detail.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\activity_qr_scan.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\activity_qr_scan.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/item_admin_user.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/item_admin_user.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\activity_event_detail.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\activity_event_detail.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_map_view.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/activity_map_view.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\fragment_admin_dashboard.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\fragment_admin_dashboard.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/item_event_card.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/item_event_card.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\activity_entrant_main.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\activity_entrant_main.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/item_comment.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/item_comment.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\activity_admin_main.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\activity_admin_main.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/fragment_notifications.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/fragment_notifications.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\activity_profile.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\activity_profile.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_qr_scan.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/activity_qr_scan.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\item_event_card.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\item_event_card.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/fragment_organizer_dashboard.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/fragment_organizer_dashboard.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\fragment_discover_events.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\fragment_discover_events.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/fragment_calendar.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/fragment_calendar.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\item_notification.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\item_notification.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/fragment_my_events.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/fragment_my_events.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\item_my_event.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\item_my_event.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_login.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/activity_login.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\dialog_create_profile.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\dialog_create_profile.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/item_profile.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/item_profile.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\activity_organizer_event_management.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\activity_organizer_event_management.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/item_organizer_event.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/item_organizer_event.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\dialog_qr_code.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\dialog_qr_code.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_profile.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/activity_profile.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\activity_create_event.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\activity_create_event.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/dialog_qr_code.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/dialog_qr_code.xml"
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\item_admin_user.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\item_admin_user.xml"
+    },
+    {
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\item_organizer_event.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\item_organizer_event.xml"
+    },
+    {
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\activity_login.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-45:\\layout\\item_profile.xml",
+        "source": "C:\\Users\\chowd\\.gradle\\daemon\\8.10.2\\com.example.eventlottery.app-main-48:\\layout\\item_profile.xml"
     }
 ]
