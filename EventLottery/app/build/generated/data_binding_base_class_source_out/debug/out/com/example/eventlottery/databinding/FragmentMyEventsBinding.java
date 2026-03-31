@@ -4,6 +4,7 @@ package com.example.eventlottery.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
@@ -21,6 +22,9 @@ public final class FragmentMyEventsBinding implements ViewBinding {
   private final LinearLayout rootView;
 
   @NonNull
+  public final AutoCompleteTextView atvMyStatusFilter;
+
+  @NonNull
   public final LinearLayout llEmpty;
 
   @NonNull
@@ -29,9 +33,11 @@ public final class FragmentMyEventsBinding implements ViewBinding {
   @NonNull
   public final RecyclerView rvMyEvents;
 
-  private FragmentMyEventsBinding(@NonNull LinearLayout rootView, @NonNull LinearLayout llEmpty,
+  private FragmentMyEventsBinding(@NonNull LinearLayout rootView,
+      @NonNull AutoCompleteTextView atvMyStatusFilter, @NonNull LinearLayout llEmpty,
       @NonNull ProgressBar progress, @NonNull RecyclerView rvMyEvents) {
     this.rootView = rootView;
+    this.atvMyStatusFilter = atvMyStatusFilter;
     this.llEmpty = llEmpty;
     this.progress = progress;
     this.rvMyEvents = rvMyEvents;
@@ -64,6 +70,12 @@ public final class FragmentMyEventsBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.atv_my_status_filter;
+      AutoCompleteTextView atvMyStatusFilter = ViewBindings.findChildViewById(rootView, id);
+      if (atvMyStatusFilter == null) {
+        break missingId;
+      }
+
       id = R.id.ll_empty;
       LinearLayout llEmpty = ViewBindings.findChildViewById(rootView, id);
       if (llEmpty == null) {
@@ -82,7 +94,8 @@ public final class FragmentMyEventsBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentMyEventsBinding((LinearLayout) rootView, llEmpty, progress, rvMyEvents);
+      return new FragmentMyEventsBinding((LinearLayout) rootView, atvMyStatusFilter, llEmpty,
+          progress, rvMyEvents);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

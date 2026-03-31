@@ -74,7 +74,6 @@ public class NotificationsFragment extends Fragment implements NotificationAdapt
                 AppNotification n = doc.toObject(AppNotification.class);
                 if (n != null) { n.setId(doc.getId()); list.add(n); }
             }
-            // Sort by createdAt descending
             list.sort((a, b) -> Long.compare(b.getCreatedAt(), a.getCreatedAt()));
             
             progress.setVisibility(View.GONE);
@@ -107,14 +106,17 @@ public class NotificationsFragment extends Fragment implements NotificationAdapt
             Intent i = new Intent(getContext(), EventDetailActivity.class);
             i.putExtra("event_id", notification.getEventId());
             startActivity(i);
+            
+            // Mark as read and REMOVE action requirement so buttons disappear
             notifRepo.markAsRead(notification.getId());
+            notifRepo.updateActionRequired(notification.getId(), false).addOnSuccessListener(v -> loadNotifications());
         }
     }
 
     @Override
     public void onDecline(AppNotification notification) {
-        // Just delete the notification for now
-        notifRepo.deleteNotification(notification.getId()).addOnSuccessListener(v -> {
+        // Remove action requirement so buttons disappear
+        notifRepo.updateActionRequired(notification.getId(), false).addOnSuccessListener(v -> {
             Toast.makeText(getContext(), "Invitation declined", Toast.LENGTH_SHORT).show();
             loadNotifications();
         });

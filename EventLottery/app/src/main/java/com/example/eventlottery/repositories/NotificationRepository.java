@@ -24,12 +24,10 @@ public class NotificationRepository {
     }
 
     public Task<QuerySnapshot> getNotificationsForUser(String userId) {
-        // Note: Removed orderBy("createdAt") to avoid requiring a composite index.
         return notifRef.whereEqualTo("userId", userId)
                 .get();
     }
 
-    /** Query uses "read" to match the Firestore field name. */
     public Task<QuerySnapshot> getUnreadNotifications(String userId) {
         return notifRef.whereEqualTo("userId", userId)
                 .whereEqualTo("read", false)
@@ -40,11 +38,10 @@ public class NotificationRepository {
         return notifRef.document(notificationId).update("read", true);
     }
 
-    /**
-     * Fix Bug #5: was returning null which caused NullPointerException in
-     * NotificationsFragment when Tasks.whenAll() was called on the result.
-     * Now fetches all unread docs for the user and marks them read in a batch.
-     */
+    public Task<Void> updateActionRequired(String notificationId, boolean required) {
+        return notifRef.document(notificationId).update("actionRequired", required);
+    }
+
     public Task<Void> markAllReadForUser(String userId) {
         return getUnreadNotifications(userId).continueWithTask(task -> {
             if (!task.isSuccessful() || task.getResult() == null) {

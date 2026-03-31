@@ -7,6 +7,8 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -24,7 +26,6 @@ import com.example.eventlottery.activities.QRScanActivity;
 import com.example.eventlottery.adapters.EventAdapter;
 import com.example.eventlottery.models.Event;
 import com.example.eventlottery.repositories.EventRepository;
-import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.ArrayList;
@@ -38,7 +39,10 @@ public class DiscoverEventsFragment extends Fragment {
     private View llEmpty;
     private ProgressBar progress;
     private SwipeRefreshLayout swipeRefresh;
-    private String currentStatusFilter = "all";
+    
+    private EditText etSearch;
+    private AutoCompleteTextView atvStatus, atvSize;
+    private View llFilterOptions;
 
     private final ActivityResultLauncher<Intent> qrLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -64,42 +68,20 @@ public class DiscoverEventsFragment extends Fragment {
         llEmpty      = view.findViewById(R.id.ll_empty);
         progress     = view.findViewById(R.id.progress);
         swipeRefresh = view.findViewById(R.id.swipe_refresh);
-        EditText etSearch = view.findViewById(R.id.et_search);
-        View ivFilter     = view.findViewById(R.id.iv_filter);
-        View llFilters    = view.findViewById(R.id.ll_filters);
-        ChipGroup cgStatus = view.findViewById(R.id.cg_status);
+        etSearch     = view.findViewById(R.id.et_search);
+        
+        View cvFilterToggle = view.findViewById(R.id.cv_filter_toggle);
+        llFilterOptions     = view.findViewById(R.id.ll_filter_options);
+        atvStatus           = view.findViewById(R.id.atv_status);
+        atvSize             = view.findViewById(R.id.atv_size);
+        
         FloatingActionButton fabScan = view.findViewById(R.id.fab_scan);
 
         adapter = new EventAdapter(event -> openEventDetail(event.getId()));
         rvEvents.setLayoutManager(new LinearLayoutManager(getContext()));
         rvEvents.setAdapter(adapter);
 
-        // Search
-        etSearch.addTextChangedListener(new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence s, int st, int c, int a) {}
-            @Override public void onTextChanged(CharSequence s, int st, int b, int c) {
-                adapter.filter(s.toString(), currentStatusFilter);
-                updateEmpty();
-            }
-            @Override public void afterTextChanged(Editable s) {}
-        });
-
-        // Filter toggle
-        ivFilter.setOnClickListener(v -> {
-            llFilters.setVisibility(llFilters.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
-        });
-
-        // Status chips
-        cgStatus.setOnCheckedStateChangeListener((group, checkedIds) -> {
-            if (checkedIds.isEmpty()) return;
-            int id = checkedIds.get(0);
-            if (id == R.id.chip_open)   currentStatusFilter = "open";
-            else if (id == R.id.chip_closed) currentStatusFilter = "closed";
-            else if (id == R.id.chip_drawn)  currentStatusFilter = "drawn";
-            else currentStatusFilter = "all";
-            adapter.filter(etSearch.getText().toString(), currentStatusFilter);
-            updateEmpty();
-        });
+        setupFilters();
 
         swipeRefresh.setOnRefreshListener(this::loadEvents);
         swipeRefresh.setColorSchemeResources(R.color.primary);
@@ -107,7 +89,46 @@ public class DiscoverEventsFragment extends Fragment {
         fabScan.setOnClickListener(v -> qrLauncher.launch(
                 new Intent(getContext(), QRScanActivity.class)));
 
+        cvFilterToggle.setOnClickListener(v -> {
+            boolean isVisible = llFilterOptions.getVisibility() == View.VISIBLE;
+            llFilterOptions.setVisibility(isVisible ? View.GONE : View.VISIBLE);
+        });
+
         loadEvents();
+    }
+
+    private void setupFilters() {
+        // Status options
+        String[] statuses = {"All Status", "Open Now", "Closed", "Drawn", "Completed"};
+        ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(requireContext(), 
+                R.layout.item_dropdown_filter, statuses);
+        atvStatus.setAdapter(statusAdapter);
+        atvStatus.setOnItemClickListener((parent, view, position, id) -> applyFilters());
+
+        // Size options
+        String[] sizes = {"Any Size", "Small (\u226420)", "Medium (21-50)", "Large (50+)"};
+        ArrayAdapter<String> sizeAdapter = new ArrayAdapter<>(requireContext(), 
+                R.layout.item_dropdown_filter, sizes);
+        atvSize.setAdapter(sizeAdapter);
+        atvSize.setOnItemClickListener((parent, view, position, id) -> applyFilters());
+
+        // Search text
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                applyFilters();
+            }
+            @Override public void afterTextChanged(Editable s) {}
+        });
+    }
+
+    private void applyFilters() {
+        String query = etSearch.getText().toString();
+        String status = atvStatus.getText().toString();
+        String size = atvSize.getText().toString();
+        
+        adapter.filter(query, status, size);
+        updateEmpty();
     }
 
     private void loadEvents() {
@@ -123,13 +144,12 @@ public class DiscoverEventsFragment extends Fragment {
                     events.add(e);
                 }
             }
-            // Client-side sort by createdAt descending
             events.sort((a, b) -> Long.compare(b.getCreatedAt(), a.getCreatedAt()));
 
             adapter.setEvents(events);
+            applyFilters();
             progress.setVisibility(View.GONE);
             swipeRefresh.setRefreshing(false);
-            updateEmpty();
         }).addOnFailureListener(e -> {
             if (!isAdded()) return;
             progress.setVisibility(View.GONE);

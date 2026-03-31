@@ -22,33 +22,59 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     private List<Event> allEvents = new ArrayList<>();
     private final OnEventClickListener listener;
 
+    private String currentQuery = "";
+    private String currentStatusFilter = "All Status";
+    private String currentSizeFilter = "Any Size";
+
     public EventAdapter(OnEventClickListener listener) {
         this.listener = listener;
     }
 
     public void setEvents(List<Event> events) {
         this.allEvents = new ArrayList<>(events);
-        this.events    = new ArrayList<>(events);
-        notifyDataSetChanged();
+        applyFilters();
     }
 
-    public void filter(String query, String statusFilter) {
-        String lowerQuery = query == null ? "" : query.trim().toLowerCase();
+    public void filter(String query, String statusFilter, String sizeFilter) {
+        this.currentQuery = query;
+        this.currentStatusFilter = statusFilter;
+        this.currentSizeFilter = sizeFilter;
+        applyFilters();
+    }
+
+    private void applyFilters() {
+        String lowerQuery = currentQuery == null ? "" : currentQuery.trim().toLowerCase();
         events = new ArrayList<>();
+
         for (Event e : allEvents) {
-            // Null-safe string comparisons (Bug fix: NPE if title/location/status is null)
             String title    = e.getTitle()    != null ? e.getTitle().toLowerCase()    : "";
             String location = e.getLocation() != null ? e.getLocation().toLowerCase() : "";
-            String status   = e.getStatus()   != null ? e.getStatus().toLowerCase()   : "";
+            String status   = e.getStatus()   != null ? e.getStatus()                : Event.STATUS_OPEN;
 
+            // Text search
             boolean matchesQuery = lowerQuery.isEmpty()
                     || title.contains(lowerQuery)
                     || location.contains(lowerQuery);
 
-            boolean matchesStatus = "all".equals(statusFilter)
-                    || status.equalsIgnoreCase(statusFilter);
+            // Status filter
+            boolean matchesStatus = "All Status".equals(currentStatusFilter)
+                    || (currentStatusFilter.equalsIgnoreCase("Open Now") && status.equalsIgnoreCase(Event.STATUS_OPEN))
+                    || (currentStatusFilter.equalsIgnoreCase("Closed") && status.equalsIgnoreCase(Event.STATUS_CLOSED))
+                    || (currentStatusFilter.equalsIgnoreCase("Drawn") && status.equalsIgnoreCase(Event.STATUS_DRAWN))
+                    || (currentStatusFilter.equalsIgnoreCase("Completed") && status.equalsIgnoreCase("completed"));
 
-            if (matchesQuery && matchesStatus) events.add(e);
+            // Size filter
+            boolean matchesSize = "Any Size".equals(currentSizeFilter);
+            if (!matchesSize) {
+                int cap = e.getCapacity();
+                if (currentSizeFilter.contains("Small") && cap <= 20) matchesSize = true;
+                else if (currentSizeFilter.contains("Medium") && cap > 20 && cap <= 50) matchesSize = true;
+                else if (currentSizeFilter.contains("Large") && cap > 50) matchesSize = true;
+            }
+
+            if (matchesQuery && matchesStatus && matchesSize) {
+                events.add(e);
+            }
         }
         notifyDataSetChanged();
     }
@@ -66,7 +92,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder h, int position) {
         Event e = events.get(position);
 
-        // Null-safe setText calls (Bug fix: any field could be null from Firestore)
         h.tvTitle.setText(e.getTitle() != null ? e.getTitle() : "");
         h.tvDescription.setText(e.getDescription() != null ? e.getDescription() : "");
         h.tvLocation.setText(e.getLocation() != null ? e.getLocation() : "");
@@ -74,7 +99,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         h.tvCapacity.setText(e.getWaitingListCount() + "/" + e.getCapacity() + " spots");
         h.tvPrice.setText(e.getFormattedPrice());
 
-        // Status badge — default to "open" if null
         String status = e.getStatus() != null ? e.getStatus() : Event.STATUS_OPEN;
         h.tvStatus.setText(status.toUpperCase());
         switch (status) {
@@ -88,7 +112,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                 h.tvStatus.setBackgroundResource(R.drawable.bg_badge_grey);
         }
 
-        // Days-left countdown
         if (e.isRegistrationOpen()) {
             long days = e.getDaysLeftToRegister();
             h.llDaysLeft.setVisibility(View.VISIBLE);

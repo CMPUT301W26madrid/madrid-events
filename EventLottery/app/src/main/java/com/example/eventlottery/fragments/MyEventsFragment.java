@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -34,6 +36,7 @@ public class MyEventsFragment extends Fragment {
     private MyEventAdapter adapter;
     private View llEmpty;
     private ProgressBar progress;
+    private AutoCompleteTextView atvStatusFilter;
 
     @Nullable @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -52,6 +55,7 @@ public class MyEventsFragment extends Fragment {
         RecyclerView rv = view.findViewById(R.id.rv_my_events);
         llEmpty  = view.findViewById(R.id.ll_empty);
         progress = view.findViewById(R.id.progress);
+        atvStatusFilter = view.findViewById(R.id.atv_my_status_filter);
 
         adapter = new MyEventAdapter();
         adapter.setListener(reg -> {
@@ -63,7 +67,19 @@ public class MyEventsFragment extends Fragment {
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         rv.setAdapter(adapter);
 
+        setupFilter();
         loadMyEvents();
+    }
+
+    private void setupFilter() {
+        String[] statuses = {"All Status", "Waiting", "Selected", "Accepted", "Declined", "Cancelled"};
+        ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(requireContext(), 
+                R.layout.item_dropdown_filter, statuses);
+        atvStatusFilter.setAdapter(statusAdapter);
+        atvStatusFilter.setOnItemClickListener((parent, view, position, id) -> {
+            adapter.filter(statuses[position]);
+            updateEmpty();
+        });
     }
 
     private void loadMyEvents() {
@@ -97,7 +113,6 @@ public class MyEventsFragment extends Fragment {
                 return;
             }
 
-            // Fetch event details for all registrations
             List<Task<DocumentSnapshot>> tasks = new ArrayList<>();
             for (Registration r : regs) {
                 if (r.getEventId() != null) {
@@ -139,17 +154,22 @@ public class MyEventsFragment extends Fragment {
 
                 progress.setVisibility(View.GONE);
                 adapter.setItems(items);
-                llEmpty.setVisibility(items.isEmpty() ? View.VISIBLE : View.GONE);
+                // After loading, ensure current filter is applied
+                adapter.filter(atvStatusFilter.getText().toString());
+                updateEmpty();
             });
 
         }).addOnFailureListener(e -> {
             if (!isAdded()) return;
             progress.setVisibility(View.GONE);
             llEmpty.setVisibility(View.VISIBLE);
-            // More descriptive error for debugging
-            String errorMsg = e.getMessage() != null ? e.getMessage() : "Unknown Firestore error";
-            Toast.makeText(getContext(), "Registration load failed: " + errorMsg, Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Registration load failed", Toast.LENGTH_SHORT).show();
         });
+    }
+
+    private void updateEmpty() {
+        boolean empty = adapter.isEmpty();
+        llEmpty.setVisibility(empty ? View.VISIBLE : View.GONE);
     }
 
     @Override

@@ -3176,6 +3176,7 @@ drawable ic_person
 drawable ic_qr_code
 drawable ic_search
 drawable ic_search_black_24
+drawable ic_tune
 drawable indeterminate_static
 drawable m3_avd_hide_password
 drawable m3_avd_show_password
@@ -3338,6 +3339,9 @@ id app_bar
 id arc
 id asConfigured
 id async
+id atv_my_status_filter
+id atv_size
+id atv_status
 id auto
 id autoComplete
 id autoCompleteToEnd
@@ -3389,18 +3393,13 @@ id centerInside
 id center_horizontal
 id center_vertical
 id cg_audience
-id cg_status
 id chain
 id chain2
 id chains
 id checkbox
 id checked
-id chip_all
 id chip_all_entrants
 id chip_cancelled_entrants
-id chip_closed
-id chip_drawn
-id chip_open
 id chip_selected_entrants
 id chronometer
 id circle_center
@@ -3427,6 +3426,7 @@ id currentState
 id custom
 id customPanel
 id cut
+id cv_filter_toggle
 id dark
 id date_picker_actions
 id decelerate
@@ -3551,7 +3551,6 @@ id iv_bell
 id iv_cancel
 id iv_close
 id iv_delete
-id iv_filter
 id iv_next_month
 id iv_poster
 id iv_prev_month
@@ -3575,7 +3574,7 @@ id ll_action_bar
 id ll_actions
 id ll_days_left
 id ll_empty
-id ll_filters
+id ll_filter_options
 id ll_role_badges
 id ll_roles
 id m3_side_sheet
@@ -4104,6 +4103,7 @@ layout ime_secondary_split_test_activity
 layout item_admin_event
 layout item_admin_user
 layout item_comment
+layout item_dropdown_filter
 layout item_event_card
 layout item_my_event
 layout item_notification

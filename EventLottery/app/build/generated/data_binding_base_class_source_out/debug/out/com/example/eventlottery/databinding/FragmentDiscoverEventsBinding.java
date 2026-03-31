@@ -4,19 +4,18 @@ package com.example.eventlottery.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.eventlottery.R;
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -27,19 +26,13 @@ public final class FragmentDiscoverEventsBinding implements ViewBinding {
   private final LinearLayout rootView;
 
   @NonNull
-  public final ChipGroup cgStatus;
+  public final AutoCompleteTextView atvSize;
 
   @NonNull
-  public final Chip chipAll;
+  public final AutoCompleteTextView atvStatus;
 
   @NonNull
-  public final Chip chipClosed;
-
-  @NonNull
-  public final Chip chipDrawn;
-
-  @NonNull
-  public final Chip chipOpen;
+  public final CardView cvFilterToggle;
 
   @NonNull
   public final EditText etSearch;
@@ -48,13 +41,10 @@ public final class FragmentDiscoverEventsBinding implements ViewBinding {
   public final FloatingActionButton fabScan;
 
   @NonNull
-  public final ImageView ivFilter;
-
-  @NonNull
   public final LinearLayout llEmpty;
 
   @NonNull
-  public final LinearLayout llFilters;
+  public final LinearLayout llFilterOptions;
 
   @NonNull
   public final ProgressBar progress;
@@ -65,23 +55,20 @@ public final class FragmentDiscoverEventsBinding implements ViewBinding {
   @NonNull
   public final SwipeRefreshLayout swipeRefresh;
 
-  private FragmentDiscoverEventsBinding(@NonNull LinearLayout rootView, @NonNull ChipGroup cgStatus,
-      @NonNull Chip chipAll, @NonNull Chip chipClosed, @NonNull Chip chipDrawn,
-      @NonNull Chip chipOpen, @NonNull EditText etSearch, @NonNull FloatingActionButton fabScan,
-      @NonNull ImageView ivFilter, @NonNull LinearLayout llEmpty, @NonNull LinearLayout llFilters,
-      @NonNull ProgressBar progress, @NonNull RecyclerView rvEvents,
-      @NonNull SwipeRefreshLayout swipeRefresh) {
+  private FragmentDiscoverEventsBinding(@NonNull LinearLayout rootView,
+      @NonNull AutoCompleteTextView atvSize, @NonNull AutoCompleteTextView atvStatus,
+      @NonNull CardView cvFilterToggle, @NonNull EditText etSearch,
+      @NonNull FloatingActionButton fabScan, @NonNull LinearLayout llEmpty,
+      @NonNull LinearLayout llFilterOptions, @NonNull ProgressBar progress,
+      @NonNull RecyclerView rvEvents, @NonNull SwipeRefreshLayout swipeRefresh) {
     this.rootView = rootView;
-    this.cgStatus = cgStatus;
-    this.chipAll = chipAll;
-    this.chipClosed = chipClosed;
-    this.chipDrawn = chipDrawn;
-    this.chipOpen = chipOpen;
+    this.atvSize = atvSize;
+    this.atvStatus = atvStatus;
+    this.cvFilterToggle = cvFilterToggle;
     this.etSearch = etSearch;
     this.fabScan = fabScan;
-    this.ivFilter = ivFilter;
     this.llEmpty = llEmpty;
-    this.llFilters = llFilters;
+    this.llFilterOptions = llFilterOptions;
     this.progress = progress;
     this.rvEvents = rvEvents;
     this.swipeRefresh = swipeRefresh;
@@ -114,33 +101,21 @@ public final class FragmentDiscoverEventsBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.cg_status;
-      ChipGroup cgStatus = ViewBindings.findChildViewById(rootView, id);
-      if (cgStatus == null) {
+      id = R.id.atv_size;
+      AutoCompleteTextView atvSize = ViewBindings.findChildViewById(rootView, id);
+      if (atvSize == null) {
         break missingId;
       }
 
-      id = R.id.chip_all;
-      Chip chipAll = ViewBindings.findChildViewById(rootView, id);
-      if (chipAll == null) {
+      id = R.id.atv_status;
+      AutoCompleteTextView atvStatus = ViewBindings.findChildViewById(rootView, id);
+      if (atvStatus == null) {
         break missingId;
       }
 
-      id = R.id.chip_closed;
-      Chip chipClosed = ViewBindings.findChildViewById(rootView, id);
-      if (chipClosed == null) {
-        break missingId;
-      }
-
-      id = R.id.chip_drawn;
-      Chip chipDrawn = ViewBindings.findChildViewById(rootView, id);
-      if (chipDrawn == null) {
-        break missingId;
-      }
-
-      id = R.id.chip_open;
-      Chip chipOpen = ViewBindings.findChildViewById(rootView, id);
-      if (chipOpen == null) {
+      id = R.id.cv_filter_toggle;
+      CardView cvFilterToggle = ViewBindings.findChildViewById(rootView, id);
+      if (cvFilterToggle == null) {
         break missingId;
       }
 
@@ -156,21 +131,15 @@ public final class FragmentDiscoverEventsBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.iv_filter;
-      ImageView ivFilter = ViewBindings.findChildViewById(rootView, id);
-      if (ivFilter == null) {
-        break missingId;
-      }
-
       id = R.id.ll_empty;
       LinearLayout llEmpty = ViewBindings.findChildViewById(rootView, id);
       if (llEmpty == null) {
         break missingId;
       }
 
-      id = R.id.ll_filters;
-      LinearLayout llFilters = ViewBindings.findChildViewById(rootView, id);
-      if (llFilters == null) {
+      id = R.id.ll_filter_options;
+      LinearLayout llFilterOptions = ViewBindings.findChildViewById(rootView, id);
+      if (llFilterOptions == null) {
         break missingId;
       }
 
@@ -192,9 +161,9 @@ public final class FragmentDiscoverEventsBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentDiscoverEventsBinding((LinearLayout) rootView, cgStatus, chipAll,
-          chipClosed, chipDrawn, chipOpen, etSearch, fabScan, ivFilter, llEmpty, llFilters,
-          progress, rvEvents, swipeRefresh);
+      return new FragmentDiscoverEventsBinding((LinearLayout) rootView, atvSize, atvStatus,
+          cvFilterToggle, etSearch, fabScan, llEmpty, llFilterOptions, progress, rvEvents,
+          swipeRefresh);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

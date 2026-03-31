@@ -74,7 +74,11 @@ drawable ic_notifications
 drawable ic_person
 drawable ic_qr_code
 drawable ic_search
+drawable ic_tune
 id app_bar
+id atv_my_status_filter
+id atv_size
+id atv_status
 id bottom_nav
 id btn_accept
 id btn_cancel
@@ -101,14 +105,10 @@ id cb_admin
 id cb_entrant
 id cb_organizer
 id cg_audience
-id cg_status
-id chip_all
 id chip_all_entrants
 id chip_cancelled_entrants
-id chip_closed
-id chip_drawn
-id chip_open
 id chip_selected_entrants
+id cv_filter_toggle
 id et_capacity
 id et_comment
 id et_description
@@ -133,7 +133,6 @@ id iv_bell
 id iv_cancel
 id iv_close
 id iv_delete
-id iv_filter
 id iv_next_month
 id iv_poster
 id iv_prev_month
@@ -144,7 +143,7 @@ id ll_action_bar
 id ll_actions
 id ll_days_left
 id ll_empty
-id ll_filters
+id ll_filter_options
 id ll_role_badges
 id ll_roles
 id map
@@ -263,6 +262,7 @@ layout fragment_organizer_dashboard
 layout item_admin_event
 layout item_admin_user
 layout item_comment
+layout item_dropdown_filter
 layout item_event_card
 layout item_my_event
 layout item_notification

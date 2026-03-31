@@ -3175,6 +3175,7 @@ int drawable ic_person 0x7f0700c9
 int drawable ic_qr_code 0x7f0700ca
 int drawable ic_search 0x7f0700cb
 int drawable ic_search_black_24 0x7f0700cc
+int drawable ic_tune 0x7f070119
 int drawable indeterminate_static 0x7f0700cd
 int drawable m3_avd_hide_password 0x7f0700ce
 int drawable m3_avd_show_password 0x7f0700cf
@@ -3337,6 +3338,9 @@ int id app_bar 0x7f080052
 int id arc 0x7f080053
 int id asConfigured 0x7f080054
 int id async 0x7f080055
+int id atv_my_status_filter 0x7f0802be
+int id atv_size 0x7f0802ba
+int id atv_status 0x7f0802bb
 int id auto 0x7f080056
 int id autoComplete 0x7f080057
 int id autoCompleteToEnd 0x7f080058
@@ -3388,18 +3392,13 @@ int id centerInside 0x7f080085
 int id center_horizontal 0x7f080086
 int id center_vertical 0x7f080087
 int id cg_audience 0x7f080088
-int id cg_status 0x7f080089
 int id chain 0x7f08008a
 int id chain2 0x7f08008b
 int id chains 0x7f08008c
 int id checkbox 0x7f08008d
 int id checked 0x7f08008e
-int id chip_all 0x7f08008f
 int id chip_all_entrants 0x7f080090
 int id chip_cancelled_entrants 0x7f080091
-int id chip_closed 0x7f080092
-int id chip_drawn 0x7f080093
-int id chip_open 0x7f080094
 int id chip_selected_entrants 0x7f080095
 int id chronometer 0x7f080096
 int id circle_center 0x7f080097
@@ -3426,6 +3425,7 @@ int id currentState 0x7f0800ab
 int id custom 0x7f0800ac
 int id customPanel 0x7f0800ad
 int id cut 0x7f0800ae
+int id cv_filter_toggle 0x7f0802bc
 int id dark 0x7f0800af
 int id date_picker_actions 0x7f0800b0
 int id decelerate 0x7f0800b1
@@ -3550,7 +3550,6 @@ int id iv_bell 0x7f080127
 int id iv_cancel 0x7f080128
 int id iv_close 0x7f080129
 int id iv_delete 0x7f08012a
-int id iv_filter 0x7f08012b
 int id iv_next_month 0x7f08012c
 int id iv_poster 0x7f08012d
 int id iv_prev_month 0x7f08012e
@@ -3574,7 +3573,7 @@ int id ll_action_bar 0x7f08013f
 int id ll_actions 0x7f080140
 int id ll_days_left 0x7f080141
 int id ll_empty 0x7f080142
-int id ll_filters 0x7f080143
+int id ll_filter_options 0x7f0802bd
 int id ll_role_badges 0x7f080144
 int id ll_roles 0x7f080145
 int id m3_side_sheet 0x7f080146
@@ -4103,6 +4102,7 @@ int layout ime_secondary_split_test_activity 0x7f0b003f
 int layout item_admin_event 0x7f0b0040
 int layout item_admin_user 0x7f0b0041
 int layout item_comment 0x7f0b0042
+int layout item_dropdown_filter 0x7f0b0088
 int layout item_event_card 0x7f0b0043
 int layout item_my_event 0x7f0b0044
 int layout item_notification 0x7f0b0045
