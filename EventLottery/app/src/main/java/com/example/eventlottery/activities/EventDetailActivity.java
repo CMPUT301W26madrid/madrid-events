@@ -60,7 +60,7 @@ public class EventDetailActivity extends AppCompatActivity {
     // Views
     private TextView tvTitle, tvOrganizer, tvStartDate, tvEndDate, tvLocation,
             tvPrice, tvWaitingCount, tvSpots, tvRegPeriod, tvDescription;
-    private ImageView ivPoster;
+    private ImageView ivPoster, ivQrBtn;
     private View cardSelected;
     private MaterialButton btnJoinLeave, btnAccept, btnDecline;
     private RecyclerView rvComments;
@@ -105,6 +105,7 @@ public class EventDetailActivity extends AppCompatActivity {
         tvRegPeriod    = findViewById(R.id.tv_reg_period);
         tvDescription  = findViewById(R.id.tv_description);
         ivPoster       = findViewById(R.id.iv_poster);
+        ivQrBtn        = findViewById(R.id.iv_qr_btn);
         cardSelected   = findViewById(R.id.card_selected);
         btnJoinLeave   = findViewById(R.id.btn_join_leave);
         btnAccept      = findViewById(R.id.btn_accept);
@@ -121,7 +122,7 @@ public class EventDetailActivity extends AppCompatActivity {
         btnAccept.setOnClickListener(v -> handleAccept());
         btnDecline.setOnClickListener(v -> handleDecline());
         findViewById(R.id.btn_post_comment).setOnClickListener(v -> postComment());
-        findViewById(R.id.iv_qr_btn).setOnClickListener(v -> showQrDialog());
+        ivQrBtn.setOnClickListener(v -> showQrDialog());
     }
 
     private void loadEvent(String eventId) {
@@ -156,6 +157,13 @@ public class EventDetailActivity extends AppCompatActivity {
             ivPoster.setVisibility(View.VISIBLE);
             Glide.with(this).load(currentEvent.getPosterUrl()).into(ivPoster);
         }
+
+        // Hide QR button for private events
+        if (currentEvent.isPrivate()) {
+            ivQrBtn.setVisibility(View.GONE);
+        } else {
+            ivQrBtn.setVisibility(View.VISIBLE);
+        }
     }
 
     private void loadRegistration() {
@@ -176,20 +184,35 @@ public class EventDetailActivity extends AppCompatActivity {
     private void updateActionButtons() {
         if (currentRegistration == null) {
             // Not registered
-            btnJoinLeave.setText(R.string.join_waiting_list);
+            if (currentEvent.isPrivate()) {
+                btnJoinLeave.setText("Private Event");
+                btnJoinLeave.setEnabled(false);
+            } else {
+                btnJoinLeave.setText(R.string.join_waiting_list);
+                btnJoinLeave.setEnabled(currentEvent.isRegistrationOpen());
+            }
             btnJoinLeave.setVisibility(View.VISIBLE);
             cardSelected.setVisibility(View.GONE);
-            btnJoinLeave.setEnabled(currentEvent.isRegistrationOpen());
         } else {
             switch (currentRegistration.getStatus()) {
+                case Registration.STATUS_INVITED:
+                    btnJoinLeave.setVisibility(View.GONE);
+                    cardSelected.setVisibility(View.VISIBLE);
+                    // Update text for invited state
+                    ((TextView)cardSelected.findViewById(R.id.tv_selected_title)).setText("You've been invited!");
+                    ((TextView)cardSelected.findViewById(R.id.tv_selected_msg)).setText("Would you like to join the waiting list for this private event?");
+                    break;
                 case Registration.STATUS_WAITING:
                     btnJoinLeave.setText(R.string.leave_waiting_list);
                     btnJoinLeave.setVisibility(View.VISIBLE);
+                    btnJoinLeave.setEnabled(true);
                     cardSelected.setVisibility(View.GONE);
                     break;
                 case Registration.STATUS_SELECTED:
                     btnJoinLeave.setVisibility(View.GONE);
                     cardSelected.setVisibility(View.VISIBLE);
+                    ((TextView)cardSelected.findViewById(R.id.tv_selected_title)).setText(R.string.you_selected);
+                    ((TextView)cardSelected.findViewById(R.id.tv_selected_msg)).setText(R.string.selected_message);
                     break;
                 case Registration.STATUS_ACCEPTED:
                     btnJoinLeave.setText("✅ Accepted");
@@ -216,7 +239,7 @@ public class EventDetailActivity extends AppCompatActivity {
             } else {
                 joinWaitingList(0, 0, false);
             }
-        } else {
+        } else if (Registration.STATUS_WAITING.equals(currentRegistration.getStatus())) {
             // Leave
             new AlertDialog.Builder(this)
                     .setTitle("Leave Waiting List")
@@ -328,36 +351,62 @@ public class EventDetailActivity extends AppCompatActivity {
     }
 
     private void handleAccept() {
-        regRepo.updateStatus(currentEvent.getId(), userId, Registration.STATUS_ACCEPTED)
+        if (currentRegistration == null) return;
+        
+        String newStatus;
+        if (Registration.STATUS_INVITED.equals(currentRegistration.getStatus())) {
+            newStatus = Registration.STATUS_WAITING;
+        } else {
+            newStatus = Registration.STATUS_ACCEPTED;
+        }
+
+        regRepo.updateStatus(currentEvent.getId(), userId, newStatus)
                 .addOnSuccessListener(v -> {
-                    currentRegistration.setStatus(Registration.STATUS_ACCEPTED);
-                    // Atomically increment accepted count
-                    eventRepo.incrementAcceptedCount(currentEvent.getId(), 1);
-                    currentEvent.setAcceptedCount(currentEvent.getAcceptedCount() + 1);
+                    currentRegistration.setStatus(newStatus);
+                    if (Registration.STATUS_ACCEPTED.equals(newStatus)) {
+                        eventRepo.incrementAcceptedCount(currentEvent.getId(), 1);
+                        currentEvent.setAcceptedCount(currentEvent.getAcceptedCount() + 1);
+                        Toast.makeText(this, "🎉 Spot accepted!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        eventRepo.incrementWaitingListCount(currentEvent.getId(), 1);
+                        currentEvent.setWaitingListCount(currentEvent.getWaitingListCount() + 1);
+                        tvWaitingCount.setText(currentEvent.getWaitingListCount() + " on waiting list");
+                        Toast.makeText(this, "Joined waiting list!", Toast.LENGTH_SHORT).show();
+                    }
                     updateActionButtons();
-                    Toast.makeText(this, "🎉 Spot accepted!", Toast.LENGTH_SHORT).show();
                 });
     }
 
     private void handleDecline() {
+        if (currentRegistration == null) return;
+        
+        String msg = Registration.STATUS_INVITED.equals(currentRegistration.getStatus())
+                ? "Are you sure you want to decline this invitation?"
+                : "Are you sure? Declining will allow someone else to take your spot.";
+
         new AlertDialog.Builder(this)
-                .setTitle("Decline Invitation")
-                .setMessage("Are you sure? Declining will allow someone else to take your spot.")
+                .setTitle("Decline")
+                .setMessage(msg)
                 .setPositiveButton("Decline", (d, w) -> {
                     regRepo.updateStatus(currentEvent.getId(), userId, Registration.STATUS_DECLINED)
                             .addOnSuccessListener(v -> {
+                                boolean wasSelected = Registration.STATUS_SELECTED.equals(currentRegistration.getStatus());
                                 currentRegistration.setStatus(Registration.STATUS_DECLINED);
-                                // Notify organizer to draw replacement
-                                AppNotification notif = new AppNotification(
-                                        currentEvent.getOrganizerId(),
-                                        currentEvent.getId(),
-                                        currentEvent.getTitle(),
-                                        AppNotification.TYPE_UPDATE,
-                                        "Invitation Declined",
-                                        "An entrant declined their spot for \"" + currentEvent.getTitle() + "\". You can draw a replacement.",
-                                        true
-                                );
-                                notifRepo.createNotification(notif);
+                                
+                                if (wasSelected) {
+                                    // Notify organizer to draw replacement
+                                    AppNotification notif = new AppNotification(
+                                            currentEvent.getOrganizerId(),
+                                            currentEvent.getId(),
+                                            currentEvent.getTitle(),
+                                            AppNotification.TYPE_UPDATE,
+                                            "Invitation Declined",
+                                            "An entrant declined their spot for \"" + currentEvent.getTitle() + "\". You can draw a replacement.",
+                                            true
+                                    );
+                                    notifRepo.createNotification(notif);
+                                }
+
                                 updateActionButtons();
                                 Toast.makeText(this, "Invitation declined", Toast.LENGTH_SHORT).show();
                             });

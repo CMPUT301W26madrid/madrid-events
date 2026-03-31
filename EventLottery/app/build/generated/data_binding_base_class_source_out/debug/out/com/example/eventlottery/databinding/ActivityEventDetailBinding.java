@@ -86,6 +86,12 @@ public final class ActivityEventDetailBinding implements ViewBinding {
   public final TextView tvRegPeriod;
 
   @NonNull
+  public final TextView tvSelectedMsg;
+
+  @NonNull
+  public final TextView tvSelectedTitle;
+
+  @NonNull
   public final TextView tvSpots;
 
   @NonNull
@@ -106,8 +112,8 @@ public final class ActivityEventDetailBinding implements ViewBinding {
       @NonNull TextInputLayout tilComment, @NonNull Toolbar toolbar,
       @NonNull TextView tvDescription, @NonNull TextView tvEndDate, @NonNull TextView tvLocation,
       @NonNull TextView tvOrganizer, @NonNull TextView tvPrice, @NonNull TextView tvRegPeriod,
-      @NonNull TextView tvSpots, @NonNull TextView tvStartDate, @NonNull TextView tvTitle,
-      @NonNull TextView tvWaitingCount) {
+      @NonNull TextView tvSelectedMsg, @NonNull TextView tvSelectedTitle, @NonNull TextView tvSpots,
+      @NonNull TextView tvStartDate, @NonNull TextView tvTitle, @NonNull TextView tvWaitingCount) {
     this.rootView = rootView;
     this.btnAccept = btnAccept;
     this.btnDecline = btnDecline;
@@ -128,6 +134,8 @@ public final class ActivityEventDetailBinding implements ViewBinding {
     this.tvOrganizer = tvOrganizer;
     this.tvPrice = tvPrice;
     this.tvRegPeriod = tvRegPeriod;
+    this.tvSelectedMsg = tvSelectedMsg;
+    this.tvSelectedTitle = tvSelectedTitle;
     this.tvSpots = tvSpots;
     this.tvStartDate = tvStartDate;
     this.tvTitle = tvTitle;
@@ -275,6 +283,18 @@ public final class ActivityEventDetailBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tv_selected_msg;
+      TextView tvSelectedMsg = ViewBindings.findChildViewById(rootView, id);
+      if (tvSelectedMsg == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_selected_title;
+      TextView tvSelectedTitle = ViewBindings.findChildViewById(rootView, id);
+      if (tvSelectedTitle == null) {
+        break missingId;
+      }
+
       id = R.id.tv_spots;
       TextView tvSpots = ViewBindings.findChildViewById(rootView, id);
       if (tvSpots == null) {
@@ -302,7 +322,8 @@ public final class ActivityEventDetailBinding implements ViewBinding {
       return new ActivityEventDetailBinding((CoordinatorLayout) rootView, btnAccept, btnDecline,
           btnJoinLeave, btnPostComment, cardSelected, etComment, ivPoster, ivQrBtn, llActionBar,
           rvComments, scrollView, tilComment, toolbar, tvDescription, tvEndDate, tvLocation,
-          tvOrganizer, tvPrice, tvRegPeriod, tvSpots, tvStartDate, tvTitle, tvWaitingCount);
+          tvOrganizer, tvPrice, tvRegPeriod, tvSelectedMsg, tvSelectedTitle, tvSpots, tvStartDate,
+          tvTitle, tvWaitingCount);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -17,8 +17,10 @@ import com.example.eventlottery.R;
 import com.example.eventlottery.activities.EventDetailActivity;
 import com.example.eventlottery.adapters.NotificationAdapter;
 import com.example.eventlottery.models.AppNotification;
+import com.example.eventlottery.models.Registration;
 import com.example.eventlottery.repositories.EventRepository;
 import com.example.eventlottery.repositories.NotificationRepository;
+import com.example.eventlottery.repositories.RegistrationRepository;
 import com.example.eventlottery.utils.SessionManager;
 import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.ArrayList;
@@ -29,6 +31,7 @@ public class NotificationsFragment extends Fragment implements NotificationAdapt
     private SessionManager session;
     private NotificationRepository notifRepo;
     private EventRepository eventRepo;
+    private RegistrationRepository regRepo;
     private NotificationAdapter adapter;
     private View llEmpty;
     private ProgressBar progress;
@@ -46,6 +49,7 @@ public class NotificationsFragment extends Fragment implements NotificationAdapt
         session   = new SessionManager(requireContext());
         notifRepo = new NotificationRepository();
         eventRepo = new EventRepository();
+        regRepo   = new RegistrationRepository();
 
         RecyclerView rv = view.findViewById(R.id.rv_notifications);
         llEmpty  = view.findViewById(R.id.ll_empty);
@@ -94,20 +98,34 @@ public class NotificationsFragment extends Fragment implements NotificationAdapt
 
     @Override
     public void onAccept(AppNotification notification) {
+        String userId = session.getUserId();
+        if (userId == null) return;
+
         if (AppNotification.TYPE_CO_ORGANIZER.equals(notification.getType())) {
-            String userId = session.getUserId();
             eventRepo.addCoOrganizer(notification.getEventId(), userId)
                     .addOnSuccessListener(v -> {
                         Toast.makeText(getContext(), "You are now a co-organizer!", Toast.LENGTH_SHORT).show();
                         notifRepo.deleteNotification(notification.getId()).addOnSuccessListener(v2 -> loadNotifications());
                     });
+        } else if (AppNotification.TYPE_INVITATION.equals(notification.getType())) {
+            // Entrant accepting private event invitation -> join waiting list
+            regRepo.updateStatus(notification.getEventId(), userId, Registration.STATUS_WAITING)
+                    .addOnSuccessListener(v -> {
+                        eventRepo.incrementWaitingListCount(notification.getEventId(), 1);
+                        Toast.makeText(getContext(), "Joined waiting list!", Toast.LENGTH_SHORT).show();
+                        notifRepo.deleteNotification(notification.getId()).addOnSuccessListener(v2 -> loadNotifications());
+                        
+                        // Open event detail
+                        Intent i = new Intent(getContext(), EventDetailActivity.class);
+                        i.putExtra("event_id", notification.getEventId());
+                        startActivity(i);
+                    });
         } else if (notification.getEventId() != null) {
-            // For lottery wins, redirect to event detail to accept
+            // For lottery wins or other action-required notifications
             Intent i = new Intent(getContext(), EventDetailActivity.class);
             i.putExtra("event_id", notification.getEventId());
             startActivity(i);
             
-            // Mark as read and REMOVE action requirement so buttons disappear
             notifRepo.markAsRead(notification.getId());
             notifRepo.updateActionRequired(notification.getId(), false).addOnSuccessListener(v -> loadNotifications());
         }
@@ -115,11 +133,21 @@ public class NotificationsFragment extends Fragment implements NotificationAdapt
 
     @Override
     public void onDecline(AppNotification notification) {
-        // Remove action requirement so buttons disappear
-        notifRepo.updateActionRequired(notification.getId(), false).addOnSuccessListener(v -> {
-            Toast.makeText(getContext(), "Invitation declined", Toast.LENGTH_SHORT).show();
-            loadNotifications();
-        });
+        String userId = session.getUserId();
+        if (userId == null) return;
+
+        if (AppNotification.TYPE_INVITATION.equals(notification.getType())) {
+            regRepo.updateStatus(notification.getEventId(), userId, Registration.STATUS_DECLINED)
+                    .addOnSuccessListener(v -> {
+                        Toast.makeText(getContext(), "Invitation declined", Toast.LENGTH_SHORT).show();
+                        notifRepo.deleteNotification(notification.getId()).addOnSuccessListener(v2 -> loadNotifications());
+                    });
+        } else {
+            notifRepo.updateActionRequired(notification.getId(), false).addOnSuccessListener(v -> {
+                Toast.makeText(getContext(), "Action declined", Toast.LENGTH_SHORT).show();
+                loadNotifications();
+            });
+        }
     }
 
     @Override

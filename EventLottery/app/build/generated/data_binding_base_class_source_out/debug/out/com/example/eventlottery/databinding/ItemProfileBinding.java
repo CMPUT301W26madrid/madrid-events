@@ -26,13 +26,17 @@ public final class ItemProfileBinding implements ViewBinding {
   public final TextView tvAvatar;
 
   @NonNull
+  public final TextView tvEmail;
+
+  @NonNull
   public final TextView tvName;
 
   private ItemProfileBinding(@NonNull LinearLayout rootView, @NonNull LinearLayout llRoles,
-      @NonNull TextView tvAvatar, @NonNull TextView tvName) {
+      @NonNull TextView tvAvatar, @NonNull TextView tvEmail, @NonNull TextView tvName) {
     this.rootView = rootView;
     this.llRoles = llRoles;
     this.tvAvatar = tvAvatar;
+    this.tvEmail = tvEmail;
     this.tvName = tvName;
   }
 
@@ -75,13 +79,19 @@ public final class ItemProfileBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tv_email;
+      TextView tvEmail = ViewBindings.findChildViewById(rootView, id);
+      if (tvEmail == null) {
+        break missingId;
+      }
+
       id = R.id.tv_name;
       TextView tvName = ViewBindings.findChildViewById(rootView, id);
       if (tvName == null) {
         break missingId;
       }
 
-      return new ItemProfileBinding((LinearLayout) rootView, llRoles, tvAvatar, tvName);
+      return new ItemProfileBinding((LinearLayout) rootView, llRoles, tvAvatar, tvEmail, tvName);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

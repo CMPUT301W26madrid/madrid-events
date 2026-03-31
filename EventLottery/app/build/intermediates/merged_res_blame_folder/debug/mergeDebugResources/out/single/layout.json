@@ -1,5 +1,9 @@
 [
     {
+        "merged": "com.example.eventlottery.app-mergeDebugResources-4:/layout/activity_organizer_event_management.xml",
+        "source": "com.example.eventlottery.app-main-7:/layout/activity_organizer_event_management.xml"
+    },
+    {
         "merged": "D:\\Android Studio\\Android\\Sdk\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-4:\\layout\\fragment_calendar.xml",
         "source": "D:\\Android Studio\\Android\\Sdk\\daemon\\8.10.2\\com.example.eventlottery.app-main-7:\\layout\\fragment_calendar.xml"
     },
@@ -72,12 +76,12 @@
         "source": "D:\\Android Studio\\Android\\Sdk\\daemon\\8.10.2\\com.example.eventlottery.app-main-7:\\layout\\item_organizer_event.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-4:/layout/fragment_my_events.xml",
-        "source": "com.example.eventlottery.app-main-7:/layout/fragment_my_events.xml"
-    },
-    {
         "merged": "D:\\Android Studio\\Android\\Sdk\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-4:\\layout\\item_profile.xml",
         "source": "D:\\Android Studio\\Android\\Sdk\\daemon\\8.10.2\\com.example.eventlottery.app-main-7:\\layout\\item_profile.xml"
+    },
+    {
+        "merged": "D:\\Android Studio\\Android\\Sdk\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-4:\\layout\\dialog_search_user.xml",
+        "source": "D:\\Android Studio\\Android\\Sdk\\daemon\\8.10.2\\com.example.eventlottery.app-main-7:\\layout\\dialog_search_user.xml"
     },
     {
         "merged": "D:\\Android Studio\\Android\\Sdk\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-4:\\layout\\item_dropdown_filter.xml",

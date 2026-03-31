@@ -77,9 +77,9 @@
                             android:id="@+id/iv_qr_btn"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:padding="8dp"
-                            android:src="@drawable/ic_qr_code"
-                            android:tint="@color/primary"
+                            android:padding="4dp"
+                            android:src="@drawable/qr_code_icon"
+                            android:scaleType="fitCenter"
                             android:background="?attr/selectableItemBackgroundBorderless"
                             android:contentDescription="Show QR Code" />
                     </LinearLayout>
@@ -294,6 +294,7 @@
                     android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/tv_selected_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/you_selected"
@@ -302,6 +303,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_selected_msg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"

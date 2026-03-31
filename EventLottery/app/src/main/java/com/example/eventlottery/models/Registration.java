@@ -14,13 +14,14 @@ public class Registration {
     private String userId;
     private String userName;
     private String userEmail;
-    private String status;      // "waiting", "selected", "accepted", "declined", "cancelled"
+    private String status;      // "invited", "waiting", "selected", "accepted", "declined", "cancelled"
     private long joinedAt;
     private long respondedAt;
     private double latitude;
     private double longitude;
     private boolean geoVerified; // renamed from hasGeolocation to avoid boolean serialization issues
 
+    public static final String STATUS_INVITED   = "invited";
     public static final String STATUS_WAITING   = "waiting";
     public static final String STATUS_SELECTED  = "selected";
     public static final String STATUS_ACCEPTED  = "accepted";

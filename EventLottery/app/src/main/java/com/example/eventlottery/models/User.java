@@ -8,6 +8,7 @@ public class User {
     @DocumentId
     private String id;
     private String name;
+    private String nameLowercase; // For case-insensitive search
     private String email;
     private String phone;
     private List<String> roles; // "entrant", "organizer", "admin"
@@ -24,7 +25,8 @@ public class User {
 
     public User(String name, String email, String phone, List<String> roles, String deviceId) {
         this.name = name;
-        this.email = email;
+        this.setName(name); // Use setter to populate nameLowercase
+        this.email = email != null ? email.toLowerCase() : null;
         this.phone = phone;
         this.roles = roles != null ? roles : new ArrayList<>();
         this.deviceId = deviceId;
@@ -37,10 +39,18 @@ public class User {
     public void setId(String id) { this.id = id; }
 
     public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public void setName(String name) {
+        this.name = name;
+        this.nameLowercase = name != null ? name.toLowerCase() : null;
+    }
+
+    public String getNameLowercase() { return nameLowercase; }
+    public void setNameLowercase(String nameLowercase) { this.nameLowercase = nameLowercase; }
 
     public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public void setEmail(String email) {
+        this.email = email != null ? email.toLowerCase() : null;
+    }
 
     public String getPhone() { return phone; }
     public void setPhone(String phone) { this.phone = phone; }

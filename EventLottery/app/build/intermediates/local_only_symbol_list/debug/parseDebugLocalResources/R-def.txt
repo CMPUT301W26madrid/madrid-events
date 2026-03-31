@@ -72,9 +72,9 @@ drawable ic_home
 drawable ic_location
 drawable ic_notifications
 drawable ic_person
-drawable ic_qr_code
 drawable ic_search
 drawable ic_tune
+drawable qr_code_icon
 id app_bar
 id atv_my_status_filter
 id atv_size
@@ -91,6 +91,7 @@ id btn_decline
 id btn_delete_profile
 id btn_draw_replacement
 id btn_export_csv
+id btn_invite_entrant
 id btn_join_leave
 id btn_new_event
 id btn_post_comment
@@ -124,6 +125,7 @@ id et_price
 id et_reg_close
 id et_reg_open
 id et_search
+id et_search_query
 id et_tags
 id et_title
 id fab_scan
@@ -167,7 +169,9 @@ id rv_my_events
 id rv_notifications
 id rv_profiles
 id rv_registrations
+id rv_search_results
 id scroll_view
+id search_progress
 id spinner_role
 id sw_geolocation
 id sw_notifications
@@ -188,6 +192,7 @@ id til_phone
 id til_price
 id til_reg_close
 id til_reg_open
+id til_search
 id til_tags
 id til_title
 id toolbar
@@ -212,6 +217,7 @@ id tv_month_year
 id tv_name
 id tv_no_events_day
 id tv_no_profiles
+id tv_no_results
 id tv_notif_badge
 id tv_notif_message
 id tv_notif_time
@@ -222,6 +228,8 @@ id tv_price
 id tv_qr_title
 id tv_reg_period
 id tv_selected_date
+id tv_selected_msg
+id tv_selected_title
 id tv_spots
 id tv_start_date
 id tv_stat_accepted
@@ -253,6 +261,7 @@ layout activity_profile
 layout activity_qr_scan
 layout dialog_create_profile
 layout dialog_qr_code
+layout dialog_search_user
 layout fragment_admin_dashboard
 layout fragment_calendar
 layout fragment_discover_events

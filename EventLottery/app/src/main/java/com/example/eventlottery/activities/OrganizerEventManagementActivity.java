@@ -2,10 +2,14 @@ package com.example.eventlottery.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
@@ -15,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.eventlottery.R;
 import com.example.eventlottery.adapters.RegistrationAdapter;
+import com.example.eventlottery.adapters.UserSearchAdapter;
 import com.example.eventlottery.models.AppNotification;
 import com.example.eventlottery.models.Event;
 import com.example.eventlottery.models.Registration;
@@ -27,13 +32,18 @@ import com.example.eventlottery.utils.CsvExportHelper;
 import com.example.eventlottery.utils.LotteryEngine;
 import com.example.eventlottery.utils.QRCodeHelper;
 import com.example.eventlottery.utils.SessionManager;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class OrganizerEventManagementActivity extends AppCompatActivity {
 
@@ -56,6 +66,8 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
     private ChipGroup cgAudience;
     private TextInputEditText etNotifMsg;
     private MaterialButton btnSendNotification;
+    private ImageView ivQrToolbar;
+    private MaterialButton btnInviteEntrant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +105,8 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
         cgAudience      = findViewById(R.id.cg_audience);
         etNotifMsg      = findViewById(R.id.et_notification_msg);
         btnSendNotification = findViewById(R.id.btn_send_notification);
+        ivQrToolbar     = findViewById(R.id.iv_qr_toolbar);
+        btnInviteEntrant = findViewById(R.id.btn_invite_entrant);
 
         registrationAdapter = new RegistrationAdapter(true);
         registrationAdapter.setCancelListener(r -> cancelEntrant(r));
@@ -122,10 +136,11 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
         findViewById(R.id.btn_run_lottery).setOnClickListener(v -> showLotteryDialog());
         findViewById(R.id.btn_draw_replacement).setOnClickListener(v -> drawReplacement());
         findViewById(R.id.btn_export_csv).setOnClickListener(v -> exportCsv());
-        findViewById(R.id.iv_qr_toolbar).setOnClickListener(v -> showQrDialog());
+        ivQrToolbar.setOnClickListener(v -> showQrDialog());
         findViewById(R.id.btn_view_map).setOnClickListener(v -> openMap());
         findViewById(R.id.btn_co_organizers).setOnClickListener(v -> showCoOrganizerDialog());
         btnSendNotification.setOnClickListener(v -> sendBulkNotification());
+        btnInviteEntrant.setOnClickListener(v -> showInviteEntrantDialog());
     }
 
     private void loadEvent(String eventId) {
@@ -136,6 +151,16 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
 
             if (getSupportActionBar() != null) getSupportActionBar().setTitle(currentEvent.getTitle());
             tvEventStatusBadge.setText(currentEvent.getStatus().toUpperCase());
+            
+            // Hide QR button if event is private
+            if (currentEvent.isPrivate()) {
+                ivQrToolbar.setVisibility(View.GONE);
+                btnInviteEntrant.setVisibility(View.VISIBLE); // Show invite button for private events
+            } else {
+                ivQrToolbar.setVisibility(View.VISIBLE);
+                btnInviteEntrant.setVisibility(View.GONE);
+            }
+
             loadStats();
             loadTabData();
         });
@@ -308,6 +333,108 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
             });
         }).addOnFailureListener(e -> {
             Toast.makeText(this, "Error finding user", Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    private void showInviteEntrantDialog() {
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_search_user, null);
+        EditText etSearch = view.findViewById(R.id.et_search_query);
+        ProgressBar progressBar = view.findViewById(R.id.search_progress);
+        RecyclerView rvResults = view.findViewById(R.id.rv_search_results);
+        TextView tvNoResults = view.findViewById(R.id.tv_no_results);
+
+        UserSearchAdapter searchAdapter = new UserSearchAdapter(user -> {
+            confirmInvitation(user);
+        });
+        rvResults.setLayoutManager(new LinearLayoutManager(this));
+        rvResults.setAdapter(searchAdapter);
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(view)
+                .setNegativeButton(R.string.btn_close, null)
+                .create();
+
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String query = s.toString().trim();
+                if (query.length() >= 2) {
+                    performUserSearch(query, progressBar, rvResults, tvNoResults, searchAdapter);
+                } else {
+                    rvResults.setVisibility(View.GONE);
+                    tvNoResults.setVisibility(View.GONE);
+                }
+            }
+            @Override public void afterTextChanged(Editable s) {}
+        });
+
+        dialog.show();
+    }
+
+    private void performUserSearch(String query, ProgressBar pb, RecyclerView rv, TextView tvNone, UserSearchAdapter adapter) {
+        pb.setVisibility(View.VISIBLE);
+        
+        Task<QuerySnapshot> t1 = userRepo.getUserByEmail(query);
+        Task<QuerySnapshot> t2 = userRepo.getUserByEmailOriginal(query);
+        Task<QuerySnapshot> t3 = userRepo.searchByPhone(query);
+        Task<QuerySnapshot> t4 = userRepo.searchByName(query);
+        Task<QuerySnapshot> t5 = userRepo.searchByNameOriginal(query);
+
+        Tasks.whenAllComplete(t1, t2, t3, t4, t5).addOnCompleteListener(all -> {
+            pb.setVisibility(View.GONE);
+            Set<User> uniqueUsers = new HashSet<>();
+            
+            for (Task<?> t : all.getResult()) {
+                if (t.isSuccessful()) {
+                    QuerySnapshot qs = (QuerySnapshot) t.getResult();
+                    for (DocumentSnapshot doc : qs.getDocuments()) {
+                        User u = doc.toObject(User.class);
+                        if (u != null) { u.setId(doc.getId()); uniqueUsers.add(u); }
+                    }
+                }
+            }
+
+            List<User> list = new ArrayList<>(uniqueUsers);
+            adapter.setUsers(list);
+            rv.setVisibility(list.isEmpty() ? View.GONE : View.VISIBLE);
+            tvNone.setVisibility(list.isEmpty() ? View.VISIBLE : View.GONE);
+        });
+    }
+
+    private void confirmInvitation(User user) {
+        new AlertDialog.Builder(this)
+                .setTitle("Invite Entrant")
+                .setMessage("Invite " + user.getName() + " to the waiting list for this event?")
+                .setPositiveButton("Invite", (d, w) -> inviteUserToWaitingList(user))
+                .setNegativeButton(R.string.btn_cancel, null)
+                .show();
+    }
+
+    private void inviteUserToWaitingList(User user) {
+        regRepo.checkExistingRegistration(currentEvent.getId(), user.getId()).addOnSuccessListener(qs -> {
+            if (!qs.isEmpty()) {
+                Toast.makeText(this, "User is already registered for this event", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Registration reg = new Registration(currentEvent.getId(), user.getId(), user.getName(), user.getEmail());
+            reg.setStatus(Registration.STATUS_INVITED); // Set status to INVITED for private events
+            regRepo.createRegistration(reg).addOnSuccessListener(v -> {
+                // For private invites, we don't increment waiting list count until they accept
+                
+                // Send notification to user with action required
+                AppNotification notif = new AppNotification(
+                        user.getId(), currentEvent.getId(), currentEvent.getTitle(),
+                        AppNotification.TYPE_INVITATION, "Private Event Invitation",
+                        "You've been invited to join \"" + currentEvent.getTitle() + "\".",
+                        true
+                );
+                notifRepo.createNotification(notif);
+
+                Toast.makeText(this, "Invitation sent to " + user.getName(), Toast.LENGTH_SHORT).show();
+                loadStats();
+                loadTabData();
+            });
         });
     }
 

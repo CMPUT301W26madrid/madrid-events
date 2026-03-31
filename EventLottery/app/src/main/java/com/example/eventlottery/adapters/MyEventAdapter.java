@@ -60,6 +60,7 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
     private boolean matchesFilter(String regStatus, String filter) {
         if (regStatus == null) return false;
         switch (filter) {
+            case "Invited": return Registration.STATUS_INVITED.equalsIgnoreCase(regStatus);
             case "Waiting": return Registration.STATUS_WAITING.equalsIgnoreCase(regStatus);
             case "Selected": return Registration.STATUS_SELECTED.equalsIgnoreCase(regStatus);
             case "Accepted": return Registration.STATUS_ACCEPTED.equalsIgnoreCase(regStatus);
@@ -90,6 +91,8 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
         String icon;
         int badgeRes;
         switch (r.getStatus()) {
+            case Registration.STATUS_INVITED:
+                icon = "📩"; badgeRes = R.drawable.bg_badge_accent; break;
             case Registration.STATUS_WAITING:
                 icon = "⏳"; badgeRes = R.drawable.bg_badge_accent; break;
             case Registration.STATUS_SELECTED:

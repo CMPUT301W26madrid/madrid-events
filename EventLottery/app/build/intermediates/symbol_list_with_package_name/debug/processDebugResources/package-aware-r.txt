@@ -3173,7 +3173,6 @@ drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable ic_notifications
 drawable ic_person
-drawable ic_qr_code
 drawable ic_search
 drawable ic_search_black_24
 drawable ic_tune
@@ -3250,6 +3249,7 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable qr_code_icon
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
@@ -3369,6 +3369,7 @@ id btn_decline
 id btn_delete_profile
 id btn_draw_replacement
 id btn_export_csv
+id btn_invite_entrant
 id btn_join_leave
 id btn_new_event
 id btn_post_comment
@@ -3486,6 +3487,7 @@ id et_price
 id et_reg_close
 id et_reg_open
 id et_search
+id et_search_query
 id et_tags
 id et_title
 id exitUntilCollapsed
@@ -3726,6 +3728,7 @@ id rv_my_events
 id rv_notifications
 id rv_profiles
 id rv_registrations
+id rv_search_results
 id satellite
 id save_non_transition_alpha
 id save_overlay_view
@@ -3746,6 +3749,7 @@ id search_edit_frame
 id search_go_btn
 id search_mag_icon
 id search_plate
+id search_progress
 id search_src_text
 id search_voice_btn
 id select_dialog_listview
@@ -3840,6 +3844,7 @@ id til_phone
 id til_price
 id til_reg_close
 id til_reg_open
+id til_search
 id til_tags
 id til_title
 id time
@@ -3883,6 +3888,7 @@ id tv_month_year
 id tv_name
 id tv_no_events_day
 id tv_no_profiles
+id tv_no_results
 id tv_notif_badge
 id tv_notif_message
 id tv_notif_time
@@ -3893,6 +3899,8 @@ id tv_price
 id tv_qr_title
 id tv_reg_period
 id tv_selected_date
+id tv_selected_msg
+id tv_selected_title
 id tv_spots
 id tv_start_date
 id tv_stat_accepted
@@ -4092,6 +4100,7 @@ layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout dialog_create_profile
 layout dialog_qr_code
+layout dialog_search_user
 layout fragment_admin_dashboard
 layout fragment_calendar
 layout fragment_discover_events
