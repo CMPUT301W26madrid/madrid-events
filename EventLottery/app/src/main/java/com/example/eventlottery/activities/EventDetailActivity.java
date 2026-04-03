@@ -4,9 +4,11 @@ import android.Manifest;
 import android.app.Dialog;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -155,7 +157,20 @@ public class EventDetailActivity extends AppCompatActivity {
 
         if (currentEvent.getPosterUrl() != null && !currentEvent.getPosterUrl().isEmpty()) {
             ivPoster.setVisibility(View.VISIBLE);
-            Glide.with(this).load(currentEvent.getPosterUrl()).into(ivPoster);
+            String posterStr = currentEvent.getPosterUrl();
+            if (posterStr.startsWith("http")) {
+                // It's a URL (Storage)
+                Glide.with(this).load(posterStr).into(ivPoster);
+            } else {
+                // It's a Base64 string (No-Credit-Card method)
+                try {
+                    byte[] decodedString = Base64.decode(posterStr, Base64.DEFAULT);
+                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                    ivPoster.setImageBitmap(decodedByte);
+                } catch (Exception e) {
+                    ivPoster.setVisibility(View.GONE);
+                }
+            }
         }
 
         // Hide QR button for private events
@@ -233,12 +248,8 @@ public class EventDetailActivity extends AppCompatActivity {
 
     private void handleJoinLeave() {
         if (currentRegistration == null) {
-            // Join
-            if (currentEvent.isRequireGeolocation()) {
-                requestGeolocationThenJoin();
-            } else {
-                joinWaitingList(0, 0, false);
-            }
+            // Join - ALWAYS request location if possible to track where they joined from
+            requestGeolocationThenJoin();
         } else if (Registration.STATUS_WAITING.equals(currentRegistration.getStatus())) {
             // Leave
             new AlertDialog.Builder(this)
@@ -253,17 +264,27 @@ public class EventDetailActivity extends AppCompatActivity {
     private void requestGeolocationThenJoin() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            new AlertDialog.Builder(this)
-                    .setTitle(R.string.geolocation_required_title)
-                    .setMessage(R.string.geolocation_required_msg)
-                    .setPositiveButton(R.string.allow_location, (d, w) -> {
-                        pendingJoin = true;
-                        ActivityCompat.requestPermissions(this,
-                                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                LOCATION_PERM_CODE);
-                    })
-                    .setNegativeButton(R.string.btn_cancel, null)
-                    .show();
+            
+            // If event requires geo, we must show the mandatory dialog
+            if (currentEvent.isRequireGeolocation()) {
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.geolocation_required_title)
+                        .setMessage(R.string.geolocation_required_msg)
+                        .setPositiveButton(R.string.allow_location, (d, w) -> {
+                            pendingJoin = true;
+                            ActivityCompat.requestPermissions(this,
+                                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                    LOCATION_PERM_CODE);
+                        })
+                        .setNegativeButton(R.string.btn_cancel, null)
+                        .show();
+            } else {
+                // Optional tracking - just ask for permission normally
+                pendingJoin = true;
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        LOCATION_PERM_CODE);
+            }
         } else {
             getLocationAndJoin();
         }
@@ -275,7 +296,11 @@ public class EventDetailActivity extends AppCompatActivity {
             locationClient.getLastLocation().addOnSuccessListener(loc -> {
                 if (loc != null) joinWaitingList(loc.getLatitude(), loc.getLongitude(), true);
                 else joinWaitingList(0, 0, false);
+            }).addOnFailureListener(e -> {
+                joinWaitingList(0, 0, false);
             });
+        } else {
+            joinWaitingList(0, 0, false);
         }
     }
 
@@ -288,7 +313,12 @@ public class EventDetailActivity extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getLocationAndJoin();
             } else {
-                Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
+                // If it was mandatory, they can't join. If optional, they join without coords.
+                if (currentEvent.isRequireGeolocation()) {
+                    Toast.makeText(this, "Location permission denied. This event requires location to join.", Toast.LENGTH_SHORT).show();
+                } else {
+                    joinWaitingList(0, 0, false);
+                }
             }
         }
     }
@@ -308,6 +338,8 @@ public class EventDetailActivity extends AppCompatActivity {
         reg.setLatitude(lat);
         reg.setLongitude(lng);
         reg.setHasGeolocation(hasGeo);
+        // Ensure map picks this up as "Geo-verified" if coords exist
+        if (hasGeo) reg.setGeoVerified(true);
 
         // Fetch user name/email first
         new com.example.eventlottery.repositories.UserRepository()

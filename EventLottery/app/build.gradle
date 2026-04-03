@@ -46,10 +46,14 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:33.1.0')
     implementation 'com.google.firebase:firebase-firestore'
     implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-storage'
 
     // Google Play Services
     implementation 'com.google.android.gms:play-services-location:21.3.0'
-    implementation 'com.google.android.gms:play-services-maps:18.2.0'
+    // implementation 'com.google.android.gms:play-services-maps:18.2.0' // Removed in favor of Osmdroid
+
+    // Osmdroid (Free Map Alternative)
+    implementation 'org.osmdroid:osmdroid-android:6.1.18'
 
     // ZXing QR Code generation
     implementation 'com.google.zxing:core:3.5.3'

@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18" />
 
     <uses-feature android:name="android.hardware.camera" android:required="false" />
 
@@ -44,8 +46,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".activities.EventDetailActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
-/>
+            android:screenOrientation="portrait" />
         <activity android:name=".activities.QRScanActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
@@ -56,12 +57,13 @@
             android:screenOrientation="portrait" />
         <activity android:name=".activities.CreateEventActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
-/>
+            android:screenOrientation="portrait" />
         <activity android:name=".activities.OrganizerEventManagementActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
-/>
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.EntrantMapActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
         <!-- Admin Activities -->
         <activity android:name=".activities.AdminMainActivity"

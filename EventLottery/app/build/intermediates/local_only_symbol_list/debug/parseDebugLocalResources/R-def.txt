@@ -128,6 +128,7 @@ id et_search
 id et_search_query
 id et_tags
 id et_title
+id fab_my_location
 id fab_scan
 id fragment_container
 id grid_calendar
@@ -342,6 +343,7 @@ string geolocation_required_title
 string google_api_key
 string google_app_id
 string google_crash_reporting_api_key
+string google_maps_key
 string google_storage_bucket
 string hint_capacity
 string hint_description

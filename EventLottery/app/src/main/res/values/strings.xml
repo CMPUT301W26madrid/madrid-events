@@ -3,6 +3,9 @@
     <string name="app_name">EventLottery</string>
     <string name="app_tagline">Fair, lottery-based event registration for community centres.</string>
 
+    <!-- Google Maps API Key -->
+    <string name="google_maps_key" translatable="false">AIzaSyA1gdTgZPUP_MNl90xt8wUKRnh2dVfAegA</string>
+
     <!-- Navigation -->
     <string name="nav_events">Events</string>
     <string name="nav_my_events">My Events</string>

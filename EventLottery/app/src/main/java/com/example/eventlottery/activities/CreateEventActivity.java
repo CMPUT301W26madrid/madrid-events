@@ -3,8 +3,11 @@ package com.example.eventlottery.activities;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -23,6 +26,8 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -43,7 +48,7 @@ public class CreateEventActivity extends AppCompatActivity {
     private SwitchMaterial swPrivate, swGeolocation;
     private MaterialButton btnCreate;
 
-    private String selectedPosterUri = null;
+    private String base64Poster = null;
 
     private final Calendar calEventStart = Calendar.getInstance();
     private final Calendar calEventEnd   = Calendar.getInstance();
@@ -54,8 +59,7 @@ public class CreateEventActivity extends AppCompatActivity {
     private final ActivityResultLauncher<String> galleryLauncher =
             registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
                 if (uri != null) {
-                    selectedPosterUri = uri.toString();
-                    tvPosterName.setText("Image selected");
+                    processImage(uri);
                 }
             });
 
@@ -78,6 +82,25 @@ public class CreateEventActivity extends AppCompatActivity {
 
         btnUploadPoster.setOnClickListener(v -> galleryLauncher.launch("image/*"));
         btnCreate.setOnClickListener(v -> validateAndCreate());
+    }
+
+    private void processImage(Uri uri) {
+        try {
+            InputStream is = getContentResolver().openInputStream(uri);
+            Bitmap bitmap = BitmapFactory.decodeStream(is);
+            
+            // Resize image to keep Firestore document size under 1MB limit
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 800, 800, true);
+            
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
+            byte[] bytes = baos.toByteArray();
+            
+            base64Poster = Base64.encodeToString(bytes, Base64.DEFAULT);
+            tvPosterName.setText("Image processed");
+        } catch (Exception e) {
+            Toast.makeText(this, "Failed to process image", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void bindViews() {
@@ -167,7 +190,6 @@ public class CreateEventActivity extends AppCompatActivity {
         btnCreate.setEnabled(false);
         btnCreate.setText("Creating…");
 
-        // Fetch organizer name
         userRepo.getUserById(currentUserId).addOnSuccessListener(doc -> {
             com.example.eventlottery.models.User user =
                     doc.toObject(com.example.eventlottery.models.User.class);
@@ -178,10 +200,9 @@ public class CreateEventActivity extends AppCompatActivity {
                     calEventStart.getTimeInMillis(), calEventEnd.getTimeInMillis(),
                     calRegOpen.getTimeInMillis(), calRegClose.getTimeInMillis(),
                     capacity, maxWl, price,
-                    selectedPosterUri,
+                    base64Poster, // Store Base64 string directly
                     priv, geo);
 
-            // Handle tags
             String tagsStr = getText(etTags);
             if (!tagsStr.isEmpty()) {
                 event.setTags(Arrays.asList(tagsStr.split(",\\s*")));
