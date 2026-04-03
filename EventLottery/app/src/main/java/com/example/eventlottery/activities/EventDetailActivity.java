@@ -58,9 +58,10 @@ public class EventDetailActivity extends AppCompatActivity {
     private Registration currentRegistration;
     private String userId;
     private boolean pendingJoin = false;
+    private boolean isCoOrganizer = false;
 
     // Views
-    private TextView tvTitle, tvOrganizer, tvStartDate, tvEndDate, tvLocation,
+    private TextView tvTitle, tvOrganizer, tvStartDate, tvStartTime, tvEndDate, tvEndTime, tvLocation,
             tvPrice, tvWaitingCount, tvSpots, tvRegPeriod, tvDescription;
     private ImageView ivPoster, ivQrBtn;
     private View cardSelected;
@@ -99,7 +100,9 @@ public class EventDetailActivity extends AppCompatActivity {
         tvTitle        = findViewById(R.id.tv_title);
         tvOrganizer    = findViewById(R.id.tv_organizer);
         tvStartDate    = findViewById(R.id.tv_start_date);
+        tvStartTime    = findViewById(R.id.tv_start_time);
         tvEndDate      = findViewById(R.id.tv_end_date);
+        tvEndTime      = findViewById(R.id.tv_end_time);
         tvLocation     = findViewById(R.id.tv_location);
         tvPrice        = findViewById(R.id.tv_price);
         tvWaitingCount = findViewById(R.id.tv_waiting_count);
@@ -115,8 +118,8 @@ public class EventDetailActivity extends AppCompatActivity {
         rvComments     = findViewById(R.id.rv_comments);
         etComment      = findViewById(R.id.et_comment);
 
+        // Initially placeholder adapter, re-initialized when event loads
         commentAdapter = new CommentAdapter(userId, false);
-        commentAdapter.setDeleteListener(c -> deleteComment(c));
         rvComments.setLayoutManager(new LinearLayoutManager(this));
         rvComments.setAdapter(commentAdapter);
 
@@ -132,6 +135,17 @@ public class EventDetailActivity extends AppCompatActivity {
             currentEvent = doc.toObject(Event.class);
             if (currentEvent == null) { finish(); return; }
             currentEvent.setId(doc.getId());
+            
+            // Determine if current user is the organizer or a co-organizer
+            boolean isOrganizer = userId != null && userId.equals(currentEvent.getOrganizerId());
+            isCoOrganizer = userId != null && currentEvent.getCoOrganizerIds() != null 
+                    && currentEvent.getCoOrganizerIds().contains(userId);
+            
+            // Re-initialize adapter with correct organizer privilege
+            commentAdapter = new CommentAdapter(userId, isOrganizer || isCoOrganizer);
+            commentAdapter.setDeleteListener(c -> deleteComment(c));
+            rvComments.setAdapter(commentAdapter);
+
             populateUI();
             loadRegistration();
             loadComments();
@@ -145,8 +159,12 @@ public class EventDetailActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) getSupportActionBar().setTitle(currentEvent.getTitle());
         tvTitle.setText(currentEvent.getTitle());
         tvOrganizer.setText(getString(R.string.organized_by, currentEvent.getOrganizerName()));
+        
         tvStartDate.setText(DateUtils.formatDate(currentEvent.getEventStartDate()));
+        tvStartTime.setText(DateUtils.formatTime(currentEvent.getEventStartDate()));
         tvEndDate.setText(DateUtils.formatDate(currentEvent.getEventEndDate()));
+        tvEndTime.setText(DateUtils.formatTime(currentEvent.getEventEndDate()));
+        
         tvLocation.setText(currentEvent.getLocation());
         tvPrice.setText(currentEvent.getFormattedPrice());
         tvWaitingCount.setText(currentEvent.getWaitingListCount() + " on waiting list");
@@ -159,10 +177,8 @@ public class EventDetailActivity extends AppCompatActivity {
             ivPoster.setVisibility(View.VISIBLE);
             String posterStr = currentEvent.getPosterUrl();
             if (posterStr.startsWith("http")) {
-                // It's a URL (Storage)
                 Glide.with(this).load(posterStr).into(ivPoster);
             } else {
-                // It's a Base64 string (No-Credit-Card method)
                 try {
                     byte[] decodedString = Base64.decode(posterStr, Base64.DEFAULT);
                     Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
@@ -173,7 +189,6 @@ public class EventDetailActivity extends AppCompatActivity {
             }
         }
 
-        // Hide QR button for private events
         if (currentEvent.isPrivate()) {
             ivQrBtn.setVisibility(View.GONE);
         } else {
@@ -197,8 +212,16 @@ public class EventDetailActivity extends AppCompatActivity {
     }
 
     private void updateActionButtons() {
+        if (isCoOrganizer || (userId != null && userId.equals(currentEvent.getOrganizerId()))) {
+            // User is an organizer/co-organizer -> prevent joining the entrant pool
+            btnJoinLeave.setText("Managing Event");
+            btnJoinLeave.setEnabled(false);
+            btnJoinLeave.setVisibility(View.VISIBLE);
+            cardSelected.setVisibility(View.GONE);
+            return;
+        }
+
         if (currentRegistration == null) {
-            // Not registered
             if (currentEvent.isPrivate()) {
                 btnJoinLeave.setText("Private Event");
                 btnJoinLeave.setEnabled(false);
@@ -213,7 +236,6 @@ public class EventDetailActivity extends AppCompatActivity {
                 case Registration.STATUS_INVITED:
                     btnJoinLeave.setVisibility(View.GONE);
                     cardSelected.setVisibility(View.VISIBLE);
-                    // Update text for invited state
                     ((TextView)cardSelected.findViewById(R.id.tv_selected_title)).setText("You've been invited!");
                     ((TextView)cardSelected.findViewById(R.id.tv_selected_msg)).setText("Would you like to join the waiting list for this private event?");
                     break;
@@ -248,10 +270,8 @@ public class EventDetailActivity extends AppCompatActivity {
 
     private void handleJoinLeave() {
         if (currentRegistration == null) {
-            // Join - ALWAYS request location if possible to track where they joined from
             requestGeolocationThenJoin();
         } else if (Registration.STATUS_WAITING.equals(currentRegistration.getStatus())) {
-            // Leave
             new AlertDialog.Builder(this)
                     .setTitle("Leave Waiting List")
                     .setMessage("Are you sure you want to leave the waiting list for \"" + currentEvent.getTitle() + "\"?")
@@ -265,7 +285,6 @@ public class EventDetailActivity extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             
-            // If event requires geo, we must show the mandatory dialog
             if (currentEvent.isRequireGeolocation()) {
                 new AlertDialog.Builder(this)
                         .setTitle(R.string.geolocation_required_title)
@@ -279,7 +298,6 @@ public class EventDetailActivity extends AppCompatActivity {
                         .setNegativeButton(R.string.btn_cancel, null)
                         .show();
             } else {
-                // Optional tracking - just ask for permission normally
                 pendingJoin = true;
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
@@ -313,7 +331,6 @@ public class EventDetailActivity extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getLocationAndJoin();
             } else {
-                // If it was mandatory, they can't join. If optional, they join without coords.
                 if (currentEvent.isRequireGeolocation()) {
                     Toast.makeText(this, "Location permission denied. This event requires location to join.", Toast.LENGTH_SHORT).show();
                 } else {
@@ -326,7 +343,6 @@ public class EventDetailActivity extends AppCompatActivity {
     private void joinWaitingList(double lat, double lng, boolean hasGeo) {
         if (userId == null) return;
 
-        // Check waiting list capacity
         if (currentEvent.getMaxWaitingList() > 0 &&
                 currentEvent.getWaitingListCount() >= currentEvent.getMaxWaitingList()) {
             Toast.makeText(this, R.string.error_waitlist_full, Toast.LENGTH_SHORT).show();
@@ -338,10 +354,8 @@ public class EventDetailActivity extends AppCompatActivity {
         reg.setLatitude(lat);
         reg.setLongitude(lng);
         reg.setHasGeolocation(hasGeo);
-        // Ensure map picks this up as "Geo-verified" if coords exist
         if (hasGeo) reg.setGeoVerified(true);
 
-        // Fetch user name/email first
         new com.example.eventlottery.repositories.UserRepository()
                 .getUserById(userId)
                 .addOnSuccessListener(userDoc -> {
@@ -353,7 +367,6 @@ public class EventDetailActivity extends AppCompatActivity {
                     }
                     reg.setUserId(userId);
                     regRepo.createRegistration(reg).addOnSuccessListener(v -> {
-                        // Atomically increment counter (race-condition safe)
                         eventRepo.incrementWaitingListCount(currentEvent.getId(), 1);
                         int newCount = currentEvent.getWaitingListCount() + 1;
                         currentEvent.setWaitingListCount(newCount);
@@ -371,7 +384,6 @@ public class EventDetailActivity extends AppCompatActivity {
     private void leaveWaitingList() {
         regRepo.deleteRegistration(currentEvent.getId(), userId)
                 .addOnSuccessListener(v -> {
-                    // Atomically decrement counter (race-condition safe)
                     eventRepo.incrementWaitingListCount(currentEvent.getId(), -1);
                     int newCount = Math.max(0, currentEvent.getWaitingListCount() - 1);
                     currentEvent.setWaitingListCount(newCount);
@@ -426,7 +438,6 @@ public class EventDetailActivity extends AppCompatActivity {
                                 currentRegistration.setStatus(Registration.STATUS_DECLINED);
                                 
                                 if (wasSelected) {
-                                    // Notify organizer to draw replacement
                                     AppNotification notif = new AppNotification(
                                             currentEvent.getOrganizerId(),
                                             currentEvent.getId(),
@@ -478,7 +489,6 @@ public class EventDetailActivity extends AppCompatActivity {
                         Comment c = doc.toObject(Comment.class);
                         if (c != null) { c.setId(doc.getId()); comments.add(c); }
                     }
-                    // Sort by time ascending (oldest first)
                     comments.sort((a, b) -> Long.compare(a.getCreatedAt(), b.getCreatedAt()));
                     commentAdapter.setComments(comments);
                 })

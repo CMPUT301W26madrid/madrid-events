@@ -68,6 +68,7 @@ drawable ic_camera
 drawable ic_close
 drawable ic_dashboard
 drawable ic_delete
+drawable ic_edit
 drawable ic_home
 drawable ic_location
 drawable ic_notifications
@@ -90,6 +91,7 @@ id btn_create_profile
 id btn_decline
 id btn_delete_profile
 id btn_draw_replacement
+id btn_edit_event
 id btn_export_csv
 id btn_invite_entrant
 id btn_join_leave
@@ -207,6 +209,7 @@ id tv_display_name
 id tv_email
 id tv_empty_tab
 id tv_end_date
+id tv_end_time
 id tv_entrant_count
 id tv_event_date
 id tv_event_status_badge
@@ -233,6 +236,7 @@ id tv_selected_msg
 id tv_selected_title
 id tv_spots
 id tv_start_date
+id tv_start_time
 id tv_stat_accepted
 id tv_stat_declined
 id tv_stat_entrants

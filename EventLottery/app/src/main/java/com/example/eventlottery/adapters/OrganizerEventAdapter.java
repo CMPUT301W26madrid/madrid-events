@@ -3,6 +3,7 @@ package com.example.eventlottery.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +14,10 @@ import java.util.List;
 
 public class OrganizerEventAdapter extends RecyclerView.Adapter<OrganizerEventAdapter.ViewHolder> {
 
-    public interface OnEventClickListener { void onClick(Event event); }
+    public interface OnEventClickListener { 
+        void onClick(Event event); 
+        void onEditClick(Event event);
+    }
 
     private List<Event> events = new ArrayList<>();
     private OnEventClickListener listener;
@@ -60,6 +64,7 @@ public class OrganizerEventAdapter extends RecyclerView.Adapter<OrganizerEventAd
         h.tvStatus.setBackgroundResource(badgeRes);
 
         h.itemView.setOnClickListener(v -> { if (listener != null) listener.onClick(e); });
+        h.btnEdit.setOnClickListener(v -> { if (listener != null) listener.onEditClick(e); });
     }
 
     private String capitalize(String s) {
@@ -71,12 +76,14 @@ public class OrganizerEventAdapter extends RecyclerView.Adapter<OrganizerEventAd
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitle, tvEntrantCount, tvAcceptedCount, tvStatus;
+        ImageView btnEdit;
         ViewHolder(View v) {
             super(v);
             tvTitle        = v.findViewById(R.id.tv_title);
             tvEntrantCount = v.findViewById(R.id.tv_entrant_count);
             tvAcceptedCount = v.findViewById(R.id.tv_accepted_count);
             tvStatus       = v.findViewById(R.id.tv_status);
+            btnEdit        = v.findViewById(R.id.btn_edit_event);
         }
     }
 }

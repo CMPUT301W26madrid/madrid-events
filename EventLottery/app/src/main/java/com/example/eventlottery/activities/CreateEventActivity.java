@@ -20,6 +20,7 @@ import com.example.eventlottery.R;
 import com.example.eventlottery.models.Event;
 import com.example.eventlottery.repositories.EventRepository;
 import com.example.eventlottery.repositories.UserRepository;
+import com.example.eventlottery.utils.DateUtils;
 import com.example.eventlottery.utils.QRCodeHelper;
 import com.example.eventlottery.utils.SessionManager;
 import com.google.android.material.button.MaterialButton;
@@ -46,9 +47,11 @@ public class CreateEventActivity extends AppCompatActivity {
     private TextView tvPosterName;
     private MaterialButton btnUploadPoster;
     private SwitchMaterial swPrivate, swGeolocation;
-    private MaterialButton btnCreate;
+    private MaterialButton btnSave;
 
     private String base64Poster = null;
+    private String eventId = null;
+    private Event existingEvent = null;
 
     private final Calendar calEventStart = Calendar.getInstance();
     private final Calendar calEventEnd   = Calendar.getInstance();
@@ -80,8 +83,61 @@ public class CreateEventActivity extends AppCompatActivity {
         bindViews();
         setupDatePickers();
 
+        eventId = getIntent().getStringExtra("event_id");
+        if (eventId != null) {
+            setTitle("Edit Event");
+            btnSave.setText("Save Changes");
+            loadExistingEvent();
+        } else {
+            setTitle("Create Event");
+            btnSave.setText("Create Event");
+        }
+
         btnUploadPoster.setOnClickListener(v -> galleryLauncher.launch("image/*"));
-        btnCreate.setOnClickListener(v -> validateAndCreate());
+        btnSave.setOnClickListener(v -> validateAndSave());
+    }
+
+    private void loadExistingEvent() {
+        eventRepo.getEventById(eventId).addOnSuccessListener(doc -> {
+            existingEvent = doc.toObject(Event.class);
+            if (existingEvent != null) {
+                existingEvent.setId(doc.getId());
+                populateFields();
+            }
+        });
+    }
+
+    private void populateFields() {
+        etTitle.setText(existingEvent.getTitle());
+        etDescription.setText(existingEvent.getDescription());
+        etLocation.setText(existingEvent.getLocation());
+        if (existingEvent.getTags() != null) {
+            etTags.setText(TextUtils.join(", ", existingEvent.getTags()));
+        }
+        
+        calEventStart.setTimeInMillis(existingEvent.getEventStartDate());
+        etEventStart.setText(sdf.format(calEventStart.getTime()));
+        
+        calEventEnd.setTimeInMillis(existingEvent.getEventEndDate());
+        etEventEnd.setText(sdf.format(calEventEnd.getTime()));
+        
+        calRegOpen.setTimeInMillis(existingEvent.getRegistrationOpenDate());
+        etRegOpen.setText(sdf.format(calRegOpen.getTime()));
+        
+        calRegClose.setTimeInMillis(existingEvent.getRegistrationCloseDate());
+        etRegClose.setText(sdf.format(calRegClose.getTime()));
+        
+        etCapacity.setText(String.valueOf(existingEvent.getCapacity()));
+        etMaxWl.setText(String.valueOf(existingEvent.getMaxWaitingList()));
+        etPrice.setText(String.valueOf(existingEvent.getPrice()));
+        
+        swPrivate.setChecked(existingEvent.isPrivate());
+        swGeolocation.setChecked(existingEvent.isRequireGeolocation());
+        
+        if (existingEvent.getPosterUrl() != null && !existingEvent.getPosterUrl().isEmpty()) {
+            base64Poster = existingEvent.getPosterUrl();
+            tvPosterName.setText("Current poster kept");
+        }
     }
 
     private void processImage(Uri uri) {
@@ -97,7 +153,7 @@ public class CreateEventActivity extends AppCompatActivity {
             byte[] bytes = baos.toByteArray();
             
             base64Poster = Base64.encodeToString(bytes, Base64.DEFAULT);
-            tvPosterName.setText("Image processed");
+            tvPosterName.setText("New image selected");
         } catch (Exception e) {
             Toast.makeText(this, "Failed to process image", Toast.LENGTH_SHORT).show();
         }
@@ -126,7 +182,7 @@ public class CreateEventActivity extends AppCompatActivity {
         
         swPrivate     = findViewById(R.id.sw_private);
         swGeolocation = findViewById(R.id.sw_geolocation);
-        btnCreate     = findViewById(R.id.btn_create_event);
+        btnSave       = findViewById(R.id.btn_create_event);
     }
 
     private void setupDatePickers() {
@@ -155,7 +211,7 @@ public class CreateEventActivity extends AppCompatActivity {
         dpd.show();
     }
 
-    private void validateAndCreate() {
+    private void validateAndSave() {
         String title = getText(etTitle);
         String desc  = getText(etDescription);
         String loc   = getText(etLocation);
@@ -187,9 +243,49 @@ public class CreateEventActivity extends AppCompatActivity {
             return;
         }
 
-        btnCreate.setEnabled(false);
-        btnCreate.setText("Creating…");
+        btnSave.setEnabled(false);
+        btnSave.setText("Saving…");
 
+        if (eventId != null) {
+            updateEvent(title, desc, loc, capacity, maxWl, price, priv, geo);
+        } else {
+            createNewEvent(title, desc, loc, currentUserId, capacity, maxWl, price, priv, geo);
+        }
+    }
+
+    private void updateEvent(String title, String desc, String loc, int capacity, int maxWl, double price, boolean priv, boolean geo) {
+        existingEvent.setTitle(title);
+        existingEvent.setDescription(desc);
+        existingEvent.setLocation(loc);
+        existingEvent.setEventStartDate(calEventStart.getTimeInMillis());
+        existingEvent.setEventEndDate(calEventEnd.getTimeInMillis());
+        existingEvent.setRegistrationOpenDate(calRegOpen.getTimeInMillis());
+        existingEvent.setRegistrationCloseDate(calRegClose.getTimeInMillis());
+        existingEvent.setCapacity(capacity);
+        existingEvent.setMaxWaitingList(maxWl);
+        existingEvent.setPrice(price);
+        existingEvent.setPrivate(priv);
+        existingEvent.setRequireGeolocation(geo);
+        existingEvent.setPosterUrl(base64Poster);
+
+        String tagsStr = getText(etTags);
+        if (!tagsStr.isEmpty()) {
+            existingEvent.setTags(Arrays.asList(tagsStr.split(",\\s*")));
+        } else {
+            existingEvent.setTags(Arrays.asList());
+        }
+
+        eventRepo.updateEvent(existingEvent).addOnSuccessListener(v -> {
+            Toast.makeText(this, "Event updated successfully!", Toast.LENGTH_SHORT).show();
+            finish();
+        }).addOnFailureListener(e -> {
+            btnSave.setEnabled(true);
+            btnSave.setText("Save Changes");
+            Toast.makeText(this, R.string.error_generic, Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    private void createNewEvent(String title, String desc, String loc, String currentUserId, int capacity, int maxWl, double price, boolean priv, boolean geo) {
         userRepo.getUserById(currentUserId).addOnSuccessListener(doc -> {
             com.example.eventlottery.models.User user =
                     doc.toObject(com.example.eventlottery.models.User.class);
@@ -200,7 +296,7 @@ public class CreateEventActivity extends AppCompatActivity {
                     calEventStart.getTimeInMillis(), calEventEnd.getTimeInMillis(),
                     calRegOpen.getTimeInMillis(), calRegClose.getTimeInMillis(),
                     capacity, maxWl, price,
-                    base64Poster, // Store Base64 string directly
+                    base64Poster,
                     priv, geo);
 
             String tagsStr = getText(etTags);
@@ -209,16 +305,16 @@ public class CreateEventActivity extends AppCompatActivity {
             }
 
             eventRepo.createEvent(event).addOnSuccessListener(ref -> {
-                String eventId = ref.getId();
-                String deepLink = QRCodeHelper.buildEventDeepLink(eventId);
-                eventRepo.setQrCodeContent(eventId, deepLink)
+                String newEventId = ref.getId();
+                String deepLink = QRCodeHelper.buildEventDeepLink(newEventId);
+                eventRepo.setQrCodeContent(newEventId, deepLink)
                         .addOnSuccessListener(v -> {
                             Toast.makeText(this, R.string.event_created_success, Toast.LENGTH_SHORT).show();
                             finish();
                         });
             }).addOnFailureListener(e -> {
-                btnCreate.setEnabled(true);
-                btnCreate.setText(R.string.create_event);
+                btnSave.setEnabled(true);
+                btnSave.setText(R.string.create_event);
                 Toast.makeText(this, R.string.error_generic, Toast.LENGTH_SHORT).show();
             });
         });

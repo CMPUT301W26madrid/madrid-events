@@ -74,6 +74,9 @@ public final class ActivityEventDetailBinding implements ViewBinding {
   public final TextView tvEndDate;
 
   @NonNull
+  public final TextView tvEndTime;
+
+  @NonNull
   public final TextView tvLocation;
 
   @NonNull
@@ -98,6 +101,9 @@ public final class ActivityEventDetailBinding implements ViewBinding {
   public final TextView tvStartDate;
 
   @NonNull
+  public final TextView tvStartTime;
+
+  @NonNull
   public final TextView tvTitle;
 
   @NonNull
@@ -110,10 +116,11 @@ public final class ActivityEventDetailBinding implements ViewBinding {
       @NonNull ImageView ivPoster, @NonNull ImageView ivQrBtn, @NonNull LinearLayout llActionBar,
       @NonNull RecyclerView rvComments, @NonNull NestedScrollView scrollView,
       @NonNull TextInputLayout tilComment, @NonNull Toolbar toolbar,
-      @NonNull TextView tvDescription, @NonNull TextView tvEndDate, @NonNull TextView tvLocation,
-      @NonNull TextView tvOrganizer, @NonNull TextView tvPrice, @NonNull TextView tvRegPeriod,
-      @NonNull TextView tvSelectedMsg, @NonNull TextView tvSelectedTitle, @NonNull TextView tvSpots,
-      @NonNull TextView tvStartDate, @NonNull TextView tvTitle, @NonNull TextView tvWaitingCount) {
+      @NonNull TextView tvDescription, @NonNull TextView tvEndDate, @NonNull TextView tvEndTime,
+      @NonNull TextView tvLocation, @NonNull TextView tvOrganizer, @NonNull TextView tvPrice,
+      @NonNull TextView tvRegPeriod, @NonNull TextView tvSelectedMsg,
+      @NonNull TextView tvSelectedTitle, @NonNull TextView tvSpots, @NonNull TextView tvStartDate,
+      @NonNull TextView tvStartTime, @NonNull TextView tvTitle, @NonNull TextView tvWaitingCount) {
     this.rootView = rootView;
     this.btnAccept = btnAccept;
     this.btnDecline = btnDecline;
@@ -130,6 +137,7 @@ public final class ActivityEventDetailBinding implements ViewBinding {
     this.toolbar = toolbar;
     this.tvDescription = tvDescription;
     this.tvEndDate = tvEndDate;
+    this.tvEndTime = tvEndTime;
     this.tvLocation = tvLocation;
     this.tvOrganizer = tvOrganizer;
     this.tvPrice = tvPrice;
@@ -138,6 +146,7 @@ public final class ActivityEventDetailBinding implements ViewBinding {
     this.tvSelectedTitle = tvSelectedTitle;
     this.tvSpots = tvSpots;
     this.tvStartDate = tvStartDate;
+    this.tvStartTime = tvStartTime;
     this.tvTitle = tvTitle;
     this.tvWaitingCount = tvWaitingCount;
   }
@@ -259,6 +268,12 @@ public final class ActivityEventDetailBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tv_end_time;
+      TextView tvEndTime = ViewBindings.findChildViewById(rootView, id);
+      if (tvEndTime == null) {
+        break missingId;
+      }
+
       id = R.id.tv_location;
       TextView tvLocation = ViewBindings.findChildViewById(rootView, id);
       if (tvLocation == null) {
@@ -307,6 +322,12 @@ public final class ActivityEventDetailBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tv_start_time;
+      TextView tvStartTime = ViewBindings.findChildViewById(rootView, id);
+      if (tvStartTime == null) {
+        break missingId;
+      }
+
       id = R.id.tv_title;
       TextView tvTitle = ViewBindings.findChildViewById(rootView, id);
       if (tvTitle == null) {
@@ -321,9 +342,9 @@ public final class ActivityEventDetailBinding implements ViewBinding {
 
       return new ActivityEventDetailBinding((CoordinatorLayout) rootView, btnAccept, btnDecline,
           btnJoinLeave, btnPostComment, cardSelected, etComment, ivPoster, ivQrBtn, llActionBar,
-          rvComments, scrollView, tilComment, toolbar, tvDescription, tvEndDate, tvLocation,
-          tvOrganizer, tvPrice, tvRegPeriod, tvSelectedMsg, tvSelectedTitle, tvSpots, tvStartDate,
-          tvTitle, tvWaitingCount);
+          rvComments, scrollView, tilComment, toolbar, tvDescription, tvEndDate, tvEndTime,
+          tvLocation, tvOrganizer, tvPrice, tvRegPeriod, tvSelectedMsg, tvSelectedTitle, tvSpots,
+          tvStartDate, tvStartTime, tvTitle, tvWaitingCount);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

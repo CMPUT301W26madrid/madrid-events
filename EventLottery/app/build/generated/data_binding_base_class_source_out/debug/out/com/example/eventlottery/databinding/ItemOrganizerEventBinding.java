@@ -4,6 +4,7 @@ package com.example.eventlottery.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -20,6 +21,9 @@ public final class ItemOrganizerEventBinding implements ViewBinding {
   private final LinearLayout rootView;
 
   @NonNull
+  public final ImageView btnEditEvent;
+
+  @NonNull
   public final TextView tvAcceptedCount;
 
   @NonNull
@@ -31,10 +35,11 @@ public final class ItemOrganizerEventBinding implements ViewBinding {
   @NonNull
   public final TextView tvTitle;
 
-  private ItemOrganizerEventBinding(@NonNull LinearLayout rootView,
+  private ItemOrganizerEventBinding(@NonNull LinearLayout rootView, @NonNull ImageView btnEditEvent,
       @NonNull TextView tvAcceptedCount, @NonNull TextView tvEntrantCount,
       @NonNull TextView tvStatus, @NonNull TextView tvTitle) {
     this.rootView = rootView;
+    this.btnEditEvent = btnEditEvent;
     this.tvAcceptedCount = tvAcceptedCount;
     this.tvEntrantCount = tvEntrantCount;
     this.tvStatus = tvStatus;
@@ -68,6 +73,12 @@ public final class ItemOrganizerEventBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.btn_edit_event;
+      ImageView btnEditEvent = ViewBindings.findChildViewById(rootView, id);
+      if (btnEditEvent == null) {
+        break missingId;
+      }
+
       id = R.id.tv_accepted_count;
       TextView tvAcceptedCount = ViewBindings.findChildViewById(rootView, id);
       if (tvAcceptedCount == null) {
@@ -92,8 +103,8 @@ public final class ItemOrganizerEventBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ItemOrganizerEventBinding((LinearLayout) rootView, tvAcceptedCount, tvEntrantCount,
-          tvStatus, tvTitle);
+      return new ItemOrganizerEventBinding((LinearLayout) rootView, btnEditEvent, tvAcceptedCount,
+          tvEntrantCount, tvStatus, tvTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
