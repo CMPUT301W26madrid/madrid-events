@@ -25,7 +25,7 @@ public class AdminMainActivity extends AppCompatActivity {
 
     private SessionManager session;
     private UserRepository userRepo;
-    private TextView tvNotifBadge; //sahjfhweguh
+    private TextView tvNotifBadge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
