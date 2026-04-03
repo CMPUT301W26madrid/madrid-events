@@ -136,14 +136,15 @@ public class EventDetailActivity extends AppCompatActivity {
             if (currentEvent == null) { finish(); return; }
             currentEvent.setId(doc.getId());
             
-            // Determine if current user is the organizer or a co-organizer
+            // Determine if current user is the organizer, a co-organizer, or an admin
             boolean isOrganizer = userId != null && userId.equals(currentEvent.getOrganizerId());
             isCoOrganizer = userId != null && currentEvent.getCoOrganizerIds() != null 
                     && currentEvent.getCoOrganizerIds().contains(userId);
+            boolean isAdmin = "admin".equals(session.getActiveRole());
             
-            // Re-initialize adapter with correct organizer privilege
-            commentAdapter = new CommentAdapter(userId, isOrganizer || isCoOrganizer);
-            commentAdapter.setDeleteListener(c -> deleteComment(c));
+            // Re-initialize adapter with correct moderator privilege (Organizer, Co-Organizer, or Admin)
+            commentAdapter = new CommentAdapter(userId, isOrganizer || isCoOrganizer || isAdmin);
+            commentAdapter.setDeleteListener(c -> confirmDeleteComment(c));
             rvComments.setAdapter(commentAdapter);
 
             populateUI();
@@ -497,9 +498,19 @@ public class EventDetailActivity extends AppCompatActivity {
                 });
     }
 
-    private void deleteComment(Comment comment) {
-        commentRepo.deleteComment(comment.getId())
-                .addOnSuccessListener(v -> loadComments());
+    private void confirmDeleteComment(Comment comment) {
+        new AlertDialog.Builder(this)
+                .setTitle("Delete Comment")
+                .setMessage("Are you sure you want to delete this comment?")
+                .setPositiveButton("Delete", (d, w) -> {
+                    commentRepo.deleteComment(comment.getId())
+                            .addOnSuccessListener(v -> {
+                                Toast.makeText(this, "Comment deleted", Toast.LENGTH_SHORT).show();
+                                loadComments();
+                            });
+                })
+                .setNegativeButton(R.string.btn_cancel, null)
+                .show();
     }
 
     private void showQrDialog() {

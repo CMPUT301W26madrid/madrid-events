@@ -222,9 +222,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
-            android:src="@drawable/ic_camera"
+            android:src="@drawable/qr_code_icon"
             app:backgroundTint="@color/primary"
-            android:tint="@color/white"
+            app:maxImageSize="32dp"
             android:contentDescription="Scan QR Code" />
 
     </FrameLayout>

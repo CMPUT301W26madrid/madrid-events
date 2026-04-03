@@ -1,5 +1,6 @@
 package com.example.eventlottery.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.eventlottery.R;
+import com.example.eventlottery.activities.EventDetailActivity;
 import com.example.eventlottery.adapters.AdminEventAdapter;
 import com.example.eventlottery.adapters.AdminUserAdapter;
 import com.example.eventlottery.models.Event;
@@ -75,8 +77,29 @@ public class AdminDashboardFragment extends Fragment {
     private void setupAdapters() {
         userAdapter = new AdminUserAdapter();
         userAdapter.setDeleteListener(this::confirmDeleteUser);
+        
         eventAdapter = new AdminEventAdapter();
-        eventAdapter.setDeleteListener(this::confirmDeleteEvent);
+        eventAdapter.setListener(new AdminEventAdapter.OnEventClickListener() {
+            @Override
+            public void onClick(Event event) {
+                // Clicking an event in the normal Events tab opens details
+                if (currentTab == 1) {
+                    Intent i = new Intent(getContext(), EventDetailActivity.class);
+                    i.putExtra("event_id", event.getId());
+                    startActivity(i);
+                }
+            }
+
+            @Override
+            public void onDelete(Event event) {
+                if (currentTab == 2) {
+                    confirmDeletePoster(event);
+                } else {
+                    confirmDeleteEvent(event);
+                }
+            }
+        });
+        
         rvAdmin.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
@@ -108,7 +131,7 @@ public class AdminDashboardFragment extends Fragment {
             @Override public void onTextChanged(CharSequence s, int st, int b, int c) {
                 String q = s.toString().trim();
                 if (currentTab == 0) userAdapter.filter(q);
-                else if (currentTab == 1) eventAdapter.filter(q);
+                else if (currentTab == 1 || currentTab == 2) eventAdapter.filter(q);
                 updateEmpty();
             }
             @Override public void afterTextChanged(Editable s) {}
@@ -160,7 +183,7 @@ public class AdminDashboardFragment extends Fragment {
                 Event e = doc.toObject(Event.class);
                 if (e != null) { e.setId(doc.getId()); events.add(e); }
             }
-            eventAdapter.setEvents(events);
+            eventAdapter.setEvents(events, false); // false = normal event view
             updateEmpty();
         }).addOnFailureListener(e -> {
             if (isAdded()) progress.setVisibility(View.GONE);
@@ -181,7 +204,7 @@ public class AdminDashboardFragment extends Fragment {
                     withImages.add(e);
                 }
             }
-            eventAdapter.setEvents(withImages);
+            eventAdapter.setEvents(withImages, true); // true = show image previews
             updateEmpty();
         });
     }
@@ -253,7 +276,26 @@ public class AdminDashboardFragment extends Fragment {
                     eventRepo.deleteEvent(event.getId()).addOnSuccessListener(v -> {
                         if (isAdded()) {
                             Toast.makeText(getContext(), "Event deleted", Toast.LENGTH_SHORT).show();
-                            loadEvents();
+                            if (currentTab == 1) loadEvents();
+                            else if (currentTab == 2) showImagesTab();
+                            loadStats();
+                        }
+                    });
+                })
+                .setNegativeButton(R.string.btn_cancel, null)
+                .show();
+    }
+
+    private void confirmDeletePoster(Event event) {
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Delete Image")
+                .setMessage("Delete this image?")
+                .setPositiveButton(R.string.btn_delete, (d, w) -> {
+                    event.setPosterUrl(null);
+                    eventRepo.updateEvent(event).addOnSuccessListener(v -> {
+                        if (isAdded()) {
+                            Toast.makeText(getContext(), "Image removed", Toast.LENGTH_SHORT).show();
+                            showImagesTab();
                             loadStats();
                         }
                     });
@@ -264,7 +306,7 @@ public class AdminDashboardFragment extends Fragment {
 
     private void updateEmpty() {
         boolean empty = (currentTab == 0 && userAdapter.isEmpty()) ||
-                        (currentTab == 1 && eventAdapter.isEmpty());
+                        ((currentTab == 1 || currentTab == 2) && eventAdapter.isEmpty());
         llEmpty.setVisibility(empty ? View.VISIBLE : View.GONE);
         rvAdmin.setVisibility(empty ? View.GONE : View.VISIBLE);
     }

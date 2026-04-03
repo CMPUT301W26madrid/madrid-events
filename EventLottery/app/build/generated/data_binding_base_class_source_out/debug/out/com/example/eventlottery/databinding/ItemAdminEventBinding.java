@@ -24,7 +24,16 @@ public final class ItemAdminEventBinding implements ViewBinding {
   public final ImageView ivDelete;
 
   @NonNull
+  public final ImageView ivPosterPreview;
+
+  @NonNull
+  public final LinearLayout llDeleteContainer;
+
+  @NonNull
   public final TextView tvDate;
+
+  @NonNull
+  public final TextView tvDeleteLabel;
 
   @NonNull
   public final TextView tvOrganizer;
@@ -36,11 +45,15 @@ public final class ItemAdminEventBinding implements ViewBinding {
   public final TextView tvTitle;
 
   private ItemAdminEventBinding(@NonNull LinearLayout rootView, @NonNull ImageView ivDelete,
-      @NonNull TextView tvDate, @NonNull TextView tvOrganizer, @NonNull TextView tvStatus,
-      @NonNull TextView tvTitle) {
+      @NonNull ImageView ivPosterPreview, @NonNull LinearLayout llDeleteContainer,
+      @NonNull TextView tvDate, @NonNull TextView tvDeleteLabel, @NonNull TextView tvOrganizer,
+      @NonNull TextView tvStatus, @NonNull TextView tvTitle) {
     this.rootView = rootView;
     this.ivDelete = ivDelete;
+    this.ivPosterPreview = ivPosterPreview;
+    this.llDeleteContainer = llDeleteContainer;
     this.tvDate = tvDate;
+    this.tvDeleteLabel = tvDeleteLabel;
     this.tvOrganizer = tvOrganizer;
     this.tvStatus = tvStatus;
     this.tvTitle = tvTitle;
@@ -79,9 +92,27 @@ public final class ItemAdminEventBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.iv_poster_preview;
+      ImageView ivPosterPreview = ViewBindings.findChildViewById(rootView, id);
+      if (ivPosterPreview == null) {
+        break missingId;
+      }
+
+      id = R.id.ll_delete_container;
+      LinearLayout llDeleteContainer = ViewBindings.findChildViewById(rootView, id);
+      if (llDeleteContainer == null) {
+        break missingId;
+      }
+
       id = R.id.tv_date;
       TextView tvDate = ViewBindings.findChildViewById(rootView, id);
       if (tvDate == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_delete_label;
+      TextView tvDeleteLabel = ViewBindings.findChildViewById(rootView, id);
+      if (tvDeleteLabel == null) {
         break missingId;
       }
 
@@ -103,8 +134,8 @@ public final class ItemAdminEventBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ItemAdminEventBinding((LinearLayout) rootView, ivDelete, tvDate, tvOrganizer,
-          tvStatus, tvTitle);
+      return new ItemAdminEventBinding((LinearLayout) rootView, ivDelete, ivPosterPreview,
+          llDeleteContainer, tvDate, tvDeleteLabel, tvOrganizer, tvStatus, tvTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

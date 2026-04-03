@@ -3360,6 +3360,7 @@ int id bounceEnd 0x7f080067
 int id bounceStart 0x7f080068
 int id btn_accept 0x7f080069
 int id btn_cancel 0x7f08006a
+int id btn_close_image 0x7f0802c9
 int id btn_close_qr 0x7f08006b
 int id btn_co_organizers 0x7f08006c
 int id btn_create 0x7f08006d
@@ -3559,8 +3560,10 @@ int id iv_bell 0x7f08012e
 int id iv_cancel 0x7f08012f
 int id iv_close 0x7f080130
 int id iv_delete 0x7f080131
+int id iv_full_image 0x7f0802ca
 int id iv_next_month 0x7f080132
 int id iv_poster 0x7f080133
+int id iv_poster_preview 0x7f0802c6
 int id iv_prev_month 0x7f080134
 int id iv_qr 0x7f080135
 int id iv_qr_btn 0x7f080136
@@ -3581,6 +3584,7 @@ int id list_item 0x7f080144
 int id ll_action_bar 0x7f080145
 int id ll_actions 0x7f080146
 int id ll_days_left 0x7f080147
+int id ll_delete_container 0x7f0802c7
 int id ll_empty 0x7f080148
 int id ll_filter_options 0x7f080149
 int id ll_role_badges 0x7f08014a
@@ -3876,6 +3880,7 @@ int id tv_avatar 0x7f08026b
 int id tv_capacity 0x7f08026c
 int id tv_date 0x7f08026d
 int id tv_days_left 0x7f08026e
+int id tv_delete_label 0x7f0802c8
 int id tv_description 0x7f08026f
 int id tv_display_name 0x7f080270
 int id tv_email 0x7f080271
@@ -4106,6 +4111,7 @@ int layout design_navigation_menu_item 0x7f0b0034
 int layout design_text_input_end_icon 0x7f0b0035
 int layout design_text_input_start_icon 0x7f0b0036
 int layout dialog_create_profile 0x7f0b0037
+int layout dialog_full_image 0x7f0b008b
 int layout dialog_qr_code 0x7f0b0038
 int layout dialog_search_user 0x7f0b0039
 int layout fragment_admin_dashboard 0x7f0b003a

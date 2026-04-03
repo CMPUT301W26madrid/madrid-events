@@ -3361,6 +3361,7 @@ id bounceEnd
 id bounceStart
 id btn_accept
 id btn_cancel
+id btn_close_image
 id btn_close_qr
 id btn_co_organizers
 id btn_create
@@ -3560,8 +3561,10 @@ id iv_bell
 id iv_cancel
 id iv_close
 id iv_delete
+id iv_full_image
 id iv_next_month
 id iv_poster
+id iv_poster_preview
 id iv_prev_month
 id iv_qr
 id iv_qr_btn
@@ -3582,6 +3585,7 @@ id list_item
 id ll_action_bar
 id ll_actions
 id ll_days_left
+id ll_delete_container
 id ll_empty
 id ll_filter_options
 id ll_role_badges
@@ -3877,6 +3881,7 @@ id tv_avatar
 id tv_capacity
 id tv_date
 id tv_days_left
+id tv_delete_label
 id tv_description
 id tv_display_name
 id tv_email
@@ -4107,6 +4112,7 @@ layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout dialog_create_profile
+layout dialog_full_image
 layout dialog_qr_code
 layout dialog_search_user
 layout fragment_admin_dashboard
