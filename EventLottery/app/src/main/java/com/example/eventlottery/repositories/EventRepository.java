@@ -23,6 +23,11 @@ public class EventRepository {
         return eventsRef.add(event);
     }
 
+    public Task<Void> updateEvent(Event event) {
+        if (event.getId() == null) return Tasks.forException(new Exception("Event ID missing"));
+        return eventsRef.document(event.getId()).set(event);
+    }
+
     public Task<Void> updateEvent(String eventId, Event event) {
         return eventsRef.document(eventId).set(event);
     }

@@ -59,5 +59,16 @@
         android:paddingVertical="5dp"
         android:textColor="@color/white"
         android:textSize="11sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_marginEnd="8dp"/>
+
+    <ImageView
+        android:id="@+id/btn_edit_event"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_edit"
+        app:tint="@color/text_secondary"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Edit Event" />
 </LinearLayout>

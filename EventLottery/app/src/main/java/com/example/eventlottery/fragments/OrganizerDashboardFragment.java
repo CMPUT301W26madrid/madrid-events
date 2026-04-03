@@ -62,10 +62,20 @@ public class OrganizerDashboardFragment extends Fragment {
 
         RecyclerView rv = view.findViewById(R.id.rv_events);
         adapter = new OrganizerEventAdapter();
-        adapter.setListener(event -> {
-            Intent i = new Intent(getContext(), OrganizerEventManagementActivity.class);
-            i.putExtra("event_id", event.getId());
-            startActivity(i);
+        adapter.setListener(new OrganizerEventAdapter.OnEventClickListener() {
+            @Override
+            public void onClick(Event event) {
+                Intent i = new Intent(getContext(), OrganizerEventManagementActivity.class);
+                i.putExtra("event_id", event.getId());
+                startActivity(i);
+            }
+
+            @Override
+            public void onEditClick(Event event) {
+                Intent i = new Intent(getContext(), CreateEventActivity.class);
+                i.putExtra("event_id", event.getId());
+                startActivity(i);
+            }
         });
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         rv.setAdapter(adapter);

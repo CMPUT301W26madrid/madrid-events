@@ -11,6 +11,8 @@ public class DateUtils {
             new SimpleDateFormat("MMM d, yyyy", Locale.getDefault());
     private static final SimpleDateFormat DATE_TIME_FORMAT =
             new SimpleDateFormat("MMM d, yyyy h:mm a", Locale.getDefault());
+    private static final SimpleDateFormat TIME_FORMAT =
+            new SimpleDateFormat("h:mm a", Locale.getDefault());
 
     public static String formatDate(long millis) {
         return DATE_FORMAT.format(new Date(millis));
@@ -22,6 +24,10 @@ public class DateUtils {
 
     public static String formatDateTime(long millis) {
         return DATE_TIME_FORMAT.format(new Date(millis));
+    }
+
+    public static String formatTime(long millis) {
+        return TIME_FORMAT.format(new Date(millis));
     }
 
     public static String formatRelative(long millis) {
