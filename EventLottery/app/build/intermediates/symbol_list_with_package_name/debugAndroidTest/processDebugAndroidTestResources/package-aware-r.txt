@@ -1,0 +1,3 @@
+com.example.eventlottery.test
+style WhiteBackgroundDialogTheme
+style WhiteBackgroundTheme

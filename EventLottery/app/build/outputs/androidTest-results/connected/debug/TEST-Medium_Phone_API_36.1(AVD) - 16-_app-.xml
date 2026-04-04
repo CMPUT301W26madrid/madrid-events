@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuite name="com.example.eventlottery.activities.CreateEventActivityTest" tests="4" failures="0" errors="0" skipped="0" time="5.87" timestamp="2026-04-04T21:06:04" hostname="localhost">
+  <properties>
+    <property name="device" value="Medium_Phone_API_36.1(AVD) - 16" />
+    <property name="flavor" value="" />
+    <property name="project" value=":app" />
+  </properties>
+  <testcase name="testCreateEventViews" classname="com.example.eventlottery.activities.CreateEventActivityTest" time="2.383" />
+  <testcase name="testNavigationElements" classname="com.example.eventlottery.activities.EntrantMainActivityTest" time="1.158" />
+  <testcase name="testLoginScreenViews" classname="com.example.eventlottery.activities.LoginActivityTest" time="0.697" />
+  <testcase name="testProfileViews" classname="com.example.eventlottery.activities.ProfileActivityTest" time="0.75" />
+</testsuite>
