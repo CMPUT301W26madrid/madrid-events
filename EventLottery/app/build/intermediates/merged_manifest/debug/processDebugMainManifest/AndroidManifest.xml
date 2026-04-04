@@ -72,7 +72,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+<<<<<<< HEAD
         android:testOnly="true"
+=======
+>>>>>>> abrar_p4
         android:theme="@style/Theme.EventLottery" >
 
         <!-- Login / Account Selection -->

@@ -4,6 +4,10 @@ package com.example.eventlottery.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+<<<<<<< HEAD
+=======
+import android.widget.ImageView;
+>>>>>>> abrar_p4
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -21,6 +25,12 @@ public final class ItemEventCardBinding implements ViewBinding {
   private final CardView rootView;
 
   @NonNull
+<<<<<<< HEAD
+=======
+  public final ImageView ivPoster;
+
+  @NonNull
+>>>>>>> abrar_p4
   public final LinearLayout llDaysLeft;
 
   @NonNull
@@ -33,9 +43,12 @@ public final class ItemEventCardBinding implements ViewBinding {
   public final TextView tvDaysLeft;
 
   @NonNull
+<<<<<<< HEAD
   public final TextView tvDescription;
 
   @NonNull
+=======
+>>>>>>> abrar_p4
   public final TextView tvLocation;
 
   @NonNull
@@ -47,16 +60,28 @@ public final class ItemEventCardBinding implements ViewBinding {
   @NonNull
   public final TextView tvTitle;
 
+<<<<<<< HEAD
   private ItemEventCardBinding(@NonNull CardView rootView, @NonNull LinearLayout llDaysLeft,
       @NonNull TextView tvCapacity, @NonNull TextView tvDate, @NonNull TextView tvDaysLeft,
       @NonNull TextView tvDescription, @NonNull TextView tvLocation, @NonNull TextView tvPrice,
       @NonNull TextView tvStatus, @NonNull TextView tvTitle) {
     this.rootView = rootView;
+=======
+  private ItemEventCardBinding(@NonNull CardView rootView, @NonNull ImageView ivPoster,
+      @NonNull LinearLayout llDaysLeft, @NonNull TextView tvCapacity, @NonNull TextView tvDate,
+      @NonNull TextView tvDaysLeft, @NonNull TextView tvLocation, @NonNull TextView tvPrice,
+      @NonNull TextView tvStatus, @NonNull TextView tvTitle) {
+    this.rootView = rootView;
+    this.ivPoster = ivPoster;
+>>>>>>> abrar_p4
     this.llDaysLeft = llDaysLeft;
     this.tvCapacity = tvCapacity;
     this.tvDate = tvDate;
     this.tvDaysLeft = tvDaysLeft;
+<<<<<<< HEAD
     this.tvDescription = tvDescription;
+=======
+>>>>>>> abrar_p4
     this.tvLocation = tvLocation;
     this.tvPrice = tvPrice;
     this.tvStatus = tvStatus;
@@ -90,6 +115,15 @@ public final class ItemEventCardBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+<<<<<<< HEAD
+=======
+      id = R.id.iv_poster;
+      ImageView ivPoster = ViewBindings.findChildViewById(rootView, id);
+      if (ivPoster == null) {
+        break missingId;
+      }
+
+>>>>>>> abrar_p4
       id = R.id.ll_days_left;
       LinearLayout llDaysLeft = ViewBindings.findChildViewById(rootView, id);
       if (llDaysLeft == null) {
@@ -114,12 +148,15 @@ public final class ItemEventCardBinding implements ViewBinding {
         break missingId;
       }
 
+<<<<<<< HEAD
       id = R.id.tv_description;
       TextView tvDescription = ViewBindings.findChildViewById(rootView, id);
       if (tvDescription == null) {
         break missingId;
       }
 
+=======
+>>>>>>> abrar_p4
       id = R.id.tv_location;
       TextView tvLocation = ViewBindings.findChildViewById(rootView, id);
       if (tvLocation == null) {
@@ -144,8 +181,13 @@ public final class ItemEventCardBinding implements ViewBinding {
         break missingId;
       }
 
+<<<<<<< HEAD
       return new ItemEventCardBinding((CardView) rootView, llDaysLeft, tvCapacity, tvDate,
           tvDaysLeft, tvDescription, tvLocation, tvPrice, tvStatus, tvTitle);
+=======
+      return new ItemEventCardBinding((CardView) rootView, ivPoster, llDaysLeft, tvCapacity, tvDate,
+          tvDaysLeft, tvLocation, tvPrice, tvStatus, tvTitle);
+>>>>>>> abrar_p4
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

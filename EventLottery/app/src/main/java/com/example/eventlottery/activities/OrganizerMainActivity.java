@@ -75,7 +75,10 @@ public class OrganizerMainActivity extends AppCompatActivity {
         bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_dashboard) return loadFragment(new OrganizerDashboardFragment());
+<<<<<<< HEAD
             if (id == R.id.nav_create)    { startActivity(new Intent(this, CreateEventActivity.class)); return true; }
+=======
+>>>>>>> abrar_p4
             if (id == R.id.nav_browse)    return loadFragment(new DiscoverEventsFragment());
             if (id == R.id.nav_alerts)    return loadFragment(new NotificationsFragment());
             if (id == R.id.nav_profile)   { startActivity(new Intent(this, ProfileActivity.class)); return true; }

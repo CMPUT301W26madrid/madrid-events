@@ -3655,7 +3655,10 @@ id nav_admin
 id nav_alerts
 id nav_browse
 id nav_calendar
+<<<<<<< HEAD
 id nav_create
+=======
+>>>>>>> abrar_p4
 id nav_dashboard
 id nav_events
 id nav_my_events

@@ -1,11 +1,25 @@
 package com.example.eventlottery.adapters;
 
+<<<<<<< HEAD
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+=======
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import com.bumptech.glide.Glide;
+>>>>>>> abrar_p4
 import com.example.eventlottery.R;
 import com.example.eventlottery.models.Event;
 import com.example.eventlottery.utils.DateUtils;
@@ -51,19 +65,28 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             String location = e.getLocation() != null ? e.getLocation().toLowerCase() : "";
             String status   = e.getStatus()   != null ? e.getStatus()                : Event.STATUS_OPEN;
 
+<<<<<<< HEAD
             // Text search
+=======
+>>>>>>> abrar_p4
             boolean matchesQuery = lowerQuery.isEmpty()
                     || title.contains(lowerQuery)
                     || location.contains(lowerQuery);
 
+<<<<<<< HEAD
             // Status filter
+=======
+>>>>>>> abrar_p4
             boolean matchesStatus = "All Status".equals(currentStatusFilter)
                     || (currentStatusFilter.equalsIgnoreCase("Open Now") && status.equalsIgnoreCase(Event.STATUS_OPEN))
                     || (currentStatusFilter.equalsIgnoreCase("Closed") && status.equalsIgnoreCase(Event.STATUS_CLOSED))
                     || (currentStatusFilter.equalsIgnoreCase("Drawn") && status.equalsIgnoreCase(Event.STATUS_DRAWN))
                     || (currentStatusFilter.equalsIgnoreCase("Completed") && status.equalsIgnoreCase("completed"));
 
+<<<<<<< HEAD
             // Size filter
+=======
+>>>>>>> abrar_p4
             boolean matchesSize = "Any Size".equals(currentSizeFilter);
             if (!matchesSize) {
                 int cap = e.getCapacity();
@@ -93,12 +116,42 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         Event e = events.get(position);
 
         h.tvTitle.setText(e.getTitle() != null ? e.getTitle() : "");
+<<<<<<< HEAD
         h.tvDescription.setText(e.getDescription() != null ? e.getDescription() : "");
         h.tvLocation.setText(e.getLocation() != null ? e.getLocation() : "");
         h.tvDate.setText(DateUtils.formatDateShort(e.getEventStartDate()));
         h.tvCapacity.setText(e.getWaitingListCount() + "/" + e.getCapacity() + " spots");
         h.tvPrice.setText(e.getFormattedPrice());
 
+=======
+        h.tvLocation.setText(e.getLocation() != null ? e.getLocation() : "");
+        
+        // Combine date and time for the card
+        String dateTime = DateUtils.formatDateShort(e.getEventStartDate()) + " • " + DateUtils.formatTime(e.getEventStartDate());
+        h.tvDate.setText(dateTime);
+        
+        h.tvCapacity.setText(e.getWaitingListCount() + "/" + e.getCapacity() + " spots");
+        h.tvPrice.setText(e.getFormattedPrice());
+
+        // Handle Image Loading
+        if (e.getPosterUrl() != null && !e.getPosterUrl().isEmpty()) {
+            String posterStr = e.getPosterUrl();
+            if (posterStr.startsWith("http")) {
+                Glide.with(h.itemView.getContext()).load(posterStr).into(h.ivPoster);
+            } else {
+                try {
+                    byte[] decodedString = Base64.decode(posterStr, Base64.DEFAULT);
+                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                    h.ivPoster.setImageBitmap(decodedByte);
+                } catch (Exception ex) {
+                    h.ivPoster.setImageResource(R.color.primary_light);
+                }
+            }
+        } else {
+            h.ivPoster.setImageResource(R.color.primary_light);
+        }
+
+>>>>>>> abrar_p4
         String status = e.getStatus() != null ? e.getStatus() : Event.STATUS_OPEN;
         h.tvStatus.setText(status.toUpperCase());
         switch (status) {
@@ -115,7 +168,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         if (e.isRegistrationOpen()) {
             long days = e.getDaysLeftToRegister();
             h.llDaysLeft.setVisibility(View.VISIBLE);
+<<<<<<< HEAD
             h.tvDaysLeft.setText(days + " days left to register");
+=======
+            h.tvDaysLeft.setText(days + " days left");
+>>>>>>> abrar_p4
         } else {
             h.llDaysLeft.setVisibility(View.GONE);
         }
@@ -127,14 +184,23 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     public int getItemCount() { return events.size(); }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
+<<<<<<< HEAD
         TextView tvTitle, tvDescription, tvLocation, tvDate,
                  tvCapacity, tvPrice, tvStatus, tvDaysLeft;
+=======
+        TextView tvTitle, tvLocation, tvDate,
+                 tvCapacity, tvPrice, tvStatus, tvDaysLeft;
+        ImageView ivPoster;
+>>>>>>> abrar_p4
         View llDaysLeft;
 
         ViewHolder(View v) {
             super(v);
             tvTitle       = v.findViewById(R.id.tv_title);
+<<<<<<< HEAD
             tvDescription = v.findViewById(R.id.tv_description);
+=======
+>>>>>>> abrar_p4
             tvLocation    = v.findViewById(R.id.tv_location);
             tvDate        = v.findViewById(R.id.tv_date);
             tvCapacity    = v.findViewById(R.id.tv_capacity);
@@ -142,6 +208,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             tvStatus      = v.findViewById(R.id.tv_status);
             tvDaysLeft    = v.findViewById(R.id.tv_days_left);
             llDaysLeft    = v.findViewById(R.id.ll_days_left);
+<<<<<<< HEAD
+=======
+            ivPoster      = v.findViewById(R.id.iv_poster);
+>>>>>>> abrar_p4
         }
     }
 }

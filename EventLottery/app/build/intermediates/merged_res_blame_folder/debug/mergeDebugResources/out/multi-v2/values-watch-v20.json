@@ -1,10 +1,17 @@
 {
     "logs": [
         {
+<<<<<<< HEAD
             "outputFile": "com.example.eventlottery.app-mergeDebugResources-3:/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
                     "source": "D:\\Android Studio\\Android\\Sdk\\caches\\8.10.2\\transforms\\bc5df90cdd82c2c0fd1e3f02386ee7aa\\transformed\\appcompat-1.7.0\\res\\values-watch-v20\\values-watch-v20.xml",
+=======
+            "outputFile": "com.example.eventlottery.app-mergeDebugResources-44:/values-watch-v20/values-watch-v20.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Abrar Shahriar\\.gradle\\caches\\8.10.2\\transforms\\bc5df90cdd82c2c0fd1e3f02386ee7aa\\transformed\\appcompat-1.7.0\\res\\values-watch-v20\\values-watch-v20.xml",
+>>>>>>> abrar_p4
                     "from": {
                         "startLines": "2,5,8",
                         "startColumns": "4,4,4",

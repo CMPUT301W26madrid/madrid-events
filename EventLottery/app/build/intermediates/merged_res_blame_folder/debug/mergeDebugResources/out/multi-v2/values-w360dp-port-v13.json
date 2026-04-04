@@ -1,10 +1,17 @@
 {
     "logs": [
         {
+<<<<<<< HEAD
             "outputFile": "com.example.eventlottery.app-mergeDebugResources-3:/values-w360dp-port-v13/values-w360dp-port-v13.xml",
             "map": [
                 {
                     "source": "D:\\Android Studio\\Android\\Sdk\\caches\\8.10.2\\transforms\\6aec877bf390236f68e40617fefa8d52\\transformed\\material-1.12.0\\res\\values-w360dp-port-v13\\values-w360dp-port-v13.xml",
+=======
+            "outputFile": "com.example.eventlottery.app-mergeDebugResources-44:/values-w360dp-port-v13/values-w360dp-port-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Abrar Shahriar\\.gradle\\caches\\8.10.2\\transforms\\6aec877bf390236f68e40617fefa8d52\\transformed\\material-1.12.0\\res\\values-w360dp-port-v13\\values-w360dp-port-v13.xml",
+>>>>>>> abrar_p4
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",

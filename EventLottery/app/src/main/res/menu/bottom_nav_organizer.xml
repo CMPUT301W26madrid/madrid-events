@@ -3,9 +3,12 @@
     <item android:id="@+id/nav_dashboard"
         android:icon="@drawable/ic_dashboard"
         android:title="@string/nav_dashboard" />
+<<<<<<< HEAD
     <item android:id="@+id/nav_create"
         android:icon="@drawable/ic_add"
         android:title="@string/nav_create" />
+=======
+>>>>>>> abrar_p4
     <item android:id="@+id/nav_browse"
         android:icon="@drawable/ic_search"
         android:title="@string/nav_browse" />

@@ -1,10 +1,17 @@
 {
     "logs": [
         {
+<<<<<<< HEAD
             "outputFile": "com.example.eventlottery.app-mergeDebugResources-3:/values-w600dp-land-v13/values-w600dp-land-v13.xml",
             "map": [
                 {
                     "source": "D:\\Android Studio\\Android\\Sdk\\caches\\8.10.2\\transforms\\6aec877bf390236f68e40617fefa8d52\\transformed\\material-1.12.0\\res\\values-w600dp-land-v13\\values-w600dp-land-v13.xml",
+=======
+            "outputFile": "com.example.eventlottery.app-mergeDebugResources-44:/values-w600dp-land-v13/values-w600dp-land-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Abrar Shahriar\\.gradle\\caches\\8.10.2\\transforms\\6aec877bf390236f68e40617fefa8d52\\transformed\\material-1.12.0\\res\\values-w600dp-land-v13\\values-w600dp-land-v13.xml",
+>>>>>>> abrar_p4
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

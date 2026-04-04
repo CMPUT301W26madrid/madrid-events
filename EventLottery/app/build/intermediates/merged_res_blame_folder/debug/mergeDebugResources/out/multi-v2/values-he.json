@@ -1,10 +1,17 @@
 {
     "logs": [
         {
+<<<<<<< HEAD
             "outputFile": "com.example.eventlottery.app-mergeDebugResources-3:/values-he/values-he.xml",
             "map": [
                 {
                     "source": "D:\\Android Studio\\Android\\Sdk\\caches\\8.10.2\\transforms\\5265769b458ba7903c41393a39e9ce1f\\transformed\\jetified-zxing-android-embedded-4.3.0\\res\\values-he\\values-he.xml",
+=======
+            "outputFile": "com.example.eventlottery.app-mergeDebugResources-44:/values-he/values-he.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Abrar Shahriar\\.gradle\\caches\\8.10.2\\transforms\\5265769b458ba7903c41393a39e9ce1f\\transformed\\jetified-zxing-android-embedded-4.3.0\\res\\values-he\\values-he.xml",
+>>>>>>> abrar_p4
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

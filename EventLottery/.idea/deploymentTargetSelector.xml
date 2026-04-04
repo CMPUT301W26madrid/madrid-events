@@ -5,6 +5,12 @@
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+<<<<<<< HEAD
+=======
+      <SelectionState runConfigName="Tests in 'com.example.eventlottery.activities'">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+>>>>>>> abrar_p4
     </selectionStates>
   </component>
 </project>

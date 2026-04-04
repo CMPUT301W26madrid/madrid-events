@@ -1,6 +1,7 @@
 {
     "logs": [
         {
+<<<<<<< HEAD
             "outputFile": "com.example.eventlottery.app-mergeDebugResources-3:/values-ru/values-ru.xml",
             "map": [
                 {
@@ -22,6 +23,12 @@
                 },
                 {
                     "source": "D:\\Android Studio\\Android\\Sdk\\caches\\8.10.2\\transforms\\7b2fdb6816a4c7e20a3d7a4a02ec21a8\\transformed\\core-1.13.0\\res\\values-ru\\values-ru.xml",
+=======
+            "outputFile": "com.example.eventlottery.app-mergeDebugResources-44:/values-ru/values-ru.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Abrar Shahriar\\.gradle\\caches\\8.10.2\\transforms\\7b2fdb6816a4c7e20a3d7a4a02ec21a8\\transformed\\core-1.13.0\\res\\values-ru\\values-ru.xml",
+>>>>>>> abrar_p4
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -38,7 +45,11 @@
                     }
                 },
                 {
+<<<<<<< HEAD
                     "source": "D:\\Android Studio\\Android\\Sdk\\caches\\8.10.2\\transforms\\bc5df90cdd82c2c0fd1e3f02386ee7aa\\transformed\\appcompat-1.7.0\\res\\values-ru\\values-ru.xml",
+=======
+                    "source": "C:\\Users\\Abrar Shahriar\\.gradle\\caches\\8.10.2\\transforms\\bc5df90cdd82c2c0fd1e3f02386ee7aa\\transformed\\appcompat-1.7.0\\res\\values-ru\\values-ru.xml",
+>>>>>>> abrar_p4
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -55,6 +66,7 @@
                     }
                 },
                 {
+<<<<<<< HEAD
                     "source": "D:\\Android Studio\\Android\\Sdk\\caches\\8.10.2\\transforms\\eeb08ddfce6c970856806293ec6dccf4\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-ru\\values.xml",
                     "from": {
                         "startLines": "4",
@@ -73,6 +85,26 @@
                 },
                 {
                     "source": "D:\\Android Studio\\Android\\Sdk\\caches\\8.10.2\\transforms\\6aec877bf390236f68e40617fefa8d52\\transformed\\material-1.12.0\\res\\values-ru\\values-ru.xml",
+=======
+                    "source": "C:\\Users\\Abrar Shahriar\\.gradle\\caches\\8.10.2\\transforms\\5265769b458ba7903c41393a39e9ce1f\\transformed\\jetified-zxing-android-embedded-4.3.0\\res\\values-ru\\values-ru.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,117,164,306",
+                        "endColumns": "61,46,141,125",
+                        "endOffsets": "112,159,301,427"
+                    },
+                    "to": {
+                        "startLines": "137,138,139,140",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "12452,12514,12561,12703",
+                        "endColumns": "61,46,141,125",
+                        "endOffsets": "12509,12556,12698,12824"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Abrar Shahriar\\.gradle\\caches\\8.10.2\\transforms\\6aec877bf390236f68e40617fefa8d52\\transformed\\material-1.12.0\\res\\values-ru\\values-ru.xml",
+>>>>>>> abrar_p4
                     "from": {
                         "startLines": "2,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -91,7 +123,28 @@
                     }
                 },
                 {
+<<<<<<< HEAD
                     "source": "D:\\Android Studio\\Android\\Sdk\\caches\\8.10.2\\transforms\\d7e26b0096f7b77a6f85d95acef205f8\\transformed\\jetified-play-services-base-18.5.0\\res\\values-ru\\values.xml",
+=======
+                    "source": "C:\\Users\\Abrar Shahriar\\.gradle\\caches\\8.10.2\\transforms\\eeb08ddfce6c970856806293ec6dccf4\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-ru\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "152",
+                        "endOffsets": "347"
+                    },
+                    "to": {
+                        "startLines": "58",
+                        "startColumns": "4",
+                        "startOffsets": "5629",
+                        "endColumns": "156",
+                        "endOffsets": "5781"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Abrar Shahriar\\.gradle\\caches\\8.10.2\\transforms\\d7e26b0096f7b77a6f85d95acef205f8\\transformed\\jetified-play-services-base-18.5.0\\res\\values-ru\\values.xml",
+>>>>>>> abrar_p4
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",

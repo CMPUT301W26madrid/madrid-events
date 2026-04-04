@@ -1,0 +1,224 @@
+# 2026-04-04T20:26:34.372831700Z:
+test_suite_meta_data {
+  scheduled_test_case_count: 4
+}
+test_status: PASSED
+test_result {
+  test_case {
+    test_class: "CreateEventActivityTest"
+    test_package: "com.example.eventlottery.activities"
+    test_method: "testCreateEventViews"
+    start_time {
+      seconds: 1775334387
+      nanos: 840000000
+    }
+    end_time {
+      seconds: 1775334390
+      nanos: 385000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\logcat-com.example.eventlottery.activities.CreateEventActivityTest-testCreateEventViews.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "EntrantMainActivityTest"
+    test_package: "com.example.eventlottery.activities"
+    test_method: "testNavigationElements"
+    start_time {
+      seconds: 1775334390
+      nanos: 410000000
+    }
+    end_time {
+      seconds: 1775334391
+      nanos: 700000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\logcat-com.example.eventlottery.activities.EntrantMainActivityTest-testNavigationElements.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "LoginActivityTest"
+    test_package: "com.example.eventlottery.activities"
+    test_method: "testLoginScreenViews"
+    start_time {
+      seconds: 1775334391
+      nanos: 731000000
+    }
+    end_time {
+      seconds: 1775334392
+      nanos: 560000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\logcat-com.example.eventlottery.activities.LoginActivityTest-testLoginScreenViews.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "ProfileActivityTest"
+    test_package: "com.example.eventlottery.activities"
+    test_method: "testProfileViews"
+    start_time {
+      seconds: 1775334392
+      nanos: 614000000
+    }
+    end_time {
+      seconds: 1775334393
+      nanos: 390000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\logcat-com.example.eventlottery.activities.ProfileActivityTest-testProfileViews.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\cpuinfo"
+    }
+  }
+}
+output_artifact {
+  label {
+    label: "test-results.log"
+    namespace: "com.google.testing.platform.runtime.android.driver.AndroidInstrumentationDriver"
+  }
+  source_path {
+    path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\testlog\\test-results.log"
+  }
+  type: TEST_DATA
+  mime_type: "text/plain"
+}
