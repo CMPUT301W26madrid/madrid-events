@@ -3,24 +3,24 @@
 3    package="com.example.eventlottery.test" >
 4
 5    <uses-sdk
-5-->C:\Users\Abrar Shahriar\demo\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12828235022212601437.xml:5:5-74
+5-->C:\Users\Abrar Shahriar\madrid-events\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest8879104585032440169.xml:5:5-74
 6        android:minSdkVersion="24"
-6-->C:\Users\Abrar Shahriar\demo\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12828235022212601437.xml:5:15-41
+6-->C:\Users\Abrar Shahriar\madrid-events\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest8879104585032440169.xml:5:15-41
 7        android:targetSdkVersion="35" />
-7-->C:\Users\Abrar Shahriar\demo\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12828235022212601437.xml:5:42-71
+7-->C:\Users\Abrar Shahriar\madrid-events\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest8879104585032440169.xml:5:42-71
 8
 9    <instrumentation
-9-->C:\Users\Abrar Shahriar\demo\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12828235022212601437.xml:11:5-15:74
+9-->C:\Users\Abrar Shahriar\madrid-events\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest8879104585032440169.xml:11:5-15:74
 10        android:name="androidx.test.runner.AndroidJUnitRunner"
-10-->C:\Users\Abrar Shahriar\demo\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12828235022212601437.xml:11:22-76
+10-->C:\Users\Abrar Shahriar\madrid-events\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest8879104585032440169.xml:11:22-76
 11        android:functionalTest="false"
-11-->C:\Users\Abrar Shahriar\demo\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12828235022212601437.xml:14:22-52
+11-->C:\Users\Abrar Shahriar\madrid-events\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest8879104585032440169.xml:14:22-52
 12        android:handleProfiling="false"
-12-->C:\Users\Abrar Shahriar\demo\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12828235022212601437.xml:13:22-53
+12-->C:\Users\Abrar Shahriar\madrid-events\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest8879104585032440169.xml:13:22-53
 13        android:label="Tests for com.example.eventlottery"
-13-->C:\Users\Abrar Shahriar\demo\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12828235022212601437.xml:15:22-72
+13-->C:\Users\Abrar Shahriar\madrid-events\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest8879104585032440169.xml:15:22-72
 14        android:targetPackage="com.example.eventlottery" />
-14-->C:\Users\Abrar Shahriar\demo\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12828235022212601437.xml:12:22-70
+14-->C:\Users\Abrar Shahriar\madrid-events\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest8879104585032440169.xml:12:22-70
 15
 16    <queries>
 16-->[androidx.test:runner:1.7.0] C:\Users\Abrar Shahriar\.gradle\caches\8.10.2\transforms\33899d7a3061ffe80f1fa1bc0af5df1d\transformed\runner-1.7.0\AndroidManifest.xml:24:5-28:15
@@ -40,12 +40,12 @@
 22-->[androidx.test:core:1.7.0] C:\Users\Abrar Shahriar\.gradle\caches\8.10.2\transforms\185f7701c953828b1288b2d774ab1b27\transformed\jetified-core-1.7.0\AndroidManifest.xml:24:22-69
 23
 24    <application
-24-->C:\Users\Abrar Shahriar\demo\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12828235022212601437.xml:7:5-9:19
+24-->C:\Users\Abrar Shahriar\madrid-events\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest8879104585032440169.xml:7:5-9:19
 25        android:debuggable="true"
 26        android:extractNativeLibs="false" >
 27        <uses-library android:name="android.test.runner" />
-27-->C:\Users\Abrar Shahriar\demo\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12828235022212601437.xml:8:9-60
-27-->C:\Users\Abrar Shahriar\demo\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest12828235022212601437.xml:8:23-57
+27-->C:\Users\Abrar Shahriar\madrid-events\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest8879104585032440169.xml:8:9-60
+27-->C:\Users\Abrar Shahriar\madrid-events\EventLottery\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest8879104585032440169.xml:8:23-57
 28
 29        <activity
 29-->[androidx.test:core:1.7.0] C:\Users\Abrar Shahriar\.gradle\caches\8.10.2\transforms\185f7701c953828b1288b2d774ab1b27\transformed\jetified-core-1.7.0\AndroidManifest.xml:27:9-34:20

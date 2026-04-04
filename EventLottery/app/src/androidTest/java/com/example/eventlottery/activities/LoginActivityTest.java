@@ -7,14 +7,16 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
+import androidx.test.core.app.ActivityScenario;
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.espresso.matcher.ViewMatchers.Visibility;
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
 import com.example.eventlottery.R;
+import com.example.eventlottery.utils.SessionManager;
 
-import org.junit.Rule;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -22,16 +24,22 @@ import org.junit.runner.RunWith;
 @LargeTest
 public class LoginActivityTest {
 
-    @Rule
-    public ActivityScenarioRule<LoginActivity> activityRule =
-            new ActivityScenarioRule<>(LoginActivity.class);
+    @Before
+    public void setUp() {
+        // Clear session to ensure we are on the login screen and not redirected
+        SessionManager session = new SessionManager(ApplicationProvider.getApplicationContext());
+        session.clearSession();
+    }
 
     @Test
     public void testLoginScreenViews() {
-        // rv_profiles might have 0 height if empty, so we check effective visibility
-        onView(withId(R.id.rv_profiles)).check(matches(withEffectiveVisibility(Visibility.VISIBLE)));
-        
-        // btn_create_profile is at the bottom, so scroll to it
-        onView(withId(R.id.btn_create_profile)).perform(scrollTo()).check(matches(isDisplayed()));
+        // Manually launch activity after clearing session
+        try (ActivityScenario<LoginActivity> scenario = ActivityScenario.launch(LoginActivity.class)) {
+            // The container for profiles should be visible (even if empty)
+            onView(withId(R.id.rv_profiles)).check(matches(withEffectiveVisibility(Visibility.VISIBLE)));
+            
+            // btn_create_profile is inside a ScrollView, so use scrollTo()
+            onView(withId(R.id.btn_create_profile)).perform(scrollTo()).check(matches(isDisplayed()));
+        }
     }
 }

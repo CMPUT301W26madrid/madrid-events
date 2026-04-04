@@ -5,7 +5,7 @@ model		: 68
 model name	: AMD Ryzen 9 6900HS with Radeon Graphics
 stepping	: 1
 microcode	: 0xffffffff
-cpu MHz		: 3493.105
+cpu MHz		: 3493.501
 cache size	: 512 KB
 physical id	: 0
 siblings	: 1
@@ -33,7 +33,7 @@ model		: 68
 model name	: AMD Ryzen 9 6900HS with Radeon Graphics
 stepping	: 1
 microcode	: 0xffffffff
-cpu MHz		: 3494.211
+cpu MHz		: 3473.055
 cache size	: 512 KB
 physical id	: 1
 siblings	: 1
@@ -61,7 +61,7 @@ model		: 68
 model name	: AMD Ryzen 9 6900HS with Radeon Graphics
 stepping	: 1
 microcode	: 0xffffffff
-cpu MHz		: 3493.758
+cpu MHz		: 3493.068
 cache size	: 512 KB
 physical id	: 2
 siblings	: 1
@@ -89,7 +89,7 @@ model		: 68
 model name	: AMD Ryzen 9 6900HS with Radeon Graphics
 stepping	: 1
 microcode	: 0xffffffff
-cpu MHz		: 3493.638
+cpu MHz		: 3493.495
 cache size	: 512 KB
 physical id	: 3
 siblings	: 1
@@ -117,7 +117,7 @@ model		: 68
 model name	: AMD Ryzen 9 6900HS with Radeon Graphics
 stepping	: 1
 microcode	: 0xffffffff
-cpu MHz		: 3493.292
+cpu MHz		: 3493.398
 cache size	: 512 KB
 physical id	: 4
 siblings	: 1
@@ -145,7 +145,7 @@ model		: 68
 model name	: AMD Ryzen 9 6900HS with Radeon Graphics
 stepping	: 1
 microcode	: 0xffffffff
-cpu MHz		: 3493.874
+cpu MHz		: 3454.678
 cache size	: 512 KB
 physical id	: 5
 siblings	: 1

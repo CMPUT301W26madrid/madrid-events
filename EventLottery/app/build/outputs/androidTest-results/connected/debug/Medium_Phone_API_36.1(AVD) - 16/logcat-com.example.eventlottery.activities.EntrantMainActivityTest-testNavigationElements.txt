@@ -1,128 +1,147 @@
-04-04 15:05:59.062 10492 10520 I TestRunner: started: testNavigationElements(com.example.eventlottery.activities.EntrantMainActivityTest)
-04-04 15:05:59.065 10492 10520 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
-04-04 15:05:59.068  1231  1231 D b/417220811: invalidateLoadedTasks - previous requestLoadId: -1
-04-04 15:05:59.077   821  2503 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@cf25f2d4 does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
-04-04 15:05:59.088   650   674 I libbinder.BpBinder: onLastStrongRef automatically unlinking death recipients for descriptor: '(not cached)'
-04-04 15:05:59.094  1231  1231 D RecentsView: onTaskDisplayChanged: 345, new displayId = 0
-04-04 15:05:59.100  1231  1231 D b/417220811: invalidateLoadedTasks - previous requestLoadId: -1
-04-04 15:05:59.101  1231  1231 D b/417220811: invalidateLoadedTasks - previous requestLoadId: -1
-04-04 15:05:59.105  1094  1295 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.view.ViewRootImpl$$ExternalSyntheticLambda12@bcdb2a7
-04-04 15:05:59.110 10557 10557 D VRI[InstrumentationActivityInvoker$EmptyActivity]: WindowInsets changed: 1080x2400 statusBars:[0,63,0,0] navigationBars:[0,0,0,63] mandatorySystemGestures:[0,63,0,84]
-04-04 15:05:59.111 10557 10557 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.view.ViewRootImpl$$ExternalSyntheticLambda12@ea4d7c3
-04-04 15:05:59.118   650   673 W libbinder.ServiceManagerCppClient: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10340 pid=0
-04-04 15:05:59.118   650   673 D libbinder.PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10340 => denied (452 us)
-04-04 15:05:59.118   650   673 W libbinder.ServiceManagerCppClient: Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10340 pid=0
-04-04 15:05:59.119   650   673 D libbinder.PermissionCache: checking android.permission.ROTATE_SURFACE_FLINGER for uid=10340 => denied (911 us)
-04-04 15:05:59.119   650   673 W libbinder.ServiceManagerCppClient: Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10340 pid=0
-04-04 15:05:59.119   650   673 D libbinder.PermissionCache: checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10340 => denied (697 us)
-04-04 15:05:59.119   650   674 W libbinder.ServiceManagerCppClient: Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10340 pid=10557
-04-04 15:05:59.119   650   674 D libbinder.PermissionCache: checking android.permission.ROTATE_SURFACE_FLINGER for uid=10340 => denied (1226 us)
-04-04 15:05:59.211   821   992 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
-04-04 15:05:59.211   821   992 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
-04-04 15:05:59.211   821   992 D InetDiagMessage: Destroyed live tcp sockets for uids={10146} in 1ms
-04-04 15:05:59.211   821   992 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
-04-04 15:05:59.212   821   992 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
-04-04 15:05:59.212   821   992 D InetDiagMessage: Destroyed live tcp sockets for uids={20146} in 1ms
-04-04 15:05:59.239   821  2101 W libbinder.ServiceManagerCppClient: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10340 pid=0
-04-04 15:05:59.239   821  2101 D libbinder.PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10340 => denied (295 us)
-04-04 15:05:59.239   821  2101 W libbinder.ServiceManagerCppClient: Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10340 pid=0
-04-04 15:05:59.239   821  2101 D libbinder.PermissionCache: checking android.permission.ROTATE_SURFACE_FLINGER for uid=10340 => denied (181 us)
-04-04 15:05:59.239   821  2101 W libbinder.ServiceManagerCppClient: Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10340 pid=0
-04-04 15:05:59.240   821  2101 D libbinder.PermissionCache: checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10340 => denied (125 us)
-04-04 15:05:59.281 10557 10557 D VRI[InstrumentationActivityInvoker$EmptyActivity]: visibilityChanged oldVisibility=true newVisibility=false
-04-04 15:05:59.292  1231  1231 D b/417220811: invalidateLoadedTasks - previous requestLoadId: -1
-04-04 15:05:59.297   821  1067 W ImageReader_JNI: Unable to acquire a buffer item, very likely client tried to acquire more than maxImages buffers
-04-04 15:05:59.299 10492 10492 D LifecycleMonitor: Lifecycle status change: com.example.eventlottery.activities.EntrantMainActivity@c294368 in: PRE_ON_CREATE
-04-04 15:05:59.299 10492 10492 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
-04-04 15:05:59.315  1094  1295 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): null
-04-04 15:05:59.327   709  6280 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
-04-04 15:05:59.354  1231  1231 D b/417220811: invalidateLoadedTasks - previous requestLoadId: -1
-04-04 15:05:59.422 10492 10492 D LifecycleMonitor: Lifecycle status change: com.example.eventlottery.activities.EntrantMainActivity@c294368 in: CREATED
-04-04 15:05:59.422 10492 10492 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=com.example.eventlottery.activities.EntrantMainActivity@c294368
-04-04 15:05:59.569 10492 10496 I le.eventlottery: Compiler allocated 5087KB to compile void android.view.ViewRootImpl.performTraversals()
-04-04 15:05:59.603 10492 10492 D LifecycleMonitor: Lifecycle status change: com.example.eventlottery.activities.EntrantMainActivity@c294368 in: STARTED
-04-04 15:05:59.603 10492 10492 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=com.example.eventlottery.activities.EntrantMainActivity@c294368
-04-04 15:05:59.605 10492 10492 D LifecycleMonitor: Lifecycle status change: com.example.eventlottery.activities.EntrantMainActivity@c294368 in: RESUMED
-04-04 15:05:59.605 10492 10492 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=com.example.eventlottery.activities.EntrantMainActivity@c294368
-04-04 15:05:59.627 10492 10492 D AutofillManager: view not autofillable - not passing ime action check
-04-04 15:05:59.627 10492 10492 D AutofillManager: view not autofillable - not passing ime action check
-04-04 15:05:59.645 10492 10492 D VRI[EntrantMainActivity]: WindowInsets changed: 1080x2400 statusBars:[0,63,0,0] navigationBars:[0,0,0,63] mandatorySystemGestures:[0,63,0,84]
-04-04 15:05:59.647 10492 10492 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.view.ViewRootImpl$$ExternalSyntheticLambda12@f408
-04-04 15:05:59.767   821   845 I ActivityTaskManager: Displayed com.example.eventlottery/.activities.EntrantMainActivity for user 0: +690ms
-04-04 15:05:59.797   821   954 I ImeTracker: com.example.eventlottery:80c6fba1: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
-04-04 15:05:59.797  1094  1295 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): null
-04-04 15:05:59.801 10492 10492 I ImeTracker: com.example.eventlottery:80c6fba1: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
-04-04 15:05:59.803   821  1505 I ImeTracker: system_server:9e927220: onRequestHide at ORIGIN_SERVER reason IME_REQUESTED_CHANGED_LISTENER fromUser false
-04-04 15:05:59.807  1588  1588 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():2057
-04-04 15:05:59.808 10557 10557 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): null
-04-04 15:05:59.809   821   848 I ImeTracker: system_server:9e927220: onCancelled at PHASE_SERVER_SHOULD_HIDE
-04-04 15:05:59.809  1588  1588 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 0, locked = false
-04-04 15:05:59.809 10557 10557 D ViewRootImpl: Skipping stats log for color mode
-04-04 15:05:59.811  1588  1588 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1318 onStartInput(EditorInfo{EditorInfo{packageName=com.example.eventlottery, inputType=0, inputTypeString=NULL, enableLearning=false, autoCorrection=false, autoComplete=false, imeOptions=0, privateImeOptions=null, actionName=UNSPECIFIED, actionLabel=null, initialSelStart=-1, initialSelEnd=-1, initialCapsMode=0, label=null, fieldId=0, fieldName=null, extras=null, hintText=null, hintLocales=[]}}, false)
-04-04 15:05:59.814  1588  1588 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 1, locked = false
-04-04 15:05:59.829  1231  1231 D RecentsView: onTaskRemoved: 344, not handling task stack changes
-04-04 15:05:59.829  1231  1231 D RecentsView: onTaskRemoved: 344, not handling task stack changes
-04-04 15:05:59.835  1231  1231 D b/417220811: invalidateLoadedTasks - previous requestLoadId: -1
-04-04 15:05:59.857 10492 10492 I ViewInteraction: Checking 'MatchesViewAssertion{viewMatcher=(view has effective visibility <VISIBLE> and view.getGlobalVisibleRect() to return non-empty rectangle)}' assertion on view view.getId() is <2131230820/com.example.eventlottery:id/bottom_nav>
-04-04 15:05:59.862 10492 10492 I ViewInteraction: Checking 'MatchesViewAssertion{viewMatcher=view has effective visibility <VISIBLE>}' assertion on view view.getId() is <2131231247/com.example.eventlottery:id/spinner_role>
-04-04 15:05:59.864 10492 10492 I ViewInteraction: Checking 'MatchesViewAssertion{viewMatcher=(view has effective visibility <VISIBLE> and view.getGlobalVisibleRect() to return non-empty rectangle)}' assertion on view view.getId() is <2131231023/com.example.eventlottery:id/iv_bell>
-04-04 15:05:59.870   821  2503 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@d0dacb73 does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
-04-04 15:05:59.876   650   785 I libbinder.BpBinder: onLastStrongRef automatically unlinking death recipients for descriptor: '(not cached)'
-04-04 15:05:59.882  1231  1231 D RecentsView: onTaskDisplayChanged: 346, new displayId = 0
-04-04 15:05:59.886 10492 10492 D LifecycleMonitor: Lifecycle status change: com.example.eventlottery.activities.EntrantMainActivity@c294368 in: PAUSED
-04-04 15:05:59.887  1094  1295 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.view.ViewRootImpl$$ExternalSyntheticLambda12@88a097f
-04-04 15:05:59.887 10492 10492 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=com.example.eventlottery.activities.EntrantMainActivity@c294368
-04-04 15:05:59.890   709  6280 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
-04-04 15:05:59.893 10557 10573 I GFXSTREAM: [eglDisplay.cpp(297)] Opening libGLESv1_CM_emulation.so
-04-04 15:05:59.894 10557 10573 I GFXSTREAM: [eglDisplay.cpp(297)] Opening libGLESv2_emulation.so
-04-04 15:05:59.893  1231  1231 D b/417220811: invalidateLoadedTasks - previous requestLoadId: -1
-04-04 15:05:59.894  1231  1231 D b/417220811: invalidateLoadedTasks - previous requestLoadId: -1
-04-04 15:05:59.907 10557 10573 W HWUI    : Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
-04-04 15:05:59.907 10557 10573 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
-04-04 15:05:59.951 10492 10587 I le.eventlottery: hiddenapi: Accessing hidden field Ljava/net/Socket;->impl:Ljava/net/SocketImpl; (runtime_flags=0, domain=core-platform, api=unsupported) from Lcom/google/android/gms/org/conscrypt/Platform; (domain=app, TargetSdkVersion=35) using reflection: allowed
-04-04 15:05:59.973 10557 10557 D VRI[InstrumentationActivityInvoker$EmptyActivity]: WindowInsets changed: 1080x2400 statusBars:[0,63,0,0] navigationBars:[0,0,0,63] mandatorySystemGestures:[0,63,0,84]
-04-04 15:05:59.973 10557 10557 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.view.ViewRootImpl$$ExternalSyntheticLambda12@e13827a
-04-04 15:06:00.007  1231  1231 D b/417220811: invalidateLoadedTasks - previous requestLoadId: -1
-04-04 15:06:00.089 10492 10492 D VRI[EntrantMainActivity]: visibilityChanged oldVisibility=true newVisibility=false
-04-04 15:06:00.093   821  1067 W ImageReader_JNI: Unable to acquire a buffer item, very likely client tried to acquire more than maxImages buffers
-04-04 15:06:00.097  1231  1231 D b/417220811: invalidateLoadedTasks - previous requestLoadId: -1
-04-04 15:06:00.099   821   845 I ActivityTaskManager: Displayed com.example.eventlottery.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity for user 0: +227ms
-04-04 15:06:00.109 10492 10587 I le.eventlottery: hiddenapi: Accessing hidden method Ljava/security/spec/ECParameterSpec;->setCurveName(Ljava/lang/String;)V (runtime_flags=0, domain=core-platform, api=unsupported) from Lcom/google/android/gms/org/conscrypt/Platform; (domain=app, TargetSdkVersion=35) using reflection: allowed
-04-04 15:06:00.120  1094  1295 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): null
-04-04 15:06:00.122   709  6280 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
-04-04 15:06:00.125  1231  1231 D ViewRootImpl: Skipping stats log for color mode
-04-04 15:06:00.127  1231  1231 D BaseActivity: Launcher flags updated: [state_started] +[state_started]
-04-04 15:06:00.128  1231  1231 D BaseActivity: Launcher flags updated: [state_started|state_resumed|state_user_active] +[state_resumed|state_user_active]
-04-04 15:06:00.129 10492 10492 D AutofillManager: view not autofillable - not passing ime action check
-04-04 15:06:00.129  1231  1231 D BaseActivity: Launcher flags updated: [state_started|state_resumed|state_deferred_resumed|state_user_active] +[state_deferred_resumed]
-04-04 15:06:00.129  1231  1231 D StatsLog: LAUNCHER_ONRESUME
-04-04 15:06:00.131   821   954 I ImeTracker: com.example.eventlottery.test:3da43ca4: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
-04-04 15:06:00.137 10557 10557 I ImeTracker: com.example.eventlottery.test:3da43ca4: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
-04-04 15:06:00.139  1231  1231 D NexusLauncherModelDelegate: notifySmartspaceEvent: SmartspaceTargetEvent{mSmartspaceTarget=null, mSmartspaceActionId='null', mEventType=6}
-04-04 15:06:00.142  1231  1297 D QuickstepModelDelegate: notifyAppTargetEvent action=1 launchLocation=workspace/0/[-1,-1]/[1,1]
-04-04 15:06:00.142  1588  1588 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():2057
-04-04 15:06:00.145  1588  1588 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 0, locked = false
-04-04 15:06:00.147  1588  1588 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1318 onStartInput(EditorInfo{EditorInfo{packageName=com.example.eventlottery.test, inputType=0, inputTypeString=NULL, enableLearning=false, autoCorrection=false, autoComplete=false, imeOptions=0, privateImeOptions=null, actionName=UNSPECIFIED, actionLabel=null, initialSelStart=-1, initialSelEnd=-1, initialCapsMode=0, label=null, fieldId=0, fieldName=null, extras=null, hintText=null, hintLocales=[]}}, false)
-04-04 15:06:00.150  1588  1588 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 1, locked = false
-04-04 15:06:00.157  1094  1459 D WallpaperService: onVisibilityChanged(true): com.android.systemui.wallpapers.ImageWallpaper$CanvasEngine@96111d8
-04-04 15:06:00.160   821   840 I ImeTracker: system_server:68415062: onRequestHide at ORIGIN_SERVER reason IME_REQUESTED_CHANGED_LISTENER fromUser false
-04-04 15:06:00.161 10492 10492 D LifecycleMonitor: Lifecycle status change: com.example.eventlottery.activities.EntrantMainActivity@c294368 in: STOPPED
-04-04 15:06:00.163 10492 10492 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=com.example.eventlottery.activities.EntrantMainActivity@c294368
-04-04 15:06:00.167  1775  1934 I AiAiEcho: Predicting[0]:  [CONTEXT sampling_count=5 ]
-04-04 15:06:00.169  1231  1231 D BaseDepthController: setSurface:
-04-04 15:06:00.169  1231  1231 D BaseDepthController: 	mWaitingOnSurfaceValidity: false
-04-04 15:06:00.169  1231  1231 D BaseDepthController: 	mBaseSurface: Surface(name=com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#6867)/@0xa7095a0
-04-04 15:06:00.169  1231  1231 V BaseDepthController: Applying blur: 0 to Surface(name=com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#6867)/@0xa7095a0 applyImmediately: false
-04-04 15:06:00.170  1231  1231 D BaseDepthController: shouldBlurWorkspace: false targetState: Normal currentStableState: Normal mCurrentBlur: 0 mLauncher.getDepthBlurTargets(): [com.android.launcher3.Workspace{8f963c7 V.ED..... .......D 0,0-1080,2400 #7f0a049d app:id/workspace}, com.android.launcher3.Hotseat{1804df4 V.ED..... .......D 0,1905-1080,2400 #7f0a01ee app:id/hotseat}]
-04-04 15:06:00.172  1775  1934 I AiAiEcho: EchoTargets:
-04-04 15:06:00.172  1775  1934 I AiAiEcho: Filtered by AiAi flag check:
-04-04 15:06:00.172  1775  1934 I AiAiEcho: [CONTEXT ratelimit_period="10 SECONDS" ]
-04-04 15:06:00.174  1775  1934 I AiAiEcho: #remoteViewsTwiddler: feature disabled.
-04-04 15:06:00.179 10492 10492 D AutofillManager: view not autofillable - not passing ime action check
-04-04 15:06:00.181  1775  1934 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0 (types=[])
-04-04 15:06:00.194 10492 10492 D LifecycleMonitor: Lifecycle status change: com.example.eventlottery.activities.EntrantMainActivity@c294368 in: DESTROYED
-04-04 15:06:00.194 10492 10492 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
-04-04 15:06:00.194 10492 10492 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): null
-04-04 15:06:00.206 10492 10492 D ViewRootImpl: Skipping stats log for color mode
-04-04 15:06:00.207 10492 10497 W le.eventlottery: Cleared Reference was only reachable from finalizer (only reported once)
-04-04 15:06:00.221 10492 10520 I TestRunner: finished: testNavigationElements(com.example.eventlottery.activities.EntrantMainActivityTest)
+04-04 15:28:26.266 13173 13199 I TestRunner: started: testNavigationElements(com.example.eventlottery.activities.EntrantMainActivityTest)
+04-04 15:28:26.267 24319 24322 I artd    : GetBestInfo: /data/user_de/0/com.google.android.gms/app_chimera/m/0000000d/dl-PlayCloudSearch.optional_253434100000.apk has no usable artifacts
+04-04 15:28:26.270 24319 25549 I artd    : GetBestInfo: /data/user_de/0/com.google.android.gms/app_chimera/m/00000001/CronetDynamite.apk has no usable artifacts
+04-04 15:28:26.270 13173 13199 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+04-04 15:28:26.272 24319 25549 I artd    : GetBestInfo: /data/user_de/0/com.google.android.gms/app_chimera/m/00000002/DynamiteLoader.apk has no usable artifacts
+04-04 15:28:26.273 24319 25549 I artd    : GetBestInfo: /data/user_de/0/com.google.android.gms/app_chimera/m/00000012/dl-Appsearch.optional_260235100800.apk has no usable artifacts
+04-04 15:28:26.277 24319 25549 I artd    : GetBestInfo: /data/user/0/com.google.android.gms/app_dg_cache/BE7EF7B4C46169C70551CAA4FB9F9DFEAA13427D/the.apk has no usable artifacts
+04-04 15:28:26.281 24319 24322 I artd    : GetBestInfo: /data/user_de/0/com.google.android.gms/app_chimera/m/00000014/dl-MlkitBarcodeUi.optional_260235100800.apk has no usable artifacts
+04-04 15:28:26.283 24319 24322 I artd    : GetBestInfo: /data/user_de/0/com.google.android.gms/app_chimera/m/00000005/GoogleCertificates.apk has no usable artifacts
+04-04 15:28:26.285   821  1534 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@e036690a does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+04-04 15:28:26.286 24319 24322 I artd    : GetBestInfo: /data/user/0/com.google.android.gms/app_dg_cache/CF98DA544914DD75038B6CE6DBC852B6C43EC876/the.apk has no usable artifacts
+04-04 15:28:26.289 24319 24322 I artd    : GetBestInfo: /data/user/0/com.google.android.gms/app_dg_cache/E893C01D331CD1FBE6F076D28A1BA871F16A1DEC/the.apk has no usable artifacts
+04-04 15:28:26.294 24319 24322 I artd    : GetBestInfo: /data/user_de/0/com.google.android.gms/app_chimera/m/00000009/dl-MlkitBarcodeUi.optional_253434100800.apk has no usable artifacts
+04-04 15:28:26.295   650   785 I libbinder.BpBinder: onLastStrongRef automatically unlinking death recipients for descriptor: '(not cached)'
+04-04 15:28:26.297 24319 24322 I artd    : GetBestInfo: /data/user_de/0/com.google.android.gms/app_chimera/m/00000010/dl-VisionOcr.optional_260235100000.apk has no usable artifacts
+04-04 15:28:26.305  1231  1231 D RecentsView: onTaskDisplayChanged: 385, new displayId = 0
+04-04 15:28:26.305 24319 24322 I artd    : GetBestInfo: /data/user_de/0/com.google.android.gms/app_chimera/m/0000000c/dl-Appsearch.optional_253434100800.apk has no usable artifacts
+04-04 15:28:26.310 24319 24322 I artd    : GetBestInfo: /data/user/0/com.google.android.gms/app_dg_cache/E054CA794C125F959C88D4849C82AB3F226237E6/the.apk has no usable artifacts
+04-04 15:28:26.310  1094  1295 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.view.ViewRootImpl$$ExternalSyntheticLambda12@51c1267
+04-04 15:28:26.313 24319 24322 I artd    : GetBestInfo: /data/user/0/com.google.android.gms/app_dg_cache/0B5F21648920603C6816E0B76773EED17E15FB77/the.apk has no usable artifacts
+04-04 15:28:26.315  1231  1231 D b/417220811: invalidateLoadedTasks - previous requestLoadId: -1
+04-04 15:28:26.316 24319 24322 I artd    : GetBestInfo: vdex next to the dex file (/data/user/0/com.google.android.gms/app_dg_cache/BB2AE5A47BB198AF36C19CFD2B6407061A1BAF30/oat/x86_64/the.vdex) is kOatUpToDate with filter 'verify' executable 'false'
+04-04 15:28:26.316 13230 13230 D VRI[InstrumentationActivityInvoker$EmptyActivity]: WindowInsets changed: 1080x2400 statusBars:[0,63,0,0] navigationBars:[0,0,0,63] mandatorySystemGestures:[0,63,0,84]
+04-04 15:28:26.317  1231  1231 D b/417220811: invalidateLoadedTasks - previous requestLoadId: -1
+04-04 15:28:26.318 13230 13230 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.view.ViewRootImpl$$ExternalSyntheticLambda12@ea4d7c3
+04-04 15:28:26.318 24319 24322 I artd    : GetBestInfo: /data/user_de/0/com.google.android.gms/app_chimera/m/00000011/dl-PlayCloudSearch.optional_260235100000.apk has no usable artifacts
+04-04 15:28:26.322 24319 24322 I artd    : GetBestInfo: /data/user_de/0/com.google.android.gms/app_chimera/m/00000016/dl-MlkitOcrCommon.optional_260235100800.apk has no usable artifacts
+04-04 15:28:26.323 24319 24322 I artd    : GetBestInfo: /data/user_de/0/com.google.android.gms/app_chimera/m/00000013/dl-MapsCoreDynamite.integ_254515602100800.apk has no usable artifacts
+04-04 15:28:26.325 24319 24322 I artd    : GetBestInfo: /data/user_de/0/com.google.android.gms/app_chimera/m/00000007/MeasurementDynamite.apk has no usable artifacts
+04-04 15:28:26.333   650   674 W libbinder.ServiceManagerCppClient: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10350 pid=0
+04-04 15:28:26.333   650   674 D libbinder.PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10350 => denied (557 us)
+04-04 15:28:26.333   650   674 W libbinder.ServiceManagerCppClient: Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10350 pid=0
+04-04 15:28:26.333   650   674 D libbinder.PermissionCache: checking android.permission.ROTATE_SURFACE_FLINGER for uid=10350 => denied (512 us)
+04-04 15:28:26.334   650   674 W libbinder.ServiceManagerCppClient: Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10350 pid=0
+04-04 15:28:26.334   650   674 D libbinder.PermissionCache: checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10350 => denied (429 us)
+04-04 15:28:26.422   821  1534 W libbinder.ServiceManagerCppClient: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10350 pid=0
+04-04 15:28:26.422   821  1534 D libbinder.PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10350 => denied (315 us)
+04-04 15:28:26.422   821  1534 W libbinder.ServiceManagerCppClient: Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10350 pid=0
+04-04 15:28:26.422   821  1534 D libbinder.PermissionCache: checking android.permission.ROTATE_SURFACE_FLINGER for uid=10350 => denied (279 us)
+04-04 15:28:26.423   821  1534 W libbinder.ServiceManagerCppClient: Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10350 pid=0
+04-04 15:28:26.423   821  1534 D libbinder.PermissionCache: checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10350 => denied (138 us)
+04-04 15:28:26.474 13230 13230 D VRI[InstrumentationActivityInvoker$EmptyActivity]: visibilityChanged oldVisibility=true newVisibility=false
+04-04 15:28:26.479 13173 13173 D LifecycleMonitor: Lifecycle status change: com.example.eventlottery.activities.EntrantMainActivity@1da4725 in: PRE_ON_CREATE
+04-04 15:28:26.479 13173 13173 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+04-04 15:28:26.485  1231  1231 D b/417220811: invalidateLoadedTasks - previous requestLoadId: -1
+04-04 15:28:26.488   821  1067 W ImageReader_JNI: Unable to acquire a buffer item, very likely client tried to acquire more than maxImages buffers
+04-04 15:28:26.497   709   798 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+04-04 15:28:26.497   709   798 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+04-04 15:28:26.503  1094  1295 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): null
+04-04 15:28:26.512   821   986 I HalDevMgr: bestIfaceCreationProposal is null, requestIface=STA, existingIface=[name=wlan0 type=STA]
+04-04 15:28:26.532  1231  1231 D b/417220811: invalidateLoadedTasks - previous requestLoadId: -1
+04-04 15:28:26.632 13173 13173 D LifecycleMonitor: Lifecycle status change: com.example.eventlottery.activities.EntrantMainActivity@1da4725 in: CREATED
+04-04 15:28:26.632 13173 13173 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=com.example.eventlottery.activities.EntrantMainActivity@1da4725
+04-04 15:28:26.766 24103 24103 D BoundBrokerSvc: onRebind: Intent { act=com.google.android.gms.scheduler.standalone.housekeeping.HousekeepingTrainTaskService.ACTION_TASK_READY dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.PersistentInternalBoundBrokerService }
+04-04 15:28:26.776 24103 12131 I NetworkScheduler.Stats: (REDACTED) Task %s/%s started execution. cause:%s exec_start_elapsed_seconds: %s
+04-04 15:28:26.776 24103 12131 I NetworkScheduler.Stats: (REDACTED) Task %s/%s started execution. cause:%s exec_start_elapsed_seconds: %s
+04-04 15:28:26.796 13173 13173 D LifecycleMonitor: Lifecycle status change: com.example.eventlottery.activities.EntrantMainActivity@1da4725 in: STARTED
+04-04 15:28:26.797 13173 13173 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=com.example.eventlottery.activities.EntrantMainActivity@1da4725
+04-04 15:28:26.799 13173 13173 D LifecycleMonitor: Lifecycle status change: com.example.eventlottery.activities.EntrantMainActivity@1da4725 in: RESUMED
+04-04 15:28:26.800 13173 13173 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=com.example.eventlottery.activities.EntrantMainActivity@1da4725
+04-04 15:28:26.805 25130 25130 D BoundBrokerSvc: onBind: Intent { act=.people.service.wipeout.PeopleAndroidUriWipeoutTask.ACTION_TASK_READY dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.GmsInternalBoundBrokerService }
+04-04 15:28:26.805 25130 25130 D BoundBrokerSvc: Loading bound service for intent: Intent { act=.people.service.wipeout.PeopleAndroidUriWipeoutTask.ACTION_TASK_READY dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.GmsInternalBoundBrokerService }
+04-04 15:28:26.811 24103 13259 I NetworkScheduler.Stats: (REDACTED) Task %s/%s started execution. cause:%s exec_start_elapsed_seconds: %s
+04-04 15:28:26.818 25130  8891 I AndroidUriWipeoutSvc: Running AndroidUriWipeout [CONTEXT service_id=5 ]
+04-04 15:28:26.825 13173 13173 D AutofillManager: view not autofillable - not passing ime action check
+04-04 15:28:26.825 13173 13173 D AutofillManager: view not autofillable - not passing ime action check
+04-04 15:28:26.832 24103 13258 I NetworkScheduler.Stats: (REDACTED) HousekeepingTask %s/%s finished executing. cause:%s result: %s elapsed_millis: %s uptime_millis: %s exec_start_elapsed_seconds: %s
+04-04 15:28:26.833 25130 25130 D BoundBrokerSvc: onUnbind: Intent { act=.people.service.wipeout.PeopleAndroidUriWipeoutTask.ACTION_TASK_READY dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.GmsInternalBoundBrokerService }
+04-04 15:28:26.840 13173 13173 D VRI[EntrantMainActivity]: WindowInsets changed: 1080x2400 statusBars:[0,63,0,0] navigationBars:[0,0,0,63] mandatorySystemGestures:[0,63,0,84]
+04-04 15:28:26.840 13173 13173 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.view.ViewRootImpl$$ExternalSyntheticLambda12@ae015ec
+04-04 15:28:26.882 24103 13259 I NetworkScheduler.Stats: (REDACTED) Task %s/%s started execution. cause:%s exec_start_elapsed_seconds: %s
+04-04 15:28:26.903 24103 13258 I NetworkScheduler.Stats: (REDACTED) HousekeepingTask %s/%s finished executing. cause:%s result: %s elapsed_millis: %s uptime_millis: %s exec_start_elapsed_seconds: %s
+04-04 15:28:26.930 24103 24103 D BoundBrokerSvc: onRebind: Intent { act=com.google.android.gms.mdm.services.QrlLoggerService.ACTION_TASK_READY dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.PersistentInternalBoundBrokerService }
+04-04 15:28:26.935 24103 13259 I NetworkScheduler.Stats: (REDACTED) Task %s/%s started execution. cause:%s exec_start_elapsed_seconds: %s
+04-04 15:28:26.938 13173 13262 I le.eventlottery: hiddenapi: Accessing hidden field Ljava/net/Socket;->impl:Ljava/net/SocketImpl; (runtime_flags=0, domain=core-platform, api=unsupported) from Lcom/google/android/gms/org/conscrypt/Platform; (domain=app, TargetSdkVersion=35) using reflection: allowed
+04-04 15:28:26.960 24103 24103 D BoundBrokerSvc: onRebind: Intent { act=com.google.android.gms.location.service.drivingmode.DrivingModeLoggerService.ACTION_TASK_READY dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.PersistentInternalBoundBrokerService }
+04-04 15:28:26.963 24103 13264 I NetworkScheduler.Stats: (REDACTED) Task %s/%s started execution. cause:%s exec_start_elapsed_seconds: %s
+04-04 15:28:26.994   821   845 I ActivityTaskManager: Displayed com.example.eventlottery/.activities.EntrantMainActivity for user 0: +707ms
+04-04 15:28:27.015 24103 13258 I NetworkScheduler.Stats: (REDACTED) HousekeepingTask %s/%s finished executing. cause:%s result: %s elapsed_millis: %s uptime_millis: %s exec_start_elapsed_seconds: %s
+04-04 15:28:27.018 24103 24103 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.mdm.services.QrlLoggerService.ACTION_TASK_READY dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.PersistentInternalBoundBrokerService }
+04-04 15:28:27.019  1094  1295 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): null
+04-04 15:28:27.027 13230 13230 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): null
+04-04 15:28:27.030 13230 13230 D ViewRootImpl: Skipping stats log for color mode
+04-04 15:28:27.045 24103 13265 W ChimeraUtils: Module com.google.android.gms.location__nonwearable missing resource location_module_display_name(0)
+04-04 15:28:27.047 25130 25130 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.stats.FeatureLoggingTask.ACTION_TASK_READY dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.GmsInternalBoundBrokerService }
+04-04 15:28:27.047 25130 25130 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.stats.FeatureLoggingTask.ACTION_TASK_READY dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.GmsInternalBoundBrokerService }
+04-04 15:28:27.048   821   954 I ImeTracker: com.example.eventlottery:e42d68d0: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+04-04 15:28:27.054  1231  1231 D b/417220811: invalidateLoadedTasks - previous requestLoadId: -1
+04-04 15:28:27.056 13173 13173 I ImeTracker: com.example.eventlottery:e42d68d0: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+04-04 15:28:27.061  1231  1231 D RecentsView: onTaskRemoved: 384, not handling task stack changes
+04-04 15:28:27.061  1231  1231 D RecentsView: onTaskRemoved: 384, not handling task stack changes
+04-04 15:28:27.069  1588  1588 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():2057
+04-04 15:28:27.070 24103 13258 I NetworkScheduler.Stats: (REDACTED) Task %s/%s started execution. cause:%s exec_start_elapsed_seconds: %s
+04-04 15:28:27.070 24103 13265 W ChimeraUtils: Module com.google.android.gms.location_base missing resource location_module_display_name(0)
+04-04 15:28:27.072   821  1442 I ImeTracker: system_server:f3aabe08: onRequestHide at ORIGIN_SERVER reason IME_REQUESTED_CHANGED_LISTENER fromUser false
+04-04 15:28:27.073  1588  1588 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 0, locked = false
+04-04 15:28:27.076  1588  1588 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1318 onStartInput(EditorInfo{EditorInfo{packageName=com.example.eventlottery, inputType=0, inputTypeString=NULL, enableLearning=false, autoCorrection=false, autoComplete=false, imeOptions=0, privateImeOptions=null, actionName=UNSPECIFIED, actionLabel=null, initialSelStart=-1, initialSelEnd=-1, initialCapsMode=0, label=null, fieldId=0, fieldName=null, extras=null, hintText=null, hintLocales=[]}}, false)
+04-04 15:28:27.077   821   848 I ImeTracker: system_server:f3aabe08: onCancelled at PHASE_SERVER_SHOULD_HIDE
+04-04 15:28:27.080  1588  1588 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 1, locked = false
+04-04 15:28:27.096 13173 13173 I ViewInteraction: Checking 'MatchesViewAssertion{viewMatcher=(view has effective visibility <VISIBLE> and view.getGlobalVisibleRect() to return non-empty rectangle)}' assertion on view view.getId() is <2131230820/com.example.eventlottery:id/bottom_nav>
+04-04 15:28:27.110 13173 13173 I ViewInteraction: Checking 'MatchesViewAssertion{viewMatcher=view has effective visibility <VISIBLE>}' assertion on view view.getId() is <2131231247/com.example.eventlottery:id/spinner_role>
+04-04 15:28:27.114 13173 13173 I ViewInteraction: Checking 'MatchesViewAssertion{viewMatcher=(view has effective visibility <VISIBLE> and view.getGlobalVisibleRect() to return non-empty rectangle)}' assertion on view view.getId() is <2131231023/com.example.eventlottery:id/iv_bell>
+04-04 15:28:27.119 24103 24108 W .gms.persistent: Suspending all threads took: 10.671ms
+04-04 15:28:27.123   821  1534 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@e1eb41a9 does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+04-04 15:28:27.133 13173 13262 I le.eventlottery: hiddenapi: Accessing hidden method Ljava/security/spec/ECParameterSpec;->setCurveName(Ljava/lang/String;)V (runtime_flags=0, domain=core-platform, api=unsupported) from Lcom/google/android/gms/org/conscrypt/Platform; (domain=app, TargetSdkVersion=35) using reflection: allowed
+04-04 15:28:27.137   650   674 I libbinder.BpBinder: onLastStrongRef automatically unlinking death recipients for descriptor: '(not cached)'
+04-04 15:28:27.139  1231  1231 D RecentsView: onTaskDisplayChanged: 386, new displayId = 0
+04-04 15:28:27.143 13173 13173 D LifecycleMonitor: Lifecycle status change: com.example.eventlottery.activities.EntrantMainActivity@1da4725 in: PAUSED
+04-04 15:28:27.144 13173 13173 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=com.example.eventlottery.activities.EntrantMainActivity@1da4725
+04-04 15:28:27.148  1231  1231 D b/417220811: invalidateLoadedTasks - previous requestLoadId: -1
+04-04 15:28:27.153  1231  1231 D b/417220811: invalidateLoadedTasks - previous requestLoadId: -1
+04-04 15:28:27.154   709   798 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+04-04 15:28:27.154   709   798 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+04-04 15:28:27.159 25130 12938 I MetricIdProvider: Unable to log feature status gaia snapshot: no accounts found [CONTEXT service_id=231 ]
+04-04 15:28:27.159  1094  1295 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.view.ViewRootImpl$$ExternalSyntheticLambda12@373813f
+04-04 15:28:27.159 24103 13258 I NetworkScheduler.Stats: (REDACTED) HousekeepingTask %s/%s finished executing. cause:%s result: %s elapsed_millis: %s uptime_millis: %s exec_start_elapsed_seconds: %s
+04-04 15:28:27.161 25130 12938 I MetricIdProvider: Unable to log feature status zwieback snapshot: Facet Usage cannot log or override not set [CONTEXT service_id=231 ]
+04-04 15:28:27.161 25130 12938 I GmsCoreDailyFeatureLogg: Unable to log feature status snapshot: Cannot log gaia or zwieback [CONTEXT service_id=231 ]
+04-04 15:28:27.163 13230 13247 I GFXSTREAM: [eglDisplay.cpp(297)] Opening libGLESv1_CM_emulation.so
+04-04 15:28:27.164 24103 24103 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.location.service.drivingmode.DrivingModeLoggerService.ACTION_TASK_READY dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.PersistentInternalBoundBrokerService }
+04-04 15:28:27.165 13230 13247 I GFXSTREAM: [eglDisplay.cpp(297)] Opening libGLESv2_emulation.so
+04-04 15:28:27.167 24103 13258 I NetworkScheduler.Stats: (REDACTED) HousekeepingTask %s/%s finished executing. cause:%s result: %s elapsed_millis: %s uptime_millis: %s exec_start_elapsed_seconds: %s
+04-04 15:28:27.192 25130 25130 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.stats.FeatureLoggingTask.ACTION_TASK_READY dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.GmsInternalBoundBrokerService }
+04-04 15:28:27.194 13230 13247 W HWUI    : Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+04-04 15:28:27.195 13230 13247 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+04-04 15:28:27.211 24103 13265 I NetworkScheduler.Stats: (REDACTED) Task %s/%s finished executing. cause:%s result: %s elapsed_millis: %s uptime_millis: %s exec_start_elapsed_seconds: %s
+04-04 15:28:27.274  1231  1231 D b/417220811: invalidateLoadedTasks - previous requestLoadId: -1
+04-04 15:28:27.296 25130 25130 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.stats.NotificationLoggingTask.ACTION_TASK_READY dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.GmsInternalBoundBrokerService }
+04-04 15:28:27.296 25130 25130 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.stats.NotificationLoggingTask.ACTION_TASK_READY dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.GmsInternalBoundBrokerService }
+04-04 15:28:27.312 25130  8891 W ChimeraUtils: Module com.google.android.gms.core missing resource null(0)
+04-04 15:28:27.323 13230 13230 D VRI[InstrumentationActivityInvoker$EmptyActivity]: WindowInsets changed: 1080x2400 statusBars:[0,63,0,0] navigationBars:[0,0,0,63] mandatorySystemGestures:[0,63,0,84]
+04-04 15:28:27.325 13230 13230 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.view.ViewRootImpl$$ExternalSyntheticLambda12@46bea2b
+04-04 15:28:27.328 13173 13173 D VRI[EntrantMainActivity]: visibilityChanged oldVisibility=true newVisibility=false
+04-04 15:28:27.341  1231  1231 D b/417220811: invalidateLoadedTasks - previous requestLoadId: -1
+04-04 15:28:27.344 13173 13173 D AutofillManager: view not autofillable - not passing ime action check
+04-04 15:28:27.362   821  1067 W ImageReader_JNI: Unable to acquire a buffer item, very likely client tried to acquire more than maxImages buffers
+04-04 15:28:27.379 25130 25130 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.stats.NotificationLoggingTask.ACTION_TASK_READY dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.GmsInternalBoundBrokerService }
+04-04 15:28:27.401 13173 13173 D LifecycleMonitor: Lifecycle status change: com.example.eventlottery.activities.EntrantMainActivity@1da4725 in: STOPPED
+04-04 15:28:27.402 13173 13173 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=com.example.eventlottery.activities.EntrantMainActivity@1da4725
+04-04 15:28:27.415 24103 24103 D BoundBrokerSvc: onRebind: Intent { act=com.google.android.gms.common.telemetry.service.START dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.PersistentApiService }
+04-04 15:28:27.418 13173 13173 D AutofillManager: view not autofillable - not passing ime action check
+04-04 15:28:27.421   821   845 I ActivityTaskManager: Displayed com.example.eventlottery.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity for user 0: +298ms
+04-04 15:28:27.431 24103 13265 I NetworkScheduler.Stats: (REDACTED) Task %s/%s started execution. cause:%s exec_start_elapsed_seconds: %s
+04-04 15:28:27.431 24103 13265 I NetworkScheduler.Stats: (REDACTED) HousekeepingTask %s/%s finished executing. cause:%s result: %s elapsed_millis: %s uptime_millis: %s exec_start_elapsed_seconds: %s
+04-04 15:28:27.442 13173 13173 D LifecycleMonitor: Lifecycle status change: com.example.eventlottery.activities.EntrantMainActivity@1da4725 in: DESTROYED
+04-04 15:28:27.442 13173 13173 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+04-04 15:28:27.444 13173 13199 I TestRunner: finished: testNavigationElements(com.example.eventlottery.activities.EntrantMainActivityTest)

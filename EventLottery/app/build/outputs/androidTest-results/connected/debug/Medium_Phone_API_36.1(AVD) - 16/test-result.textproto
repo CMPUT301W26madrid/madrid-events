@@ -1,4 +1,4 @@
-# 2026-04-04T21:06:04.853492900Z:
+# 2026-04-04T21:28:32.557449100Z:
 test_suite_meta_data {
   scheduled_test_case_count: 4
 }
@@ -9,12 +9,12 @@ test_result {
     test_package: "com.example.eventlottery.activities"
     test_method: "testCreateEventViews"
     start_time {
-      seconds: 1775336758
-      nanos: 932000000
+      seconds: 1775338105
+      nanos: 952000000
     }
     end_time {
-      seconds: 1775336761
-      nanos: 322000000
+      seconds: 1775338108
+      nanos: 472000000
     }
   }
   test_status: PASSED
@@ -24,7 +24,7 @@ test_result {
       namespace: "android"
     }
     source_path {
-      path: "C:\\Users\\Abrar Shahriar\\demo\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\logcat-com.example.eventlottery.activities.CreateEventActivityTest-testCreateEventViews.txt"
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\logcat-com.example.eventlottery.activities.CreateEventActivityTest-testCreateEventViews.txt"
     }
   }
   output_artifact {
@@ -33,7 +33,7 @@ test_result {
       namespace: "android"
     }
     source_path {
-      path: "C:\\Users\\Abrar Shahriar\\demo\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\device-info.pb"
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\device-info.pb"
     }
   }
   output_artifact {
@@ -42,7 +42,7 @@ test_result {
       namespace: "android"
     }
     source_path {
-      path: "C:\\Users\\Abrar Shahriar\\demo\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\meminfo"
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\meminfo"
     }
   }
   output_artifact {
@@ -51,7 +51,7 @@ test_result {
       namespace: "android"
     }
     source_path {
-      path: "C:\\Users\\Abrar Shahriar\\demo\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\cpuinfo"
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\cpuinfo"
     }
   }
 }
@@ -61,12 +61,12 @@ test_result {
     test_package: "com.example.eventlottery.activities"
     test_method: "testNavigationElements"
     start_time {
-      seconds: 1775336761
-      nanos: 349000000
+      seconds: 1775338108
+      nanos: 499000000
     }
     end_time {
-      seconds: 1775336762
-      nanos: 510000000
+      seconds: 1775338109
+      nanos: 657000000
     }
   }
   test_status: PASSED
@@ -76,7 +76,7 @@ test_result {
       namespace: "android"
     }
     source_path {
-      path: "C:\\Users\\Abrar Shahriar\\demo\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\logcat-com.example.eventlottery.activities.EntrantMainActivityTest-testNavigationElements.txt"
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\logcat-com.example.eventlottery.activities.EntrantMainActivityTest-testNavigationElements.txt"
     }
   }
   output_artifact {
@@ -85,7 +85,7 @@ test_result {
       namespace: "android"
     }
     source_path {
-      path: "C:\\Users\\Abrar Shahriar\\demo\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\device-info.pb"
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\device-info.pb"
     }
   }
   output_artifact {
@@ -94,7 +94,7 @@ test_result {
       namespace: "android"
     }
     source_path {
-      path: "C:\\Users\\Abrar Shahriar\\demo\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\meminfo"
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\meminfo"
     }
   }
   output_artifact {
@@ -103,7 +103,7 @@ test_result {
       namespace: "android"
     }
     source_path {
-      path: "C:\\Users\\Abrar Shahriar\\demo\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\cpuinfo"
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\cpuinfo"
     }
   }
 }
@@ -113,12 +113,12 @@ test_result {
     test_package: "com.example.eventlottery.activities"
     test_method: "testLoginScreenViews"
     start_time {
-      seconds: 1775336762
-      nanos: 540000000
+      seconds: 1775338109
+      nanos: 712000000
     }
     end_time {
-      seconds: 1775336763
-      nanos: 238000000
+      seconds: 1775338110
+      nanos: 514000000
     }
   }
   test_status: PASSED
@@ -128,7 +128,7 @@ test_result {
       namespace: "android"
     }
     source_path {
-      path: "C:\\Users\\Abrar Shahriar\\demo\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\logcat-com.example.eventlottery.activities.LoginActivityTest-testLoginScreenViews.txt"
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\logcat-com.example.eventlottery.activities.LoginActivityTest-testLoginScreenViews.txt"
     }
   }
   output_artifact {
@@ -137,7 +137,7 @@ test_result {
       namespace: "android"
     }
     source_path {
-      path: "C:\\Users\\Abrar Shahriar\\demo\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\device-info.pb"
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\device-info.pb"
     }
   }
   output_artifact {
@@ -146,7 +146,7 @@ test_result {
       namespace: "android"
     }
     source_path {
-      path: "C:\\Users\\Abrar Shahriar\\demo\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\meminfo"
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\meminfo"
     }
   }
   output_artifact {
@@ -155,7 +155,7 @@ test_result {
       namespace: "android"
     }
     source_path {
-      path: "C:\\Users\\Abrar Shahriar\\demo\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\cpuinfo"
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\cpuinfo"
     }
   }
 }
@@ -165,12 +165,12 @@ test_result {
     test_package: "com.example.eventlottery.activities"
     test_method: "testProfileViews"
     start_time {
-      seconds: 1775336763
-      nanos: 241000000
+      seconds: 1775338110
+      nanos: 517000000
     }
     end_time {
-      seconds: 1775336763
-      nanos: 995000000
+      seconds: 1775338111
+      nanos: 522000000
     }
   }
   test_status: PASSED
@@ -180,7 +180,7 @@ test_result {
       namespace: "android"
     }
     source_path {
-      path: "C:\\Users\\Abrar Shahriar\\demo\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\logcat-com.example.eventlottery.activities.ProfileActivityTest-testProfileViews.txt"
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\logcat-com.example.eventlottery.activities.ProfileActivityTest-testProfileViews.txt"
     }
   }
   output_artifact {
@@ -189,7 +189,7 @@ test_result {
       namespace: "android"
     }
     source_path {
-      path: "C:\\Users\\Abrar Shahriar\\demo\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\device-info.pb"
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\device-info.pb"
     }
   }
   output_artifact {
@@ -198,7 +198,7 @@ test_result {
       namespace: "android"
     }
     source_path {
-      path: "C:\\Users\\Abrar Shahriar\\demo\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\meminfo"
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\meminfo"
     }
   }
   output_artifact {
@@ -207,7 +207,7 @@ test_result {
       namespace: "android"
     }
     source_path {
-      path: "C:\\Users\\Abrar Shahriar\\demo\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\cpuinfo"
+      path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\cpuinfo"
     }
   }
 }
@@ -217,7 +217,7 @@ output_artifact {
     namespace: "com.google.testing.platform.runtime.android.driver.AndroidInstrumentationDriver"
   }
   source_path {
-    path: "C:\\Users\\Abrar Shahriar\\demo\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\testlog\\test-results.log"
+    path: "C:\\Users\\Abrar Shahriar\\madrid-events\\EventLottery\\app\\build\\outputs\\androidTest-results\\connected\\debug\\Medium_Phone_API_36.1(AVD) - 16\\testlog\\test-results.log"
   }
   type: TEST_DATA
   mime_type: "text/plain"
