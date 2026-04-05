@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.eventlottery.app-mergeDebugResources-44:/values-ro/values-ro.xml",
+            "outputFile": "com.example.eventlottery.app-mergeDebugResources-45:/values-ro/values-ro.xml",
             "map": [
                 {
                     "source": "/Users/tasfikamali/.gradle/caches/8.10.2/transforms/d7e26b0096f7b77a6f85d95acef205f8/transformed/jetified-play-services-base-18.5.0/res/values-ro/values.xml",

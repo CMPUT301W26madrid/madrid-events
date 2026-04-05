@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.eventlottery.app-mergeDebugResources-44:/values-v23/values-v23.xml",
+            "outputFile": "com.example.eventlottery.app-mergeDebugResources-45:/values-v23/values-v23.xml",
             "map": [
                 {
                     "source": "/Users/tasfikamali/.gradle/caches/8.10.2/transforms/cede72027aef5cb44c9da1e1e96b0082/transformed/cardview-1.0.0/res/values-v23/values-v23.xml",

@@ -44,6 +44,9 @@ public final class DialogCreateProfileBinding implements ViewBinding {
   public final TextInputEditText etName;
 
   @NonNull
+  public final TextInputEditText etPassword;
+
+  @NonNull
   public final TextInputEditText etPhone;
 
   @NonNull
@@ -53,14 +56,18 @@ public final class DialogCreateProfileBinding implements ViewBinding {
   public final TextInputLayout tilName;
 
   @NonNull
+  public final TextInputLayout tilPassword;
+
+  @NonNull
   public final TextInputLayout tilPhone;
 
   private DialogCreateProfileBinding(@NonNull ScrollView rootView,
       @NonNull MaterialButton btnCancel, @NonNull MaterialButton btnCreate,
       @NonNull MaterialCheckBox cbAdmin, @NonNull MaterialCheckBox cbEntrant,
       @NonNull MaterialCheckBox cbOrganizer, @NonNull TextInputEditText etEmail,
-      @NonNull TextInputEditText etName, @NonNull TextInputEditText etPhone,
-      @NonNull TextInputLayout tilEmail, @NonNull TextInputLayout tilName,
+      @NonNull TextInputEditText etName, @NonNull TextInputEditText etPassword,
+      @NonNull TextInputEditText etPhone, @NonNull TextInputLayout tilEmail,
+      @NonNull TextInputLayout tilName, @NonNull TextInputLayout tilPassword,
       @NonNull TextInputLayout tilPhone) {
     this.rootView = rootView;
     this.btnCancel = btnCancel;
@@ -70,9 +77,11 @@ public final class DialogCreateProfileBinding implements ViewBinding {
     this.cbOrganizer = cbOrganizer;
     this.etEmail = etEmail;
     this.etName = etName;
+    this.etPassword = etPassword;
     this.etPhone = etPhone;
     this.tilEmail = tilEmail;
     this.tilName = tilName;
+    this.tilPassword = tilPassword;
     this.tilPhone = tilPhone;
   }
 
@@ -145,6 +154,12 @@ public final class DialogCreateProfileBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.et_password;
+      TextInputEditText etPassword = ViewBindings.findChildViewById(rootView, id);
+      if (etPassword == null) {
+        break missingId;
+      }
+
       id = R.id.et_phone;
       TextInputEditText etPhone = ViewBindings.findChildViewById(rootView, id);
       if (etPhone == null) {
@@ -163,6 +178,12 @@ public final class DialogCreateProfileBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.til_password;
+      TextInputLayout tilPassword = ViewBindings.findChildViewById(rootView, id);
+      if (tilPassword == null) {
+        break missingId;
+      }
+
       id = R.id.til_phone;
       TextInputLayout tilPhone = ViewBindings.findChildViewById(rootView, id);
       if (tilPhone == null) {
@@ -170,7 +191,8 @@ public final class DialogCreateProfileBinding implements ViewBinding {
       }
 
       return new DialogCreateProfileBinding((ScrollView) rootView, btnCancel, btnCreate, cbAdmin,
-          cbEntrant, cbOrganizer, etEmail, etName, etPhone, tilEmail, tilName, tilPhone);
+          cbEntrant, cbOrganizer, etEmail, etName, etPassword, etPhone, tilEmail, tilName,
+          tilPassword, tilPhone);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

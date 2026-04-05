@@ -131,12 +131,27 @@
                         style="@style/InputField"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/hint_phone">
+                        android:hint="@string/hint_phone"
+                        android:layout_marginBottom="12dp">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/et_phone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="phone"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_password"
+                        style="@style/InputField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Update Password"
+                        app:passwordToggleEnabled="true">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

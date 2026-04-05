@@ -1,5 +1,7 @@
-com.example.eventlottery.test.app-jetified-core-1.7.0-0 C:\Users\Abrar Shahriar\.gradle\caches\8.10.2\transforms\185f7701c953828b1288b2d774ab1b27\transformed\jetified-core-1.7.0\res
-com.example.eventlottery.test.app-androidTest-1 C:\Users\Abrar Shahriar\madrid-events\EventLottery\app\build\generated\res\resValues\androidTest\debug
-com.example.eventlottery.test.app-mergeDebugAndroidTestResources-2 C:\Users\Abrar Shahriar\madrid-events\EventLottery\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
-com.example.eventlottery.test.app-mergeDebugAndroidTestResources-3 C:\Users\Abrar Shahriar\madrid-events\EventLottery\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
-com.example.eventlottery.test.app-debugAndroidTest-4 C:\Users\Abrar Shahriar\madrid-events\EventLottery\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources
+com.example.eventlottery.test.app-jetified-tracing-1.2.0-0 /Users/tasfikamali/.gradle/caches/8.10.2/transforms/4f4169215095d4b8921faf72141eafe6/transformed/jetified-tracing-1.2.0/res
+com.example.eventlottery.test.app-jetified-core-1.6.1-1 /Users/tasfikamali/.gradle/caches/8.10.2/transforms/86274745c35d70b35a47f4d66c893999/transformed/jetified-core-1.6.1/res
+com.example.eventlottery.test.app-uiautomator-2.3.0-2 /Users/tasfikamali/.gradle/caches/8.10.2/transforms/e1ae2938d86ac6b4fb7149fed875401a/transformed/uiautomator-2.3.0/res
+com.example.eventlottery.test.app-androidTest-3 /Users/tasfikamali/Desktop/Part 4/EventLottery/app/build/generated/res/resValues/androidTest/debug
+com.example.eventlottery.test.app-mergeDebugAndroidTestResources-4 /Users/tasfikamali/Desktop/Part 4/EventLottery/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/merged.dir
+com.example.eventlottery.test.app-mergeDebugAndroidTestResources-5 /Users/tasfikamali/Desktop/Part 4/EventLottery/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/stripped.dir
+com.example.eventlottery.test.app-debugAndroidTest-6 /Users/tasfikamali/Desktop/Part 4/EventLottery/app/build/intermediates/merged_res/debugAndroidTest/mergeDebugAndroidTestResources

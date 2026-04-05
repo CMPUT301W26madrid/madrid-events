@@ -37,39 +37,41 @@ public class UserRepository {
     }
 
     public Task<QuerySnapshot> getUserByEmail(String email) {
-        // Search by lowercase email for new data
-        return usersRef.whereEqualTo("email", email.toLowerCase()).limit(1).get();
+        if (email == null) return Tasks.forResult(null);
+        return usersRef.whereEqualTo("email", email.toLowerCase()).get();
     }
 
-    // Support for legacy case-sensitive email search
     public Task<QuerySnapshot> getUserByEmailOriginal(String email) {
-        return usersRef.whereEqualTo("email", email).limit(1).get();
+        if (email == null) return Tasks.forResult(null);
+        return usersRef.whereEqualTo("email", email).get();
     }
 
-    public Task<QuerySnapshot> searchUsers(String query) {
-        String lowerQuery = query.toLowerCase();
-        Task<QuerySnapshot> emailTask = usersRef.whereEqualTo("email", lowerQuery).get();
-        Task<QuerySnapshot> phoneTask = usersRef.whereEqualTo("phone", query).get();
-        Task<QuerySnapshot> nameTask = usersRef.orderBy("nameLowercase").startAt(lowerQuery).endAt(lowerQuery + "\uf8ff").get();
-
-        return Tasks.whenAllComplete(emailTask, phoneTask, nameTask).continueWith(task -> {
-            return null; 
-        });
-    }
-    
-    public Task<QuerySnapshot> searchByName(String namePrefix) {
-        // Case-insensitive prefix search using the nameLowercase field
-        String lowerPrefix = namePrefix.toLowerCase();
-        return usersRef.orderBy("nameLowercase").startAt(lowerPrefix).endAt(lowerPrefix + "\uf8ff").get();
-    }
-
-    // Support for legacy case-sensitive name prefix search
-    public Task<QuerySnapshot> searchByNameOriginal(String namePrefix) {
-        return usersRef.orderBy("name").startAt(namePrefix).endAt(namePrefix + "\uf8ff").get();
+    public Task<QuerySnapshot> getUserByPhone(String phone) {
+        if (phone == null) return Tasks.forResult(null);
+        return usersRef.whereEqualTo("phone", phone).get();
     }
 
     public Task<QuerySnapshot> searchByPhone(String phone) {
-        return usersRef.whereEqualTo("phone", phone).get();
+        return usersRef.orderBy("phone").startAt(phone).endAt(phone + "\uf8ff").get();
+    }
+
+    public Task<QuerySnapshot> searchByName(String name) {
+        return usersRef.orderBy("name").startAt(name.toLowerCase()).endAt(name.toLowerCase() + "\uf8ff").get();
+    }
+
+    public Task<QuerySnapshot> searchByNameOriginal(String name) {
+        return usersRef.orderBy("name").startAt(name).endAt(name + "\uf8ff").get();
+    }
+
+    public Task<Boolean> checkUserExists(String email, String phone) {
+        Task<QuerySnapshot> emailTask = getUserByEmail(email);
+        Task<QuerySnapshot> phoneTask = getUserByPhone(phone);
+
+        return Tasks.whenAllSuccess(emailTask, phoneTask).continueWith(task -> {
+            boolean emailExists = emailTask.getResult() != null && !emailTask.getResult().isEmpty();
+            boolean phoneExists = phoneTask.getResult() != null && !phoneTask.getResult().isEmpty();
+            return emailExists || phoneExists;
+        });
     }
 
     public Task<QuerySnapshot> getAllUsers() {

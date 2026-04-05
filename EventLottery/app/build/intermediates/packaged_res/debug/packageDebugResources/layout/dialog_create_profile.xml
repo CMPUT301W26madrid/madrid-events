@@ -61,6 +61,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="phone"
+                android:imeOptions="actionNext"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_password"
+            style="@style/InputField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Create Password"
+            android:layout_marginBottom="16dp"
+            app:passwordToggleEnabled="true">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
                 android:imeOptions="actionDone"/>
         </com.google.android.material.textfield.TextInputLayout>
 

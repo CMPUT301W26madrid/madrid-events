@@ -2,6 +2,7 @@ package com.example.eventlottery.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +25,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private TextView tvAvatar, tvDisplayName;
     private LinearLayout llRoleBadges;
-    private TextInputEditText etName, etEmail, etPhone;
+    private TextInputEditText etName, etEmail, etPhone, etPassword;
     private SwitchMaterial swNotifications;
     private MaterialButton btnSave, btnSignOut, btnDelete;
 
@@ -47,6 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
         etName        = findViewById(R.id.et_name);
         etEmail       = findViewById(R.id.et_email);
         etPhone       = findViewById(R.id.et_phone);
+        etPassword    = findViewById(R.id.et_password);
         swNotifications = findViewById(R.id.sw_notifications);
         btnSave       = findViewById(R.id.btn_save);
         btnSignOut    = findViewById(R.id.btn_sign_out);
@@ -76,6 +78,7 @@ public class ProfileActivity extends AppCompatActivity {
         etName.setText(currentUser.getName());
         etEmail.setText(currentUser.getEmail());
         etPhone.setText(currentUser.getPhone());
+        etPassword.setText(currentUser.getPassword());
         swNotifications.setChecked(currentUser.isPushNotificationsEnabled());
 
         // Role badges
@@ -99,7 +102,6 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void saveUser() {
-        // Guard: Firestore load may not have completed yet
         if (currentUser == null) {
             Toast.makeText(this, "Profile still loading, please wait", Toast.LENGTH_SHORT).show();
             return;
@@ -107,15 +109,32 @@ public class ProfileActivity extends AppCompatActivity {
         String name  = etName.getText() != null ? etName.getText().toString().trim() : "";
         String email = etEmail.getText() != null ? etEmail.getText().toString().trim() : "";
         String phone = etPhone.getText() != null ? etPhone.getText().toString().trim() : "";
+        String pass  = etPassword.getText() != null ? etPassword.getText().toString().trim() : "";
 
-        if (name.isEmpty() || email.isEmpty()) {
-            Toast.makeText(this, "Name and email are required", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || TextUtils.isEmpty(pass)) {
+            Toast.makeText(this, "Name, email and password are required", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        // Email uniqueness check if email changed
+        if (!email.equalsIgnoreCase(currentUser.getEmail())) {
+            userRepo.getUserByEmail(email).addOnSuccessListener(qs -> {
+                if (qs != null && !qs.isEmpty()) {
+                    Toast.makeText(this, "Email already in use", Toast.LENGTH_SHORT).show();
+                } else {
+                    updateUserInFirestore(name, email, phone, pass);
+                }
+            });
+        } else {
+            updateUserInFirestore(name, email, phone, pass);
+        }
+    }
+
+    private void updateUserInFirestore(String name, String email, String phone, String pass) {
         currentUser.setName(name);
         currentUser.setEmail(email);
         currentUser.setPhone(phone);
+        currentUser.setPassword(pass);
         currentUser.setPushNotificationsEnabled(swNotifications.isChecked());
 
         btnSave.setEnabled(false);

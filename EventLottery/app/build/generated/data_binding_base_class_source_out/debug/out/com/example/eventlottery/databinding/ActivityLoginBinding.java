@@ -4,6 +4,7 @@ package com.example.eventlottery.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -13,6 +14,8 @@ import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.eventlottery.R;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -22,21 +25,52 @@ public final class ActivityLoginBinding implements ViewBinding {
   private final ScrollView rootView;
 
   @NonNull
-  public final MaterialButton btnCreateProfile;
+  public final MaterialButton btnContinueDevice;
+
+  @NonNull
+  public final MaterialButton btnLogin;
+
+  @NonNull
+  public final TextInputEditText etLoginId;
+
+  @NonNull
+  public final LinearLayout llLoginRoot;
+
+  @NonNull
+  public final LinearLayout llQuickLogin;
 
   @NonNull
   public final RecyclerView rvProfiles;
 
   @NonNull
-  public final TextView tvNoProfiles;
+  public final TextInputLayout tilLoginId;
+
+  @NonNull
+  public final TextView tvLoginSubtitle;
+
+  @NonNull
+  public final TextView tvLoginTitle;
+
+  @NonNull
+  public final TextView tvSwitchToSignup;
 
   private ActivityLoginBinding(@NonNull ScrollView rootView,
-      @NonNull MaterialButton btnCreateProfile, @NonNull RecyclerView rvProfiles,
-      @NonNull TextView tvNoProfiles) {
+      @NonNull MaterialButton btnContinueDevice, @NonNull MaterialButton btnLogin,
+      @NonNull TextInputEditText etLoginId, @NonNull LinearLayout llLoginRoot,
+      @NonNull LinearLayout llQuickLogin, @NonNull RecyclerView rvProfiles,
+      @NonNull TextInputLayout tilLoginId, @NonNull TextView tvLoginSubtitle,
+      @NonNull TextView tvLoginTitle, @NonNull TextView tvSwitchToSignup) {
     this.rootView = rootView;
-    this.btnCreateProfile = btnCreateProfile;
+    this.btnContinueDevice = btnContinueDevice;
+    this.btnLogin = btnLogin;
+    this.etLoginId = etLoginId;
+    this.llLoginRoot = llLoginRoot;
+    this.llQuickLogin = llQuickLogin;
     this.rvProfiles = rvProfiles;
-    this.tvNoProfiles = tvNoProfiles;
+    this.tilLoginId = tilLoginId;
+    this.tvLoginSubtitle = tvLoginSubtitle;
+    this.tvLoginTitle = tvLoginTitle;
+    this.tvSwitchToSignup = tvSwitchToSignup;
   }
 
   @Override
@@ -66,9 +100,33 @@ public final class ActivityLoginBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.btn_create_profile;
-      MaterialButton btnCreateProfile = ViewBindings.findChildViewById(rootView, id);
-      if (btnCreateProfile == null) {
+      id = R.id.btn_continue_device;
+      MaterialButton btnContinueDevice = ViewBindings.findChildViewById(rootView, id);
+      if (btnContinueDevice == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_login;
+      MaterialButton btnLogin = ViewBindings.findChildViewById(rootView, id);
+      if (btnLogin == null) {
+        break missingId;
+      }
+
+      id = R.id.et_login_id;
+      TextInputEditText etLoginId = ViewBindings.findChildViewById(rootView, id);
+      if (etLoginId == null) {
+        break missingId;
+      }
+
+      id = R.id.ll_login_root;
+      LinearLayout llLoginRoot = ViewBindings.findChildViewById(rootView, id);
+      if (llLoginRoot == null) {
+        break missingId;
+      }
+
+      id = R.id.ll_quick_login;
+      LinearLayout llQuickLogin = ViewBindings.findChildViewById(rootView, id);
+      if (llQuickLogin == null) {
         break missingId;
       }
 
@@ -78,14 +136,33 @@ public final class ActivityLoginBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.tv_no_profiles;
-      TextView tvNoProfiles = ViewBindings.findChildViewById(rootView, id);
-      if (tvNoProfiles == null) {
+      id = R.id.til_login_id;
+      TextInputLayout tilLoginId = ViewBindings.findChildViewById(rootView, id);
+      if (tilLoginId == null) {
         break missingId;
       }
 
-      return new ActivityLoginBinding((ScrollView) rootView, btnCreateProfile, rvProfiles,
-          tvNoProfiles);
+      id = R.id.tv_login_subtitle;
+      TextView tvLoginSubtitle = ViewBindings.findChildViewById(rootView, id);
+      if (tvLoginSubtitle == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_login_title;
+      TextView tvLoginTitle = ViewBindings.findChildViewById(rootView, id);
+      if (tvLoginTitle == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_switch_to_signup;
+      TextView tvSwitchToSignup = ViewBindings.findChildViewById(rootView, id);
+      if (tvSwitchToSignup == null) {
+        break missingId;
+      }
+
+      return new ActivityLoginBinding((ScrollView) rootView, btnContinueDevice, btnLogin, etLoginId,
+          llLoginRoot, llQuickLogin, rvProfiles, tilLoginId, tvLoginSubtitle, tvLoginTitle,
+          tvSwitchToSignup);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

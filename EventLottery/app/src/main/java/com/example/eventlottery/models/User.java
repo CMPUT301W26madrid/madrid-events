@@ -11,6 +11,7 @@ public class User {
     private String nameLowercase; // For case-insensitive search
     private String email;
     private String phone;
+    private String password; // Added for security
     private List<String> roles; // "entrant", "organizer", "admin"
     private boolean pushNotificationsEnabled;
     private String deviceId;
@@ -54,6 +55,9 @@ public class User {
 
     public String getPhone() { return phone; }
     public void setPhone(String phone) { this.phone = phone; }
+
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 
     public List<String> getRoles() { return roles; }
     public void setRoles(List<String> roles) { this.roles = roles; }

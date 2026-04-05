@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.eventlottery.app-mergeDebugResources-44:/values-v16/values-v16.xml",
+            "outputFile": "com.example.eventlottery.app-mergeDebugResources-45:/values-v16/values-v16.xml",
             "map": [
                 {
                     "source": "/Users/tasfikamali/.gradle/caches/8.10.2/transforms/bc5df90cdd82c2c0fd1e3f02386ee7aa/transformed/appcompat-1.7.0/res/values-v16/values-v16.xml",

@@ -88,9 +88,9 @@ id btn_cancel
 id btn_close_image
 id btn_close_qr
 id btn_co_organizers
+id btn_continue_device
 id btn_create
 id btn_create_event
-id btn_create_profile
 id btn_decline
 id btn_delete_profile
 id btn_draw_replacement
@@ -98,6 +98,7 @@ id btn_edit_event
 id btn_export_csv
 id btn_invite_entrant
 id btn_join_leave
+id btn_login
 id btn_new_event
 id btn_post_comment
 id btn_run_lottery
@@ -122,9 +123,11 @@ id et_email
 id et_event_end
 id et_event_start
 id et_location
+id et_login_id
 id et_max_wl
 id et_name
 id et_notification_msg
+id et_password
 id et_phone
 id et_price
 id et_reg_close
@@ -156,6 +159,8 @@ id ll_days_left
 id ll_delete_container
 id ll_empty
 id ll_filter_options
+id ll_login_root
+id ll_quick_login
 id ll_role_badges
 id ll_roles
 id map
@@ -194,9 +199,11 @@ id til_email
 id til_event_end
 id til_event_start
 id til_location
+id til_login_id
 id til_max_wl
 id til_name
 id til_notification_msg
+id til_password
 id til_phone
 id til_price
 id til_reg_close
@@ -223,11 +230,12 @@ id tv_event_status_badge
 id tv_event_title
 id tv_joined_date
 id tv_location
+id tv_login_subtitle
+id tv_login_title
 id tv_mark_read
 id tv_month_year
 id tv_name
 id tv_no_events_day
-id tv_no_profiles
 id tv_no_results
 id tv_notif_badge
 id tv_notif_message
@@ -256,6 +264,7 @@ id tv_stat_waiting
 id tv_status
 id tv_status_badge
 id tv_status_icon
+id tv_switch_to_signup
 id tv_text
 id tv_time
 id tv_title
