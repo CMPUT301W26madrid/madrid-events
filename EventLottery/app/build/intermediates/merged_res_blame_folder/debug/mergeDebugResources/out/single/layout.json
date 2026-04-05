@@ -1,122 +1,126 @@
 [
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/item_dropdown_filter.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/item_dropdown_filter.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/item_my_event.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/item_my_event.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/fragment_admin_dashboard.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/fragment_admin_dashboard.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/item_dropdown_filter.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/item_dropdown_filter.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_admin_main.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/activity_admin_main.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/fragment_notifications.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/fragment_notifications.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/dialog_create_profile.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/dialog_create_profile.xml"
-    },
-    {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_organizer_event_management.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/activity_organizer_event_management.xml"
-    },
-    {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/item_admin_event.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/item_admin_event.xml"
-    },
-    {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/fragment_discover_events.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/fragment_discover_events.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_create_event.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/activity_create_event.xml"
     },
     {
         "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_create_event.xml",
         "source": "com.example.eventlottery.app-main-48:/layout/activity_create_event.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/item_notification.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/item_notification.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/item_notification.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/item_notification.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_organizer_main.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/activity_organizer_main.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/item_admin_event.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/item_admin_event.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_entrant_main.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/activity_entrant_main.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/dialog_search_user.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/dialog_search_user.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/item_my_event.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/item_my_event.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/dialog_qr_code.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/dialog_qr_code.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/dialog_search_user.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/dialog_search_user.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_profile.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/activity_profile.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/item_registration.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/item_registration.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_login.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/activity_login.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_event_detail.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/activity_event_detail.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_organizer_main.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/activity_organizer_main.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/item_admin_user.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/item_admin_user.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/fragment_admin_dashboard.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/fragment_admin_dashboard.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_map_view.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/activity_map_view.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/item_event_card.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/item_event_card.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/item_event_card.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/item_event_card.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/item_registration.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/item_registration.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/item_comment.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/item_comment.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/dialog_full_image.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/dialog_full_image.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/dialog_full_image.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/dialog_full_image.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_admin_main.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/activity_admin_main.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/fragment_notifications.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/fragment_notifications.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_organizer_event_management.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/activity_organizer_event_management.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_qr_scan.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/activity_qr_scan.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/item_admin_user.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/item_admin_user.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/fragment_organizer_dashboard.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/fragment_organizer_dashboard.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_event_detail.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/activity_event_detail.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/fragment_calendar.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/fragment_calendar.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/fragment_organizer_dashboard.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/fragment_organizer_dashboard.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/fragment_my_events.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/fragment_my_events.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/item_comment.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/item_comment.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_login.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/activity_login.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/dialog_create_profile.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/dialog_create_profile.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/item_profile.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/item_profile.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_qr_scan.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/activity_qr_scan.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/item_organizer_event.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/item_organizer_event.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/fragment_calendar.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/fragment_calendar.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_profile.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/activity_profile.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/item_organizer_event.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/item_organizer_event.xml"
     },
     {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-45:/layout/dialog_qr_code.xml",
-        "source": "com.example.eventlottery.app-main-48:/layout/dialog_qr_code.xml"
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/fragment_discover_events.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/fragment_discover_events.xml"
+    },
+    {
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_entrant_main.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/activity_entrant_main.xml"
+    },
+    {
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/fragment_my_events.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/fragment_my_events.xml"
+    },
+    {
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/activity_map_view.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/activity_map_view.xml"
+    },
+    {
+        "merged": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-mergeDebugResources-45:/layout/item_profile.xml",
+        "source": "/Users/tasfikamali/.gradle/daemon/8.10.2/com.example.eventlottery.app-main-48:/layout/item_profile.xml"
     }
 ]
