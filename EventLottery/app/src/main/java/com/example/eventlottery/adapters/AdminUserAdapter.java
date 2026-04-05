@@ -16,12 +16,15 @@ import java.util.List;
 public class AdminUserAdapter extends RecyclerView.Adapter<AdminUserAdapter.ViewHolder> {
 
     public interface OnDeleteListener { void onDelete(User user); }
+    public interface OnUserClickListener { void onClick(User user); }
 
     private List<User> users = new ArrayList<>();
     private List<User> allUsers = new ArrayList<>();
     private OnDeleteListener deleteListener;
+    private OnUserClickListener clickListener;
 
     public void setDeleteListener(OnDeleteListener l) { this.deleteListener = l; }
+    public void setClickListener(OnUserClickListener l) { this.clickListener = l; }
 
     public void setUsers(List<User> list) {
         this.allUsers = new ArrayList<>(list);
@@ -80,6 +83,10 @@ public class AdminUserAdapter extends RecyclerView.Adapter<AdminUserAdapter.View
                 h.llRoleBadges.addView(badge);
             }
         }
+
+        h.itemView.setOnClickListener(v -> {
+            if (clickListener != null) clickListener.onClick(u);
+        });
 
         h.ivDelete.setOnClickListener(v -> {
             if (deleteListener != null) deleteListener.onDelete(u);

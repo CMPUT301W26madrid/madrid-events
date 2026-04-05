@@ -367,6 +367,7 @@ public class EventDetailActivity extends AppCompatActivity {
                     if (user != null) {
                         reg.setUserName(user.getName());
                         reg.setUserEmail(user.getEmail());
+                        reg.setUserPhone(user.getPhone());
                     }
                     reg.setUserId(userId);
                     regRepo.createRegistration(reg).addOnSuccessListener(v -> {

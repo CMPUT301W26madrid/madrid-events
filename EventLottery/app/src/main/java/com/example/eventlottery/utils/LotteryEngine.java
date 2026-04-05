@@ -62,7 +62,6 @@ public class LotteryEngine {
                     Collections.shuffle(waitingList);
 
                     int actualSample = Math.min(sampleSize, waitingList.size());
-                    // Fix: copy subList into new ArrayList — subList is a live view, unsafe with async ops
                     List<Registration> winners = new ArrayList<>(waitingList.subList(0, actualSample));
                     List<Registration> losers  = new ArrayList<>(waitingList.subList(actualSample, waitingList.size()));
 
@@ -99,6 +98,18 @@ public class LotteryEngine {
                         notif.setSenderName(event.getOrganizerName());
                         tasks.add(notifRepo.createNotification(notif));
                     }
+
+                    // Also notify the organizer that the draw is complete
+                    AppNotification orgNotif = new AppNotification(
+                            event.getOrganizerId(), event.getId(), event.getTitle(),
+                            AppNotification.TYPE_UPDATE,
+                            "Lottery Complete: " + event.getTitle(),
+                            "The lottery draw for \"" + event.getTitle() + "\" has been completed. " +
+                                    winners.size() + " winners selected, " + losers.size() + " waitlisted.",
+                            false
+                    );
+                    orgNotif.setSenderName("System");
+                    tasks.add(notifRepo.createNotification(orgNotif));
 
                     Tasks.whenAll(tasks)
                             .addOnSuccessListener(v -> callback.onSuccess(winners.size(), losers.size()))
@@ -145,6 +156,17 @@ public class LotteryEngine {
                     notif.setSenderName(event.getOrganizerName());
                     tasks.add(notifRepo.createNotification(notif));
 
+                    // Notify organizer
+                    AppNotification orgNotif = new AppNotification(
+                            event.getOrganizerId(), event.getId(), event.getTitle(),
+                            AppNotification.TYPE_UPDATE,
+                            "Replacement Drawn: " + event.getTitle(),
+                            "A replacement entrant has been drawn and notified for \"" + event.getTitle() + "\".",
+                            false
+                    );
+                    orgNotif.setSenderName("System");
+                    tasks.add(notifRepo.createNotification(orgNotif));
+
                     Tasks.whenAll(tasks)
                             .addOnSuccessListener(v -> callback.onSuccess(1, 0))
                             .addOnFailureListener(callback::onFailure);
@@ -184,14 +206,22 @@ public class LotteryEngine {
                 notif.setRecipientCount(querySnapshot.size());
                 tasks.add(notifRepo.createNotification(notif));
             }
-            final int finalCount = count;
-            // Guard: if no registrations matched, tasks is empty — still fire success
-            if (tasks.isEmpty()) {
-                callback.onSuccess(0, 0);
-                return;
-            }
+
+            // Also create a copy for the organizer themselves
+            AppNotification orgCopy = new AppNotification(
+                    event.getOrganizerId(), event.getId(), event.getTitle(),
+                    AppNotification.TYPE_UPDATE,
+                    "Notification Sent: " + event.getTitle(),
+                    "To " + audience + " entrants: " + message,
+                    false
+            );
+            orgCopy.setSenderName("You");
+            tasks.add(notifRepo.createNotification(orgCopy));
+
             Tasks.whenAll(tasks)
-                    .addOnSuccessListener(v -> callback.onSuccess(finalCount, 0))
+                    .addOnSuccessListener(v -> {
+                        callback.onSuccess(tasks.size() - 1, 0); // Subtract 1 to reflect entrants count
+                    })
                     .addOnFailureListener(callback::onFailure);
         }).addOnFailureListener(callback::onFailure);
     }

@@ -77,6 +77,7 @@ public class AdminDashboardFragment extends Fragment {
     private void setupAdapters() {
         userAdapter = new AdminUserAdapter();
         userAdapter.setDeleteListener(this::confirmDeleteUser);
+        userAdapter.setClickListener(this::showUserProfileDetails);
         
         eventAdapter = new AdminEventAdapter();
         eventAdapter.setListener(new AdminEventAdapter.OnEventClickListener() {
@@ -249,6 +250,22 @@ public class AdminDashboardFragment extends Fragment {
                         });
                     }
                 });
+    }
+
+    private void showUserProfileDetails(User user) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Name: ").append(user.getName()).append("\n");
+        sb.append("Email: ").append(user.getEmail()).append("\n");
+        sb.append("Phone: ").append(user.getPhone() != null && !user.getPhone().isEmpty() ? user.getPhone() : "Not provided").append("\n");
+        sb.append("Roles: ").append(user.getRoles()).append("\n");
+        sb.append("Notifications: ").append(user.isPushNotificationsEnabled() ? "Enabled" : "Disabled");
+
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Profile Details")
+                .setMessage(sb.toString())
+                .setPositiveButton(R.string.btn_ok, null)
+                .setNegativeButton("Remove Profile", (d, w) -> confirmDeleteUser(user))
+                .show();
     }
 
     private void confirmDeleteUser(User user) {

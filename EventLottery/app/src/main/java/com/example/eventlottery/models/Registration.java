@@ -14,6 +14,7 @@ public class Registration {
     private String userId;
     private String userName;
     private String userEmail;
+    private String userPhone;
     private String status;      // "invited", "waiting", "selected", "accepted", "declined", "cancelled"
     private long joinedAt;
     private long respondedAt;
@@ -56,6 +57,9 @@ public class Registration {
 
     public String getUserEmail()                  { return userEmail; }
     public void   setUserEmail(String userEmail)  { this.userEmail = userEmail; }
+
+    public String getUserPhone()                  { return userPhone; }
+    public void   setUserPhone(String userPhone)  { this.userPhone = userPhone; }
 
     public String getStatus()                     { return status; }
     public void   setStatus(String status)        { this.status = status; }
