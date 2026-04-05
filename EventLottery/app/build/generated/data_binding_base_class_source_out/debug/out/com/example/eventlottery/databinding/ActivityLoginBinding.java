@@ -14,6 +14,7 @@ import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.eventlottery.R;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import java.lang.NullPointerException;
@@ -31,7 +32,34 @@ public final class ActivityLoginBinding implements ViewBinding {
   public final MaterialButton btnLogin;
 
   @NonNull
+  public final MaterialCheckBox cbSignupEntrant;
+
+  @NonNull
+  public final MaterialCheckBox cbSignupOrganizer;
+
+  @NonNull
   public final TextInputEditText etLoginId;
+
+  @NonNull
+  public final TextInputEditText etLoginPassword;
+
+  @NonNull
+  public final TextInputEditText etSignupConfirmPassword;
+
+  @NonNull
+  public final TextInputEditText etSignupEmail;
+
+  @NonNull
+  public final TextInputEditText etSignupName;
+
+  @NonNull
+  public final TextInputEditText etSignupPassword;
+
+  @NonNull
+  public final TextInputEditText etSignupPhone;
+
+  @NonNull
+  public final LinearLayout llLoginFields;
 
   @NonNull
   public final LinearLayout llLoginRoot;
@@ -40,10 +68,31 @@ public final class ActivityLoginBinding implements ViewBinding {
   public final LinearLayout llQuickLogin;
 
   @NonNull
+  public final LinearLayout llSignupFields;
+
+  @NonNull
   public final RecyclerView rvProfiles;
 
   @NonNull
   public final TextInputLayout tilLoginId;
+
+  @NonNull
+  public final TextInputLayout tilLoginPassword;
+
+  @NonNull
+  public final TextInputLayout tilSignupConfirmPassword;
+
+  @NonNull
+  public final TextInputLayout tilSignupEmail;
+
+  @NonNull
+  public final TextInputLayout tilSignupName;
+
+  @NonNull
+  public final TextInputLayout tilSignupPassword;
+
+  @NonNull
+  public final TextInputLayout tilSignupPhone;
 
   @NonNull
   public final TextView tvLoginSubtitle;
@@ -56,18 +105,42 @@ public final class ActivityLoginBinding implements ViewBinding {
 
   private ActivityLoginBinding(@NonNull ScrollView rootView,
       @NonNull MaterialButton btnContinueDevice, @NonNull MaterialButton btnLogin,
-      @NonNull TextInputEditText etLoginId, @NonNull LinearLayout llLoginRoot,
-      @NonNull LinearLayout llQuickLogin, @NonNull RecyclerView rvProfiles,
-      @NonNull TextInputLayout tilLoginId, @NonNull TextView tvLoginSubtitle,
+      @NonNull MaterialCheckBox cbSignupEntrant, @NonNull MaterialCheckBox cbSignupOrganizer,
+      @NonNull TextInputEditText etLoginId, @NonNull TextInputEditText etLoginPassword,
+      @NonNull TextInputEditText etSignupConfirmPassword, @NonNull TextInputEditText etSignupEmail,
+      @NonNull TextInputEditText etSignupName, @NonNull TextInputEditText etSignupPassword,
+      @NonNull TextInputEditText etSignupPhone, @NonNull LinearLayout llLoginFields,
+      @NonNull LinearLayout llLoginRoot, @NonNull LinearLayout llQuickLogin,
+      @NonNull LinearLayout llSignupFields, @NonNull RecyclerView rvProfiles,
+      @NonNull TextInputLayout tilLoginId, @NonNull TextInputLayout tilLoginPassword,
+      @NonNull TextInputLayout tilSignupConfirmPassword, @NonNull TextInputLayout tilSignupEmail,
+      @NonNull TextInputLayout tilSignupName, @NonNull TextInputLayout tilSignupPassword,
+      @NonNull TextInputLayout tilSignupPhone, @NonNull TextView tvLoginSubtitle,
       @NonNull TextView tvLoginTitle, @NonNull TextView tvSwitchToSignup) {
     this.rootView = rootView;
     this.btnContinueDevice = btnContinueDevice;
     this.btnLogin = btnLogin;
+    this.cbSignupEntrant = cbSignupEntrant;
+    this.cbSignupOrganizer = cbSignupOrganizer;
     this.etLoginId = etLoginId;
+    this.etLoginPassword = etLoginPassword;
+    this.etSignupConfirmPassword = etSignupConfirmPassword;
+    this.etSignupEmail = etSignupEmail;
+    this.etSignupName = etSignupName;
+    this.etSignupPassword = etSignupPassword;
+    this.etSignupPhone = etSignupPhone;
+    this.llLoginFields = llLoginFields;
     this.llLoginRoot = llLoginRoot;
     this.llQuickLogin = llQuickLogin;
+    this.llSignupFields = llSignupFields;
     this.rvProfiles = rvProfiles;
     this.tilLoginId = tilLoginId;
+    this.tilLoginPassword = tilLoginPassword;
+    this.tilSignupConfirmPassword = tilSignupConfirmPassword;
+    this.tilSignupEmail = tilSignupEmail;
+    this.tilSignupName = tilSignupName;
+    this.tilSignupPassword = tilSignupPassword;
+    this.tilSignupPhone = tilSignupPhone;
     this.tvLoginSubtitle = tvLoginSubtitle;
     this.tvLoginTitle = tvLoginTitle;
     this.tvSwitchToSignup = tvSwitchToSignup;
@@ -112,9 +185,63 @@ public final class ActivityLoginBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.cb_signup_entrant;
+      MaterialCheckBox cbSignupEntrant = ViewBindings.findChildViewById(rootView, id);
+      if (cbSignupEntrant == null) {
+        break missingId;
+      }
+
+      id = R.id.cb_signup_organizer;
+      MaterialCheckBox cbSignupOrganizer = ViewBindings.findChildViewById(rootView, id);
+      if (cbSignupOrganizer == null) {
+        break missingId;
+      }
+
       id = R.id.et_login_id;
       TextInputEditText etLoginId = ViewBindings.findChildViewById(rootView, id);
       if (etLoginId == null) {
+        break missingId;
+      }
+
+      id = R.id.et_login_password;
+      TextInputEditText etLoginPassword = ViewBindings.findChildViewById(rootView, id);
+      if (etLoginPassword == null) {
+        break missingId;
+      }
+
+      id = R.id.et_signup_confirm_password;
+      TextInputEditText etSignupConfirmPassword = ViewBindings.findChildViewById(rootView, id);
+      if (etSignupConfirmPassword == null) {
+        break missingId;
+      }
+
+      id = R.id.et_signup_email;
+      TextInputEditText etSignupEmail = ViewBindings.findChildViewById(rootView, id);
+      if (etSignupEmail == null) {
+        break missingId;
+      }
+
+      id = R.id.et_signup_name;
+      TextInputEditText etSignupName = ViewBindings.findChildViewById(rootView, id);
+      if (etSignupName == null) {
+        break missingId;
+      }
+
+      id = R.id.et_signup_password;
+      TextInputEditText etSignupPassword = ViewBindings.findChildViewById(rootView, id);
+      if (etSignupPassword == null) {
+        break missingId;
+      }
+
+      id = R.id.et_signup_phone;
+      TextInputEditText etSignupPhone = ViewBindings.findChildViewById(rootView, id);
+      if (etSignupPhone == null) {
+        break missingId;
+      }
+
+      id = R.id.ll_login_fields;
+      LinearLayout llLoginFields = ViewBindings.findChildViewById(rootView, id);
+      if (llLoginFields == null) {
         break missingId;
       }
 
@@ -130,6 +257,12 @@ public final class ActivityLoginBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.ll_signup_fields;
+      LinearLayout llSignupFields = ViewBindings.findChildViewById(rootView, id);
+      if (llSignupFields == null) {
+        break missingId;
+      }
+
       id = R.id.rv_profiles;
       RecyclerView rvProfiles = ViewBindings.findChildViewById(rootView, id);
       if (rvProfiles == null) {
@@ -139,6 +272,42 @@ public final class ActivityLoginBinding implements ViewBinding {
       id = R.id.til_login_id;
       TextInputLayout tilLoginId = ViewBindings.findChildViewById(rootView, id);
       if (tilLoginId == null) {
+        break missingId;
+      }
+
+      id = R.id.til_login_password;
+      TextInputLayout tilLoginPassword = ViewBindings.findChildViewById(rootView, id);
+      if (tilLoginPassword == null) {
+        break missingId;
+      }
+
+      id = R.id.til_signup_confirm_password;
+      TextInputLayout tilSignupConfirmPassword = ViewBindings.findChildViewById(rootView, id);
+      if (tilSignupConfirmPassword == null) {
+        break missingId;
+      }
+
+      id = R.id.til_signup_email;
+      TextInputLayout tilSignupEmail = ViewBindings.findChildViewById(rootView, id);
+      if (tilSignupEmail == null) {
+        break missingId;
+      }
+
+      id = R.id.til_signup_name;
+      TextInputLayout tilSignupName = ViewBindings.findChildViewById(rootView, id);
+      if (tilSignupName == null) {
+        break missingId;
+      }
+
+      id = R.id.til_signup_password;
+      TextInputLayout tilSignupPassword = ViewBindings.findChildViewById(rootView, id);
+      if (tilSignupPassword == null) {
+        break missingId;
+      }
+
+      id = R.id.til_signup_phone;
+      TextInputLayout tilSignupPhone = ViewBindings.findChildViewById(rootView, id);
+      if (tilSignupPhone == null) {
         break missingId;
       }
 
@@ -160,9 +329,12 @@ public final class ActivityLoginBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityLoginBinding((ScrollView) rootView, btnContinueDevice, btnLogin, etLoginId,
-          llLoginRoot, llQuickLogin, rvProfiles, tilLoginId, tvLoginSubtitle, tvLoginTitle,
-          tvSwitchToSignup);
+      return new ActivityLoginBinding((ScrollView) rootView, btnContinueDevice, btnLogin,
+          cbSignupEntrant, cbSignupOrganizer, etLoginId, etLoginPassword, etSignupConfirmPassword,
+          etSignupEmail, etSignupName, etSignupPassword, etSignupPhone, llLoginFields, llLoginRoot,
+          llQuickLogin, llSignupFields, rvProfiles, tilLoginId, tilLoginPassword,
+          tilSignupConfirmPassword, tilSignupEmail, tilSignupName, tilSignupPassword,
+          tilSignupPhone, tvLoginSubtitle, tvLoginTitle, tvSwitchToSignup);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

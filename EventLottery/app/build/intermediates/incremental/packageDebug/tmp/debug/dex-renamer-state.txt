@@ -1,12 +1,12 @@
-#Sun Apr 05 02:58:40 MDT 2026
-base.0=/Users/tasfikamali/Desktop/Part 4/EventLottery/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
-base.1=/Users/tasfikamali/Desktop/Part 4/EventLottery/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
-base.2=/Users/tasfikamali/Desktop/Part 4/EventLottery/app/build/intermediates/dex/debug/mergeProjectDexDebug/14/classes.dex
-base.3=/Users/tasfikamali/Desktop/Part 4/EventLottery/app/build/intermediates/dex/debug/mergeProjectDexDebug/2/classes.dex
-base.4=/Users/tasfikamali/Desktop/Part 4/EventLottery/app/build/intermediates/dex/debug/mergeProjectDexDebug/5/classes.dex
-base.5=/Users/tasfikamali/Desktop/Part 4/EventLottery/app/build/intermediates/dex/debug/mergeProjectDexDebug/7/classes.dex
-base.6=/Users/tasfikamali/Desktop/Part 4/EventLottery/app/build/intermediates/dex/debug/mergeExtDexDebug/classes2.dex
-base.7=/Users/tasfikamali/Desktop/Part 4/EventLottery/app/build/intermediates/dex/debug/mergeExtDexDebug/classes3.dex
+#Sun Apr 05 11:56:29 MDT 2026
+base.0=C\:\\Users\\chowd\\OneDrive\\Documents\\WINTER_2026\\madrid-events\\EventLottery\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.1=C\:\\Users\\chowd\\OneDrive\\Documents\\WINTER_2026\\madrid-events\\EventLottery\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.2=C\:\\Users\\chowd\\OneDrive\\Documents\\WINTER_2026\\madrid-events\\EventLottery\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
+base.3=C\:\\Users\\chowd\\OneDrive\\Documents\\WINTER_2026\\madrid-events\\EventLottery\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\2\\classes.dex
+base.4=C\:\\Users\\chowd\\OneDrive\\Documents\\WINTER_2026\\madrid-events\\EventLottery\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex
+base.5=C\:\\Users\\chowd\\OneDrive\\Documents\\WINTER_2026\\madrid-events\\EventLottery\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
+base.6=C\:\\Users\\chowd\\OneDrive\\Documents\\WINTER_2026\\madrid-events\\EventLottery\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
+base.7=C\:\\Users\\chowd\\OneDrive\\Documents\\WINTER_2026\\madrid-events\\EventLottery\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=14/classes.dex

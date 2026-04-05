@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.eventlottery.app-mergeDebugResources-45:/values-port/values-port.xml",
+            "outputFile": "com.example.eventlottery.app-mergeDebugResources-3:/values-port/values-port.xml",
             "map": [
                 {
-                    "source": "/Users/tasfikamali/.gradle/caches/8.10.2/transforms/bc5df90cdd82c2c0fd1e3f02386ee7aa/transformed/appcompat-1.7.0/res/values-port/values-port.xml",
+                    "source": "D:\\Android Studio\\Android\\Sdk\\caches\\8.10.2\\transforms\\bc5df90cdd82c2c0fd1e3f02386ee7aa\\transformed\\appcompat-1.7.0\\res\\values-port\\values-port.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

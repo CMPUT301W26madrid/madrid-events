@@ -3141,7 +3141,6 @@ drawable ic_comment_edit
 drawable ic_dashboard
 drawable ic_delete
 drawable ic_edit
-drawable ic_edit_pencil
 drawable ic_home
 drawable ic_keyboard_black_24dp
 drawable ic_location
@@ -3399,6 +3398,8 @@ id carryVelocity
 id cb_admin
 id cb_entrant
 id cb_organizer
+id cb_signup_entrant
+id cb_signup_organizer
 id center
 id centerCrop
 id centerInside
@@ -3491,6 +3492,7 @@ id et_event_end
 id et_event_start
 id et_location
 id et_login_id
+id et_login_password
 id et_max_wl
 id et_name
 id et_notification_msg
@@ -3501,6 +3503,11 @@ id et_reg_close
 id et_reg_open
 id et_search
 id et_search_query
+id et_signup_confirm_password
+id et_signup_email
+id et_signup_name
+id et_signup_password
+id et_signup_phone
 id et_tags
 id et_title
 id exitUntilCollapsed
@@ -3594,10 +3601,12 @@ id ll_days_left
 id ll_delete_container
 id ll_empty
 id ll_filter_options
+id ll_login_fields
 id ll_login_root
 id ll_quick_login
 id ll_role_badges
 id ll_roles
+id ll_signup_fields
 id m3_side_sheet
 id map
 id marquee
@@ -3854,6 +3863,7 @@ id til_event_end
 id til_event_start
 id til_location
 id til_login_id
+id til_login_password
 id til_max_wl
 id til_name
 id til_notification_msg
@@ -3863,6 +3873,11 @@ id til_price
 id til_reg_close
 id til_reg_open
 id til_search
+id til_signup_confirm_password
+id til_signup_email
+id til_signup_name
+id til_signup_password
+id til_signup_phone
 id til_tags
 id til_title
 id time
