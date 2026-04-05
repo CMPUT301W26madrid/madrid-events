@@ -6,6 +6,7 @@ import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.Filter;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -37,40 +38,62 @@ public class UserRepository {
     }
 
     public Task<QuerySnapshot> getUserByEmail(String email) {
-        if (email == null) return Tasks.forResult(null);
-        return usersRef.whereEqualTo("email", email.toLowerCase()).get();
+        if (email == null || email.trim().isEmpty()) return Tasks.forResult(null);
+        return usersRef.whereEqualTo("email", email.toLowerCase().trim()).get();
     }
 
     public Task<QuerySnapshot> getUserByEmailOriginal(String email) {
-        if (email == null) return Tasks.forResult(null);
-        return usersRef.whereEqualTo("email", email).get();
+        if (email == null || email.trim().isEmpty()) return Tasks.forResult(null);
+        return usersRef.whereEqualTo("email", email.trim()).get();
     }
 
     public Task<QuerySnapshot> getUserByPhone(String phone) {
-        if (phone == null) return Tasks.forResult(null);
-        return usersRef.whereEqualTo("phone", phone).get();
+        if (phone == null || phone.trim().isEmpty()) return Tasks.forResult(null);
+        return usersRef.whereEqualTo("phone", phone.trim()).get();
     }
 
     public Task<QuerySnapshot> searchByPhone(String phone) {
-        return usersRef.orderBy("phone").startAt(phone).endAt(phone + "\uf8ff").get();
+        if (phone == null || phone.trim().isEmpty()) return Tasks.forResult(null);
+        return usersRef.orderBy("phone")
+                .startAt(phone.trim())
+                .endAt(phone.trim() + "\uf8ff")
+                .get();
     }
 
     public Task<QuerySnapshot> searchByName(String name) {
-        return usersRef.orderBy("name").startAt(name.toLowerCase()).endAt(name.toLowerCase() + "\uf8ff").get();
+        if (name == null || name.trim().isEmpty()) return Tasks.forResult(null);
+        String query = name.toLowerCase().trim();
+        return usersRef.orderBy("nameLowercase")
+                .startAt(query)
+                .endAt(query + "\uf8ff")
+                .get();
     }
 
     public Task<QuerySnapshot> searchByNameOriginal(String name) {
-        return usersRef.orderBy("name").startAt(name).endAt(name + "\uf8ff").get();
+        if (name == null || name.trim().isEmpty()) return Tasks.forResult(null);
+        String query = name.trim();
+        return usersRef.orderBy("name")
+                .startAt(query)
+                .endAt(query + "\uf8ff")
+                .get();
     }
 
     public Task<Boolean> checkUserExists(String email, String phone) {
-        Task<QuerySnapshot> emailTask = getUserByEmail(email);
-        Task<QuerySnapshot> phoneTask = getUserByPhone(phone);
+        List<Filter> filters = new ArrayList<>();
+        if (email != null && !email.trim().isEmpty()) {
+            filters.add(Filter.equalTo("email", email.toLowerCase().trim()));
+        }
+        if (phone != null && !phone.trim().isEmpty()) {
+            filters.add(Filter.equalTo("phone", phone.trim()));
+        }
 
-        return Tasks.whenAllSuccess(emailTask, phoneTask).continueWith(task -> {
-            boolean emailExists = emailTask.getResult() != null && !emailTask.getResult().isEmpty();
-            boolean phoneExists = phoneTask.getResult() != null && !phoneTask.getResult().isEmpty();
-            return emailExists || phoneExists;
+        if (filters.isEmpty()) return Tasks.forResult(false);
+
+        Filter combined = filters.size() == 2 ? Filter.or(filters.get(0), filters.get(1)) : filters.get(0);
+
+        return usersRef.where(combined).get().continueWith(task -> {
+            QuerySnapshot qs = task.getResult();
+            return qs != null && !qs.isEmpty();
         });
     }
 
