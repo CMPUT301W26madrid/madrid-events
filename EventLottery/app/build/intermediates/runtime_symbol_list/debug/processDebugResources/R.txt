@@ -4327,6 +4327,8 @@ int string error_dates_required 0x7f110079
 int string error_email_required 0x7f11007a
 int string error_generic 0x7f11007b
 int string error_icon_content_description 0x7f11007c
+int string error_invalid_end_date 0x7f11018a
+int string error_invalid_reg_close 0x7f11018b
 int string error_location_required 0x7f11007d
 int string error_name_required 0x7f11007e
 int string error_registration_closed 0x7f11007f
@@ -4891,6 +4893,7 @@ int style CardStyle 0x7f120123
 int style CardView 0x7f120124
 int style CardView_Dark 0x7f120125
 int style CardView_Light 0x7f120126
+int style CustomPickerTheme 0x7f120472
 int style DialogStyle 0x7f120127
 int style InputField 0x7f120128
 int style MaterialAlertDialog_Material3 0x7f120129
@@ -4913,6 +4916,7 @@ int style MaterialAlertDialog_MaterialComponents_Title_Panel 0x7f120139
 int style MaterialAlertDialog_MaterialComponents_Title_Panel_CenterStacked 0x7f12013a
 int style MaterialAlertDialog_MaterialComponents_Title_Text 0x7f12013b
 int style MaterialAlertDialog_MaterialComponents_Title_Text_CenterStacked 0x7f12013c
+int style PickerButtonStyle 0x7f120473
 int style Platform_AppCompat 0x7f12013d
 int style Platform_AppCompat_Light 0x7f12013e
 int style Platform_MaterialComponents 0x7f12013f

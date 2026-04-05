@@ -333,6 +333,8 @@ string error_capacity_required
 string error_dates_required
 string error_email_required
 string error_generic
+string error_invalid_end_date
+string error_invalid_reg_close
 string error_location_required
 string error_name_required
 string error_registration_closed
@@ -443,8 +445,10 @@ style ButtonDanger
 style ButtonOutline
 style ButtonPrimary
 style CardStyle
+style CustomPickerTheme
 style DialogStyle
 style InputField
+style PickerButtonStyle
 style TabStyle
 style TextSectionHeader
 style Theme.EventLottery

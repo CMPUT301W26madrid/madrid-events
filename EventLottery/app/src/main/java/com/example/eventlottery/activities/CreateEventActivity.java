@@ -186,13 +186,28 @@ public class CreateEventActivity extends AppCompatActivity {
     }
 
     private void setupDatePickers() {
-        etEventStart.setOnClickListener(v -> pickDateTime(calEventStart, etEventStart));
-        etEventEnd.setOnClickListener(v -> pickDateTime(calEventEnd, etEventEnd));
-        etRegOpen.setOnClickListener(v -> pickDateTime(calRegOpen, etRegOpen));
-        etRegClose.setOnClickListener(v -> pickDateTime(calRegClose, etRegClose));
+        etEventStart.setOnClickListener(v -> {
+            long max = getText(etEventEnd).isEmpty() ? 0 : calEventEnd.getTimeInMillis() - 60000;
+            pickDateTime(calEventStart, etEventStart, 0, max);
+        });
+        etEventEnd.setOnClickListener(v -> {
+            long min = getText(etEventStart).isEmpty() ? 0 : calEventStart.getTimeInMillis() + 60000;
+            pickDateTime(calEventEnd, etEventEnd, min, 0);
+        });
+        etRegOpen.setOnClickListener(v -> {
+            // Reg Opens must be before Event Start
+            long max = getText(etEventStart).isEmpty() ? 0 : calEventStart.getTimeInMillis() - 60000;
+            pickDateTime(calRegOpen, etRegOpen, 0, max);
+        });
+        etRegClose.setOnClickListener(v -> {
+            long min = getText(etRegOpen).isEmpty() ? 0 : calRegOpen.getTimeInMillis() + 60000;
+            // Reg Closes must be before Event End
+            long max = getText(etEventEnd).isEmpty() ? 0 : calEventEnd.getTimeInMillis() - 60000;
+            pickDateTime(calRegClose, etRegClose, min, max);
+        });
     }
 
-    private void pickDateTime(Calendar cal, TextInputEditText target) {
+    private void pickDateTime(Calendar cal, TextInputEditText target, long minMillis, long maxMillis) {
         DatePickerDialog dpd = new DatePickerDialog(this,
                 (view, year, month, day) -> {
                     cal.set(year, month, day);
@@ -200,6 +215,16 @@ public class CreateEventActivity extends AppCompatActivity {
                             (tp, hour, minute) -> {
                                 cal.set(Calendar.HOUR_OF_DAY, hour);
                                 cal.set(Calendar.MINUTE, minute);
+                                
+                                // Enforcement logic
+                                if (minMillis > 0 && cal.getTimeInMillis() < minMillis) {
+                                    cal.setTimeInMillis(minMillis);
+                                    Toast.makeText(this, "Time adjusted to satisfy minimum requirements", Toast.LENGTH_SHORT).show();
+                                } else if (maxMillis > 0 && cal.getTimeInMillis() > maxMillis) {
+                                    cal.setTimeInMillis(maxMillis);
+                                    Toast.makeText(this, "Time adjusted to satisfy maximum requirements", Toast.LENGTH_SHORT).show();
+                                }
+                                
                                 target.setText(sdf.format(cal.getTime()));
                             },
                             cal.get(Calendar.HOUR_OF_DAY),
@@ -208,6 +233,10 @@ public class CreateEventActivity extends AppCompatActivity {
                 cal.get(Calendar.YEAR),
                 cal.get(Calendar.MONTH),
                 cal.get(Calendar.DAY_OF_MONTH));
+        
+        if (minMillis > 0) dpd.getDatePicker().setMinDate(minMillis);
+        if (maxMillis > 0 && maxMillis >= minMillis) dpd.getDatePicker().setMaxDate(maxMillis);
+        
         dpd.show();
     }
 
@@ -224,12 +253,35 @@ public class CreateEventActivity extends AppCompatActivity {
         else tilLocation.setError(null);
         if (TextUtils.isEmpty(cap))   { tilCapacity.setError(getString(R.string.error_capacity_required)); valid = false; }
         else tilCapacity.setError(null);
+        
         if (getText(etEventStart).isEmpty() || getText(etEventEnd).isEmpty() ||
             getText(etRegOpen).isEmpty()    || getText(etRegClose).isEmpty()) {
             Toast.makeText(this, R.string.error_dates_required, Toast.LENGTH_SHORT).show();
             valid = false;
         }
+        
         if (!valid) return;
+
+        // Date logical validation
+        long startMillis = calEventStart.getTimeInMillis();
+        long endMillis = calEventEnd.getTimeInMillis();
+        long regOpenMillis = calRegOpen.getTimeInMillis();
+        long regCloseMillis = calRegClose.getTimeInMillis();
+
+        if (endMillis <= startMillis) {
+            Toast.makeText(this, R.string.error_invalid_end_date, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (regOpenMillis >= startMillis) {
+            Toast.makeText(this, "Registration must open before the event starts", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (regCloseMillis <= regOpenMillis || regCloseMillis >= endMillis) {
+            Toast.makeText(this, "Registration must close between its opening and the event end", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         int capacity   = safeInt(cap, 10);
         int maxWl      = safeInt(getText(etMaxWl), 0);

@@ -8,6 +8,28 @@
         <item name="android:statusBarColor">@color/primary_dark</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:navigationBarColor">@color/white</item>
+
+        <!-- Date and Time Picker Styles -->
+        <item name="android:datePickerDialogTheme">@style/CustomPickerTheme</item>
+        <item name="android:timePickerDialogTheme">@style/CustomPickerTheme</item>
+    </style>
+
+    <style name="CustomPickerTheme" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/primary</item>
+
+        <!-- Force button colors in different states -->
+        <item name="android:buttonBarPositiveButtonStyle">@style/PickerButtonStyle</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/PickerButtonStyle</item>
+
+        <!-- Some Android versions use colorAccent for buttons -->
+        <item name="android:colorAccent">@color/primary</item>
+    </style>
+
+    <style name="PickerButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/primary</item>
+        <item name="rippleColor">@color/primary_light</item>
     </style>
 
     <style name="Theme.EventLottery.Splash" parent="Theme.MaterialComponents.Light.NoActionBar">

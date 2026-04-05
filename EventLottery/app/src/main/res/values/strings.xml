@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">EventLottery</string>
+    <string name="app_name">Event Lottery</string>
     <string name="app_tagline">Fair, lottery-based event registration for community centres.</string>
 
     <!-- Google Maps API Key -->
@@ -164,6 +164,8 @@
     <string name="error_already_registered">You are already on the waiting list</string>
     <string name="error_waitlist_full">The waiting list is full</string>
     <string name="error_registration_closed">Registration is closed for this event</string>
+    <string name="error_invalid_end_date">End time must be after start time</string>
+    <string name="error_invalid_reg_close">Registration must close after opening and before event starts</string>
 
     <!-- Geolocation -->
     <string name="geolocation_required_title">Location Required</string>

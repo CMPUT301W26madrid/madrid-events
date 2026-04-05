@@ -46,7 +46,7 @@
     <string name="admin_panel">Admin Panel</string>
     <string name="all_entrants">All Entrants</string>
     <string name="allow_location">Allow Location</string>
-    <string name="app_name">EventLottery</string>
+    <string name="app_name">Event Lottery</string>
     <string name="app_tagline">Fair, lottery-based event registration for community centres.</string>
     <string name="basic_info">Basic Info</string>
     <string name="browse_events_prompt">Browse events to join the lottery!</string>
@@ -80,6 +80,8 @@
     <string name="error_dates_required">All dates are required</string>
     <string name="error_email_required">Email is required</string>
     <string name="error_generic">Something went wrong. Please try again.</string>
+    <string name="error_invalid_end_date">End time must be after start time</string>
+    <string name="error_invalid_reg_close">Registration must close after opening and before event starts</string>
     <string name="error_location_required">Location is required</string>
     <string name="error_name_required">Name is required</string>
     <string name="error_registration_closed">Registration is closed for this event</string>
@@ -218,6 +220,18 @@
         <item name="cardBackgroundColor">@color/card_background</item>
         <item name="contentPadding">0dp</item>
     </style>
+    <style name="CustomPickerTheme" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/primary</item>
+
+        
+        <item name="android:buttonBarPositiveButtonStyle">@style/PickerButtonStyle</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/PickerButtonStyle</item>
+
+        
+        <item name="android:colorAccent">@color/primary</item>
+    </style>
     <style name="DialogStyle" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
         <item name="colorPrimary">@color/primary</item>
         <item name="buttonBarPositiveButtonStyle">@style/ButtonPrimary</item>
@@ -229,6 +243,10 @@
         <item name="boxCornerRadiusTopEnd">8dp</item>
         <item name="boxCornerRadiusBottomStart">8dp</item>
         <item name="boxCornerRadiusBottomEnd">8dp</item>
+    </style>
+    <style name="PickerButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/primary</item>
+        <item name="rippleColor">@color/primary_light</item>
     </style>
     <style name="TabStyle" parent="Widget.MaterialComponents.TabLayout">
         <item name="tabSelectedTextColor">@color/primary</item>
@@ -252,6 +270,10 @@
         <item name="android:statusBarColor">@color/primary_dark</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:navigationBarColor">@color/white</item>
+
+        
+        <item name="android:datePickerDialogTheme">@style/CustomPickerTheme</item>
+        <item name="android:timePickerDialogTheme">@style/CustomPickerTheme</item>
     </style>
     <style name="Theme.EventLottery.Splash" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowBackground">@color/primary</item>

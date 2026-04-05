@@ -4,7 +4,7 @@
             "outputFile": "com.example.eventlottery.app-mergeDebugResources-44:/values-v23/values-v23.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Abrar Shahriar\\.gradle\\caches\\8.10.2\\transforms\\cede72027aef5cb44c9da1e1e96b0082\\transformed\\cardview-1.0.0\\res\\values-v23\\values-v23.xml",
+                    "source": "/Users/tasfikamali/.gradle/caches/8.10.2/transforms/cede72027aef5cb44c9da1e1e96b0082/transformed/cardview-1.0.0/res/values-v23/values-v23.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Abrar Shahriar\\.gradle\\caches\\8.10.2\\transforms\\6aec877bf390236f68e40617fefa8d52\\transformed\\material-1.12.0\\res\\values-v23\\values-v23.xml",
+                    "source": "/Users/tasfikamali/.gradle/caches/8.10.2/transforms/6aec877bf390236f68e40617fefa8d52/transformed/material-1.12.0/res/values-v23/values-v23.xml",
                     "from": {
                         "startLines": "2,5,9,13,16,19,22,25,28,32",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
@@ -42,7 +42,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Abrar Shahriar\\.gradle\\caches\\8.10.2\\transforms\\bc5df90cdd82c2c0fd1e3f02386ee7aa\\transformed\\appcompat-1.7.0\\res\\values-v23\\values-v23.xml",
+                    "source": "/Users/tasfikamali/.gradle/caches/8.10.2/transforms/bc5df90cdd82c2c0fd1e3f02386ee7aa/transformed/appcompat-1.7.0/res/values-v23/values-v23.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,20,34,35,36,39,43,44,45,46",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
