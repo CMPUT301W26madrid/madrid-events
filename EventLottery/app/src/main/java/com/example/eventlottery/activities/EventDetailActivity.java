@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
@@ -41,6 +42,13 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.DocumentSnapshot;
+
+import org.osmdroid.config.Configuration;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Marker;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +73,8 @@ public class EventDetailActivity extends AppCompatActivity {
     private TextView tvTitle, tvOrganizer, tvStartDate, tvStartTime, tvEndDate, tvEndTime, tvLocation,
             tvPrice, tvWaitingCount, tvSpots, tvRegPeriod, tvDescription;
     private ImageView ivPoster, ivQrBtn;
-    private View cardSelected;
+    private View cardSelected, cardMap;
+    private MapView mapView;
     private MaterialButton btnJoinLeave, btnAccept, btnDecline;
     private RecyclerView rvComments;
     private TextInputEditText etComment;
@@ -74,6 +83,10 @@ public class EventDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        // Osmdroid configuration
+        Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this));
+        
         setContentView(R.layout.activity_event_detail);
 
         session      = new SessionManager(this);
@@ -113,11 +126,19 @@ public class EventDetailActivity extends AppCompatActivity {
         ivPoster       = findViewById(R.id.iv_poster);
         ivQrBtn        = findViewById(R.id.iv_qr_btn);
         cardSelected   = findViewById(R.id.card_selected);
+        cardMap        = findViewById(R.id.card_map);
+        mapView        = findViewById(R.id.map_view);
         btnJoinLeave   = findViewById(R.id.btn_join_leave);
         btnAccept      = findViewById(R.id.btn_accept);
         btnDecline     = findViewById(R.id.btn_decline);
         rvComments     = findViewById(R.id.rv_comments);
         etComment      = findViewById(R.id.et_comment);
+
+        // Map setup
+        if (mapView != null) {
+            mapView.setTileSource(TileSourceFactory.MAPNIK);
+            mapView.setMultiTouchControls(false); // Static-ish preview
+        }
 
         // Initially placeholder adapter, re-initialized when event loads
         commentAdapter = new CommentAdapter(userId, false);
@@ -196,6 +217,24 @@ public class EventDetailActivity extends AppCompatActivity {
             ivQrBtn.setVisibility(View.GONE);
         } else {
             ivQrBtn.setVisibility(View.VISIBLE);
+        }
+
+        // Setup Map Preview
+        if (currentEvent.getLatitude() != 0 || currentEvent.getLongitude() != 0) {
+            cardMap.setVisibility(View.VISIBLE);
+            GeoPoint startPoint = new GeoPoint(currentEvent.getLatitude(), currentEvent.getLongitude());
+            mapView.getController().setZoom(15.0);
+            mapView.getController().setCenter(startPoint);
+
+            Marker startMarker = new Marker(mapView);
+            startMarker.setPosition(startPoint);
+            startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+            startMarker.setTitle(currentEvent.getLocation());
+            mapView.getOverlays().clear();
+            mapView.getOverlays().add(startMarker);
+            mapView.invalidate();
+        } else {
+            cardMap.setVisibility(View.GONE);
         }
     }
 
@@ -558,5 +597,17 @@ public class EventDetailActivity extends AppCompatActivity {
         tvTitle.setText(currentEvent.getTitle());
         btnClose.setOnClickListener(v -> dialog.dismiss());
         dialog.show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mapView != null) mapView.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mapView != null) mapView.onPause();
     }
 }

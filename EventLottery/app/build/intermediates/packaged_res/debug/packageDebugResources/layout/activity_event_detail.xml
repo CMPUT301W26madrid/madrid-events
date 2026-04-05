@@ -288,6 +288,23 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <!-- Map box -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_map"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                android:visibility="gone">
+
+                <org.osmdroid.views.MapView
+                    android:id="@+id/map_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </androidx.cardview.widget.CardView>
+
             <!-- Selected banner -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_selected"

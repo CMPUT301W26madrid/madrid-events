@@ -20,12 +20,12 @@
         "source": "D:\\Android Studio\\Android\\Sdk\\daemon\\8.10.2\\com.example.eventlottery.app-main-7:\\layout\\fragment_organizer_dashboard.xml"
     },
     {
-        "merged": "D:\\Android Studio\\Android\\Sdk\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-4:\\layout\\item_admin_user.xml",
-        "source": "D:\\Android Studio\\Android\\Sdk\\daemon\\8.10.2\\com.example.eventlottery.app-main-7:\\layout\\item_admin_user.xml"
-    },
-    {
         "merged": "D:\\Android Studio\\Android\\Sdk\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-4:\\layout\\item_comment.xml",
         "source": "D:\\Android Studio\\Android\\Sdk\\daemon\\8.10.2\\com.example.eventlottery.app-main-7:\\layout\\item_comment.xml"
+    },
+    {
+        "merged": "D:\\Android Studio\\Android\\Sdk\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-4:\\layout\\item_admin_user.xml",
+        "source": "D:\\Android Studio\\Android\\Sdk\\daemon\\8.10.2\\com.example.eventlottery.app-main-7:\\layout\\item_admin_user.xml"
     },
     {
         "merged": "D:\\Android Studio\\Android\\Sdk\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-4:\\layout\\activity_admin_main.xml",
@@ -38,6 +38,10 @@
     {
         "merged": "D:\\Android Studio\\Android\\Sdk\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-4:\\layout\\dialog_full_image.xml",
         "source": "D:\\Android Studio\\Android\\Sdk\\daemon\\8.10.2\\com.example.eventlottery.app-main-7:\\layout\\dialog_full_image.xml"
+    },
+    {
+        "merged": "com.example.eventlottery.app-mergeDebugResources-4:/layout/activity_event_detail.xml",
+        "source": "com.example.eventlottery.app-main-7:/layout/activity_event_detail.xml"
     },
     {
         "merged": "D:\\Android Studio\\Android\\Sdk\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-4:\\layout\\activity_organizer_main.xml",
@@ -94,10 +98,6 @@
     {
         "merged": "D:\\Android Studio\\Android\\Sdk\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-4:\\layout\\activity_login.xml",
         "source": "D:\\Android Studio\\Android\\Sdk\\daemon\\8.10.2\\com.example.eventlottery.app-main-7:\\layout\\activity_login.xml"
-    },
-    {
-        "merged": "com.example.eventlottery.app-mergeDebugResources-4:/layout/activity_login.xml",
-        "source": "com.example.eventlottery.app-main-7:/layout/activity_login.xml"
     },
     {
         "merged": "D:\\Android Studio\\Android\\Sdk\\daemon\\8.10.2\\com.example.eventlottery.app-mergeDebugResources-4:\\layout\\dialog_create_profile.xml",

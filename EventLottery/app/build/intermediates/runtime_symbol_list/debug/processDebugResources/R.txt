@@ -3392,6 +3392,7 @@ int id buttonPanel 0x7f080086
 int id cache_measures 0x7f080087
 int id callMeasure 0x7f080088
 int id cancel_button 0x7f080089
+int id card_map 0x7f0802e4
 int id card_selected 0x7f08008a
 int id carryVelocity 0x7f08008b
 int id cb_admin 0x7f08008c
@@ -3608,6 +3609,7 @@ int id ll_roles 0x7f080155
 int id ll_signup_fields 0x7f0802dd
 int id m3_side_sheet 0x7f080156
 int id map 0x7f080157
+int id map_view 0x7f0802e5
 int id marquee 0x7f080158
 int id masked 0x7f080159
 int id match_constraint 0x7f08015a

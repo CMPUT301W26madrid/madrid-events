@@ -3393,6 +3393,7 @@ id buttonPanel
 id cache_measures
 id callMeasure
 id cancel_button
+id card_map
 id card_selected
 id carryVelocity
 id cb_admin
@@ -3609,6 +3610,7 @@ id ll_roles
 id ll_signup_fields
 id m3_side_sheet
 id map
+id map_view
 id marquee
 id masked
 id match_constraint

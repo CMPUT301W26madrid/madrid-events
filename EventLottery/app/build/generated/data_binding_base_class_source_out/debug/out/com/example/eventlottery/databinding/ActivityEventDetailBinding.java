@@ -23,6 +23,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
+import org.osmdroid.views.MapView;
 
 public final class ActivityEventDetailBinding implements ViewBinding {
   @NonNull
@@ -41,6 +42,9 @@ public final class ActivityEventDetailBinding implements ViewBinding {
   public final MaterialButton btnPostComment;
 
   @NonNull
+  public final CardView cardMap;
+
+  @NonNull
   public final CardView cardSelected;
 
   @NonNull
@@ -54,6 +58,9 @@ public final class ActivityEventDetailBinding implements ViewBinding {
 
   @NonNull
   public final LinearLayout llActionBar;
+
+  @NonNull
+  public final MapView mapView;
 
   @NonNull
   public final RecyclerView rvComments;
@@ -112,13 +119,13 @@ public final class ActivityEventDetailBinding implements ViewBinding {
   private ActivityEventDetailBinding(@NonNull CoordinatorLayout rootView,
       @NonNull MaterialButton btnAccept, @NonNull MaterialButton btnDecline,
       @NonNull MaterialButton btnJoinLeave, @NonNull MaterialButton btnPostComment,
-      @NonNull CardView cardSelected, @NonNull TextInputEditText etComment,
-      @NonNull ImageView ivPoster, @NonNull ImageView ivQrBtn, @NonNull LinearLayout llActionBar,
-      @NonNull RecyclerView rvComments, @NonNull NestedScrollView scrollView,
-      @NonNull TextInputLayout tilComment, @NonNull Toolbar toolbar,
-      @NonNull TextView tvDescription, @NonNull TextView tvEndDate, @NonNull TextView tvEndTime,
-      @NonNull TextView tvLocation, @NonNull TextView tvOrganizer, @NonNull TextView tvPrice,
-      @NonNull TextView tvRegPeriod, @NonNull TextView tvSelectedMsg,
+      @NonNull CardView cardMap, @NonNull CardView cardSelected,
+      @NonNull TextInputEditText etComment, @NonNull ImageView ivPoster, @NonNull ImageView ivQrBtn,
+      @NonNull LinearLayout llActionBar, @NonNull MapView mapView, @NonNull RecyclerView rvComments,
+      @NonNull NestedScrollView scrollView, @NonNull TextInputLayout tilComment,
+      @NonNull Toolbar toolbar, @NonNull TextView tvDescription, @NonNull TextView tvEndDate,
+      @NonNull TextView tvEndTime, @NonNull TextView tvLocation, @NonNull TextView tvOrganizer,
+      @NonNull TextView tvPrice, @NonNull TextView tvRegPeriod, @NonNull TextView tvSelectedMsg,
       @NonNull TextView tvSelectedTitle, @NonNull TextView tvSpots, @NonNull TextView tvStartDate,
       @NonNull TextView tvStartTime, @NonNull TextView tvTitle, @NonNull TextView tvWaitingCount) {
     this.rootView = rootView;
@@ -126,11 +133,13 @@ public final class ActivityEventDetailBinding implements ViewBinding {
     this.btnDecline = btnDecline;
     this.btnJoinLeave = btnJoinLeave;
     this.btnPostComment = btnPostComment;
+    this.cardMap = cardMap;
     this.cardSelected = cardSelected;
     this.etComment = etComment;
     this.ivPoster = ivPoster;
     this.ivQrBtn = ivQrBtn;
     this.llActionBar = llActionBar;
+    this.mapView = mapView;
     this.rvComments = rvComments;
     this.scrollView = scrollView;
     this.tilComment = tilComment;
@@ -202,6 +211,12 @@ public final class ActivityEventDetailBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.card_map;
+      CardView cardMap = ViewBindings.findChildViewById(rootView, id);
+      if (cardMap == null) {
+        break missingId;
+      }
+
       id = R.id.card_selected;
       CardView cardSelected = ViewBindings.findChildViewById(rootView, id);
       if (cardSelected == null) {
@@ -229,6 +244,12 @@ public final class ActivityEventDetailBinding implements ViewBinding {
       id = R.id.ll_action_bar;
       LinearLayout llActionBar = ViewBindings.findChildViewById(rootView, id);
       if (llActionBar == null) {
+        break missingId;
+      }
+
+      id = R.id.map_view;
+      MapView mapView = ViewBindings.findChildViewById(rootView, id);
+      if (mapView == null) {
         break missingId;
       }
 
@@ -341,10 +362,10 @@ public final class ActivityEventDetailBinding implements ViewBinding {
       }
 
       return new ActivityEventDetailBinding((CoordinatorLayout) rootView, btnAccept, btnDecline,
-          btnJoinLeave, btnPostComment, cardSelected, etComment, ivPoster, ivQrBtn, llActionBar,
-          rvComments, scrollView, tilComment, toolbar, tvDescription, tvEndDate, tvEndTime,
-          tvLocation, tvOrganizer, tvPrice, tvRegPeriod, tvSelectedMsg, tvSelectedTitle, tvSpots,
-          tvStartDate, tvStartTime, tvTitle, tvWaitingCount);
+          btnJoinLeave, btnPostComment, cardMap, cardSelected, etComment, ivPoster, ivQrBtn,
+          llActionBar, mapView, rvComments, scrollView, tilComment, toolbar, tvDescription,
+          tvEndDate, tvEndTime, tvLocation, tvOrganizer, tvPrice, tvRegPeriod, tvSelectedMsg,
+          tvSelectedTitle, tvSpots, tvStartDate, tvStartTime, tvTitle, tvWaitingCount);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

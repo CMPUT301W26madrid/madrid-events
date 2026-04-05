@@ -106,6 +106,7 @@ id btn_send_notification
 id btn_sign_out
 id btn_upload_poster
 id btn_view_map
+id card_map
 id card_selected
 id cb_admin
 id cb_entrant
@@ -173,6 +174,7 @@ id ll_role_badges
 id ll_roles
 id ll_signup_fields
 id map
+id map_view
 id nav_admin
 id nav_alerts
 id nav_browse
