@@ -11,6 +11,8 @@ public class Event {
     private String title;
     private String description;
     private String location;
+    private double latitude;
+    private double longitude;
     private String organizerId;
     private String organizerName;
     private List<String> tags;
@@ -100,6 +102,12 @@ public class Event {
 
     public String getLocation() { return location; }
     public void setLocation(String location) { this.location = location; }
+
+    public double getLatitude() { return latitude; }
+    public void setLatitude(double latitude) { this.latitude = latitude; }
+
+    public double getLongitude() { return longitude; }
+    public void setLongitude(double longitude) { this.longitude = longitude; }
 
     public String getOrganizerId() { return organizerId; }
     public void setOrganizerId(String organizerId) { this.organizerId = organizerId; }

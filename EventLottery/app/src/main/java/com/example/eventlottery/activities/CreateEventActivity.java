@@ -66,6 +66,8 @@ public class CreateEventActivity extends AppCompatActivity {
     private String base64Poster = null;
     private String eventId = null;
     private Event existingEvent = null;
+    private double selectedLat = 0;
+    private double selectedLng = 0;
 
     private final Calendar calEventStart = Calendar.getInstance();
     private final Calendar calEventEnd   = Calendar.getInstance();
@@ -132,6 +134,8 @@ public class CreateEventActivity extends AppCompatActivity {
         etTitle.setText(existingEvent.getTitle());
         etDescription.setText(existingEvent.getDescription());
         etLocation.setText(existingEvent.getLocation(), false);
+        selectedLat = existingEvent.getLatitude();
+        selectedLng = existingEvent.getLongitude();
         isLocationSelectedFromDropdown = true; 
         if (existingEvent.getTags() != null) {
             etTags.setText(TextUtils.join(", ", existingEvent.getTags()));
@@ -230,6 +234,8 @@ public class CreateEventActivity extends AppCompatActivity {
         etLocation.setOnItemClickListener((parent, view, position, id) -> {
             isLocationSelectedFromDropdown = true;
             tilLocation.setError(null);
+            // Re-verify to get Lat/Lng immediately
+            verifyAndSetLatLng(locationList.get(position));
         });
 
         etLocation.addTextChangedListener(new TextWatcher() {
@@ -244,7 +250,22 @@ public class CreateEventActivity extends AppCompatActivity {
                 if (query.length() < 2) return;
 
                 queryRunnable = () -> fetchSuggestions(query);
-                mainHandler.postDelayed(queryRunnable, 300); // Very fast debounce
+                mainHandler.postDelayed(queryRunnable, 300); 
+            }
+        });
+    }
+
+    private void verifyAndSetLatLng(String locName) {
+        executor.execute(() -> {
+            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+            try {
+                List<Address> addresses = geocoder.getFromLocationName(locName, 1);
+                if (addresses != null && !addresses.isEmpty()) {
+                    selectedLat = addresses.get(0).getLatitude();
+                    selectedLng = addresses.get(0).getLongitude();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
     }
@@ -329,17 +350,19 @@ public class CreateEventActivity extends AppCompatActivity {
         
         if (!valid) return;
 
-        // Final Geocoder Check to ensure address is real
+        // Final Geocoder Check to ensure address is real and get Lat/Lng
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
         try {
             List<Address> addresses = geocoder.getFromLocationName(loc, 1);
             if (addresses == null || addresses.isEmpty()) {
                 tilLocation.setError("Invalid address. Please enter a real-world location.");
                 return;
+            } else {
+                selectedLat = addresses.get(0).getLatitude();
+                selectedLng = addresses.get(0).getLongitude();
             }
         } catch (IOException e) {
-            // Network failure - if it's already marked valid from dropdown, let it pass
-            if (!isLocationSelectedFromDropdown) {
+            if (!isLocationSelectedFromDropdown && selectedLat == 0) {
                 Toast.makeText(this, "Cannot verify location. Please pick from the dropdown suggestions.", Toast.LENGTH_LONG).show();
                 return;
             }
@@ -371,6 +394,8 @@ public class CreateEventActivity extends AppCompatActivity {
         existingEvent.setTitle(title);
         existingEvent.setDescription(desc);
         existingEvent.setLocation(loc);
+        existingEvent.setLatitude(selectedLat);
+        existingEvent.setLongitude(selectedLng);
         existingEvent.setEventStartDate(calEventStart.getTimeInMillis());
         existingEvent.setEventEndDate(calEventEnd.getTimeInMillis());
         existingEvent.setRegistrationOpenDate(calRegOpen.getTimeInMillis());
@@ -412,6 +437,9 @@ public class CreateEventActivity extends AppCompatActivity {
                     capacity, maxWl, price,
                     base64Poster,
                     priv, geo);
+            
+            event.setLatitude(selectedLat);
+            event.setLongitude(selectedLng);
 
             String tagsStr = getText(etTags);
             if (!tagsStr.isEmpty()) {
