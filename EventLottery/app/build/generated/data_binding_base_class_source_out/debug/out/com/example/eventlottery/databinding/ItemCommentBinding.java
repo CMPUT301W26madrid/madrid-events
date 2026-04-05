@@ -24,6 +24,9 @@ public final class ItemCommentBinding implements ViewBinding {
   public final ImageView ivDelete;
 
   @NonNull
+  public final ImageView ivEdit;
+
+  @NonNull
   public final TextView tvAvatar;
 
   @NonNull
@@ -36,10 +39,11 @@ public final class ItemCommentBinding implements ViewBinding {
   public final TextView tvTime;
 
   private ItemCommentBinding(@NonNull LinearLayout rootView, @NonNull ImageView ivDelete,
-      @NonNull TextView tvAvatar, @NonNull TextView tvName, @NonNull TextView tvText,
-      @NonNull TextView tvTime) {
+      @NonNull ImageView ivEdit, @NonNull TextView tvAvatar, @NonNull TextView tvName,
+      @NonNull TextView tvText, @NonNull TextView tvTime) {
     this.rootView = rootView;
     this.ivDelete = ivDelete;
+    this.ivEdit = ivEdit;
     this.tvAvatar = tvAvatar;
     this.tvName = tvName;
     this.tvText = tvText;
@@ -79,6 +83,12 @@ public final class ItemCommentBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.iv_edit;
+      ImageView ivEdit = ViewBindings.findChildViewById(rootView, id);
+      if (ivEdit == null) {
+        break missingId;
+      }
+
       id = R.id.tv_avatar;
       TextView tvAvatar = ViewBindings.findChildViewById(rootView, id);
       if (tvAvatar == null) {
@@ -103,8 +113,8 @@ public final class ItemCommentBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ItemCommentBinding((LinearLayout) rootView, ivDelete, tvAvatar, tvName, tvText,
-          tvTime);
+      return new ItemCommentBinding((LinearLayout) rootView, ivDelete, ivEdit, tvAvatar, tvName,
+          tvText, tvTime);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

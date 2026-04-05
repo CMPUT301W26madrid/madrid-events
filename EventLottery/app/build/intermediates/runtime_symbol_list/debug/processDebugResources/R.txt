@@ -3136,9 +3136,11 @@ int drawable ic_camera 0x7f0700bb
 int drawable ic_clear_black_24 0x7f0700bc
 int drawable ic_clock_black_24dp 0x7f0700bd
 int drawable ic_close 0x7f0700be
+int drawable ic_comment_edit 0x7f070134
 int drawable ic_dashboard 0x7f0700bf
 int drawable ic_delete 0x7f0700c0
 int drawable ic_edit 0x7f0700c1
+int drawable ic_edit_pencil 0x7f070135
 int drawable ic_home 0x7f0700c2
 int drawable ic_keyboard_black_24dp 0x7f0700c3
 int drawable ic_location 0x7f0700c4
@@ -3560,6 +3562,7 @@ int id iv_bell 0x7f08012f
 int id iv_cancel 0x7f080130
 int id iv_close 0x7f080131
 int id iv_delete 0x7f080132
+int id iv_edit 0x7f0802ca
 int id iv_full_image 0x7f080133
 int id iv_next_month 0x7f080134
 int id iv_poster 0x7f080135

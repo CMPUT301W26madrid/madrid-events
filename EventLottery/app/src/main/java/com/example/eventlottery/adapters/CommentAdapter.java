@@ -16,11 +16,13 @@ import java.util.List;
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
 
     public interface OnDeleteListener { void onDelete(Comment comment); }
+    public interface OnEditListener { void onEdit(Comment comment); }
 
     private List<Comment> comments = new ArrayList<>();
     private String currentUserId;
     private boolean isOrganizer;
     private OnDeleteListener deleteListener;
+    private OnEditListener editListener;
 
     public CommentAdapter(String currentUserId, boolean isOrganizer) {
         this.currentUserId = currentUserId;
@@ -28,6 +30,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     }
 
     public void setDeleteListener(OnDeleteListener l) { this.deleteListener = l; }
+    public void setEditListener(OnEditListener l) { this.editListener = l; }
 
     public void setComments(List<Comment> list) {
         this.comments = new ArrayList<>(list);
@@ -48,7 +51,13 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         Comment c = comments.get(position);
         h.tvAvatar.setText(c.getInitials());
         h.tvName.setText(c.getUserName());
-        h.tvText.setText(c.getText());
+        
+        String text = c.getText();
+        if (c.isEdited()) {
+            text += " (edited)";
+        }
+        h.tvText.setText(text);
+        
         h.tvTime.setText(DateUtils.formatRelative(c.getCreatedAt()));
 
         boolean canDelete = isOrganizer || c.getUserId().equals(currentUserId);
@@ -58,13 +67,21 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                 if (deleteListener != null) deleteListener.onDelete(c);
             });
         }
+
+        boolean canEdit = c.getUserId().equals(currentUserId);
+        h.ivEdit.setVisibility(canEdit ? View.VISIBLE : View.GONE);
+        if (canEdit) {
+            h.ivEdit.setOnClickListener(v -> {
+                if (editListener != null) editListener.onEdit(c);
+            });
+        }
     }
 
     @Override public int getItemCount() { return comments.size(); }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvAvatar, tvName, tvText, tvTime;
-        ImageView ivDelete;
+        ImageView ivDelete, ivEdit;
         ViewHolder(View v) {
             super(v);
             tvAvatar = v.findViewById(R.id.tv_avatar);
@@ -72,6 +89,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             tvText   = v.findViewById(R.id.tv_text);
             tvTime   = v.findViewById(R.id.tv_time);
             ivDelete = v.findViewById(R.id.iv_delete);
+            ivEdit   = v.findViewById(R.id.iv_edit);
         }
     }
 }

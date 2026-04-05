@@ -26,4 +26,8 @@ public class CommentRepository {
     public Task<Void> deleteComment(String commentId) {
         return commentRef.document(commentId).delete();
     }
+
+    public Task<Void> updateComment(Comment comment) {
+        return commentRef.document(comment.getId()).set(comment);
+    }
 }

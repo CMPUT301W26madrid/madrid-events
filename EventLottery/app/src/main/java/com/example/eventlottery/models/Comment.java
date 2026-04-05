@@ -10,9 +10,11 @@ public class Comment {
     private String userName;
     private String text;
     private long createdAt;
+    private boolean edited;
 
     public Comment() {
         this.createdAt = System.currentTimeMillis();
+        this.edited = false;
     }
 
     public Comment(String eventId, String userId, String userName, String text) {
@@ -21,6 +23,7 @@ public class Comment {
         this.userName = userName;
         this.text = text;
         this.createdAt = System.currentTimeMillis();
+        this.edited = false;
     }
 
     public String getId() { return id; }
@@ -40,6 +43,9 @@ public class Comment {
 
     public long getCreatedAt() { return createdAt; }
     public void setCreatedAt(long createdAt) { this.createdAt = createdAt; }
+
+    public boolean isEdited() { return edited; }
+    public void setEdited(boolean edited) { this.edited = edited; }
 
     public String getInitials() {
         if (userName == null || userName.isEmpty()) return "?";

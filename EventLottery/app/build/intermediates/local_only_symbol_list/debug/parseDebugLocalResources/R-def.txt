@@ -66,9 +66,11 @@ drawable ic_arrow_forward
 drawable ic_calendar
 drawable ic_camera
 drawable ic_close
+drawable ic_comment_edit
 drawable ic_dashboard
 drawable ic_delete
 drawable ic_edit
+drawable ic_edit_pencil
 drawable ic_home
 drawable ic_location
 drawable ic_notifications
@@ -139,6 +141,7 @@ id iv_bell
 id iv_cancel
 id iv_close
 id iv_delete
+id iv_edit
 id iv_full_image
 id iv_next_month
 id iv_poster

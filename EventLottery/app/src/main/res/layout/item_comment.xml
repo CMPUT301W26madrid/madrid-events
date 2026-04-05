@@ -46,11 +46,22 @@
                 android:textSize="11sp"/>
 
             <ImageView
-                android:id="@+id/iv_delete"
+                android:id="@+id/iv_edit"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:padding="5dp"
                 android:layout_marginStart="4dp"
+                android:src="@drawable/ic_comment_edit"
+                android:tint="@color/primary"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/iv_delete"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:padding="5dp"
+                android:layout_marginStart="2dp"
                 android:src="@drawable/ic_close"
                 android:tint="@color/error"
                 android:background="?attr/selectableItemBackgroundBorderless"

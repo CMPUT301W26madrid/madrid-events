@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -145,6 +146,7 @@ public class EventDetailActivity extends AppCompatActivity {
             // Re-initialize adapter with correct moderator privilege (Organizer, Co-Organizer, or Admin)
             commentAdapter = new CommentAdapter(userId, isOrganizer || isCoOrganizer || isAdmin);
             commentAdapter.setDeleteListener(c -> confirmDeleteComment(c));
+            commentAdapter.setEditListener(c -> showEditCommentDialog(c));
             rvComments.setAdapter(commentAdapter);
 
             populateUI();
@@ -496,6 +498,31 @@ public class EventDetailActivity extends AppCompatActivity {
                 .addOnFailureListener(e -> {
                     if (!isFinishing()) Toast.makeText(this, "Error loading comments", Toast.LENGTH_SHORT).show();
                 });
+    }
+
+    private void showEditCommentDialog(Comment comment) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Edit Comment");
+
+        final EditText input = new EditText(this);
+        input.setText(comment.getText());
+        input.setSelection(comment.getText().length());
+        builder.setView(input);
+
+        builder.setPositiveButton("Save", (dialog, which) -> {
+            String newText = input.getText().toString().trim();
+            if (!newText.isEmpty() && !newText.equals(comment.getText())) {
+                comment.setText(newText);
+                comment.setEdited(true);
+                commentRepo.updateComment(comment).addOnSuccessListener(v -> {
+                    Toast.makeText(this, "Comment updated", Toast.LENGTH_SHORT).show();
+                    loadComments();
+                });
+            }
+        });
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+
+        builder.show();
     }
 
     private void confirmDeleteComment(Comment comment) {

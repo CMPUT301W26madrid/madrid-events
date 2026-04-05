@@ -5,11 +5,18 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Base64;
+import android.os.Handler;
+import android.os.Looper;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Base64;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
@@ -25,14 +32,20 @@ import com.example.eventlottery.utils.QRCodeHelper;
 import com.example.eventlottery.utils.SessionManager;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class CreateEventActivity extends AppCompatActivity {
 
@@ -41,7 +54,8 @@ public class CreateEventActivity extends AppCompatActivity {
     private UserRepository userRepo;
 
     private TextInputLayout tilTitle, tilDescription, tilLocation, tilCapacity;
-    private TextInputEditText etTitle, etDescription, etLocation, etTags;
+    private TextInputEditText etTitle, etDescription, etTags;
+    private MaterialAutoCompleteTextView etLocation;
     private TextInputEditText etEventStart, etEventEnd, etRegOpen, etRegClose;
     private TextInputEditText etCapacity, etMaxWl, etPrice;
     private TextView tvPosterName;
@@ -58,6 +72,12 @@ public class CreateEventActivity extends AppCompatActivity {
     private final Calendar calRegOpen    = Calendar.getInstance();
     private final Calendar calRegClose   = Calendar.getInstance();
     private final SimpleDateFormat sdf = new SimpleDateFormat("MMM d, yyyy h:mm a", Locale.getDefault());
+
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private final Handler mainHandler = new Handler(Looper.getMainLooper());
+    private final List<String> locationList = new ArrayList<>();
+    private ArrayAdapter<String> locationAdapter;
+    private boolean isLocationSelectedFromDropdown = false;
 
     private final ActivityResultLauncher<String> galleryLauncher =
             registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
@@ -82,6 +102,7 @@ public class CreateEventActivity extends AppCompatActivity {
 
         bindViews();
         setupDatePickers();
+        setupLocationAutocomplete();
 
         eventId = getIntent().getStringExtra("event_id");
         if (eventId != null) {
@@ -110,7 +131,8 @@ public class CreateEventActivity extends AppCompatActivity {
     private void populateFields() {
         etTitle.setText(existingEvent.getTitle());
         etDescription.setText(existingEvent.getDescription());
-        etLocation.setText(existingEvent.getLocation());
+        etLocation.setText(existingEvent.getLocation(), false);
+        isLocationSelectedFromDropdown = true; 
         if (existingEvent.getTags() != null) {
             etTags.setText(TextUtils.join(", ", existingEvent.getTags()));
         }
@@ -144,14 +166,10 @@ public class CreateEventActivity extends AppCompatActivity {
         try {
             InputStream is = getContentResolver().openInputStream(uri);
             Bitmap bitmap = BitmapFactory.decodeStream(is);
-            
-            // Resize image to keep Firestore document size under 1MB limit
             Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 800, 800, true);
-            
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
             byte[] bytes = baos.toByteArray();
-            
             base64Poster = Base64.encodeToString(bytes, Base64.DEFAULT);
             tvPosterName.setText("New image selected");
         } catch (Exception e) {
@@ -195,15 +213,69 @@ public class CreateEventActivity extends AppCompatActivity {
             pickDateTime(calEventEnd, etEventEnd, min, 0);
         });
         etRegOpen.setOnClickListener(v -> {
-            // Reg Opens must be before Event Start
             long max = getText(etEventStart).isEmpty() ? 0 : calEventStart.getTimeInMillis() - 60000;
             pickDateTime(calRegOpen, etRegOpen, 0, max);
         });
         etRegClose.setOnClickListener(v -> {
             long min = getText(etRegOpen).isEmpty() ? 0 : calRegOpen.getTimeInMillis() + 60000;
-            // Reg Closes must be before Event End
             long max = getText(etEventEnd).isEmpty() ? 0 : calEventEnd.getTimeInMillis() - 60000;
             pickDateTime(calRegClose, etRegClose, min, max);
+        });
+    }
+
+    private void setupLocationAutocomplete() {
+        locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, locationList);
+        etLocation.setAdapter(locationAdapter);
+
+        etLocation.setOnItemClickListener((parent, view, position, id) -> {
+            isLocationSelectedFromDropdown = true;
+            tilLocation.setError(null);
+        });
+
+        etLocation.addTextChangedListener(new TextWatcher() {
+            private Runnable queryRunnable;
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                isLocationSelectedFromDropdown = false;
+            }
+            @Override public void afterTextChanged(Editable s) {
+                if (queryRunnable != null) mainHandler.removeCallbacks(queryRunnable);
+                String query = s.toString().trim();
+                if (query.length() < 2) return;
+
+                queryRunnable = () -> fetchSuggestions(query);
+                mainHandler.postDelayed(queryRunnable, 300); // Very fast debounce
+            }
+        });
+    }
+
+    private void fetchSuggestions(String query) {
+        executor.execute(() -> {
+            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+            try {
+                List<Address> addresses = geocoder.getFromLocationName(query, 5);
+                final List<String> suggestions = new ArrayList<>();
+                if (addresses != null) {
+                    for (Address addr : addresses) {
+                        StringBuilder sb = new StringBuilder();
+                        for (int i = 0; i <= addr.getMaxAddressLineIndex(); i++) {
+                            if (i > 0) sb.append(", ");
+                            sb.append(addr.getAddressLine(i));
+                        }
+                        suggestions.add(sb.toString());
+                    }
+                }
+                mainHandler.post(() -> {
+                    locationList.clear();
+                    locationList.addAll(suggestions);
+                    locationAdapter.notifyDataSetChanged();
+                    if (!suggestions.isEmpty() && etLocation.hasFocus()) {
+                        etLocation.showDropDown();
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
     }
 
@@ -215,8 +287,6 @@ public class CreateEventActivity extends AppCompatActivity {
                             (tp, hour, minute) -> {
                                 cal.set(Calendar.HOUR_OF_DAY, hour);
                                 cal.set(Calendar.MINUTE, minute);
-                                
-                                // Enforcement logic
                                 if (minMillis > 0 && cal.getTimeInMillis() < minMillis) {
                                     cal.setTimeInMillis(minMillis);
                                     Toast.makeText(this, "Time adjusted to satisfy minimum requirements", Toast.LENGTH_SHORT).show();
@@ -224,7 +294,6 @@ public class CreateEventActivity extends AppCompatActivity {
                                     cal.setTimeInMillis(maxMillis);
                                     Toast.makeText(this, "Time adjusted to satisfy maximum requirements", Toast.LENGTH_SHORT).show();
                                 }
-                                
                                 target.setText(sdf.format(cal.getTime()));
                             },
                             cal.get(Calendar.HOUR_OF_DAY),
@@ -233,17 +302,15 @@ public class CreateEventActivity extends AppCompatActivity {
                 cal.get(Calendar.YEAR),
                 cal.get(Calendar.MONTH),
                 cal.get(Calendar.DAY_OF_MONTH));
-        
         if (minMillis > 0) dpd.getDatePicker().setMinDate(minMillis);
         if (maxMillis > 0 && maxMillis >= minMillis) dpd.getDatePicker().setMaxDate(maxMillis);
-        
         dpd.show();
     }
 
     private void validateAndSave() {
         String title = getText(etTitle);
         String desc  = getText(etDescription);
-        String loc   = getText(etLocation);
+        String loc   = etLocation.getText().toString().trim();
         String cap   = getText(etCapacity);
 
         boolean valid = true;
@@ -262,25 +329,20 @@ public class CreateEventActivity extends AppCompatActivity {
         
         if (!valid) return;
 
-        // Date logical validation
-        long startMillis = calEventStart.getTimeInMillis();
-        long endMillis = calEventEnd.getTimeInMillis();
-        long regOpenMillis = calRegOpen.getTimeInMillis();
-        long regCloseMillis = calRegClose.getTimeInMillis();
-
-        if (endMillis <= startMillis) {
-            Toast.makeText(this, R.string.error_invalid_end_date, Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (regOpenMillis >= startMillis) {
-            Toast.makeText(this, "Registration must open before the event starts", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (regCloseMillis <= regOpenMillis || regCloseMillis >= endMillis) {
-            Toast.makeText(this, "Registration must close between its opening and the event end", Toast.LENGTH_SHORT).show();
-            return;
+        // Final Geocoder Check to ensure address is real
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocationName(loc, 1);
+            if (addresses == null || addresses.isEmpty()) {
+                tilLocation.setError("Invalid address. Please enter a real-world location.");
+                return;
+            }
+        } catch (IOException e) {
+            // Network failure - if it's already marked valid from dropdown, let it pass
+            if (!isLocationSelectedFromDropdown) {
+                Toast.makeText(this, "Cannot verify location. Please pick from the dropdown suggestions.", Toast.LENGTH_LONG).show();
+                return;
+            }
         }
 
         int capacity   = safeInt(cap, 10);

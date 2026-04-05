@@ -78,11 +78,17 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_location" style="@style/InputField"
                         android:layout_width="match_parent" android:layout_height="wrap_content"
-                        android:hint="@string/hint_location" android:layout_marginBottom="12dp">
-                        <com.google.android.material.textfield.TextInputEditText
+                        android:hint="@string/hint_location" android:layout_marginBottom="12dp"
+                        app:endIconMode="clear_text">
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
                             android:id="@+id/et_location"
-                            android:layout_width="match_parent" android:layout_height="wrap_content"
-                            android:inputType="textPostalAddress"/>
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="64dp"
+                            android:inputType="textPostalAddress"
+                            android:completionThreshold="1"
+                            android:paddingVertical="16dp"
+                            android:textSize="16sp"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout

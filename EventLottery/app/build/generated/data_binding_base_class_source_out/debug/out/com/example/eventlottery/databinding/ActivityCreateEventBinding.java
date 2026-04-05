@@ -14,6 +14,7 @@ import androidx.viewbinding.ViewBindings;
 import com.example.eventlottery.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import java.lang.NullPointerException;
@@ -43,7 +44,7 @@ public final class ActivityCreateEventBinding implements ViewBinding {
   public final TextInputEditText etEventStart;
 
   @NonNull
-  public final TextInputEditText etLocation;
+  public final MaterialAutoCompleteTextView etLocation;
 
   @NonNull
   public final TextInputEditText etMaxWl;
@@ -112,7 +113,7 @@ public final class ActivityCreateEventBinding implements ViewBinding {
       @NonNull MaterialButton btnCreateEvent, @NonNull MaterialButton btnUploadPoster,
       @NonNull TextInputEditText etCapacity, @NonNull TextInputEditText etDescription,
       @NonNull TextInputEditText etEventEnd, @NonNull TextInputEditText etEventStart,
-      @NonNull TextInputEditText etLocation, @NonNull TextInputEditText etMaxWl,
+      @NonNull MaterialAutoCompleteTextView etLocation, @NonNull TextInputEditText etMaxWl,
       @NonNull TextInputEditText etPrice, @NonNull TextInputEditText etRegClose,
       @NonNull TextInputEditText etRegOpen, @NonNull TextInputEditText etTags,
       @NonNull TextInputEditText etTitle, @NonNull SwitchMaterial swGeolocation,
@@ -218,7 +219,7 @@ public final class ActivityCreateEventBinding implements ViewBinding {
       }
 
       id = R.id.et_location;
-      TextInputEditText etLocation = ViewBindings.findChildViewById(rootView, id);
+      MaterialAutoCompleteTextView etLocation = ViewBindings.findChildViewById(rootView, id);
       if (etLocation == null) {
         break missingId;
       }
