@@ -2,9 +2,20 @@ package com.example.eventlottery.models;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-
+/**
+ * Unit tests for the {@link Event} model class.
+ *
+ * <p>Role in application: validates event registration state logic and formatted values
+ * that are displayed to entrants and organizers throughout the event lottery workflow.
+ *
+ * <p>Outstanding issues: these tests focus on representative scenarios and do not yet
+ * cover every status combination or boundary case around exact timestamps.
+ */
 public class EventTest {
-
+    /**
+     * Verifies that registration is considered open only when the current time falls
+     * within the registration window and the event status is open.
+     */
     @Test
     public void testIsRegistrationOpen() {
         Event event = new Event();
@@ -32,7 +43,10 @@ public class EventTest {
         event.setStatus(Event.STATUS_CLOSED);
         assertFalse(event.isRegistrationOpen());
     }
-
+    /**
+     * Verifies that event prices are formatted as user-facing strings, including the
+     * special free label and rounded dollar formatting.
+     */
     @Test
     public void testGetFormattedPrice() {
         Event event = new Event();
@@ -45,7 +59,10 @@ public class EventTest {
         event.setPrice(15.99);
         assertEquals("$16", event.getFormattedPrice()); // Note: format is %.0f
     }
-
+    /**
+     * Verifies that the days-left helper returns the number of remaining whole days
+     * before registration closes and returns zero once the deadline has passed.
+     */
     @Test
     public void testGetDaysLeftToRegister() {
         Event event = new Event();
