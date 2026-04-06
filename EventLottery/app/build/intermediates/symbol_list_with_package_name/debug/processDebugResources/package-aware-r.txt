@@ -3141,6 +3141,7 @@ drawable ic_comment_edit
 drawable ic_dashboard
 drawable ic_delete
 drawable ic_edit
+drawable ic_edit_pencil
 drawable ic_home
 drawable ic_keyboard_black_24dp
 drawable ic_location

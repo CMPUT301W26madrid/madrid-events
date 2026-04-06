@@ -228,6 +228,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private void completeLogin(User user) {
         if (user == null) return;
+
+        // Ensure this user profile is associated with the current device for Quick Login
+        String currentDeviceId = session.getDeviceId();
+        if (!currentDeviceId.equals(user.getDeviceId())) {
+            user.setDeviceId(currentDeviceId);
+            userRepo.updateUser(user.getId(), user);
+        }
+
         session.saveUserId(user.getId());
         String role = "entrant";
         if (user.hasRole("admin")) role = "admin";
@@ -239,9 +247,6 @@ public class LoginActivity extends AppCompatActivity {
     private void continueWithoutAccount() {
         userRepo.getUserByDeviceId(session.getDeviceId()).addOnSuccessListener(qs -> {
             if (qs != null && !qs.isEmpty()) {
-                // For guest login, if they have multiple profiles, we just take the first one?
-                // Or maybe prompt them for password if it has one?
-                // In many apps "continue without account" creates a fresh guest or logs into existing guest.
                 User u = qs.getDocuments().get(0).toObject(User.class);
                 if (u != null) {
                     u.setId(qs.getDocuments().get(0).getId());
@@ -276,9 +281,24 @@ public class LoginActivity extends AppCompatActivity {
 
     private void onProfileSelected(User user) {
         if (user == null) return;
-        // Populate and scroll to password
+        
+        // If in signup mode, switch back to login mode
+        if (isSignupMode) {
+            toggleSignupMode();
+        }
+
+        // If the user has no password (guest), log in immediately
+        if (TextUtils.isEmpty(user.getPassword())) {
+            completeLogin(user);
+            return;
+        }
+
+        // For users with passwords, populate ID and focus password field
         etLoginId.setText(user.getEmail() != null && !user.getEmail().isEmpty() ? user.getEmail() : user.getPhone());
+        etLoginPassword.setText(""); // Clear password field
         etLoginPassword.requestFocus();
+        
+        Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT).show();
     }
 
     private void navigateToRole(String role) {
