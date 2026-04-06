@@ -26,15 +26,37 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
-
+/**
+ * Instrumented UI tests for {@link CreateEventActivity}.
+ *
+ * <p>Purpose:
+ * Confirms that organizers can reach the event creation screen and that the
+ * primary form fields needed to define a new event are visible.</p>
+ *
+ * <p>Role in application:
+ * Helps protect the organizer event-management workflow by checking the basic
+ * structure of the event creation interface used for lottery-enabled events.</p>
+ *
+ * <p>Outstanding issues:
+ * The test only validates view presence and still depends on fixed wait times
+ * and simple session mocking rather than full end-to-end organizer setup.</p>
+ */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class CreateEventActivityTest {
-
+    /**
+     * Rule that launches the event creation activity for each test run.
+     */
     @Rule
     public ActivityScenarioRule<CreateEventActivity> activityRule =
             new ActivityScenarioRule<>(CreateEventActivity.class);
-
+    /**
+     * Wakes and unlocks the device, dismisses common blocking dialogs, and prepares
+     * a mocked organizer session so the test stays on the create-event screen.
+     *
+     * @throws RemoteException if device shell commands fail while unlocking
+     * @throws IOException if the test environment cannot execute the device command
+     */
     @Before
     public void setUp() throws RemoteException, IOException {
         UiDevice device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
@@ -60,7 +82,9 @@ public class CreateEventActivityTest {
         session.saveUserId("test_organizer_id");
         session.saveActiveRole("organizer");
     }
-
+    /**
+     * Attempts to close common system dialogs that may block Espresso interactions.
+     */
     private void dismissSystemDialogs() {
         UiDevice device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
         String[] buttons = {"OK", "Don't Show Again", "Allow", "Dismiss", "Close"};
@@ -75,7 +99,9 @@ public class CreateEventActivityTest {
             }
         }
     }
-
+    /**
+     * Verifies that the key input fields and submit button on the create-event form are visible.
+     */
     @Test
     public void testCreateEventViews() {
         // Wait a bit for the activity to settle

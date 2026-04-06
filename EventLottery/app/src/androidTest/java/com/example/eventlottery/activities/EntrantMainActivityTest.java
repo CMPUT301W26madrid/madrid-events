@@ -27,15 +27,37 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
-
+/**
+ * Instrumented UI tests for {@link EntrantMainActivity}.
+ *
+ * <p>Purpose:
+ * Verifies that the entrant home screen shows the essential navigation controls
+ * needed to reach event discovery, notifications, and role-switching features.</p>
+ *
+ * <p>Role in application:
+ * Provides smoke-test coverage for the main entrant landing screen in the event
+ * lottery workflow after a user session has already been established.</p>
+ *
+ * <p>Outstanding issues:
+ * The test currently checks only top-level visibility and does not validate
+ * fragment switching, notification contents, or asynchronous data population.</p>
+ */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class EntrantMainActivityTest {
-
+    /**
+     * Rule that launches the entrant main activity for each test execution.
+     */
     @Rule
     public ActivityScenarioRule<EntrantMainActivity> activityRule =
             new ActivityScenarioRule<>(EntrantMainActivity.class);
-
+    /**
+     * Unlocks the device, dismisses common dialogs, and prepares a mocked entrant session
+     * so the main screen can open without redirecting back to authentication.
+     *
+     * @throws RemoteException if device shell commands fail while dismissing the keyguard
+     * @throws IOException if the test environment cannot execute the device command
+     */
     @Before
     public void setUp() throws RemoteException, IOException {
         // Unlock and wake up the device if needed
@@ -53,7 +75,9 @@ public class EntrantMainActivityTest {
         session.saveUserId("test_user_id");
         session.saveActiveRole("entrant");
     }
-
+    /**
+     * Attempts to dismiss common dialogs that may block the activity under test.
+     */
     private void dismissSystemDialogs() {
         UiDevice device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
         String[] buttons = {"OK", "Don't Show Again", "Allow", "Dismiss"};
@@ -68,7 +92,9 @@ public class EntrantMainActivityTest {
             }
         }
     }
-
+    /**
+     * Verifies that the entrant main screen shows the bottom navigation and header controls.
+     */
     @Test
     public void testNavigationElements() {
         // Check bottom navigation visibility

@@ -25,15 +25,37 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
-
+/**
+ * Instrumented UI tests for {@link ProfileActivity}.
+ *
+ * <p>Purpose:
+ * Ensures that the profile screen exposes the main editable identity fields
+ * required for entrant profile management.</p>
+ *
+ * <p>Role in application:
+ * Supports regression coverage for entrant profile maintenance, which is part of
+ * the app's user information and self-service account workflows.</p>
+ *
+ * <p>Outstanding issues:
+ * The test focuses on visibility only and does not yet validate profile loading,
+ * saving, deletion, or error states from the backing repositories.</p>
+ */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class ProfileActivityTest {
-
+    /**
+     * Rule that launches the profile activity for each test execution.
+     */
     @Rule
     public ActivityScenarioRule<ProfileActivity> activityRule =
             new ActivityScenarioRule<>(ProfileActivity.class);
-
+    /**
+     * Unlocks the device, dismisses common blocking dialogs, and prepares a mocked
+     * entrant session so the profile screen can open without authentication redirects.
+     *
+     * @throws RemoteException if device shell commands fail while dismissing the keyguard
+     * @throws IOException if the test environment cannot execute the device command
+     */
     @Before
     public void setUp() throws RemoteException, IOException {
         UiDevice device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
@@ -51,7 +73,9 @@ public class ProfileActivityTest {
         session.saveUserId("test_user_id");
         session.saveActiveRole("entrant");
     }
-
+    /**
+     * Attempts to dismiss common permission or warning dialogs that can interrupt the test.
+     */
     private void dismissSystemDialogs() {
         UiDevice device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
         String[] buttons = {"OK", "Don't Show Again", "Allow", "Dismiss"};
@@ -66,7 +90,9 @@ public class ProfileActivityTest {
             }
         }
     }
-
+    /**
+     * Verifies that the primary profile form widgets are visible to the user.
+     */
     @Test
     public void testProfileViews() {
         onView(withId(R.id.et_name)).check(matches(isDisplayed()));

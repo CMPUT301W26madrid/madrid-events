@@ -30,14 +30,36 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
-
+/**
+ * Instrumented UI tests for {@link LoginActivity}.
+ *
+ * <p>Purpose:
+ * Verifies that the login screen loads correctly and that the screen can toggle
+ * between sign-in and sign-up modes during entrant authentication flows.</p>
+ *
+ * <p>Role in application:
+ * Supports regression testing for the app entry point by preparing a clean session,
+ * dismissing disruptive system dialogs, and asserting core authentication UI elements.</p>
+ *
+ * <p>Outstanding issues:
+ * The tests still rely on fixed sleep intervals and device-specific dialog dismissal,
+ * which may make them less stable on slower emulators or devices.</p>
+ */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class LoginActivityTest {
+    /** UI Automator device handle used for wake, unlock, and dialog dismissal steps. */
 
     private UiDevice device;
+    /** Scenario used to launch and close the login activity explicitly for each test. */
     private ActivityScenario<LoginActivity> scenario;
-
+    /**
+     * Clears any existing session, wakes and unlocks the test device, launches the activity,
+     * and dismisses common system dialogs that may steal focus from the UI under test.
+     *
+     * @throws RemoteException if a shell command used to unlock the device fails
+     * @throws IOException if the underlying device command infrastructure fails
+     */
     @Before
     public void setUp() throws RemoteException, IOException {
         // 1. Clear session BEFORE launching the activity to prevent redirection
@@ -66,14 +88,21 @@ public class LoginActivityTest {
         
         dismissSystemDialogs();
     }
-
+    /**
+     * Closes the launched activity scenario after each test to release resources cleanly.
+     */
     @After
     public void tearDown() {
         if (scenario != null) {
             scenario.close();
         }
     }
-
+    /**
+     * Attempts to dismiss a set of common system popups that may block test interactions.
+     *
+     * <p>This helper looks for known button labels such as permission prompts or warning
+     * dialogs and clicks them when present.</p>
+     */
     private void dismissSystemDialogs() {
         // Try to dismiss various common system dialogs
         String[] buttons = {"OK", "Don't Show Again", "Allow", "Dismiss", "Close", "Wait"};
@@ -88,7 +117,9 @@ public class LoginActivityTest {
             }
         }
     }
-
+    /**
+     * Verifies that the essential login screen widgets are displayed in sign-in mode.
+     */
     @Test
     public void testLoginScreenViews() {
         // Wait for UI to settle and dismiss any late dialogs
@@ -104,7 +135,9 @@ public class LoginActivityTest {
         onView(withId(R.id.tv_switch_to_signup)).perform(scrollTo()).check(matches(isDisplayed()));
         onView(withId(R.id.btn_continue_device)).perform(scrollTo()).check(matches(isDisplayed()));
     }
-
+    /**
+     * Verifies that the login screen can toggle to sign-up mode and then back to sign-in mode.
+     */
     @Test
     public void testToggleSignupMode() {
         try { Thread.sleep(2000); } catch (InterruptedException e) {}
