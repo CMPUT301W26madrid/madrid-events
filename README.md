@@ -4,7 +4,7 @@ Welcome to **EventLottery**, an Android application for fair event registration 
 
 Our app helps entrants join popular community events without needing to constantly refresh a webpage or race for spots. Instead, organizers collect interested entrants in a waiting list and use a lottery system to fairly select participants. The app also supports replacement draws, QR-based event access, notifications, and role-based event management.
 
----
+
 
 ## Table of Contents
 
@@ -37,7 +37,7 @@ Once registration closes, organizers can draw a specified number of entrants fro
 
 The app also supports QR-code access to event details, event poster images, optional geolocation requirements, profile management, comment features, and separate workflows for entrants, organizers, and administrators.
 
----
+
 ## Features
 
 ### Entrant Features
@@ -80,7 +80,7 @@ The app also supports QR-code access to event details, event poster images, opti
 - Remove inappropriate event comments
 - Act as an administrator while also supporting organizer and entrant capabilities
 
----
+
 
 ## Roles
 
@@ -93,7 +93,7 @@ An organizer creates and manages events, monitors waiting lists, runs lottery dr
 ### Administrator
 An administrator manages the app infrastructure and moderates events, profiles, images, organizers, and comments.
 
----
+
 
 ## Tech Stack
 
@@ -106,7 +106,7 @@ An administrator manages the app infrastructure and moderates events, profiles, 
 - **Image Upload Support**
 - **Geolocation Verification**
 
----
+
 
 
 ## Wiki Page
