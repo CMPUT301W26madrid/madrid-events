@@ -1,3 +1,14 @@
+/**
+ * Role: Repository / Data Access Object (DAO)
+ * Purpose: Provides an abstraction layer for all Firestore operations related
+ * to event comments. It handles the creation, retrieval, and real-time
+ * synchronization of comment streams for specific events, as well as
+ * administrative moderation (deletion) tasks.
+ *
+ * Design Pattern: Repository Pattern. This decouples the ViewModel/Activity
+ * from the specific database implementation (Firebase Firestore).
+ */
+
 package com.example.eventlottery.repositories;
 
 import com.example.eventlottery.models.Comment;

@@ -1,3 +1,14 @@
+/**
+ * Role: Repository / Data Access Object (DAO)
+ * Purpose: Centralizes all Firestore operations for the 'notifications' collection.
+ * It manages the creation, retrieval, deletion, and status updates of notifications,
+ * as well as batch operations like marking all unread notifications as read for a user.
+ *
+ * Design Pattern: Repository Pattern. It abstracts the data source (Firebase)
+ * from the rest of the application, allowing Activities and ViewModels
+ * to interact with AppNotification data through Task-based asynchronous methods.
+ */
+
 package com.example.eventlottery.repositories;
 
 import com.example.eventlottery.models.AppNotification;

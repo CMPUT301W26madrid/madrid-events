@@ -1,3 +1,13 @@
+/**
+ * Role: Utility / Helper
+ * Purpose: Provides CSV export functionality for event registration data.
+ * It builds a formatted CSV file from a list of registrations and saves it
+ * to the device's Downloads folder, then triggers a share intent for distribution.
+ *
+ * Design Pattern: Static Utility Class. It exposes stateless helper methods
+ * that can be called directly from Activities or ViewModels without instantiation.
+ */
+
 package com.example.eventlottery.utils;
 
 import android.content.ContentValues;

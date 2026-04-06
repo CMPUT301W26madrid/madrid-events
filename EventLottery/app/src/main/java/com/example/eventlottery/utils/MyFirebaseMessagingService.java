@@ -1,3 +1,15 @@
+/**
+ * Role: Utility / Firebase Service
+ * Purpose: Handles incoming Firebase Cloud Messaging (FCM) events, including
+ * FCM token refresh persistence and the display of push notifications
+ * for lottery results, invitations, and event updates.
+ *
+ * Design Pattern: Service Extension. It extends FirebaseMessagingService to
+ * intercept push message delivery and token lifecycle events, routing
+ * notification payloads into system-level Android notifications.
+ */
+
+
 package com.example.eventlottery.utils;
 
 import android.app.NotificationChannel;

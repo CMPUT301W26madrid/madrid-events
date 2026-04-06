@@ -1,3 +1,15 @@
+/**
+ * Role: Repository / Data Access Object (DAO)
+ * Purpose: Centralizes all Firestore operations for the 'users' collection.
+ * It manages the creation, retrieval, deletion, and searching of users,
+ * as well as targeted updates like FCM token refresh and notification preferences.
+ *
+ * Design Pattern: Repository Pattern. It abstracts the data source (Firebase)
+ * from the rest of the application, allowing Activities and ViewModels
+ * to interact with User data through Task-based asynchronous methods.
+ */
+
+
 package com.example.eventlottery.repositories;
 
 import com.example.eventlottery.models.User;

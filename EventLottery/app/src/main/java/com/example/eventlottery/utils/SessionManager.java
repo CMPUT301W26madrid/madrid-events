@@ -1,3 +1,14 @@
+/**
+ * Role: Utility / Session Manager
+ * Purpose: Manages local user session state using SharedPreferences,
+ * including user ID persistence, active role tracking, and stable
+ * device identification via Android ID.
+ *
+ * Design Pattern: Static Utility Class. It wraps SharedPreferences access
+ * behind a clean interface, allowing Activities and Services to read and
+ * write session data without directly coupling to Android storage APIs.
+ */
+
 package com.example.eventlottery.utils;
 
 import android.content.Context;

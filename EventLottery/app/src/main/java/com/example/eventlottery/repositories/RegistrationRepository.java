@@ -1,3 +1,14 @@
+/**
+ * Role: Repository / Data Access Object (DAO)
+ * Purpose: Centralizes all Firestore operations for the 'registrations' collection.
+ * It manages the creation, retrieval, deletion, and status transitions of registrations,
+ * as well as filtered queries by event, user, and status for lottery and waitlist workflows.
+ *
+ * Design Pattern: Repository Pattern. It abstracts the data source (Firebase)
+ * from the rest of the application, allowing Activities and ViewModels
+ * to interact with Registration data through Task-based asynchronous methods.
+ */
+
 package com.example.eventlottery.repositories;
 
 import com.example.eventlottery.models.Registration;

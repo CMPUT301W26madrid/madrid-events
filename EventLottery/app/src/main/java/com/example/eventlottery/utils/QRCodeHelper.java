@@ -1,3 +1,13 @@
+/**
+ * Role: Utility / Helper
+ * Purpose: Provides QR code generation and deep-link encoding for events.
+ * It converts event identifiers into scannable QR code Bitmaps using the
+ * ZXing library, and handles deep-link construction and extraction.
+ *
+ * Design Pattern: Static Utility Class. It exposes stateless helper methods
+ * that can be called directly from Activities or ViewModels without instantiation.
+ */
+
 package com.example.eventlottery.utils;
 
 import android.graphics.Bitmap;

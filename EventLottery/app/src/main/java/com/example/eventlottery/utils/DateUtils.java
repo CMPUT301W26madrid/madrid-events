@@ -1,3 +1,13 @@
+/**
+ * Role: Utility / Helper
+ * Purpose: Provides centralized date and time formatting for use across the application.
+ * It converts millisecond timestamps into human-readable strings in various formats,
+ * including relative time expressions and countdown calculations.
+ *
+ * Design Pattern: Static Utility Class. It exposes stateless helper methods
+ * that can be called directly from Activities or ViewModels without instantiation.
+ */
+
 package com.example.eventlottery.utils;
 
 import java.text.SimpleDateFormat;

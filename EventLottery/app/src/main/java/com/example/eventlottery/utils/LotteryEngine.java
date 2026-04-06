@@ -1,3 +1,15 @@
+/**
+ * Role: Utility / Business Logic Engine
+ * Purpose: Encapsulates all lottery draw logic for events, including the initial
+ * random selection of winners, replacement draws when spots are declined,
+ * and bulk notification dispatch to entrants and organizers.
+ *
+ * Design Pattern: Service / Engine Class. It coordinates between the
+ * RegistrationRepository and NotificationRepository to execute multi-step
+ * lottery workflows, exposing results through a callback interface.
+ */
+
+
 package com.example.eventlottery.utils;
 
 import com.example.eventlottery.models.AppNotification;
