@@ -16,10 +16,26 @@ import com.example.eventlottery.models.Event;
 import com.example.eventlottery.utils.DateUtils;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * RecyclerView adapter for the entrant event discovery feed.
+ *
+ * <p>Role in application: displays public event cards with poster images, dates, pricing,
+ * registration status, and time-left information while supporting keyword, status, and
+ * event-size filtering.</p>
+ *
+ * <p>Outstanding issues: filtering logic currently lives inside the adapter and relies on
+ * UI-facing filter labels, which makes future localization or category expansion harder.</p>
+ */
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
-
+    /**
+     * Callback invoked when a discover-event card is selected.
+     */
     public interface OnEventClickListener {
+        /**
+         * Opens the selected event.
+         *
+         * @param event the chosen event
+         */
         void onEventClick(Event event);
     }
 
@@ -30,16 +46,30 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     private String currentQuery = "";
     private String currentStatusFilter = "All Status";
     private String currentSizeFilter = "Any Size";
-
+    /**
+     * Creates a new adapter for discover-event cards.
+     *
+     * @param listener callback used when an event card is tapped
+     */
     public EventAdapter(OnEventClickListener listener) {
         this.listener = listener;
     }
-
+    /**
+     * Replaces the full list of discoverable events.
+     *
+     * @param events the events available to display
+     */
     public void setEvents(List<Event> events) {
         this.allEvents = new ArrayList<>(events);
         applyFilters();
     }
-
+    /**
+     * Updates the active query and filter settings, then refreshes the visible list.
+     *
+     * @param query keyword text used to match title or location
+     * @param statusFilter the selected status filter label
+     * @param sizeFilter the selected capacity-size filter label
+     */
     public void filter(String query, String statusFilter, String sizeFilter) {
         this.currentQuery = query;
         this.currentStatusFilter = statusFilter;
@@ -80,16 +110,31 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         }
         notifyDataSetChanged();
     }
-
+    /**
+     * Indicates whether the filtered discover list is empty.
+     *
+     * @return {@code true} if no events match the current filters
+     */
     public boolean isEmpty() { return events.isEmpty(); }
-
+    /**
+     * Inflates a discover-event card.
+     *
+     * @param parent the parent RecyclerView
+     * @param viewType the requested view type
+     * @return a holder for one discover-event card
+     */
     @NonNull @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_event_card, parent, false);
         return new ViewHolder(v);
     }
-
+    /**
+     * Binds one discoverable event to its card view.
+     *
+     * @param h the holder receiving event data
+     * @param position the adapter position being displayed
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder h, int position) {
         Event e = events.get(position);
@@ -145,16 +190,26 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
         h.itemView.setOnClickListener(v -> listener.onEventClick(e));
     }
-
+    /**
+     * Returns the number of currently visible discover-event cards.
+     *
+     * @return the filtered event count
+     */
     @Override
     public int getItemCount() { return events.size(); }
-
+    /**
+     * Holds view references for one discover-event card.
+     */
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitle, tvLocation, tvDate,
                  tvCapacity, tvPrice, tvStatus, tvDaysLeft;
         ImageView ivPoster;
         View llDaysLeft;
-
+        /**
+         * Creates a holder for one discover-event item view.
+         *
+         * @param v the inflated item view
+         */
         ViewHolder(View v) {
             super(v);
             tvTitle       = v.findViewById(R.id.tv_title);

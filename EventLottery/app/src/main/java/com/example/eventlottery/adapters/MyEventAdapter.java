@@ -11,15 +11,42 @@ import com.example.eventlottery.models.Registration;
 import com.example.eventlottery.utils.DateUtils;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * RecyclerView adapter for the entrant's personal event history and registration status list.
+ *
+ * <p>Role in application: shows the events associated with the current user, including
+ * registration status, join date, and a lightweight status filter for browsing past and
+ * current event participation.</p>
+ *
+ * <p>Outstanding issues: filtering currently depends on fixed display strings, so changes to
+ * filter labels must remain synchronized with the UI controls that invoke this adapter.</p>
+ */
 public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHolder> {
-
-    public interface OnItemClickListener { void onClick(Registration registration); }
-
+    /**
+     * Callback invoked when a registration history item is selected.
+     */
+    public interface OnItemClickListener {
+        /**
+         * Opens details for the selected registration.
+         *
+         * @param registration the selected registration record
+         */
+        void onClick(Registration registration);
+    }
+    /**
+     * Simple view model combining a registration with event metadata required by the list.
+     */
     public static class RegistrationWithTitle {
         public final Registration registration;
         public final String eventTitle;
         public final long eventStartDate;
+        /**
+         * Creates a new combined registration and event summary object.
+         *
+         * @param r the registration record
+         * @param title the related event title
+         * @param date the event start date in milliseconds
+         */
         public RegistrationWithTitle(Registration r, String title, long date) {
             this.registration   = r;
             this.eventTitle     = title;
@@ -30,14 +57,27 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
     private List<RegistrationWithTitle> allItems = new ArrayList<>();
     private List<RegistrationWithTitle> filteredItems = new ArrayList<>();
     private OnItemClickListener listener;
+    /**
+     * Registers the click listener for list rows.
+     *
+     * @param l listener used when an item is tapped
+     */
 
     public void setListener(OnItemClickListener l) { this.listener = l; }
-
+    /**
+     * Replaces the registration history dataset and resets the filter.
+     *
+     * @param list the history items to display
+     */
     public void setItems(List<RegistrationWithTitle> list) {
         this.allItems = new ArrayList<>(list);
         applyFilter("All Status");
     }
-
+    /**
+     * Applies the requested status filter to the event history list.
+     *
+     * @param statusFilter the selected status label
+     */
     public void filter(String statusFilter) {
         applyFilter(statusFilter);
     }
@@ -69,16 +109,31 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
             default: return false;
         }
     }
-
+    /**
+     * Indicates whether the filtered history list is empty.
+     *
+     * @return {@code true} if no items match the current filter
+     */
     public boolean isEmpty() { return filteredItems.isEmpty(); }
-
+    /**
+     * Inflates a row for the user's event history list.
+     *
+     * @param parent the parent RecyclerView
+     * @param viewType the requested view type
+     * @return a holder for one event history row
+     */
     @NonNull @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_my_event, parent, false);
         return new ViewHolder(v);
     }
-
+    /**
+     * Binds one registration history item to the supplied row.
+     *
+     * @param h the holder receiving row data
+     * @param position the adapter position being displayed
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder h, int position) {
         RegistrationWithTitle item = filteredItems.get(position);
@@ -117,11 +172,22 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
         if (s == null || s.isEmpty()) return s;
         return s.substring(0, 1).toUpperCase() + s.substring(1);
     }
-
+    /**
+     * Returns the number of filtered history items.
+     *
+     * @return the current visible item count
+     */
     @Override public int getItemCount() { return filteredItems.size(); }
-
+    /**
+     * Holds view references for a single "My Events" row.
+     */
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvStatusIcon, tvEventTitle, tvEventDate, tvJoinedDate, tvStatusBadge;
+        /**
+         * Creates a holder for one event history item view.
+         *
+         * @param v the inflated item view
+         */
         ViewHolder(View v) {
             super(v);
             tvStatusIcon  = v.findViewById(R.id.tv_status_icon);
