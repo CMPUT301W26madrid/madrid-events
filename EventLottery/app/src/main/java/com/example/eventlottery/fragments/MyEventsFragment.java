@@ -27,7 +27,16 @@ import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Fragment that shows the active user's registration history across events.
+ *
+ * <p>Role in application: loads registrations for the signed-in user, resolves each
+ * registration to its related event title and date, provides status-based filtering,
+ * and opens event details when a registration is selected.</p>
+ *
+ * <p>Outstanding issues: event titles are resolved with multiple Firestore lookups and
+ * could be optimized further if registration data were denormalized or batched differently.</p>
+ */
 public class MyEventsFragment extends Fragment {
 
     private SessionManager session;
@@ -37,14 +46,26 @@ public class MyEventsFragment extends Fragment {
     private View llEmpty;
     private ProgressBar progress;
     private AutoCompleteTextView atvStatusFilter;
-
+    /**
+     * Inflates the screen that lists the user's joined, invited, and past events.
+     *
+     * @param inflater the layout inflater used to create the fragment view
+     * @param container the parent view that the fragment UI will attach to
+     * @param savedInstanceState previously saved fragment state, if any
+     * @return the inflated my-events fragment view
+     */
     @Nullable @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_my_events, container, false);
     }
-
+    /**
+     * Initializes repositories, binds the RecyclerView, configures filters, and loads data.
+     *
+     * @param view the fragment root view
+     * @param savedInstanceState previously saved fragment state, if any
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -70,7 +91,9 @@ public class MyEventsFragment extends Fragment {
         setupFilter();
         loadMyEvents();
     }
-
+    /**
+     * Configures the registration-status dropdown used to filter the displayed items.
+     */
     private void setupFilter() {
         String[] statuses = {"All Status", "Waiting", "Selected", "Accepted", "Declined", "Cancelled"};
         ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(requireContext(), 
@@ -81,7 +104,10 @@ public class MyEventsFragment extends Fragment {
             updateEmpty();
         });
     }
-
+    /**
+     * Loads the current user's registrations, resolves event metadata for each registration,
+     * and updates the list in reverse chronological order of join time.
+     */
     private void loadMyEvents() {
         String userId = session.getUserId();
         if (userId == null) return;
@@ -166,12 +192,16 @@ public class MyEventsFragment extends Fragment {
             Toast.makeText(getContext(), "Registration load failed", Toast.LENGTH_SHORT).show();
         });
     }
-
+    /**
+     * Toggles the empty-state view based on the filtered adapter contents.
+     */
     private void updateEmpty() {
         boolean empty = adapter.isEmpty();
         llEmpty.setVisibility(empty ? View.VISIBLE : View.GONE);
     }
-
+    /**
+     * Refreshes the user's event list whenever the fragment becomes visible again.
+     */
     @Override
     public void onResume() {
         super.onResume();

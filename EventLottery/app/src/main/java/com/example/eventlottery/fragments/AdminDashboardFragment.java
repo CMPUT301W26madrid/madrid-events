@@ -29,7 +29,17 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Administrative dashboard fragment for browsing and moderating users, events, images,
+ * and notification logs.
+ *
+ * <p>Role in application: presents summary statistics, tab-based management views,
+ * search/filter support, and moderation actions such as deleting users, events, and
+ * poster images.</p>
+ *
+ * <p>Outstanding issues: the notification log tab currently uses an inline adapter for
+ * simple text rows and could be extracted into a dedicated adapter class for maintainability.</p>
+ */
 public class AdminDashboardFragment extends Fragment {
 
     private UserRepository userRepo;
@@ -46,7 +56,14 @@ public class AdminDashboardFragment extends Fragment {
     private EditText etSearch;
 
     private int currentTab = 0; // 0=users, 1=events, 2=images, 3=logs
-
+    /**
+     * Inflates the admin dashboard and initializes its views, tabs, and data sources.
+     *
+     * @param inflater the layout inflater used to create the fragment view
+     * @param container the parent view that the fragment UI will attach to
+     * @param savedInstanceState previously saved fragment state, if any
+     * @return the inflated admin dashboard view
+     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -73,7 +90,9 @@ public class AdminDashboardFragment extends Fragment {
 
         return view;
     }
-
+    /**
+     * Creates adapters and listeners for user and event moderation actions.
+     */
     private void setupAdapters() {
         userAdapter = new AdminUserAdapter();
         userAdapter.setDeleteListener(this::confirmDeleteUser);
@@ -103,7 +122,9 @@ public class AdminDashboardFragment extends Fragment {
         
         rvAdmin.setLayoutManager(new LinearLayoutManager(getContext()));
     }
-
+    /**
+     * Builds the dashboard tabs and routes each tab to its corresponding data loader.
+     */
     private void setupTabs() {
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_users));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_events));
@@ -125,7 +146,9 @@ public class AdminDashboardFragment extends Fragment {
             @Override public void onTabReselected(TabLayout.Tab t) {}
         });
     }
-
+    /**
+     * Applies text-based filtering to the currently visible administrative list.
+     */
     private void setupSearch() {
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int st, int c, int a) {}
@@ -138,7 +161,9 @@ public class AdminDashboardFragment extends Fragment {
             @Override public void afterTextChanged(Editable s) {}
         });
     }
-
+    /**
+     * Loads summary counts for users, events, and events that currently have poster images.
+     */
     private void loadStats() {
         userRepo.getAllUsers().addOnSuccessListener(qs -> {
             if (isAdded()) tvStatUsers.setText(String.valueOf(qs.size()));
@@ -154,7 +179,9 @@ public class AdminDashboardFragment extends Fragment {
             tvStatImages.setText(String.valueOf(images));
         });
     }
-
+    /**
+     * Loads all user profiles into the admin moderation list.
+     */
     private void loadUsers() {
         progress.setVisibility(View.VISIBLE);
         rvAdmin.setAdapter(userAdapter);
@@ -172,7 +199,9 @@ public class AdminDashboardFragment extends Fragment {
             if (isAdded()) progress.setVisibility(View.GONE);
         });
     }
-
+    /**
+     * Loads all events into the admin moderation list.
+     */
     private void loadEvents() {
         progress.setVisibility(View.VISIBLE);
         rvAdmin.setAdapter(eventAdapter);
@@ -190,7 +219,9 @@ public class AdminDashboardFragment extends Fragment {
             if (isAdded()) progress.setVisibility(View.GONE);
         });
     }
-
+    /**
+     * Loads only events that currently have poster images so they can be reviewed or removed.
+     */
     private void showImagesTab() {
         progress.setVisibility(View.VISIBLE);
         rvAdmin.setAdapter(eventAdapter);
@@ -209,7 +240,9 @@ public class AdminDashboardFragment extends Fragment {
             updateEmpty();
         });
     }
-
+    /**
+     * Displays a simple list of notification log entries sent by organizers or the system.
+     */
     private void showLogsTab() {
         progress.setVisibility(View.VISIBLE);
         new com.example.eventlottery.repositories.NotificationRepository()
@@ -251,7 +284,11 @@ public class AdminDashboardFragment extends Fragment {
                     }
                 });
     }
-
+    /**
+     * Opens a dialog summarizing a user's profile details and offering a removal action.
+     *
+     * @param user the user whose details should be displayed
+     */
     private void showUserProfileDetails(User user) {
         StringBuilder sb = new StringBuilder();
         sb.append("Name: ").append(user.getName()).append("\n");
@@ -267,7 +304,11 @@ public class AdminDashboardFragment extends Fragment {
                 .setNegativeButton("Remove Profile", (d, w) -> confirmDeleteUser(user))
                 .show();
     }
-
+    /**
+     * Confirms and performs deletion of a user profile.
+     *
+     * @param user the user selected for deletion
+     */
     private void confirmDeleteUser(User user) {
         new AlertDialog.Builder(requireContext())
                 .setTitle(R.string.delete_profile)
@@ -284,7 +325,11 @@ public class AdminDashboardFragment extends Fragment {
                 .setNegativeButton(R.string.btn_cancel, null)
                 .show();
     }
-
+    /**
+     * Confirms and performs deletion of an event.
+     *
+     * @param event the event selected for deletion
+     */
     private void confirmDeleteEvent(Event event) {
         new AlertDialog.Builder(requireContext())
                 .setTitle("Delete Event")
@@ -302,7 +347,11 @@ public class AdminDashboardFragment extends Fragment {
                 .setNegativeButton(R.string.btn_cancel, null)
                 .show();
     }
-
+    /**
+     * Confirms and removes the poster image associated with an event.
+     *
+     * @param event the event whose poster should be cleared
+     */
     private void confirmDeletePoster(Event event) {
         new AlertDialog.Builder(requireContext())
                 .setTitle("Delete Image")
@@ -320,14 +369,21 @@ public class AdminDashboardFragment extends Fragment {
                 .setNegativeButton(R.string.btn_cancel, null)
                 .show();
     }
-
+    /**
+     * Updates empty-state visibility for the current admin tab.
+     */
     private void updateEmpty() {
         boolean empty = (currentTab == 0 && userAdapter.isEmpty()) ||
                         ((currentTab == 1 || currentTab == 2) && eventAdapter.isEmpty());
         llEmpty.setVisibility(empty ? View.VISIBLE : View.GONE);
         rvAdmin.setVisibility(empty ? View.GONE : View.VISIBLE);
     }
-
+    /**
+     * Converts a density-independent pixel value to a pixel value for runtime view creation.
+     *
+     * @param val the dp value to convert
+     * @return the corresponding pixel value
+     */
     private int dp(int val) {
         return Math.round(val * getResources().getDisplayMetrics().density);
     }

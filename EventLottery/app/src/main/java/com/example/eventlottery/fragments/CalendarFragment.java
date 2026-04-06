@@ -30,7 +30,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
+/**
+ * Fragment that presents public events in a monthly calendar view.
+ *
+ * <p>Role in application: groups public events by start date, renders a selectable month
+ * grid, and shows a day-specific list of matching events beneath the calendar.</p>
+ *
+ * <p>Outstanding issues: multi-day and recurring events are currently mapped only to their
+ * start date in the calendar display.</p>
+ */
 public class CalendarFragment extends Fragment {
 
     private final Calendar displayMonth = Calendar.getInstance();
@@ -45,14 +53,26 @@ public class CalendarFragment extends Fragment {
     private RecyclerView rvDayEvents;
     private EventAdapter dayAdapter;
     private EventRepository eventRepo;
-
+    /**
+     * Inflates the calendar screen layout.
+     *
+     * @param inflater the layout inflater used to create the fragment view
+     * @param container the parent view that the fragment UI will attach to
+     * @param savedInstanceState previously saved fragment state, if any
+     * @return the inflated calendar fragment view
+     */
     @Nullable @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_calendar, container, false);
     }
-
+    /**
+     * Binds calendar controls, initializes the event list, and triggers the first data load.
+     *
+     * @param view the fragment root view
+     * @param savedInstanceState previously saved fragment state, if any
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -83,7 +103,9 @@ public class CalendarFragment extends Fragment {
 
         loadEvents();
     }
-
+    /**
+     * Loads all public events and groups them by event date for calendar rendering.
+     */
     private void loadEvents() {
         eventRepo.getAllPublicEvents().addOnSuccessListener(qs -> {
             if (!isAdded()) return;  // fragment may have been detached
@@ -99,7 +121,10 @@ public class CalendarFragment extends Fragment {
             showDayEvents(selectedDate);
         });
     }
-
+    /**
+     * Rebuilds the visible month grid, marking today, the selected day, and dates that have
+     * one or more events.
+     */
     private void buildCalendarGrid() {
         tvMonthYear.setText(headerFmt.format(displayMonth.getTime()));
         gridCalendar.removeAllViews();
@@ -133,7 +158,15 @@ public class CalendarFragment extends Fragment {
             gridCalendar.addView(cell);
         }
     }
-
+    /**
+     * Creates a single calendar cell for a day in the month grid.
+     *
+     * @param label the day number text, or {@code null} for an empty spacer cell
+     * @param isToday whether the cell represents the current date
+     * @param isSelected whether the cell represents the currently selected date
+     * @param hasEvents whether one or more events exist on that date
+     * @return the configured calendar cell view
+     */
     private View makeDayCell(String label, boolean isToday, boolean isSelected, boolean hasEvents) {
         LinearLayout cell = new LinearLayout(getContext());
         cell.setOrientation(LinearLayout.VERTICAL);
@@ -180,7 +213,11 @@ public class CalendarFragment extends Fragment {
 
         return cell;
     }
-
+    /**
+     * Displays the events scheduled for the selected date.
+     *
+     * @param cal the selected calendar date
+     */
     private void showDayEvents(Calendar cal) {
         tvSelectedDate.setText("Events on " + dayHeaderFmt.format(cal.getTime()));
         String key = keyFmt.format(cal.getTime());
@@ -189,13 +226,24 @@ public class CalendarFragment extends Fragment {
         tvNoEventsDay.setVisibility(events.isEmpty() ? View.VISIBLE : View.GONE);
         rvDayEvents.setVisibility(events.isEmpty() ? View.GONE : View.VISIBLE);
     }
-
+    /**
+     * Determines whether two calendar instances refer to the same year, month, and day.
+     *
+     * @param a the first calendar date
+     * @param b the second calendar date
+     * @return {@code true} if both dates represent the same day, otherwise {@code false}
+     */
     private boolean sameDay(Calendar a, Calendar b) {
         return a.get(Calendar.YEAR) == b.get(Calendar.YEAR) &&
                a.get(Calendar.MONTH) == b.get(Calendar.MONTH) &&
                a.get(Calendar.DAY_OF_MONTH) == b.get(Calendar.DAY_OF_MONTH);
     }
-
+    /**
+     * Converts a density-independent pixel value to a pixel value for dynamically created views.
+     *
+     * @param val the dp value to convert
+     * @return the corresponding pixel value
+     */
     private int dp(int val) {
         return Math.round(val * getResources().getDisplayMetrics().density);
     }

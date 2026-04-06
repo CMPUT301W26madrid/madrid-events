@@ -25,7 +25,16 @@ import com.example.eventlottery.utils.SessionManager;
 import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Dashboard fragment for organizers to monitor and manage the events they run.
+ *
+ * <p>Role in application: shows summary statistics for organizer-owned events, lists those
+ * events in reverse chronological order, and provides navigation to event creation and
+ * event-management screens.</p>
+ *
+ * <p>Outstanding issues: aggregate counts are currently derived client-side from the loaded
+ * event list and may become inefficient for very large organizer datasets.</p>
+ */
 public class OrganizerDashboardFragment extends Fragment {
 
     private SessionManager session;
@@ -37,14 +46,26 @@ public class OrganizerDashboardFragment extends Fragment {
     private View llEmpty;
     private ProgressBar progress;
     private SwipeRefreshLayout swipeRefresh;
-
+    /**
+     * Inflates the organizer dashboard layout.
+     *
+     * @param inflater the layout inflater used to create the fragment view
+     * @param container the parent view that the fragment UI will attach to
+     * @param savedInstanceState previously saved fragment state, if any
+     * @return the inflated organizer dashboard view
+     */
     @Nullable @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_organizer_dashboard, container, false);
     }
-
+    /**
+     * Binds views, configures the organizer event list, and loads dashboard data.
+     *
+     * @param view the fragment root view
+     * @param savedInstanceState previously saved fragment state, if any
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -88,7 +109,9 @@ public class OrganizerDashboardFragment extends Fragment {
 
         loadDashboard();
     }
-
+    /**
+     * Loads organizer-owned events, updates summary metrics, and refreshes the displayed list.
+     */
     private void loadDashboard() {
         String userId = session.getUserId();
         if (userId == null) return;
@@ -128,6 +151,8 @@ public class OrganizerDashboardFragment extends Fragment {
             Toast.makeText(getContext(), "Error loading events: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         });
     }
-
+    /**
+     * Reloads dashboard data whenever the fragment returns to the foreground.
+     */
     @Override public void onResume() { super.onResume(); loadDashboard(); }
 }

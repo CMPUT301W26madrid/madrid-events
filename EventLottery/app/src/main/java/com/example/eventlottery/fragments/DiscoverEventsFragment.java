@@ -30,7 +30,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Fragment that lets entrants discover, search, filter, and scan into public events.
+ *
+ * <p>Role in application: loads the public event catalogue, applies search and dropdown
+ * filters, launches QR scanning, and opens event details for selected results.</p>
+ *
+ * <p>Outstanding issues: filtering is performed client-side on the currently loaded event
+ * list, which is appropriate for the project scope but may require pagination or server-side
+ * querying at larger scale.</p>
+ */
 public class DiscoverEventsFragment extends Fragment {
 
     private EventRepository eventRepo;
@@ -51,14 +60,26 @@ public class DiscoverEventsFragment extends Fragment {
                     if (eventId != null) openEventDetail(eventId);
                 }
             });
-
+    /**
+     * Inflates the discover-events layout.
+     *
+     * @param inflater the layout inflater used to create the fragment view
+     * @param container the parent view that the fragment UI will attach to
+     * @param savedInstanceState previously saved fragment state, if any
+     * @return the inflated discover-events fragment view
+     */
     @Nullable @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_discover_events, container, false);
     }
-
+    /**
+     * Binds the public event list, filter controls, and QR scanner entry point.
+     *
+     * @param view the fragment root view
+     * @param savedInstanceState previously saved fragment state, if any
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -96,7 +117,9 @@ public class DiscoverEventsFragment extends Fragment {
 
         loadEvents();
     }
-
+    /**
+     * Configures search text and dropdown filters for status and event size.
+     */
     private void setupFilters() {
         // Status options
         String[] statuses = {"All Status", "Open Now", "Closed", "Drawn", "Completed"};
@@ -121,7 +144,9 @@ public class DiscoverEventsFragment extends Fragment {
             @Override public void afterTextChanged(Editable s) {}
         });
     }
-
+    /**
+     * Applies the current search query and dropdown selections to the event adapter.
+     */
     private void applyFilters() {
         String query = etSearch.getText().toString();
         String status = atvStatus.getText().toString();
@@ -130,7 +155,9 @@ public class DiscoverEventsFragment extends Fragment {
         adapter.filter(query, status, size);
         updateEmpty();
     }
-
+    /**
+     * Loads all public events, sorts them by creation time, and refreshes the filtered list.
+     */
     private void loadEvents() {
         if (!isAdded()) return;
         progress.setVisibility(View.VISIBLE);
@@ -157,18 +184,26 @@ public class DiscoverEventsFragment extends Fragment {
             Toast.makeText(getContext(), "Error loading events: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         });
     }
-
+    /**
+     * Opens the detail screen for a selected event.
+     *
+     * @param eventId the identifier of the event to display
+     */
     private void openEventDetail(String eventId) {
         Intent intent = new Intent(getContext(), EventDetailActivity.class);
         intent.putExtra("event_id", eventId);
         startActivity(intent);
     }
-
+    /**
+     * Updates empty-state visibility based on the filtered adapter contents.
+     */
     private void updateEmpty() {
         boolean empty = adapter.isEmpty();
         llEmpty.setVisibility(empty ? View.VISIBLE : View.GONE);
         rvEvents.setVisibility(empty ? View.GONE : View.VISIBLE);
     }
-
+    /**
+     * Reloads public events whenever the fragment becomes active again.
+     */
     @Override public void onResume() { super.onResume(); loadEvents(); }
 }
