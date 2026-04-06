@@ -21,7 +21,15 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Entry activity for authentication and device-based quick access.
+ *
+ * <p>Role in application: supports sign-in, sign-up, profile selection on the current
+ * device, guest continuation, and routing to the correct role-specific home screen.</p>
+ *
+ * <p>Outstanding issues: password handling is intentionally simple for the project and
+ * should be strengthened before production deployment.</p>
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private SessionManager session;
@@ -45,7 +53,11 @@ public class LoginActivity extends AppCompatActivity {
     private TextView tvSwitchToSignup, tvTitle, tvSubtitle;
 
     private boolean isSignupMode = false;
-
+    /**
+     * Initializes authentication views and attempts automatic session routing when possible.
+     *
+     * @param savedInstanceState previously saved activity state, if any
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +83,9 @@ public class LoginActivity extends AppCompatActivity {
 
         loadProfiles();
     }
-
+    /**
+     * Binds all authentication and quick-login views from the layout.
+     */
     private void bindViews() {
         llQuickLogin = findViewById(R.id.ll_quick_login);
         rvProfiles = findViewById(R.id.rv_profiles);
@@ -104,7 +118,9 @@ public class LoginActivity extends AppCompatActivity {
         tvTitle = findViewById(R.id.tv_login_title);
         tvSubtitle = findViewById(R.id.tv_login_subtitle);
     }
-
+    /**
+     * Toggles the screen between sign-in and sign-up modes.
+     */
     private void toggleSignupMode() {
         isSignupMode = !isSignupMode;
         if (isSignupMode) {
@@ -126,6 +142,9 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Dispatches the primary action button to either the sign-in or sign-up flow.
+     */
     private void handleLoginOrSignup() {
         if (isSignupMode) {
             performSignup();
@@ -133,7 +152,9 @@ public class LoginActivity extends AppCompatActivity {
             performLogin();
         }
     }
-
+    /**
+     * Validates sign-up fields and creates a new user account.
+     */
     private void performSignup() {
         String name = etSignupName.getText().toString().trim();
         String email = etSignupEmail.getText().toString().trim();
@@ -179,7 +200,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
+    /**
+     * Attempts to authenticate a user by email or phone number and password.
+     */
     private void performLogin() {
         String loginId = etLoginId.getText().toString().trim();
         String password = etLoginPassword.getText().toString().trim();
@@ -215,7 +238,12 @@ public class LoginActivity extends AppCompatActivity {
             btnLogin.setText("Sign In");
         });
     }
-
+    /**
+     * Verifies the supplied password and completes login on success.
+     *
+     * @param user user record loaded from storage
+     * @param password password entered by the user
+     */
     private void checkPasswordAndLogin(User user, String password) {
         if (user != null && user.getPassword() != null && user.getPassword().equals(password)) {
             completeLogin(user);
@@ -225,7 +253,11 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Incorrect password", Toast.LENGTH_SHORT).show();
         }
     }
-
+    /**
+     * Finalizes a successful login and routes the user to the correct role home screen.
+     *
+     * @param user authenticated user
+     */
     private void completeLogin(User user) {
         if (user == null) return;
 
@@ -243,7 +275,9 @@ public class LoginActivity extends AppCompatActivity {
         session.saveActiveRole(role);
         navigateToRole(role);
     }
-
+    /**
+     * Continues with a device-based entrant profile, creating a guest profile if needed.
+     */
     private void continueWithoutAccount() {
         userRepo.getUserByDeviceId(session.getDeviceId()).addOnSuccessListener(qs -> {
             if (qs != null && !qs.isEmpty()) {
@@ -261,7 +295,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
+    /**
+     * Loads device-associated profiles for the quick-login list.
+     */
     private void loadProfiles() {
         userRepo.getUserByDeviceId(session.getDeviceId()).addOnSuccessListener(qs -> {
             if (qs == null) return;
@@ -278,7 +314,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
+    /**
+     * Handles quick-login profile selection from the recycler view.
+     *
+     * @param user selected profile
+     */
     private void onProfileSelected(User user) {
         if (user == null) return;
         
@@ -300,7 +340,11 @@ public class LoginActivity extends AppCompatActivity {
         
         Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT).show();
     }
-
+    /**
+     * Opens the main activity associated with the resolved active role.
+     *
+     * @param role active role to launch
+     */
     private void navigateToRole(String role) {
         Intent intent;
         switch (role) {

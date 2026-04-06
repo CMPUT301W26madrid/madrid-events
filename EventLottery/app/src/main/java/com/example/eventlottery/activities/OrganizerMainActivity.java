@@ -16,7 +16,15 @@ import com.example.eventlottery.utils.SessionManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Main entry activity for organizer users.
+ *
+ * <p>Role in application: hosts organizer navigation for dashboard, event discovery,
+ * notifications, profile access, and switching into other roles associated with the user.</p>
+ *
+ * <p>Outstanding issues: this activity intentionally keeps navigation simple and does
+ * not yet preserve richer per-tab state across role changes or process recreation.</p>
+ */
 public class OrganizerMainActivity extends AppCompatActivity {
 
     private SessionManager session;
@@ -81,13 +89,22 @@ public class OrganizerMainActivity extends AppCompatActivity {
             return false;
         });
     }
-
+    /**
+     * Replaces the organizer fragment container with the supplied fragment.
+     *
+     * @param f fragment to display
+     * @return {@code true} after the transaction is requested
+     */
     private boolean loadFragment(Fragment f) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, f).commit();
         return true;
     }
-
+    /**
+     * Launches another main activity when the user switches roles.
+     *
+     * @param role selected target role
+     */
     private void switchRole(String role) {
         Intent intent;
         switch (role) {
@@ -102,7 +119,12 @@ public class OrganizerMainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
+    /**
+     * Capitalizes the first letter of a role label for spinner display.
+     *
+     * @param s raw role text
+     * @return capitalized text, or the original value when empty
+     */
     private String capitalize(String s) {
         if (s == null || s.isEmpty()) return s;
         return s.substring(0, 1).toUpperCase() + s.substring(1);

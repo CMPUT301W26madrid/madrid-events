@@ -26,13 +26,25 @@ import com.google.mlkit.vision.common.InputImage;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
+/**
+ * Activity for scanning event QR codes.
+ *
+ * <p>Role in application: opens the device camera with CameraX, scans QR content with
+ * ML Kit, extracts the target event identifier, and returns the result to the caller.</p>
+ *
+ * <p>Outstanding issues: scanning currently stops after the first valid match and has
+ * only basic handling for malformed codes and camera startup failures.</p>
+ */
 public class QRScanActivity extends AppCompatActivity {
 
     private static final int CAMERA_PERM = 200;
     private ExecutorService cameraExecutor;
     private boolean scanned = false;
-
+    /**
+     * Initializes the QR scanner screen and requests camera permission if needed.
+     *
+     * @param savedInstanceState previously saved activity state, if any
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +62,13 @@ public class QRScanActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.CAMERA}, CAMERA_PERM);
         }
     }
-
+    /**
+     * Handles the camera permission result and starts scanning when granted.
+     *
+     * @param code permission request code
+     * @param perms requested permission names
+     * @param results grant results aligned with {@code perms}
+     */
     @Override
     public void onRequestPermissionsResult(int code, @NonNull String[] perms,
                                            @NonNull int[] results) {
@@ -64,7 +82,9 @@ public class QRScanActivity extends AppCompatActivity {
             finish();
         }
     }
-
+    /**
+     * Starts the camera preview and binds QR analysis to the lifecycle.
+     */
     private void startCamera() {
         ListenableFuture<ProcessCameraProvider> future =
                 ProcessCameraProvider.getInstance(this);
@@ -103,6 +123,12 @@ public class QRScanActivity extends AppCompatActivity {
     }
 
     @androidx.annotation.OptIn(markerClass = androidx.camera.core.ExperimentalGetImage.class)
+    /**
+     * Processes a camera frame and checks it for QR or barcode content.
+     *
+     * @param imageProxy camera frame to analyze
+     * @param scanner configured barcode scanner instance
+     */
     private void processImage(ImageProxy imageProxy, BarcodeScanner scanner) {
         if (imageProxy.getImage() == null) { imageProxy.close(); return; }
 
@@ -129,7 +155,9 @@ public class QRScanActivity extends AppCompatActivity {
                 })
                 .addOnCompleteListener(t -> imageProxy.close());
     }
-
+    /**
+     * Shuts down the camera executor when the activity is destroyed.
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();

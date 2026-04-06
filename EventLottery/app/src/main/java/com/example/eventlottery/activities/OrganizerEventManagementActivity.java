@@ -44,7 +44,16 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+/**
+ * Activity for managing a single organizer-owned event.
+ *
+ * <p>Role in application: lets organizers review registrations by status, run lotteries,
+ * draw replacements, invite co-organizers or private entrants, send notifications,
+ * export accepted entrants, and open related map and QR views.</p>
+ *
+ * <p>Outstanding issues: several workflow operations are coordinated directly from the
+ * activity, so some business logic could still be moved into dedicated controllers or view models.</p>
+ */
 public class OrganizerEventManagementActivity extends AppCompatActivity {
 
     private SessionManager session;
@@ -68,7 +77,11 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
     private MaterialButton btnSendNotification;
     private ImageView ivQrToolbar;
     private MaterialButton btnInviteEntrant;
-
+    /**
+     * Initializes organizer controls for the selected event.
+     *
+     * @param savedInstanceState previously saved activity state, if any
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,7 +105,9 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
         bindViews();
         loadEvent(eventId);
     }
-
+    /**
+     * Binds layout views, configures tabs, adapters, and click listeners.
+     */
     private void bindViews() {
         tvEventStatusBadge = findViewById(R.id.tv_event_status_badge);
         tvStatWaiting   = findViewById(R.id.tv_stat_waiting);
@@ -142,7 +157,11 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
         btnSendNotification.setOnClickListener(v -> sendBulkNotification());
         btnInviteEntrant.setOnClickListener(v -> showInviteEntrantDialog());
     }
-
+    /**
+     * Loads the selected event and initializes event-specific controls.
+     *
+     * @param eventId identifier of the organizer-managed event
+     */
     private void loadEvent(String eventId) {
         eventRepo.getEventById(eventId).addOnSuccessListener(doc -> {
             currentEvent = doc.toObject(Event.class);
@@ -165,7 +184,9 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
             loadTabData();
         });
     }
-
+    /**
+     * Loads registration counts by status and updates the summary statistics.
+     */
     private void loadStats() {
         regRepo.getRegistrationsForEvent(currentEvent.getId())
                 .addOnSuccessListener(qs -> {
@@ -186,7 +207,9 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
                     tvStatDeclined.setText(String.valueOf(declined));
                 });
     }
-
+    /**
+     * Loads registrations for the currently selected status tab.
+     */
     private void loadTabData() {
         regRepo.getRegistrationsByStatus(currentEvent.getId(), currentTab)
                 .addOnSuccessListener(qs -> {
@@ -200,13 +223,19 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
                     rvRegistrations.setVisibility(list.isEmpty() ? View.GONE : View.VISIBLE);
                 });
     }
-
+    /**
+     * Opens the map view for the current event's geolocation data.
+     */
     private void openMap() {
         Intent intent = new Intent(this, EntrantMapActivity.class);
         intent.putExtra("event_id", currentEvent.getId());
         startActivity(intent);
     }
-
+    /**
+     * Confirms and cancels the supplied entrant registration.
+     *
+     * @param r registration selected for cancellation
+     */
     private void cancelEntrant(Registration r) {
         new AlertDialog.Builder(this)
                 .setTitle("Cancel Entrant")
@@ -223,7 +252,9 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
                 .setNegativeButton(R.string.btn_cancel, null)
                 .show();
     }
-
+    /**
+     * Prompts the organizer for the number of entrants to sample in the lottery.
+     */
     private void showLotteryDialog() {
         final EditText etCount = new EditText(this);
         etCount.setHint(getString(R.string.lottery_sample_prompt));
@@ -242,7 +273,11 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
                 .setNegativeButton(R.string.btn_cancel, null)
                 .show();
     }
-
+    /**
+     * Runs the lottery for the current event and refreshes the UI on completion.
+     *
+     * @param sampleSize number of entrants to invite
+     */
     private void runLottery(int sampleSize) {
         Toast.makeText(this, R.string.lottery_running, Toast.LENGTH_SHORT).show();
         lotteryEngine.runLottery(currentEvent, sampleSize, new LotteryEngine.LotteryCallback() {
@@ -262,7 +297,9 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
             }
         });
     }
-
+    /**
+     * Draws a replacement entrant from the waiting list for the current event.
+     */
     private void drawReplacement() {
         lotteryEngine.drawReplacement(currentEvent, new LotteryEngine.LotteryCallback() {
             @Override public void onSuccess(int selected, int notSelected) {
@@ -282,7 +319,9 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
             }
         });
     }
-
+    /**
+     * Opens a dialog for inviting a co-organizer by email address.
+     */
     private void showCoOrganizerDialog() {
         final EditText etEmail = new EditText(this);
         etEmail.setHint("User Email");
@@ -299,7 +338,11 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
                 .setNegativeButton(R.string.btn_cancel, null)
                 .show();
     }
-
+    /**
+     * Creates a co-organizer invitation notification for the supplied user email.
+     *
+     * @param email email address used to locate the invitee
+     */
     private void inviteCoOrganizer(String email) {
         userRepo.getUserByEmail(email).addOnSuccessListener(qs -> {
             if (qs.isEmpty()) {
@@ -335,7 +378,9 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
             Toast.makeText(this, "Error finding user", Toast.LENGTH_SHORT).show();
         });
     }
-
+    /**
+     * Opens the private-event entrant search dialog.
+     */
     private void showInviteEntrantDialog() {
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_search_user, null);
         EditText etSearch = view.findViewById(R.id.et_search_query);
@@ -370,7 +415,15 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
 
         dialog.show();
     }
-
+    /**
+     * Searches for users across multiple fields and updates the private invite results.
+     *
+     * @param query search text entered by the organizer
+     * @param pb progress indicator shown while the search is running
+     * @param rv recycler view that displays search results
+     * @param tvNone empty-state label shown when no users are found
+     * @param adapter adapter that receives the resulting users
+     */
     private void performUserSearch(String query, ProgressBar pb, RecyclerView rv, TextView tvNone, UserSearchAdapter adapter) {
         pb.setVisibility(View.VISIBLE);
         
@@ -400,7 +453,11 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
             tvNone.setVisibility(list.isEmpty() ? View.VISIBLE : View.GONE);
         });
     }
-
+    /**
+     * Confirms that the organizer wants to invite the supplied user.
+     *
+     * @param user user selected for invitation
+     */
     private void confirmInvitation(User user) {
         new AlertDialog.Builder(this)
                 .setTitle("Invite Entrant")
@@ -409,7 +466,11 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
                 .setNegativeButton(R.string.btn_cancel, null)
                 .show();
     }
-
+    /**
+     * Creates a private-event invitation registration and notification for a user.
+     *
+     * @param user invited user
+     */
     private void inviteUserToWaitingList(User user) {
         regRepo.checkExistingRegistration(currentEvent.getId(), user.getId()).addOnSuccessListener(qs -> {
             if (!qs.isEmpty()) {
@@ -437,7 +498,9 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
             });
         });
     }
-
+    /**
+     * Sends a bulk notification to the organizer-selected audience segment.
+     */
     private void sendBulkNotification() {
         String msg = etNotifMsg.getText() != null ? etNotifMsg.getText().toString().trim() : "";
         if (TextUtils.isEmpty(msg)) {
@@ -479,7 +542,9 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
                             });
                 });
     }
-
+    /**
+     * Exports accepted registrations for the current event to CSV.
+     */
     private void exportCsv() {
         regRepo.getRegistrationsByStatus(currentEvent.getId(), Registration.STATUS_ACCEPTED)
                 .addOnSuccessListener(qs -> {
@@ -491,7 +556,9 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
                     CsvExportHelper.exportRegistrations(this, currentEvent.getTitle(), accepted);
                 });
     }
-
+    /**
+     * Displays the current event's QR code in a dialog.
+     */
     private void showQrDialog() {
         if (currentEvent == null || currentEvent.getQrCodeContent() == null) return;
         android.graphics.Bitmap qr = QRCodeHelper.generateQRCode(currentEvent.getQrCodeContent(), 600, 600);
@@ -507,11 +574,22 @@ public class OrganizerEventManagementActivity extends AppCompatActivity {
         dialog.findViewById(R.id.btn_close_qr).setOnClickListener(v -> dialog.dismiss());
         dialog.show();
     }
-
+    /**
+     * Parses an integer while falling back to a default value on failure.
+     *
+     * @param s raw numeric string
+     * @param def default value to use when parsing fails
+     * @return parsed integer or the fallback value
+     */
     private int safeInt(String s, int def) {
         try { return Integer.parseInt(s.trim()); } catch (Exception e) { return def; }
     }
-
+    /**
+     * Converts a density-independent pixel value to physical pixels.
+     *
+     * @param val density-independent pixel value
+     * @return converted pixel value
+     */
     private int dp(int val) {
         return Math.round(val * getResources().getDisplayMetrics().density);
     }

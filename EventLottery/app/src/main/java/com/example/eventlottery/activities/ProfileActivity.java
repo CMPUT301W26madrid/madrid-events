@@ -16,7 +16,16 @@ import com.example.eventlottery.utils.SessionManager;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
-
+/**
+ * Activity for viewing and editing the active user's profile.
+ *
+ * <p>Role in application: loads the signed-in user's profile details, exposes editable
+ * fields such as name and contact information, toggles notification preferences, and
+ * supports sign-out and profile deletion.</p>
+ *
+ * <p>Outstanding issues: validation is lightweight and account deletion currently assumes
+ * repository-side cleanup for any related data.</p>
+ */
 public class ProfileActivity extends AppCompatActivity {
 
     private SessionManager session;
@@ -28,7 +37,11 @@ public class ProfileActivity extends AppCompatActivity {
     private TextInputEditText etName, etEmail, etPhone, etPassword;
     private SwitchMaterial swNotifications;
     private MaterialButton btnSave, btnSignOut, btnDelete;
-
+    /**
+     * Initializes the profile screen and begins loading the active user.
+     *
+     * @param savedInstanceState previously saved activity state, if any
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +73,9 @@ public class ProfileActivity extends AppCompatActivity {
         btnSignOut.setOnClickListener(v -> confirmSignOut());
         btnDelete.setOnClickListener(v -> confirmDelete());
     }
-
+    /**
+     * Loads the currently signed-in user's profile data.
+     */
     private void loadUser() {
         String userId = session.getUserId();
         if (userId == null) return;
@@ -71,7 +86,9 @@ public class ProfileActivity extends AppCompatActivity {
             populateUI();
         });
     }
-
+    /**
+     * Populates the profile UI using the loaded user record.
+     */
     private void populateUI() {
         tvAvatar.setText(currentUser.getInitials());
         tvDisplayName.setText(currentUser.getName());
@@ -100,7 +117,9 @@ public class ProfileActivity extends AppCompatActivity {
             }
         }
     }
-
+    /**
+     * Validates the edited profile fields and starts the update workflow.
+     */
     private void saveUser() {
         if (currentUser == null) {
             Toast.makeText(this, "Profile still loading, please wait", Toast.LENGTH_SHORT).show();
@@ -129,7 +148,14 @@ public class ProfileActivity extends AppCompatActivity {
             updateUserInFirestore(name, email, phone, pass);
         }
     }
-
+    /**
+     * Writes updated profile data back to persistent storage.
+     *
+     * @param name updated display name
+     * @param email updated email address
+     * @param phone updated phone number
+     * @param pass updated password
+     */
     private void updateUserInFirestore(String name, String email, String phone, String pass) {
         currentUser.setName(name);
         currentUser.setEmail(email);
@@ -150,7 +176,9 @@ public class ProfileActivity extends AppCompatActivity {
                     Toast.makeText(this, R.string.error_generic, Toast.LENGTH_SHORT).show();
                 });
     }
-
+    /**
+     * Shows a confirmation dialog before clearing the current session.
+     */
     private void confirmSignOut() {
         new AlertDialog.Builder(this)
                 .setTitle("Sign Out")
@@ -163,7 +191,9 @@ public class ProfileActivity extends AppCompatActivity {
                 .setNegativeButton(R.string.btn_cancel, null)
                 .show();
     }
-
+    /**
+     * Shows a confirmation dialog before deleting the current profile.
+     */
     private void confirmDelete() {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.delete_profile)
@@ -179,7 +209,12 @@ public class ProfileActivity extends AppCompatActivity {
                 .setNegativeButton(R.string.btn_cancel, null)
                 .show();
     }
-
+    /**
+     * Returns the badge background resource for a given role label.
+     *
+     * @param role role associated with the badge
+     * @return drawable resource identifier for the badge background
+     */
     private int getBadgeRes(String role) {
         switch (role) {
             case "organizer": return R.drawable.bg_badge_accent;
@@ -187,12 +222,22 @@ public class ProfileActivity extends AppCompatActivity {
             default:          return R.drawable.bg_badge_green;
         }
     }
-
+    /**
+     * Capitalizes the first character of a role label.
+     *
+     * @param s raw role value
+     * @return capitalized role label, or the original value when empty
+     */
     private String capitalize(String s) {
         if (s == null || s.isEmpty()) return s;
         return s.substring(0, 1).toUpperCase() + s.substring(1);
     }
-
+    /**
+     * Converts a density-independent pixel value to a pixel value.
+     *
+     * @param val density-independent pixels
+     * @return converted pixels
+     */
     private int dp(int val) {
         return Math.round(val * getResources().getDisplayMetrics().density);
     }

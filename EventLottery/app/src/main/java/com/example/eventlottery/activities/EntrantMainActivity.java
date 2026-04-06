@@ -22,13 +22,26 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Main entry activity for entrant users.
+ *
+ * <p>Role in application: hosts the entrant navigation shell for discovering events,
+ * reviewing personal events, checking notifications, opening the calendar, and
+ * switching to other authorized roles.</p>
+ *
+ * <p>Outstanding issues: fragment state is re-created on navigation changes and is
+ * not yet preserved through a more robust navigation architecture.</p>
+ */
 public class EntrantMainActivity extends AppCompatActivity {
 
     private SessionManager session;
     private UserRepository userRepo;
     private TextView tvNotifBadge;
-
+    /**
+     * Initializes the entrant home screen and bottom navigation.
+     *
+     * @param savedInstanceState previously saved activity state, if any
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +81,9 @@ public class EntrantMainActivity extends AppCompatActivity {
 
         loadUnreadBadge();
     }
-
+    /**
+     * Loads the available roles for the current user and configures the role switcher.
+     */
     private void setupRoleSwitcher() {
         Spinner spinner = findViewById(R.id.spinner_role);
         String userId = session.getUserId();
@@ -102,7 +117,11 @@ public class EntrantMainActivity extends AppCompatActivity {
             });
         });
     }
-
+    /**
+     * Opens another role-specific main activity when the user changes role.
+     *
+     * @param role target role selected from the spinner
+     */
     private void switchRole(String role) {
         Intent intent;
         switch (role) {
@@ -117,20 +136,31 @@ public class EntrantMainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
+    /**
+     * Replaces the main entrant container with the supplied fragment.
+     *
+     * @param fragment fragment to display
+     * @return {@code true} after the transaction is requested
+     */
     private boolean loadFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .commit();
         return true;
     }
-
+    /**
+     * Opens the detail screen for an event referenced by a deep link or notification.
+     *
+     * @param eventId identifier of the event to display
+     */
     private void openEventDetail(String eventId) {
         Intent intent = new Intent(this, EventDetailActivity.class);
         intent.putExtra("event_id", eventId);
         startActivity(intent);
     }
-
+    /**
+     * Retrieves the unread notification count for the active user and updates the badge.
+     */
     private void loadUnreadBadge() {
         String userId = session.getUserId();
         if (userId == null || tvNotifBadge == null) return;
@@ -145,13 +175,20 @@ public class EntrantMainActivity extends AppCompatActivity {
                     }
                 });
     }
-
+    /**
+     * Refreshes notification badge data when the activity resumes.
+     */
     @Override
     protected void onResume() {
         super.onResume();
         loadUnreadBadge();
     }
-
+    /**
+     * Capitalizes the first letter of a role name for presentation in the spinner.
+     *
+     * @param s raw role value
+     * @return capitalized text, or the original value when empty
+     */
     private String capitalize(String s) {
         if (s == null || s.isEmpty()) return s;
         return s.substring(0, 1).toUpperCase() + s.substring(1);

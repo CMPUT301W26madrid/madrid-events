@@ -24,7 +24,15 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Map activity for viewing event and entrant join locations.
+ *
+ * <p>Role in application: displays the event location together with geolocation-verified
+ * entrant markers so organizers can review where registrations were submitted from.</p>
+ *
+ * <p>Outstanding issues: older events without saved coordinates only fall back to a
+ * limited participant-only view instead of a full location recovery workflow.</p>
+ */
 public class EntrantMapActivity extends AppCompatActivity {
 
     private String eventId;
@@ -33,7 +41,11 @@ public class EntrantMapActivity extends AppCompatActivity {
     private MapView map;
     private MyLocationNewOverlay myLocationOverlay;
     private boolean hasZoomedToTarget = false;
-
+    /**
+     * Initializes the map screen and loads map markers for the selected event.
+     *
+     * @param savedInstanceState previously saved activity state, if any
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +98,9 @@ public class EntrantMapActivity extends AppCompatActivity {
 
         loadEventAndMarkers();
     }
-
+    /**
+     * Loads the event itself, places the event marker, and then loads entrant markers.
+     */
     private void loadEventAndMarkers() {
         eventRepo.getEventById(eventId).addOnSuccessListener(doc -> {
             Event event = doc.toObject(Event.class);
@@ -117,7 +131,9 @@ public class EntrantMapActivity extends AppCompatActivity {
             loadEntrantLocations();
         }).addOnFailureListener(e -> loadEntrantLocations());
     }
-
+    /**
+     * Loads geolocation-verified registrations and adds entrant markers to the map.
+     */
     private void loadEntrantLocations() {
         regRepo.getRegistrationsForEvent(eventId).addOnSuccessListener(qs -> {
             List<GeoPoint> points = new ArrayList<>();
@@ -150,7 +166,12 @@ public class EntrantMapActivity extends AppCompatActivity {
             map.invalidate();
         });
     }
-
+    /**
+     * Resumes the map and re-enables the current-location overlay when visible.
+     */
     @Override public void onResume() { super.onResume(); map.onResume(); if (myLocationOverlay != null) myLocationOverlay.enableMyLocation(); }
+    /**
+     * Pauses the map and disables live location updates while the activity is not visible.
+     */
     @Override public void onPause() { super.onPause(); map.onPause(); if (myLocationOverlay != null) myLocationOverlay.disableMyLocation(); }
 }

@@ -20,13 +20,26 @@ import com.example.eventlottery.utils.SessionManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Main entry activity for administrators.
+ *
+ * <p>Role in application: hosts admin-facing navigation for moderation tasks,
+ * event browsing, notifications, and profile access, while also supporting
+ * role switching for users who hold multiple roles.</p>
+ *
+ * <p>Outstanding issues: unread notification counts are refreshed on resume but
+ * are not subscribed to live updates, so the badge may lag behind real-time changes.</p>
+ */
 public class AdminMainActivity extends AppCompatActivity {
 
     private SessionManager session;
     private UserRepository userRepo;
     private TextView tvNotifBadge;
-
+    /**
+     * Initializes the admin home screen and configures navigation.
+     *
+     * @param savedInstanceState previously saved activity state, if any
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +76,10 @@ public class AdminMainActivity extends AppCompatActivity {
         loadUnreadBadge();
     }
 
+
+    /**
+     * Loads the current user's roles and configures the role-switch spinner.
+     */
     private void setupRoleSwitcher() {
         Spinner spinner = findViewById(R.id.spinner_role);
         String userId = session.getUserId();
@@ -94,7 +111,11 @@ public class AdminMainActivity extends AppCompatActivity {
             });
         });
     }
-
+    /**
+     * Switches from the admin shell to another role-specific main activity.
+     *
+     * @param role target role selected by the user
+     */
     private void switchRole(String role) {
         Intent intent;
         switch (role) {
@@ -110,13 +131,21 @@ public class AdminMainActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Replaces the main container with the supplied fragment.
+     *
+     * @param fragment fragment to display
+     * @return {@code true} after the fragment transaction is requested
+     */
     private boolean loadFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .commit();
         return true;
     }
-
+    /**
+     * Loads the unread notification count and updates the badge view.
+     */
     private void loadUnreadBadge() {
         String userId = session.getUserId();
         if (userId == null || tvNotifBadge == null) return;
@@ -131,13 +160,21 @@ public class AdminMainActivity extends AppCompatActivity {
                     }
                 });
     }
-
+    /**
+     * Refreshes the unread notification badge when the activity returns to the foreground.
+     */
     @Override
     protected void onResume() {
         super.onResume();
         loadUnreadBadge();
     }
 
+    /**
+     * Capitalizes the first character of a role label for display purposes.
+     *
+     * @param s raw role string
+     * @return capitalized role label, or the original value when empty
+     */
     private String capitalize(String s) {
         if (s == null || s.isEmpty()) return s;
         return s.substring(0, 1).toUpperCase() + s.substring(1);

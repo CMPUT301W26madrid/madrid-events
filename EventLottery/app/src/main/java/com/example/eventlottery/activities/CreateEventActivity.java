@@ -48,7 +48,16 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
+/**
+ * Activity for creating and editing events.
+ *
+ * <p>Role in application: collects event metadata, validates registration and event
+ * dates, geocodes the selected location, optionally attaches a poster image, and
+ * persists the event through the repository layer.</p>
+ *
+ * <p>Outstanding issues: location verification depends on geocoder availability and
+ * poster handling is still implemented locally rather than through a dedicated media pipeline.</p>
+ */
 public class CreateEventActivity extends AppCompatActivity {
 
     private SessionManager session;
@@ -88,7 +97,11 @@ public class CreateEventActivity extends AppCompatActivity {
                     processImage(uri);
                 }
             });
-
+    /**
+     * Initializes the event creation or editing form.
+     *
+     * @param savedInstanceState previously saved activity state, if any
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,7 +133,9 @@ public class CreateEventActivity extends AppCompatActivity {
         btnUploadPoster.setOnClickListener(v -> galleryLauncher.launch("image/*"));
         btnSave.setOnClickListener(v -> validateAndSave());
     }
-
+    /**
+     * Loads an existing event when the screen is opened in edit mode.
+     */
     private void loadExistingEvent() {
         eventRepo.getEventById(eventId).addOnSuccessListener(doc -> {
             existingEvent = doc.toObject(Event.class);
@@ -130,7 +145,9 @@ public class CreateEventActivity extends AppCompatActivity {
             }
         });
     }
-
+    /**
+     * Populates the form fields with the currently loaded event values.
+     */
     private void populateFields() {
         etTitle.setText(existingEvent.getTitle());
         etDescription.setText(existingEvent.getDescription());
@@ -166,7 +183,11 @@ public class CreateEventActivity extends AppCompatActivity {
             tvPosterName.setText("Current poster kept");
         }
     }
-
+    /**
+     * Reads, scales, and encodes a selected poster image for storage.
+     *
+     * @param uri content URI of the selected image
+     */
     private void processImage(Uri uri) {
         try {
             InputStream is = getContentResolver().openInputStream(uri);
@@ -181,7 +202,9 @@ public class CreateEventActivity extends AppCompatActivity {
             Toast.makeText(this, "Failed to process image", Toast.LENGTH_SHORT).show();
         }
     }
-
+    /**
+     * Binds all form views from the layout to local activity fields.
+     */
     private void bindViews() {
         tilTitle       = findViewById(R.id.til_title);
         tilDescription = findViewById(R.id.til_description);
@@ -207,7 +230,9 @@ public class CreateEventActivity extends AppCompatActivity {
         swGeolocation = findViewById(R.id.sw_geolocation);
         btnSave       = findViewById(R.id.btn_create_event);
     }
-
+    /**
+     * Attaches date-time picker dialogs to the event and registration fields.
+     */
     private void setupDatePickers() {
         etEventStart.setOnClickListener(v -> {
             long max = getText(etEventEnd).isEmpty() ? 0 : calEventEnd.getTimeInMillis() - 60000;
@@ -227,7 +252,9 @@ public class CreateEventActivity extends AppCompatActivity {
             pickDateTime(calRegClose, etRegClose, min, max);
         });
     }
-
+    /**
+     * Configures location autocomplete and geocoder-backed suggestion handling.
+     */
     private void setupLocationAutocomplete() {
         locationAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line) {
             @NonNull
@@ -281,7 +308,12 @@ public class CreateEventActivity extends AppCompatActivity {
             @Override public void afterTextChanged(Editable s) {}
         });
     }
-
+    /**
+     * Fetches geocoder suggestions for the supplied location query.
+     *
+     * @param query partial user-entered location text
+     * @return a list of formatted address suggestions
+     */
     private List<String> fetchGeocoderSuggestions(String query) {
         List<String> suggestions = new ArrayList<>();
         if (!Geocoder.isPresent()) return suggestions;
@@ -304,7 +336,11 @@ public class CreateEventActivity extends AppCompatActivity {
         }
         return suggestions;
     }
-
+    /**
+     * Resolves the selected location text into latitude and longitude coordinates.
+     *
+     * @param locName selected location string
+     */
     private void verifyAndSetLatLng(String locName) {
         executor.execute(() -> {
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
@@ -319,7 +355,14 @@ public class CreateEventActivity extends AppCompatActivity {
             }
         });
     }
-
+    /**
+     * Opens a date picker followed by a time picker and writes the result to the target field.
+     *
+     * @param cal calendar instance to update
+     * @param target text field that should display the chosen date and time
+     * @param minMillis optional minimum allowed timestamp, or {@code 0} for none
+     * @param maxMillis optional maximum allowed timestamp, or {@code 0} for none
+     */
     private void pickDateTime(Calendar cal, TextInputEditText target, long minMillis, long maxMillis) {
         DatePickerDialog dpd = new DatePickerDialog(this,
                 (view, year, month, day) -> {
@@ -347,7 +390,9 @@ public class CreateEventActivity extends AppCompatActivity {
         if (maxMillis > 0 && maxMillis >= minMillis) dpd.getDatePicker().setMaxDate(maxMillis);
         dpd.show();
     }
-
+    /**
+     * Validates the form contents and dispatches either a create or update request.
+     */
     private void validateAndSave() {
         String title = getText(etTitle);
         String desc  = getText(etDescription);
@@ -409,7 +454,18 @@ public class CreateEventActivity extends AppCompatActivity {
             createNewEvent(title, desc, loc, currentUserId, capacity, maxWl, price, priv, geo);
         }
     }
-
+    /**
+     * Applies the edited form values to the existing event and saves the update.
+     *
+     * @param title event title
+     * @param desc event description
+     * @param loc event location string
+     * @param capacity event capacity
+     * @param maxWl maximum waiting-list size
+     * @param price event price
+     * @param priv whether the event is private
+     * @param geo whether geolocation is required to join
+     */
     private void updateEvent(String title, String desc, String loc, int capacity, int maxWl, double price, boolean priv, boolean geo) {
         existingEvent.setTitle(title);
         existingEvent.setDescription(desc);
@@ -443,7 +499,19 @@ public class CreateEventActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.error_generic, Toast.LENGTH_SHORT).show();
         });
     }
-
+    /**
+     * Builds and persists a new event from the validated form data.
+     *
+     * @param title event title
+     * @param desc event description
+     * @param loc event location string
+     * @param currentUserId organizer creating the event
+     * @param capacity event capacity
+     * @param maxWl maximum waiting-list size
+     * @param price event price
+     * @param priv whether the event is private
+     * @param geo whether geolocation is required to join
+     */
     private void createNewEvent(String title, String desc, String loc, String currentUserId, int capacity, int maxWl, double price, boolean priv, boolean geo) {
         userRepo.getUserById(currentUserId).addOnSuccessListener(doc -> {
             com.example.eventlottery.models.User user =
@@ -481,15 +549,32 @@ public class CreateEventActivity extends AppCompatActivity {
             });
         });
     }
-
+    /**
+     * Returns trimmed text from a text input field.
+     *
+     * @param et source input field
+     * @return trimmed text, or an empty string when no value is present
+     */
     private String getText(TextInputEditText et) {
         return et.getText() != null ? et.getText().toString().trim() : "";
     }
-
+    /**
+     * Parses an integer value while falling back to a default on failure.
+     *
+     * @param s raw string value
+     * @param def fallback value
+     * @return parsed integer or the fallback value
+     */
     private int safeInt(String s, int def) {
         try { return Integer.parseInt(s); } catch (Exception e) { return def; }
     }
-
+    /**
+     * Parses a decimal value while falling back to a default on failure.
+     *
+     * @param s raw string value
+     * @param def fallback value
+     * @return parsed decimal or the fallback value
+     */
     private double safeDouble(String s, double def) {
         try { return Double.parseDouble(s); } catch (Exception e) { return def; }
     }

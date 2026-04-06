@@ -51,7 +51,15 @@ import org.osmdroid.views.overlay.Marker;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Activity that presents the full details for a single event.
+ *
+ * <p>Role in application: shows event metadata, waitlist state, QR access, comments,
+ * map preview, and entrant actions such as joining, leaving, accepting, or declining.</p>
+ *
+ * <p>Outstanding issues: this screen coordinates several responsibilities directly in
+ * the activity and could be refactored further to reduce UI-data coupling.</p>
+ */
 public class EventDetailActivity extends AppCompatActivity {
 
     private static final int LOCATION_PERM_CODE = 101;
@@ -79,7 +87,11 @@ public class EventDetailActivity extends AppCompatActivity {
     private RecyclerView rvComments;
     private TextInputEditText etComment;
     private CommentAdapter commentAdapter;
-
+    /**
+     * Initializes the event detail screen and starts loading the requested event.
+     *
+     * @param savedInstanceState previously saved activity state, if any
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,7 +121,9 @@ public class EventDetailActivity extends AppCompatActivity {
 
         loadEvent(eventId);
     }
-
+    /**
+     * Binds layout views, initializes adapters, and attaches click listeners.
+     */
     private void bindViews() {
         tvTitle        = findViewById(R.id.tv_title);
         tvOrganizer    = findViewById(R.id.tv_organizer);
@@ -151,7 +165,11 @@ public class EventDetailActivity extends AppCompatActivity {
         findViewById(R.id.btn_post_comment).setOnClickListener(v -> postComment());
         ivQrBtn.setOnClickListener(v -> showQrDialog());
     }
-
+    /**
+     * Loads the target event and configures moderator privileges for the current user.
+     *
+     * @param eventId identifier of the event to display
+     */
     private void loadEvent(String eventId) {
         eventRepo.getEventById(eventId).addOnSuccessListener(doc -> {
             currentEvent = doc.toObject(Event.class);
@@ -178,7 +196,9 @@ public class EventDetailActivity extends AppCompatActivity {
             finish();
         });
     }
-
+    /**
+     * Populates the detail UI with the currently loaded event data.
+     */
     private void populateUI() {
         if (getSupportActionBar() != null) getSupportActionBar().setTitle(currentEvent.getTitle());
         tvTitle.setText(currentEvent.getTitle());
@@ -237,7 +257,9 @@ public class EventDetailActivity extends AppCompatActivity {
             cardMap.setVisibility(View.GONE);
         }
     }
-
+    /**
+     * Loads the active user's registration state for the current event.
+     */
     private void loadRegistration() {
         if (userId == null) {
             btnJoinLeave.setVisibility(View.GONE);
@@ -252,7 +274,9 @@ public class EventDetailActivity extends AppCompatActivity {
                     updateActionButtons();
                 });
     }
-
+    /**
+     * Updates the visible action buttons to reflect the current registration state.
+     */
     private void updateActionButtons() {
         if (isCoOrganizer || (userId != null && userId.equals(currentEvent.getOrganizerId()))) {
             // User is an organizer/co-organizer -> prevent joining the entrant pool
@@ -309,7 +333,9 @@ public class EventDetailActivity extends AppCompatActivity {
             }
         }
     }
-
+    /**
+     * Handles the primary waitlist action button for joining or leaving the event.
+     */
     private void handleJoinLeave() {
         if (currentRegistration == null) {
             requestGeolocationThenJoin();
@@ -322,7 +348,9 @@ public class EventDetailActivity extends AppCompatActivity {
                     .show();
         }
     }
-
+    /**
+     * Requests location permission when needed before attempting to join the waitlist.
+     */
     private void requestGeolocationThenJoin() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -349,7 +377,9 @@ public class EventDetailActivity extends AppCompatActivity {
             getLocationAndJoin();
         }
     }
-
+    /**
+     * Retrieves the user's last known location and continues the join workflow.
+     */
     private void getLocationAndJoin() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -363,7 +393,13 @@ public class EventDetailActivity extends AppCompatActivity {
             joinWaitingList(0, 0, false);
         }
     }
-
+    /**
+     * Handles the result of the location permission request used by the join workflow.
+     *
+     * @param requestCode application request code
+     * @param permissions requested permission names
+     * @param grantResults permission grant results aligned with {@code permissions}
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
@@ -381,7 +417,13 @@ public class EventDetailActivity extends AppCompatActivity {
             }
         }
     }
-
+    /**
+     * Creates a registration and joins the current user to the event waiting list.
+     *
+     * @param lat captured latitude, or {@code 0} when unavailable
+     * @param lng captured longitude, or {@code 0} when unavailable
+     * @param hasGeo whether location data was successfully captured
+     */
     private void joinWaitingList(double lat, double lng, boolean hasGeo) {
         if (userId == null) return;
 
@@ -424,6 +466,9 @@ public class EventDetailActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Removes the current user's waiting-list registration for the event.
+     */
     private void leaveWaitingList() {
         regRepo.deleteRegistration(currentEvent.getId(), userId)
                 .addOnSuccessListener(v -> {
@@ -436,7 +481,9 @@ public class EventDetailActivity extends AppCompatActivity {
                     Toast.makeText(this, "Left waiting list", Toast.LENGTH_SHORT).show();
                 });
     }
-
+    /**
+     * Accepts the current invitation or private-event waitlist invite.
+     */
     private void handleAccept() {
         if (currentRegistration == null) return;
         
@@ -463,7 +510,9 @@ public class EventDetailActivity extends AppCompatActivity {
                     updateActionButtons();
                 });
     }
-
+    /**
+     * Confirms and processes a decline action for the current registration.
+     */
     private void handleDecline() {
         if (currentRegistration == null) return;
         
@@ -500,7 +549,9 @@ public class EventDetailActivity extends AppCompatActivity {
                 .setNegativeButton(R.string.btn_cancel, null)
                 .show();
     }
-
+    /**
+     * Posts a new comment for the current event using the active user's identity.
+     */
     private void postComment() {
         if (userId == null) {
             Toast.makeText(this, "Please log in to comment", Toast.LENGTH_SHORT).show();
@@ -522,7 +573,9 @@ public class EventDetailActivity extends AppCompatActivity {
                     });
                 });
     }
-
+    /**
+     * Loads and sorts comments associated with the current event.
+     */
     private void loadComments() {
         if (currentEvent == null) return;
         commentRepo.getCommentsForEvent(currentEvent.getId())
@@ -539,7 +592,11 @@ public class EventDetailActivity extends AppCompatActivity {
                     if (!isFinishing()) Toast.makeText(this, "Error loading comments", Toast.LENGTH_SHORT).show();
                 });
     }
-
+    /**
+     * Opens a dialog that allows a comment to be edited.
+     *
+     * @param comment comment selected for editing
+     */
     private void showEditCommentDialog(Comment comment) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Edit Comment");
@@ -564,7 +621,11 @@ public class EventDetailActivity extends AppCompatActivity {
 
         builder.show();
     }
-
+    /**
+     * Confirms deletion of the supplied comment and removes it if accepted.
+     *
+     * @param comment comment selected for deletion
+     */
     private void confirmDeleteComment(Comment comment) {
         new AlertDialog.Builder(this)
                 .setTitle("Delete Comment")
@@ -579,7 +640,9 @@ public class EventDetailActivity extends AppCompatActivity {
                 .setNegativeButton(R.string.btn_cancel, null)
                 .show();
     }
-
+    /**
+     * Displays the event QR code in a dialog for sharing or scanning.
+     */
     private void showQrDialog() {
         if (currentEvent.getQrCodeContent() == null) return;
         Bitmap qr = QRCodeHelper.generateQRCode(currentEvent.getQrCodeContent(), 600, 600);
@@ -598,13 +661,17 @@ public class EventDetailActivity extends AppCompatActivity {
         btnClose.setOnClickListener(v -> dialog.dismiss());
         dialog.show();
     }
-
+    /**
+     * Resumes the embedded map preview when the activity enters the foreground.
+     */
     @Override
     protected void onResume() {
         super.onResume();
         if (mapView != null) mapView.onResume();
     }
-
+    /**
+     * Pauses the embedded map preview while the activity is not visible.
+     */
     @Override
     protected void onPause() {
         super.onPause();
