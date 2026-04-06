@@ -27,8 +27,11 @@ Our app helps entrants join popular community events without needing to constant
 |yutao12| yutao17|
 
 ## Compatibility
-This app is designed for Android devices. Please refer to the project configuration files for the exact supported Android SDK versions and build requirements.
-For the best experience, run the app on the emulator or device version specified in the project setup instructions.
+This application has been tested and is confirmed to run on **Android 16.0 ("Baklava"), API Level 36.0**.
+
+While the app is expected to run on other Android versions as well, very old Android versions are not recommended, as they may introduce compatibility issues or limited support for certain features.
+
+For the best experience, run the app on the emulator or device version we recommend using the tested version listed above.
 
 ## Overview
 EventLottery is a mobile application designed for community centre events that are popular and fill up quickly. Instead of rewarding only the fastest users, the app gives entrants a fair way to express interest by joining a waiting list during the registration period.
