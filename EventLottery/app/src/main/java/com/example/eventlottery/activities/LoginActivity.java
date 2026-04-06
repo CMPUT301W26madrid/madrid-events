@@ -3,13 +3,10 @@ package com.example.eventlottery.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,8 +29,18 @@ public class LoginActivity extends AppCompatActivity {
     private ProfileAdapter profileAdapter;
     private RecyclerView rvProfiles;
     private View llQuickLogin;
-    private TextInputLayout tilLoginId;
-    private TextInputEditText etLoginId;
+    
+    // Login Views
+    private View llLoginFields;
+    private TextInputLayout tilLoginId, tilLoginPassword;
+    private TextInputEditText etLoginId, etLoginPassword;
+    
+    // Signup Views
+    private View llSignupFields;
+    private TextInputLayout tilSignupName, tilSignupEmail, tilSignupPhone, tilSignupPassword, tilSignupConfirmPassword;
+    private TextInputEditText etSignupName, etSignupEmail, etSignupPhone, etSignupPassword, etSignupConfirmPassword;
+    private CheckBox cbSignupEntrant, cbSignupOrganizer;
+
     private MaterialButton btnLogin, btnContinueDevice;
     private TextView tvSwitchToSignup, tvTitle, tvSubtitle;
 
@@ -68,8 +75,29 @@ public class LoginActivity extends AppCompatActivity {
     private void bindViews() {
         llQuickLogin = findViewById(R.id.ll_quick_login);
         rvProfiles = findViewById(R.id.rv_profiles);
+        
+        // Login bindings
+        llLoginFields = findViewById(R.id.ll_login_fields);
         tilLoginId = findViewById(R.id.til_login_id);
         etLoginId = findViewById(R.id.et_login_id);
+        tilLoginPassword = findViewById(R.id.til_login_password);
+        etLoginPassword = findViewById(R.id.et_login_password);
+        
+        // Signup bindings
+        llSignupFields = findViewById(R.id.ll_signup_fields);
+        tilSignupName = findViewById(R.id.til_signup_name);
+        etSignupName = findViewById(R.id.et_signup_name);
+        tilSignupEmail = findViewById(R.id.til_signup_email);
+        etSignupEmail = findViewById(R.id.et_signup_email);
+        tilSignupPhone = findViewById(R.id.til_signup_phone);
+        etSignupPhone = findViewById(R.id.et_signup_phone);
+        tilSignupPassword = findViewById(R.id.til_signup_password);
+        etSignupPassword = findViewById(R.id.et_signup_password);
+        tilSignupConfirmPassword = findViewById(R.id.til_signup_confirm_password);
+        etSignupConfirmPassword = findViewById(R.id.et_signup_confirm_password);
+        cbSignupEntrant = findViewById(R.id.cb_signup_entrant);
+        cbSignupOrganizer = findViewById(R.id.cb_signup_organizer);
+
         btnLogin = findViewById(R.id.btn_login);
         btnContinueDevice = findViewById(R.id.btn_continue_device);
         tvSwitchToSignup = findViewById(R.id.tv_switch_to_signup);
@@ -84,54 +112,97 @@ public class LoginActivity extends AppCompatActivity {
             tvSubtitle.setText("Create an account to join or organize events.");
             btnLogin.setText("Sign Up");
             tvSwitchToSignup.setText("Already have an account? Sign in");
+            llLoginFields.setVisibility(View.GONE);
+            llSignupFields.setVisibility(View.VISIBLE);
             llQuickLogin.setVisibility(View.GONE);
         } else {
             tvTitle.setText("Sign In");
             tvSubtitle.setText("Sign in to access events as an entrant or organizer.");
             btnLogin.setText("Sign In");
             tvSwitchToSignup.setText("Don't have an account? Sign up");
+            llLoginFields.setVisibility(View.VISIBLE);
+            llSignupFields.setVisibility(View.GONE);
             loadProfiles();
         }
     }
 
     private void handleLoginOrSignup() {
-        String input = etLoginId.getText() != null ? etLoginId.getText().toString().trim() : "";
-        if (TextUtils.isEmpty(input)) {
-            tilLoginId.setError("Email or Phone Number is required");
-            return;
-        }
-
         if (isSignupMode) {
-            checkUniquenessAndSignup(input);
+            performSignup();
         } else {
-            performLogin(input);
+            performLogin();
         }
     }
 
-    private void checkUniquenessAndSignup(String input) {
-        String email = input.contains("@") ? input : null;
-        String phone = !input.contains("@") ? input : null;
+    private void performSignup() {
+        String name = etSignupName.getText().toString().trim();
+        String email = etSignupEmail.getText().toString().trim();
+        String phone = etSignupPhone.getText().toString().trim();
+        String pass = etSignupPassword.getText().toString().trim();
+        String confirmPass = etSignupConfirmPassword.getText().toString().trim();
 
-        userRepo.checkUserExists(email, phone).addOnSuccessListener(exists -> {
+        if (TextUtils.isEmpty(name)) { tilSignupName.setError("Name required"); return; }
+        if (TextUtils.isEmpty(email)) { tilSignupEmail.setError("Email required"); return; }
+        if (TextUtils.isEmpty(pass)) { tilSignupPassword.setError("Password required"); return; }
+        if (!pass.equals(confirmPass)) {
+            tilSignupConfirmPassword.setError("Passwords do not match");
+            return;
+        }
+
+        List<String> roles = new ArrayList<>();
+        if (cbSignupEntrant.isChecked()) roles.add("entrant");
+        if (cbSignupOrganizer.isChecked()) roles.add("organizer");
+
+        if (roles.isEmpty()) {
+            Toast.makeText(this, "Select at least one role", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        btnLogin.setEnabled(false);
+        btnLogin.setText("Creating account...");
+
+        userRepo.checkUserExists(email, phone.isEmpty() ? null : phone).addOnSuccessListener(exists -> {
             if (exists) {
+                btnLogin.setEnabled(true);
+                btnLogin.setText("Sign Up");
                 Toast.makeText(this, "User already exists with this email or phone", Toast.LENGTH_LONG).show();
             } else {
-                showSignupDetailsDialog(input);
+                User newUser = new User(name, email, phone, roles, session.getDeviceId());
+                newUser.setPassword(pass);
+                userRepo.addUser(newUser).addOnSuccessListener(ref -> {
+                    newUser.setId(ref.getId());
+                    completeLogin(newUser);
+                }).addOnFailureListener(e -> {
+                    btnLogin.setEnabled(true);
+                    btnLogin.setText("Sign Up");
+                });
             }
         });
     }
 
-    private void performLogin(String loginId) {
+    private void performLogin() {
+        String loginId = etLoginId.getText().toString().trim();
+        String password = etLoginPassword.getText().toString().trim();
+
+        if (TextUtils.isEmpty(loginId)) {
+            tilLoginId.setError("Email or Phone Number is required");
+            return;
+        }
+        if (TextUtils.isEmpty(password)) {
+            tilLoginPassword.setError("Password is required");
+            return;
+        }
+
         btnLogin.setEnabled(false);
         btnLogin.setText("Checking…");
 
         userRepo.getUserByEmail(loginId).addOnSuccessListener(qs -> {
             if (qs != null && !qs.isEmpty()) {
-                verifyPasswordThenLogin(qs.getDocuments().get(0).toObject(User.class));
+                checkPasswordAndLogin(qs.getDocuments().get(0).toObject(User.class), password);
             } else {
                 userRepo.getUserByPhone(loginId).addOnSuccessListener(qs2 -> {
                     if (qs2 != null && !qs2.isEmpty()) {
-                        verifyPasswordThenLogin(qs2.getDocuments().get(0).toObject(User.class));
+                        checkPasswordAndLogin(qs2.getDocuments().get(0).toObject(User.class), password);
                     } else {
                         btnLogin.setEnabled(true);
                         btnLogin.setText("Sign In");
@@ -145,40 +216,14 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void verifyPasswordThenLogin(User user) {
-        if (user == null) {
+    private void checkPasswordAndLogin(User user, String password) {
+        if (user != null && user.getPassword() != null && user.getPassword().equals(password)) {
+            completeLogin(user);
+        } else {
             btnLogin.setEnabled(true);
             btnLogin.setText("Sign In");
-            return;
+            Toast.makeText(this, "Incorrect password", Toast.LENGTH_SHORT).show();
         }
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Verification Required");
-        builder.setMessage("Please enter your password to continue.");
-
-        final EditText input = new EditText(this);
-        input.setHint("Password");
-        input.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        builder.setView(input);
-
-        builder.setPositiveButton("Verify", (dialog, which) -> {
-            String pass = input.getText().toString();
-            if (user.getPassword() != null && user.getPassword().equals(pass)) {
-                completeLogin(user);
-            } else {
-                btnLogin.setEnabled(true);
-                btnLogin.setText("Sign In");
-                Toast.makeText(this, "Incorrect password", Toast.LENGTH_SHORT).show();
-            }
-        });
-        builder.setNegativeButton("Cancel", (dialog, which) -> {
-            btnLogin.setEnabled(true);
-            btnLogin.setText("Sign In");
-            dialog.cancel();
-        });
-
-        builder.setCancelable(false);
-        builder.show();
     }
 
     private void completeLogin(User user) {
@@ -191,67 +236,17 @@ public class LoginActivity extends AppCompatActivity {
         navigateToRole(role);
     }
 
-    private void showSignupDetailsDialog(String loginId) {
-        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_create_profile, null);
-        TextInputEditText etName = dialogView.findViewById(R.id.et_name);
-        TextInputEditText etEmail = dialogView.findViewById(R.id.et_email);
-        TextInputEditText etPhone = dialogView.findViewById(R.id.et_phone);
-        TextInputEditText etPass = dialogView.findViewById(R.id.et_password);
-        CheckBox cbAdmin = dialogView.findViewById(R.id.cb_admin);
-        
-        cbAdmin.setVisibility(View.GONE);
-        if (loginId.contains("@")) { 
-            etEmail.setText(loginId); 
-            etEmail.setEnabled(false);
-        } else { 
-            etPhone.setText(loginId); 
-            etPhone.setEnabled(false);
-        }
-
-        AlertDialog dialog = new AlertDialog.Builder(this).setView(dialogView).create();
-
-        dialogView.findViewById(R.id.btn_create).setOnClickListener(v -> {
-            String name = etName.getText().toString().trim();
-            String email = etEmail.getText().toString().trim();
-            String phone = etPhone.getText().toString().trim();
-            String pass = etPass.getText().toString().trim();
-            
-            if (TextUtils.isEmpty(name)) { etName.setError("Name required"); return; }
-            if (TextUtils.isEmpty(pass)) { etPass.setError("Password required"); return; }
-            
-            List<String> roles = new ArrayList<>();
-            if (((CheckBox)dialogView.findViewById(R.id.cb_entrant)).isChecked()) roles.add("entrant");
-            if (((CheckBox)dialogView.findViewById(R.id.cb_organizer)).isChecked()) roles.add("organizer");
-
-            if (roles.isEmpty()) {
-                Toast.makeText(this, "Select at least one role", Toast.LENGTH_SHORT).show(); return;
-            }
-
-            // Final check to ensure uniqueness before adding
-            userRepo.checkUserExists(email, phone).addOnSuccessListener(exists -> {
-                if (exists) {
-                    Toast.makeText(this, "A user with this email or phone already signed up.", Toast.LENGTH_LONG).show();
-                } else {
-                    User newUser = new User(name, email, phone, roles, session.getDeviceId());
-                    newUser.setPassword(pass);
-                    userRepo.addUser(newUser).addOnSuccessListener(ref -> {
-                        newUser.setId(ref.getId());
-                        dialog.dismiss();
-                        completeLogin(newUser);
-                    });
-                }
-            });
-        });
-
-        dialogView.findViewById(R.id.btn_cancel).setOnClickListener(v -> dialog.dismiss());
-        dialog.setCancelable(false);
-        dialog.show();
-    }
-
     private void continueWithoutAccount() {
         userRepo.getUserByDeviceId(session.getDeviceId()).addOnSuccessListener(qs -> {
             if (qs != null && !qs.isEmpty()) {
-                verifyPasswordThenLogin(qs.getDocuments().get(0).toObject(User.class));
+                // For guest login, if they have multiple profiles, we just take the first one?
+                // Or maybe prompt them for password if it has one?
+                // In many apps "continue without account" creates a fresh guest or logs into existing guest.
+                User u = qs.getDocuments().get(0).toObject(User.class);
+                if (u != null) {
+                    u.setId(qs.getDocuments().get(0).getId());
+                    completeLogin(u);
+                }
             } else {
                 User guest = new User("Guest User", "", "", List.of("entrant"), session.getDeviceId());
                 userRepo.addUser(guest).addOnSuccessListener(ref -> {
@@ -271,7 +266,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (u != null) { u.setId(doc.getId()); profiles.add(u); }
             }
             if (!profiles.isEmpty()) {
-                llQuickLogin.setVisibility(View.VISIBLE);
+                llQuickLogin.setVisibility(isSignupMode ? View.GONE : View.VISIBLE);
                 profileAdapter.setProfiles(profiles);
             } else {
                 llQuickLogin.setVisibility(View.GONE);
@@ -281,7 +276,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void onProfileSelected(User user) {
         if (user == null) return;
-        verifyPasswordThenLogin(user);
+        // Populate and scroll to password
+        etLoginId.setText(user.getEmail() != null && !user.getEmail().isEmpty() ? user.getEmail() : user.getPhone());
+        etLoginPassword.requestFocus();
     }
 
     private void navigateToRole(String role) {

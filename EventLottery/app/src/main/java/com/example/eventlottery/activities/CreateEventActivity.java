@@ -17,10 +17,12 @@ import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.example.eventlottery.R;
@@ -77,7 +79,6 @@ public class CreateEventActivity extends AppCompatActivity {
 
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
-    private final List<String> locationList = new ArrayList<>();
     private ArrayAdapter<String> locationAdapter;
     private boolean isLocationSelectedFromDropdown = false;
 
@@ -228,31 +229,80 @@ public class CreateEventActivity extends AppCompatActivity {
     }
 
     private void setupLocationAutocomplete() {
-        locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, locationList);
+        locationAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line) {
+            @NonNull
+            @Override
+            public Filter getFilter() {
+                return new Filter() {
+                    @Override
+                    protected FilterResults performFiltering(CharSequence constraint) {
+                        FilterResults results = new FilterResults();
+                        if (isLocationSelectedFromDropdown) return results;
+
+                        if (constraint != null && constraint.length() >= 2) {
+                            List<String> suggestions = fetchGeocoderSuggestions(constraint.toString());
+                            results.values = suggestions;
+                            results.count = suggestions.size();
+                        }
+                        return results;
+                    }
+
+                    @Override
+                    protected void publishResults(CharSequence constraint, FilterResults results) {
+                        clear();
+                        if (results != null && results.count > 0) {
+                            addAll((List<String>) results.values);
+                            notifyDataSetChanged();
+                        } else {
+                            notifyDataSetInvalidated();
+                        }
+                    }
+                };
+            }
+        };
         etLocation.setAdapter(locationAdapter);
+        etLocation.setThreshold(1);
 
         etLocation.setOnItemClickListener((parent, view, position, id) -> {
             isLocationSelectedFromDropdown = true;
+            String selected = locationAdapter.getItem(position);
+            etLocation.setText(selected, false); // false prevents re-triggering the filter
             tilLocation.setError(null);
-            // Re-verify to get Lat/Lng immediately
-            verifyAndSetLatLng(locationList.get(position));
+            verifyAndSetLatLng(selected);
         });
 
         etLocation.addTextChangedListener(new TextWatcher() {
-            private Runnable queryRunnable;
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-                isLocationSelectedFromDropdown = false;
+                if (!etLocation.isPerformingCompletion()) {
+                    isLocationSelectedFromDropdown = false;
+                }
             }
-            @Override public void afterTextChanged(Editable s) {
-                if (queryRunnable != null) mainHandler.removeCallbacks(queryRunnable);
-                String query = s.toString().trim();
-                if (query.length() < 2) return;
-
-                queryRunnable = () -> fetchSuggestions(query);
-                mainHandler.postDelayed(queryRunnable, 300); 
-            }
+            @Override public void afterTextChanged(Editable s) {}
         });
+    }
+
+    private List<String> fetchGeocoderSuggestions(String query) {
+        List<String> suggestions = new ArrayList<>();
+        if (!Geocoder.isPresent()) return suggestions;
+
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocationName(query, 5);
+            if (addresses != null) {
+                for (Address addr : addresses) {
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 0; i <= addr.getMaxAddressLineIndex(); i++) {
+                        if (i > 0) sb.append(", ");
+                        sb.append(addr.getAddressLine(i));
+                    }
+                    suggestions.add(sb.toString());
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return suggestions;
     }
 
     private void verifyAndSetLatLng(String locName) {
@@ -265,36 +315,6 @@ public class CreateEventActivity extends AppCompatActivity {
                     selectedLng = addresses.get(0).getLongitude();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
-    private void fetchSuggestions(String query) {
-        executor.execute(() -> {
-            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-            try {
-                List<Address> addresses = geocoder.getFromLocationName(query, 5);
-                final List<String> suggestions = new ArrayList<>();
-                if (addresses != null) {
-                    for (Address addr : addresses) {
-                        StringBuilder sb = new StringBuilder();
-                        for (int i = 0; i <= addr.getMaxAddressLineIndex(); i++) {
-                            if (i > 0) sb.append(", ");
-                            sb.append(addr.getAddressLine(i));
-                        }
-                        suggestions.add(sb.toString());
-                    }
-                }
-                mainHandler.post(() -> {
-                    locationList.clear();
-                    locationList.addAll(suggestions);
-                    locationAdapter.notifyDataSetChanged();
-                    if (!suggestions.isEmpty() && etLocation.hasFocus()) {
-                        etLocation.showDropDown();
-                    }
-                });
-            } catch (Exception e) {
                 e.printStackTrace();
             }
         });
